@@ -87,4 +87,7 @@
     <Build Include="TradeCompany_DataBase\Stored Procedures\UpdateOrderListByID.sql" />
     <Build Include="Security\TradeCompany_DataBase.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="TradeCompany_DataBase.refactorlog" />
+  </ItemGroup>
 </Project>
