@@ -13,6 +13,6 @@ namespace TradeCompany_DAL.DTOs
         public DateTime Datetime { get; set; }
         public int AddressID { get; set; }
         public string Comment { get; set; }
-        public List<OrderListDTO> OrderLists { get; set; } = new List<OrderListDTO>();
+        public List<OrderListsDTO> OrderLists { get; set; } = new List<OrderListsDTO>();
     }
 }
