@@ -4,7 +4,7 @@
 	@AddressID int,
 	@Comment nvarchar(500)
 AS
-	insert into Orders
+	insert into Orders (ClientsID, Datetime,  AddressID, Comment)
 	values (@ClientsID, @Datetime,  @AddressID, @Comment)
 
 	Select SCOPE_IDENTITY()

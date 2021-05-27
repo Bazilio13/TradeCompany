@@ -8,7 +8,7 @@ namespace TradeCompany_TMPForTests
     {
         static void Main(string[] args)
         {
-            OrdersData ordersData = new OrdersData(@"Data Source=80.78.240.16;Initial Catalog=TradeCompany_DataBase;Integrated Security=True");
+            OrdersData ordersData = new OrdersData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
             OrdersDTO ordersDTO = new OrdersDTO();
             ordersDTO.AddressID = 1;
             ordersDTO.ClientsID = 1;
@@ -17,8 +17,9 @@ namespace TradeCompany_TMPForTests
             OrderListDTO orderListDTO = new OrderListDTO();
             orderListDTO.Amount = 10;
             orderListDTO.Price = 15;
-            orderListDTO.ProductID = 1;
+            orderListDTO.ProductID = 3;
             ordersDTO.OrderLists.Add(orderListDTO);
+            orderListDTO = new OrderListDTO();
             orderListDTO.Amount = 4;
             orderListDTO.Price = 10;
             orderListDTO.ProductID = 2;
