@@ -157,13 +157,13 @@ namespace TradeCompany_DAL
             return result;
         }
 
-        public List<OrdersDTO> GetOrdersByParams(int clientsID, DateTime minDateTime, DateTime maxDateTime, int addressID)
+        public List<OrdersDTO> GetOrdersByParams(int? clientsID, DateTime? minDateTime, DateTime? maxDateTime, int? addressID, int? productID)
         {
             List<OrdersDTO> result = new List<OrdersDTO>();
             string query;
             using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
             {
-                query = "exec TradeCompany_DataBase.GetOrdersByParams @ClientsID, @MinDateTime, @MaxDateTime, @AddressID";
+                query = "exec TradeCompany_DataBase.GetOrdersByParams @ClientsID, @MinDateTime, @MaxDateTime, @AddressID, @ProductID";
                 dbConnection.Query<OrdersDTO, OrderListsDTO, OrdersDTO>(query,
                     (order, orderList) =>
                     {
@@ -190,10 +190,38 @@ namespace TradeCompany_DAL
                         clientsID,
                         minDateTime,
                         maxDateTime,
-                        addressID
+                        addressID,
+                        productID
                     });
             }
             return result;
         }
+        public void UpdateOrdersByID(OrdersDTO ordersDTO)
+        {
+            string query;
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                query = "exec TradeCompany_DataBase.UpdateOrder @ID, @ClientsID, @Datetime, @AddressID, @Comment";
+                dbConnection.Query(query,new {
+                    ordersDTO.ID,
+                    ordersDTO.ClientsID,
+                    ordersDTO.Datetime,
+                    ordersDTO.AddressID,
+                    ordersDTO.Comment
+                });
+                query = "exec TradeCompany_DataBase.UpdateOrderListByID @ID, @OrderID, @ProductID, @Amount, @Price";
+                foreach (OrderListsDTO olDTO in ordersDTO.OrderLists)
+                {
+                    dbConnection.Query(query, new
+                    {
+                        olDTO.ID,
+                        olDTO.OrderID,
+                        olDTO.ProductID,
+                        olDTO.Amount,
+                        olDTO.Price
+                    });
+                }
+            }
+        }        
     }
 }

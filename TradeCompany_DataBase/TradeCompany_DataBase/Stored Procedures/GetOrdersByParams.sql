@@ -2,13 +2,15 @@
 	@ClientsID int,
 	@MinDateTime DateTime,
 	@MaxDateTime DateTime,
-	@AddressID int
+	@AddressID int,
+	@ProductID int
 AS
 	SELECT * from Orders as O
-	join OrderLists as OL 
+	left join OrderLists as OL 
 	on O.ID = OL.OrderID
 	Where 
 	(@ClientsID IS NULL OR O.ClientsID = @ClientsID) AND
 	(@AddressID IS NULL OR O.AddressID = @AddressID) AND
+	(@ProductID IS NULL OR OL.ProductID = @ProductID) AND
 	(@MinDateTime IS NULL OR O.DateTime >= @MinDateTime) AND
-	(@MinDateTime IS NULL OR O.DateTime <= @MinDateTime)
+	(@MaxDateTime IS NULL OR O.DateTime <= @MaxDateTime) 
