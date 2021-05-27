@@ -75,5 +75,14 @@
     <Build Include="dbo\Tables\FeedBacks.sql" />
     <Build Include="dbo\Tables\Supplies.sql" />
     <Build Include="dbo\Tables\MeasureUnits.sql" />
+    <Build Include="dbo\Stored Procedures\AddOrder.sql" />
+    <Build Include="dbo\Stored Procedures\AddOrderList.sql" />
+    <Build Include="dbo\Stored Procedures\DeleteOrderByID.sql" />
+    <Build Include="dbo\Stored Procedures\DeleteOrderListByID.sql" />
+    <Build Include="dbo\Stored Procedures\GetOrders.sql" />
+    <Build Include="dbo\Stored Procedures\GetOrderByID.sql" />
+    <Build Include="dbo\Stored Procedures\UpdateOrderByID.sql" />
+    <Build Include="dbo\Stored Procedures\UpdateOrderListByID.sql" />
+    <Build Include="dbo\Stored Procedures\GetOrderByParams.sql" />
   </ItemGroup>
 </Project>
