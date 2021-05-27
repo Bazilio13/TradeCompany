@@ -100,20 +100,97 @@ namespace TradeCompany_DAL
                 dbConnection.Query<OrdersDTO, OrderListsDTO, OrdersDTO>(query,
                     (order, orderList) =>
                     {
-                        bool checkMatch = false;
+                        OrdersDTO crntOrder = null;
                         foreach (var o in result)
                         {
-                            if (o == order)
+                            if (o.ID == order.ID)
                             {
-                                checkMatch = true;
+                                crntOrder = o;
                             }
                         }
-                        if (!checkMatch)
+                        if (crntOrder == null)
                         {
-                            result.Add(order);
+                            crntOrder = order;
+                            result.Add(crntOrder);
                         }
-                        order.OrderLists.Add(orderList);
+                        if (orderList != null)
+                        {
+                            crntOrder.OrderLists.Add(orderList);
+                        }
                         return order;
+                    });
+            }
+            return result;
+        }
+
+        public List<OrdersDTO> GetOrdersByID(int id)
+        {
+            List<OrdersDTO> result = new List<OrdersDTO>();
+            string query;
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                query = "exec TradeCompany_DataBase.GetOrdersByID @ID";
+                dbConnection.Query<OrdersDTO, OrderListsDTO, OrdersDTO>(query,
+                    (order, orderList) =>
+                    {
+                        OrdersDTO crntOrder = null;
+                        foreach (var o in result)
+                        {
+                            if (o.ID == order.ID)
+                            {
+                                crntOrder = o;
+                            }
+                        }
+                        if (crntOrder == null)
+                        {
+                            crntOrder = order;
+                            result.Add(crntOrder);
+                        }
+                        if (orderList != null)
+                        {
+                            crntOrder.OrderLists.Add(orderList);
+                        }
+                        return order;
+                    },
+                    new { id });
+            }
+            return result;
+        }
+
+        public List<OrdersDTO> GetOrdersByParams(int clientsID, DateTime minDateTime, DateTime maxDateTime, int addressID)
+        {
+            List<OrdersDTO> result = new List<OrdersDTO>();
+            string query;
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                query = "exec TradeCompany_DataBase.GetOrdersByParams @ClientsID, @MinDateTime, @MaxDateTime, @AddressID";
+                dbConnection.Query<OrdersDTO, OrderListsDTO, OrdersDTO>(query,
+                    (order, orderList) =>
+                    {
+                        OrdersDTO crntOrder = null;
+                        foreach (var o in result)
+                        {
+                            if (o.ID == order.ID)
+                            {
+                                crntOrder = o;
+                            }
+                        }
+                        if (crntOrder == null)
+                        {
+                            crntOrder = order;
+                            result.Add(crntOrder);
+                        }
+                        if (orderList != null)
+                        {
+                            crntOrder.OrderLists.Add(orderList);
+                        }
+                        return order;
+                    },
+                    new { 
+                        clientsID,
+                        minDateTime,
+                        maxDateTime,
+                        addressID
                     });
             }
             return result;

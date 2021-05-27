@@ -25,7 +25,12 @@ namespace TradeCompany_TMPForTests
             //orderListDTO.ProductID = 2;
             //ordersDTO.OrderLists.Add(orderListDTO);
             //ordersData.AddOrder(ordersDTO);
-            ordersData.GetOrders();
+            //ordersData.GetOrders();
+            DateTime min = DateTime.Now;
+            min.AddYears(-100);
+            DateTime max = DateTime.Now;
+            max.AddYears(100);
+            ordersData.GetOrdersByParams(1, min, max, 1);
         }
     }
 }
