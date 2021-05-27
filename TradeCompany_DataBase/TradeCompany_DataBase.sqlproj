@@ -58,22 +58,33 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
-    <Folder Include="dbo\" />
-    <Folder Include="dbo\Tables\" />
-    <Folder Include="dbo\Stored Procedures" />
+    <Folder Include="TradeCompany_DataBase\" />
+    <Folder Include="TradeCompany_DataBase\Tables\" />
+    <Folder Include="TradeCompany_DataBase\Stored Procedures\" />
+    <Folder Include="Security\" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\Products.sql" />
-    <Build Include="dbo\Tables\Product_ProductGroups.sql" />
-    <Build Include="dbo\Tables\ProductGroups.sql" />
-    <Build Include="dbo\Tables\SupplyLists.sql" />
-    <Build Include="dbo\Tables\Clients.sql" />
-    <Build Include="dbo\Tables\Wishes.sql" />
-    <Build Include="dbo\Tables\Addresses.sql" />
-    <Build Include="dbo\Tables\Orders.sql" />
-    <Build Include="dbo\Tables\OrderLists.sql" />
-    <Build Include="dbo\Tables\FeedBacks.sql" />
-    <Build Include="dbo\Tables\Supplies.sql" />
-    <Build Include="dbo\Tables\MeasureUnits.sql" />
+    <Build Include="TradeCompany_DataBase\Tables\Addresses.sql" />
+    <Build Include="TradeCompany_DataBase\Tables\Clients.sql" />
+    <Build Include="TradeCompany_DataBase\Tables\FeedBacks.sql" />
+    <Build Include="TradeCompany_DataBase\Tables\MeasureUnits.sql" />
+    <Build Include="TradeCompany_DataBase\Tables\OrderLists.sql" />
+    <Build Include="TradeCompany_DataBase\Tables\Orders.sql" />
+    <Build Include="TradeCompany_DataBase\Tables\Product_ProductGroups.sql" />
+    <Build Include="TradeCompany_DataBase\Tables\ProductGroups.sql" />
+    <Build Include="TradeCompany_DataBase\Tables\Products.sql" />
+    <Build Include="TradeCompany_DataBase\Tables\Supplies.sql" />
+    <Build Include="TradeCompany_DataBase\Tables\SupplyLists.sql" />
+    <Build Include="TradeCompany_DataBase\Tables\Wishes.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\AddOrder.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\AddOrderList.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\DeleteOrderByID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\DeleteOrderListByID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetOrders.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetOrdersByID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetOrdersByParams.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\UpdateOrder.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\UpdateOrderListByID.sql" />
+    <Build Include="Security\TradeCompany_DataBase.sql" />
   </ItemGroup>
 </Project>
