@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[GetOrdersByID]
+﻿CREATE PROCEDURE [TradeCompany_DataBase].[GetOrdersByID]
 	@ID int
 AS
 	SELECT * from Orders as O

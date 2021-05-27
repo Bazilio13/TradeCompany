@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[AddOrder]
+﻿CREATE PROCEDURE [TradeCompany_DataBase].[AddOrder]
 	@ClientsID int,
 	@Datetime datetime,
 	@AddressID int,

@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[DeleteOrderListByID]
+﻿CREATE PROCEDURE [TradeCompany_DataBase].[DeleteOrderListByID]
 	@ID int
 AS
 	delete OrderLists

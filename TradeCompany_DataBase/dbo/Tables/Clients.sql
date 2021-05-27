@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[Clients] (
+﻿CREATE TABLE [TradeCompany_DataBase].[Clients] (
     [ID]            INT            IDENTITY (1, 1) NOT NULL,
     [Name]          NVARCHAR (255) NOT NULL,
     [INN]           INT            NULL,

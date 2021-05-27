@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[GetOrdersByParams]
+﻿CREATE PROCEDURE [TradeCompany_DataBase].[GetOrdersByParams]
 	@ClientsID int,
 	@MinDateTime DateTime,
 	@MaxDateTime DateTime,

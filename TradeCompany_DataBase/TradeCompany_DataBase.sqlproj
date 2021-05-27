@@ -61,6 +61,8 @@
     <Folder Include="dbo\" />
     <Folder Include="dbo\Tables\" />
     <Folder Include="dbo\Stored Procedures" />
+    <Folder Include="dbo\Security" />
+    <Folder Include="dbo\Security\Schemas" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Products.sql" />
@@ -84,5 +86,6 @@
     <Build Include="dbo\Stored Procedures\UpdateOrderByID.sql" />
     <Build Include="dbo\Stored Procedures\UpdateOrderListByID.sql" />
     <Build Include="dbo\Stored Procedures\GetOrderByParams.sql" />
+    <Build Include="dbo\Security\Schemas\TradeCompany_DataBase.sql" />
   </ItemGroup>
 </Project>

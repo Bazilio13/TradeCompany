@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[AddOrderList]
+﻿CREATE PROCEDURE [TradeCompany_DataBase].[AddOrderList]
 	@OrderID int,
 	@ProductID int,
 	@Amount int,

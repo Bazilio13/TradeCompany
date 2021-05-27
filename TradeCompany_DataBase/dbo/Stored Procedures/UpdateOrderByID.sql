@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[UpdateOrder]
+﻿CREATE PROCEDURE [TradeCompany_DataBase].[UpdateOrder]
 	@ID int,
 	@ClientsID int,
 	@Datetime datetime,
@@ -8,7 +8,7 @@ AS
 	update O 
 	set 
 	ClientsID = @ClientsID, 
-	Datetime = @Datetime,
+	DateTime = @Datetime,
 	AddressID = @AddressID,
 	Comment = @Comment
 	from Orders as O

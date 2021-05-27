@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[UpdateOrderListByID]
+﻿CREATE PROCEDURE [TradeCompany_DataBase].[UpdateOrderListByID]
 	@ID int,
 	@OrderID int,
 	@ProductID int,
