@@ -21,6 +21,14 @@ namespace TradeCompany_TMPForTests
             client.Type = true;
             client.CorporateBody = false;
             //clientsData.AddClient(client);
+            //clientsData.AddClient(client);
+            //clientsData.DeleteClientByID(4);
+
+            client.Name = "No Oleg2";
+            client.Type = false;
+            client.ID = 6;
+            client.LastOrderDate = DateTime.Now;
+            clientsData.UpdateClientByID(client);
             clientList = clientsData.GetClients();
             //clientsData.GetClientByID(3);
             //OrdersDTO ordersDTO = new OrdersDTO();

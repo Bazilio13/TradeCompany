@@ -52,7 +52,6 @@ namespace TradeCompany_DAL
         public void AddClient(ClientDTO client)
         {
             string query = "exec TradeCompany_DataBase.AddClient @Name, @INN, @Email, @Phone, @Comment, @CorporateBody, @Type, @LastOrderDate";
-
             using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
             {
                 dbConnection.Query<ClientDTO>(query, new {
@@ -66,6 +65,37 @@ namespace TradeCompany_DAL
                 client.Comment
                 });
             }
+        }
+
+        public void DeleteClientByID(int id)
+        {
+            ClientDTO client = new ClientDTO();
+            string query = "exec TradeCompany_DataBase.DeleteClientByID @ID";
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                dbConnection.Query<ClientDTO>(query, new { id });
+            }
+        }
+
+        public void UpdateClientByID(ClientDTO client)
+        {
+            string query1 = "exec TradeCompany_DataBase.UpdateClientByID @ID, @Name, @INN, @Email, @Phone, @Comment, @CorporateBody, @Type, @LastOrderDate";
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                dbConnection.Query<ClientDTO>(query1, new
+                {
+                    client.ID,
+                    client.Name,
+                    client.INN,
+                    client.Email,
+                    client.Phone,
+                    client.Comment,
+                    client.CorporateBody,
+                    client.Type,
+                    client.LastOrderDate
+                });
+            }
+
         }
     }
 }
