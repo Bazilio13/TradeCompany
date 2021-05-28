@@ -36,5 +36,36 @@ namespace TradeCompany_DAL
 
             return clientsList;
         }
+
+        public ClientDTO GetClientByID(int id)
+        {
+            ClientDTO client = new ClientDTO();
+            string query = "exec TradeCompany_DataBase.GetClientByID @ID";
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                client = dbConnection.Query<ClientDTO>(query, new { id }).Single<ClientDTO>();
+            }
+
+            return client;
+        }
+
+        public void AddClient(ClientDTO client)
+        {
+            string query = "exec TradeCompany_DataBase.AddClient @Name, @INN, @Email, @Phone, @Comment, @CorporateBody, @Type, @LastOrderDate";
+
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                dbConnection.Query<ClientDTO>(query, new {
+                client.Name,
+                client.INN,
+                client.Email, 
+                client.Phone,
+                client.Type,
+                client.CorporateBody,
+                client.LastOrderDate,
+                client.Comment
+                });
+            }
+        }
     }
 }

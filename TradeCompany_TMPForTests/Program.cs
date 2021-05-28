@@ -13,7 +13,16 @@ namespace TradeCompany_TMPForTests
             ClientsData clientsData = new ClientsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
 
             List<ClientDTO> clientList = new List<ClientDTO>();
+            ClientDTO client = new ClientDTO();
+            client.Name = "Oleg";
+            client.INN = 12345678;
+            client.LastOrderDate = DateTime.Now;
+            client.Phone = "8999090123";
+            client.Type = true;
+            client.CorporateBody = false;
+            //clientsData.AddClient(client);
             clientList = clientsData.GetClients();
+            //clientsData.GetClientByID(3);
             //OrdersDTO ordersDTO = new OrdersDTO();
             //ordersDTO.AddressID = 1;
             //ordersDTO.ClientsID = 1;
