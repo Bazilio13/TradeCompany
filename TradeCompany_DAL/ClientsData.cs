@@ -14,7 +14,6 @@ namespace TradeCompany_DAL
     {
         public string ConnectionString { get; set; }
 
-
         public ClientsData()
         {
             ConnectionString = null;
@@ -96,6 +95,19 @@ namespace TradeCompany_DAL
                 });
             }
 
+        }
+
+        public List<ClientDTO> GetClientsByName(string partOfTheName)
+        {
+            List<ClientDTO> clientsList = new List<ClientDTO>();
+
+            string query = "exec TradeCompany_DataBase.GetClientsByName @PartOfTheName";
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                clientsList = dbConnection.Query<ClientDTO>(query, new { partOfTheName }).AsList<ClientDTO>();
+            }
+
+            return clientsList;
         }
     }
 }
