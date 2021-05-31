@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using TradeCompany_DAL;
 using TradeCompany_DAL.DTOs;
 
@@ -10,6 +11,11 @@ namespace TradeCompany_TMPForTests
         {
             OrdersData ordersData = new OrdersData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
             OrdersDTO ordersDTO = new OrdersDTO();
+
+            ProductsData productsData = new ProductsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
+            List<ProductDTO> products = productsData.GetProducts();
+
+
             //ordersDTO.AddressID = 2;
             //ordersDTO.ClientsID = 2;
             //ordersDTO.Comment = "Petya chto-to kypil";
@@ -33,9 +39,9 @@ namespace TradeCompany_TMPForTests
             ////max.AddYears(100);
             //ordersData.GetOrdersByParams(1, min, max, 1, 2);
             //ordersData.GetOrdersByParams(null, null, null, null, null);
-            ordersDTO = ordersData.GetOrdersByID(6)[0];
-            ordersDTO.Comment = "Test";
-            ordersData.UpdateOrdersByID(ordersDTO);
+            //ordersDTO = ordersData.GetOrdersByID(6)[0];
+            //ordersDTO.Comment = "Test";
+            //ordersData.UpdateOrdersByID(ordersDTO);
         }
     }
 }
