@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[AddFeedback]
+﻿CREATE PROCEDURE [TradeCompany_DataBase].[AddFeedback]
 @Datetime datetime,
 @Text nvarchar(1500),
 @ClientID int,
