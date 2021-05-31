@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[DeleteFeedbackById]
+﻿CREATE PROCEDURE [TradeCompany_DataBase].[DeleteFeedbackById]
 	@ID int
 	as
 	delete from FeedBacks 

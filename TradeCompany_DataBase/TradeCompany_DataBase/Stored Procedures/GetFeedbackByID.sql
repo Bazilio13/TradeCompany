@@ -1,6 +1,6 @@
-﻿CREATE PROCEDURE [dbo].[GetFeedbackByID]
+﻿CREATE PROCEDURE [TradeCompany_DataBase].[GetFeedbackByID]
 	@FeedbackId int
 	as
-	select [Datetime].F, [Text].F, ClientID.F, OrderID.F
+	select F.[Datetime], F.[Text], F.ClientID, F.OrderID
 	from [Feedbacks] as F
 	where F.ID = @FeedbackId

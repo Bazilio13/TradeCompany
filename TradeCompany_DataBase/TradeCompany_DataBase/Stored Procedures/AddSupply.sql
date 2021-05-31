@@ -2,4 +2,4 @@
 	@Datetime datetime
 AS
 	insert into Supplies (Datetime)
-	values(Datetime)
+	values(@Datetime)
