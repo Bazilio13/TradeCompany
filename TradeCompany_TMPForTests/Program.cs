@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TradeCompany_DAL;
 using TradeCompany_DAL.DTOs;
 
+
 namespace TradeCompany_TMPForTests
 {
     class Program
@@ -11,7 +12,16 @@ namespace TradeCompany_TMPForTests
         {
             //OrdersData ordersData = new OrdersData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
             ClientsData clientsData = new ClientsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
+            FeedBacksData feedBacksData = new FeedBacksData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
+             FeedBacksDTO feedBacksDTO = new FeedBacksDTO();
+            feedBacksDTO.ClientID = 4;
+            feedBacksDTO.OrderID = 7;
+            feedBacksDTO.DateTime = new DateTime(630);
+            feedBacksDTO.Text = "проба";
+            feedBacksData.AddFeedback(feedBacksDTO);
 
+
+            feedBacksDTO = feedBacksData.GetFeedbackByID(4);
             List<ClientDTO> clientList = new List<ClientDTO>();
             ClientDTO client = new ClientDTO();
 
