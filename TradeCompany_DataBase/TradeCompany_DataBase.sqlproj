@@ -89,6 +89,7 @@
     <Build Include="TradeCompany_DataBase\Stored Procedures\UpdateClientByID.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\DeleteClientByID.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\AddClient.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetClientsByName.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="TradeCompany_DataBase.refactorlog" />
