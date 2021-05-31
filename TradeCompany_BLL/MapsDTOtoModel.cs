@@ -3,10 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
+using TradeCompany_BLL.Models;
+using TradeCompany_DAL.DTOs;
 
 namespace TradeCompany_BLL
 {
-    class MapsDTOtoModel
+    public class MapsDTOtoModel
     {
+
+        public ClientModel MapClientDTOtoClientMap(ClientDTO clientDTO)
+        {
+            var config = new MapperConfiguration(cfg=>cfg.CreateMap<ClientDTO, ClientModel>());
+            Mapper mapper = new Mapper(config);
+            ClientModel clientModel = mapper.Map<ClientModel>(clientDTO);
+            return clientModel;
+        }
+
     }
 }
