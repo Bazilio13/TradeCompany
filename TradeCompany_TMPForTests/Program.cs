@@ -9,7 +9,9 @@ namespace TradeCompany_TMPForTests
     {
         static void Main(string[] args)
         {
-   
+            List<ClientDTO> clients = new List<ClientDTO>();
+            ClientsData cd = new ClientsData();
+            clients = cd.GetClients();
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using TradeCompany_BLL.Models;
+using TradeCompany_DAL;
 using TradeCompany_DAL.DTOs;
 
 namespace TradeCompany_BLL
@@ -26,6 +27,18 @@ namespace TradeCompany_BLL
             Mapper mapper = new Mapper(config);
             ClientDTO  clientDTO = mapper.Map<ClientDTO>(clientModel);
             return clientDTO;
+        }
+
+        public List<ClientModel> MapClientsDTOToClientsModelList()
+        {
+            ClientsData clients = new ClientsData();
+            List<ClientDTO> clientsDTO = clients.GetClients();
+
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<ClientDTO, ClientModel>());
+            Mapper mapper = new Mapper(config);
+            List<ClientModel> clientModel = mapper.Map<List<ClientModel>>(clientsDTO);
+
+            return clientModel;
         }
 
     }

@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TradeCompany_BLL;
 
 namespace TradeCompany_UI
 {
@@ -22,6 +23,12 @@ namespace TradeCompany_UI
         public AllClientsForm()
         {
             InitializeComponent();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            MapsDTOtoModel map = new MapsDTOtoModel();
+            dgAllClientsTable.ItemsSource = map.MapClientsDTOToClientsModelList();
         }
     }
 }

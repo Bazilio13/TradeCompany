@@ -5,15 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TradeCompany_UI"
         mc:Ignorable="d"
-        Title="AllClientsForm" Height="450" Width="800">
+        Title="AllClientsForm" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
         <DataGrid x:Name="dgAllClientsTable" FontSize="16">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Width="50"/>
-                <DataGridTextColumn Header="Name" Width="200" />
-                <DataGridTextColumn Header="Phone" Width="150"/>
-                <DataGridTextColumn Header="Email" Width="150"/>
-                <DataGridTextColumn Header="Date last order" Width="*"/>
+                <DataGridTextColumn IsReadOnly="True" Header="Id" Width="50"/>
+                <DataGridTextColumn IsReadOnly="True" Header="Name" Width="200" />
+                <DataGridTextColumn IsReadOnly="True" Header="Phone" Width="150"/>
+                <DataGridTextColumn IsReadOnly="True" Header="Email" Width="150"/>
+                <DataGridTextColumn IsReadOnly="True" Header="Date last order" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
         <Border BorderThickness="1" BorderBrush="Black"/>
