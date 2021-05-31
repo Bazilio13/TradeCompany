@@ -23,6 +23,7 @@
     <TargetDatabaseSet>True</TargetDatabaseSet>
     <DefaultCollation>Cyrillic_General_CI_AS</DefaultCollation>
     <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+    <IncludeSchemaNameInFileName>False</IncludeSchemaNameInFileName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -95,6 +96,11 @@
     <Build Include="TradeCompany_DataBase\Stored Procedures\DeleteFeedbackById.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\DeleteFeedbackByOrderID.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\GetFeedbackByID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\AddSupply.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\DeleteSupplyByID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetSupplies.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetSupplyByID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\UpdateSupplyByID.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="TradeCompany_DataBase.refactorlog" />
