@@ -31,7 +31,7 @@ namespace TradeCompany_BLL
 
         public List<ClientModel> MapClientsDTOToClientsModelList()
         {
-            ClientsData clients = new ClientsData();
+            ClientsData clients = new ClientsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
             List<ClientDTO> clientsDTO = clients.GetClients();
 
             var config = new MapperConfiguration(cfg => cfg.CreateMap<ClientDTO, ClientModel>());

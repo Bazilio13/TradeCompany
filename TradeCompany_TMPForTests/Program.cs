@@ -9,9 +9,9 @@ namespace TradeCompany_TMPForTests
     {
         static void Main(string[] args)
         {
-            List<ClientDTO> clients = new List<ClientDTO>();
-            ClientsData cd = new ClientsData();
-            clients = cd.GetClients();
+            //ClientsData clientsData = new ClientsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
+            //List<ClientDTO> clients = new List<ClientDTO>();
+            //clients = clientsData.GetClients();
         }
     }
 }
