@@ -12,12 +12,20 @@ namespace TradeCompany_BLL
     public class MapsDTOtoModel
     {
 
-        public ClientModel MapClientDTOtoClientMap(ClientDTO clientDTO)
+        public ClientModel MapClientDTOToClientModel(ClientDTO clientDTO)
         {
             var config = new MapperConfiguration(cfg=>cfg.CreateMap<ClientDTO, ClientModel>());
             Mapper mapper = new Mapper(config);
             ClientModel clientModel = mapper.Map<ClientModel>(clientDTO);
             return clientModel;
+        }  
+        
+        public ClientDTO MapClientModelToClientDTO(ClientModel clientModel)
+        {
+            var config = new MapperConfiguration(cfg=>cfg.CreateMap<ClientModel, ClientDTO>());
+            Mapper mapper = new Mapper(config);
+            ClientDTO  clientDTO = mapper.Map<ClientDTO>(clientModel);
+            return clientDTO;
         }
 
     }
