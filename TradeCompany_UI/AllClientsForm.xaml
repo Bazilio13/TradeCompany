@@ -1,0 +1,21 @@
+﻿<Window x:Class="TradeCompany_UI.AllClientsForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TradeCompany_UI"
+        mc:Ignorable="d"
+        Title="AllClientsForm" Height="450" Width="800">
+    <Grid>
+        <DataGrid x:Name="dgAllClientsTable" FontSize="16">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Width="50"/>
+                <DataGridTextColumn Header="Name" Width="200" />
+                <DataGridTextColumn Header="Phone" Width="150"/>
+                <DataGridTextColumn Header="Email" Width="150"/>
+                <DataGridTextColumn Header="Date last order" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Border BorderThickness="1" BorderBrush="Black"/>
+    </Grid>
+</Window>

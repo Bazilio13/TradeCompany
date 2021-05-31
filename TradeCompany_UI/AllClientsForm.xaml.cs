@@ -10,21 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace TradeCompany_UI
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for AllClientsForm.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class AllClientsForm : Window
     {
-        public MainWindow()
+        public AllClientsForm()
         {
             InitializeComponent();
-            AllClientsForm form = new AllClientsForm();
-            form.ShowDialog();
         }
     }
 }
