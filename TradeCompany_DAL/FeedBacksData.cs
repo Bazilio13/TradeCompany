@@ -22,23 +22,23 @@ namespace TradeCompany_DAL
             ConnectionString = connectionString;
         }
 
-        public FeedBacksDTO AddFeedback(FeedBacksDTO feedBacksDTO)
+        public void AddFeedback(FeedBacksDTO feedBacksDTO)
         {
             string query;
             using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
             {
                 query = "exec [TradeCompany_DataBase].[AddFeedback] @Datetime,@Text,@ClientID,@OrderID";
 
-                feedBacksDTO.ID = dbConnection.Query<int>(query, new
+                dbConnection.Query<int>(query, new
                 {
                     feedBacksDTO.DateTime,
                     feedBacksDTO.Text,
                     feedBacksDTO.ClientID,
                     feedBacksDTO.OrderID,
 
-                }).AsList<int>()[0];
+                });
             }
-            return feedBacksDTO;
+            
         }
 
         public void DeleteFeedbackById(int id)
