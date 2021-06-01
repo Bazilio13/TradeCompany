@@ -55,5 +55,40 @@ namespace TradeCompany_DAL
             }
             return products;
         }
+
+        public List<ProductDTO> GetProductByID(int id)
+        {
+            List<ProductDTO> products = new List<ProductDTO>();
+            string query;
+            using (System.Data.IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                query = "exec TradeCompany_DataBase.GetProductByID @ID";
+                dbConnection.Query<ProductDTO, ProductGroupDTO, ProductDTO>(query,
+                    (product, group) =>
+                    {
+                        ProductDTO crntProduct = null;
+                        foreach (var p in products)
+                        {
+                            if (p.ID == product.ID)
+                            {
+                                crntProduct = p;
+                                break;
+                            }
+                        }
+                        if (crntProduct is null)
+                        {
+                            crntProduct = product;
+                            products.Add(crntProduct);
+                        }
+                        if (!(group is null))
+                        {
+                            crntProduct.Group.Add(group);
+                        }
+                        return crntProduct;
+                    }, new { id },
+                    splitOn: "ID");
+            }
+            return products;
+        }
     }
 }
