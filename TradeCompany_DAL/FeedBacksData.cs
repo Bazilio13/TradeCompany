@@ -84,6 +84,25 @@ namespace TradeCompany_DAL
 
             return result;
         }
+        public void UpdateFeedBackById(FeedBacksDTO feedBacksDTO)
+        {
+            string query;
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                query = "exec [TradeCompany_DataBase].[UpdateFeedBackById] @ID,@Datetime,@Text,@ClientID,@OrderID";
+                dbConnection.Query(query, new
+                {
+                    feedBacksDTO.ID,
+                    feedBacksDTO.DateTime,
+                    feedBacksDTO.Text,
+                    feedBacksDTO.ClientID,
+                    feedBacksDTO.OrderID,
+
+                });
+
+            }
+
+        }
 
 
     }

@@ -24,6 +24,7 @@
     <DefaultCollation>Cyrillic_General_CI_AS</DefaultCollation>
     <DefaultFilegroup>PRIMARY</DefaultFilegroup>
     <IncludeSchemaNameInFileName>False</IncludeSchemaNameInFileName>
+    <DefaultSchema>TradeCompany_DataBase</DefaultSchema>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -102,6 +103,7 @@
     <Build Include="TradeCompany_DataBase\Stored Procedures\GetSupplyByID.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\UpdateSupplyByID.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\AddSupplyList.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\UpdateFeedBackById.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="TradeCompany_DataBase.refactorlog" />

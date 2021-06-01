@@ -15,12 +15,14 @@ namespace TradeCompany_TMPForTests
             
             FeedBacksData feedBacksData = new FeedBacksData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
             FeedBacksDTO feedBacksDTO = new FeedBacksDTO();
+            feedBacksDTO.ID = 17;
             feedBacksDTO.ClientID = 5;
             feedBacksDTO.OrderID = 7;
             feedBacksDTO.DateTime = DateTime.Now;
             feedBacksDTO.Text = "проба";
+
             //feedBacksData.AddFeedback(feedBacksDTO);
-            feedBacksData.DeleteFeedbackById(16);
+            feedBacksData.UpdateFeedBackById(feedBacksDTO);
 
            // feedBacksDTO = feedBacksData.GetFeedbackByID(4);
 
