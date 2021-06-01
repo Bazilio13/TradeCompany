@@ -7,6 +7,12 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Frame Name="MainFrame" NavigationUIVisibility="Hidden" Grid.Row="1" Source="StartPage.xaml"></Frame>
+        <Button Name="OrdersButton" Content="Заказы" Background="BlanchedAlmond" FontSize="25" FontWeight="Medium" HorizontalAlignment="Left" Margin="142,0,0,0" VerticalAlignment="Center" Height="55" Width="127" Click="OrdersButton_Click"/>
+        <Button Name="MainButton" Content="Главная" Background="BlanchedAlmond" FontSize="25" FontWeight="Medium" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Height="55" Width="127" Click="MainButton_Click"/>
     </Grid>
 </Window>

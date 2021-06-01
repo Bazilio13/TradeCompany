@@ -5,13 +5,13 @@ VisualStudioVersion = 16.0.31313.79
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "TradeCompany_DataBase", "TradeCompany_DataBase\TradeCompany_DataBase.sqlproj", "{433E903B-E651-4EA9-B5F2-238437442A20}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradeCompany_DAL", "TradeCompany_DAL\TradeCompany_DAL.csproj", "{B499E795-573A-49F7-ACE0-A7DE4D761E9F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TradeCompany_DAL", "TradeCompany_DAL\TradeCompany_DAL.csproj", "{B499E795-573A-49F7-ACE0-A7DE4D761E9F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradeCompany_BLL", "TradeCompany_BLL\TradeCompany_BLL.csproj", "{6A1B1CFF-99C9-4C3D-84C7-3A22EA8F15A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TradeCompany_BLL", "TradeCompany_BLL\TradeCompany_BLL.csproj", "{6A1B1CFF-99C9-4C3D-84C7-3A22EA8F15A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradeCompany_UI", "TradeCompany_UI\TradeCompany_UI.csproj", "{E754B279-540E-4011-9136-AEB5A0DF2BA2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TradeCompany_UI", "TradeCompany_UI\TradeCompany_UI.csproj", "{E754B279-540E-4011-9136-AEB5A0DF2BA2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradeCompany_TMPForTests", "TradeCompany_TMPForTests\TradeCompany_TMPForTests.csproj", "{78E1F081-5BA3-45B9-9F3B-4EB24380AFC6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TradeCompany_TMPForTests", "TradeCompany_TMPForTests\TradeCompany_TMPForTests.csproj", "{78E1F081-5BA3-45B9-9F3B-4EB24380AFC6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,7 +20,6 @@ Global
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{433E903B-E651-4EA9-B5F2-238437442A20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{433E903B-E651-4EA9-B5F2-238437442A20}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{433E903B-E651-4EA9-B5F2-238437442A20}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{433E903B-E651-4EA9-B5F2-238437442A20}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{433E903B-E651-4EA9-B5F2-238437442A20}.Release|Any CPU.Build.0 = Release|Any CPU
