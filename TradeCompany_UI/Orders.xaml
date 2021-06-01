@@ -31,5 +31,8 @@
                 </TransformGroup>
             </DataGrid.RenderTransform>
         </DataGrid>
+        <StackPanel Grid.Row="1">
+            
+        </StackPanel>
     </Grid>
 </Page>

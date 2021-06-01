@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TradeCompany_DAL.DTOs
+namespace TradeCompany_BLL.Models
 {
-    public class OrdersDTO
+    public class OrderModel
     {
         public int ID { get; set; }
         public int ClientsID { get; set; }
@@ -14,6 +14,5 @@ namespace TradeCompany_DAL.DTOs
         public int AddressID { get; set; }
         public string Comment { get; set; }
         public List<OrderListsDTO> OrderLists { get; set; } = new List<OrderListsDTO>();
-        public 
     }
 }
