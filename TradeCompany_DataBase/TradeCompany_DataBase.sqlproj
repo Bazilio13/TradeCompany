@@ -106,4 +106,7 @@
   <ItemGroup>
     <RefactorLog Include="TradeCompany_DataBase.refactorlog" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="TradeCompany_DataBase\Stored Procedures\DeleteProductByID.sql" />
+  </ItemGroup>
 </Project>
