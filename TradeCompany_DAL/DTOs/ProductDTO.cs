@@ -12,6 +12,7 @@ namespace TradeCompany_DAL.DTOs
         public string Name { get; set; }
         public float StockAmount { get; set; }
         public int MeasureUnit { get; set; }
+        public string MeasureUnitName { get; set; }
         public float MinPrice { get; set; }
         public float MaxPrice { get; set; }
         public DateTime LastSupplyDate { get; set; }
