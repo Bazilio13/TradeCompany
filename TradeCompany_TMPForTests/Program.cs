@@ -13,11 +13,22 @@ namespace TradeCompany_TMPForTests
             OrdersDTO ordersDTO = new OrdersDTO();
 
             ProductsData productsData = new ProductsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
-            //List<ProductDTO> products = productsData.GetProducts();
+            ProductDTO product = new ProductDTO();
             //productsData.GetProductByID(2);
             //productsData.GetProductsByLetter("o");
-           // productsData.GetProducts();
+            // productsData.GetProducts();
             //productsData.DeleteGroupFromProduct(2, 2);
+            //productsData.GetProducts();
+            //product.Name = "maslo";
+            //product.StockAmount = 30;
+            //product.MeasureUnit = 1;
+            //product.MinPrice = 200;
+            //product.MaxPrice = 500;
+            //DateTime date = DateTime.Now;
+            //product.LastSupplyDate = date;
+            //productsData.AddProduct(product);
+            //productsData.GetProducts();
+            productsData.AddProductToProductGroup(8, 3);
             productsData.GetProducts();
 
 

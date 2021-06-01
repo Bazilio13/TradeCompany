@@ -139,5 +139,33 @@ namespace TradeCompany_DAL
                 dbConnection.Query(query, new { productID, productGroupID });
             }
         }
+
+        public void AddProduct(ProductDTO product)
+        {
+            string query;
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                query = "exec TradeCompany_DataBase.AddProduct @Name, @StockAmount, @MeasureUnit, @MinPrice, @MaxPrice, @LastSupplyDate";
+                dbConnection.Query<ProductDTO>(query, new
+                {
+                    product.Name,
+                    product.StockAmount,
+                    product.MeasureUnit,
+                    product.MinPrice,
+                    product.MaxPrice,
+                    product.LastSupplyDate
+                }) ;
+            }
+        }
+
+        public void AddProductToProductGroup(int productID, int productGroupID)
+        {
+            string query;
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                query = "exec TradeCompany_DataBase.AddProductToProductGroup @productID, @ProductGroupID";
+                dbConnection.Query<ProductDTO>(query, new { productID, productGroupID});
+            }
+        }
     }
 }
