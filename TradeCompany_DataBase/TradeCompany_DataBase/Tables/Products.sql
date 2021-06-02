@@ -3,9 +3,11 @@
     [Name]           NVARCHAR (250) NOT NULL,
     [StockAmount]    FLOAT (53)     NOT NULL,
     [MeasureUnit]    INT            NOT NULL,
-    [MinPrice]       FLOAT (53)     NOT NULL,
-    [MaxPrice]       FLOAT (53)     NULL,
-    [LastSupplyDate] DATETIME       NULL,
+    [WholesalePrice] FLOAT (53)     NOT NULL,
+    [RetailPrice]    FLOAT (53)     NOT NULL,
+    [LastSupplyDate] DATETIME       NOT NULL,
+    [Description]    NVARCHAR (500) NULL,
+    [Comments]       NVARCHAR (500) NULL,
     CONSTRAINT [PK_PRODUCTS] PRIMARY KEY CLUSTERED ([ID] ASC),
     CONSTRAINT [Products_fk0] FOREIGN KEY ([MeasureUnit]) REFERENCES [TradeCompany_DataBase].[MeasureUnits] ([ID])
 );
