@@ -50,13 +50,13 @@ namespace TradeCompany_DAL
 
         public void AddClient(ClientDTO client)
         {
-            string query = "exec TradeCompany_DataBase.AddClient @Name, @INN, @Email, @Phone, @Comment, @CorporateBody, @Type, @LastOrderDate";
+            string query = "exec TradeCompany_DataBase.AddClient @Name, @INN, @E_mail, @Phone, @Comment, @CorporateBody, @Type, @LastOrderDate";
             using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
             {
                 dbConnection.Query<ClientDTO>(query, new {
                 client.Name,
                 client.INN,
-                client.Email, 
+                client.E_mail, 
                 client.Phone,
                 client.Type,
                 client.CorporateBody,
@@ -78,7 +78,7 @@ namespace TradeCompany_DAL
 
         public void UpdateClientByID(ClientDTO client)
         {
-            string query1 = "exec TradeCompany_DataBase.UpdateClientByID @ID, @Name, @INN, @Email, @Phone, @Comment, @CorporateBody, @Type, @LastOrderDate";
+            string query1 = "exec TradeCompany_DataBase.UpdateClientByID @ID, @Name, @INN, @E_mail, @Phone, @Comment, @CorporateBody, @Type, @LastOrderDate";
             using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
             {
                 dbConnection.Query<ClientDTO>(query1, new
@@ -86,7 +86,7 @@ namespace TradeCompany_DAL
                     client.ID,
                     client.Name,
                     client.INN,
-                    client.Email,
+                    client.E_mail,
                     client.Phone,
                     client.Comment,
                     client.CorporateBody,
