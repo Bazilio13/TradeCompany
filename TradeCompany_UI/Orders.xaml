@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:TradeCompany_UI"
       mc:Ignorable="d" 
       d:DesignHeight="450"
-      Title="Orders" Width="942">
+      Title="Orders">
 
     <Grid Background="WhiteSmoke">
         <Grid.RowDefinitions>
