@@ -26,7 +26,7 @@ namespace TradeCompany_DAL
         {
             List<ProductDTO> products = new List<ProductDTO>();
             string query;
-            using (System.Data.IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
             {
                 query = "exec TradeCompany_DataBase.GetProducts";
                 dbConnection.Query<ProductDTO, ProductGroupDTO, ProductDTO>(query,
@@ -62,7 +62,7 @@ namespace TradeCompany_DAL
             List<ProductDTO> products = new List<ProductDTO>();
             ProductDTO crntProduct = null;
             string query;
-            using (System.Data.IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
             {
                 query = "exec TradeCompany_DataBase.GetProductByID @ID";
                 dbConnection.Query<ProductDTO, ProductGroupDTO, ProductDTO>(query,
@@ -89,7 +89,7 @@ namespace TradeCompany_DAL
         {
             List<ProductDTO> products = new List<ProductDTO>();
             string query;
-            using (System.Data.IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
             {
                 query = "exec TradeCompany_DataBase.GetProductByLetter @InputString";
                 dbConnection.Query<ProductDTO, ProductGroupDTO, ProductDTO>(query,
@@ -164,7 +164,26 @@ namespace TradeCompany_DAL
             using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
             {
                 query = "exec TradeCompany_DataBase.AddProductToProductGroup @productID, @ProductGroupID";
-                dbConnection.Query<ProductDTO>(query, new { productID, productGroupID});
+                dbConnection.Query(query, new { productID, productGroupID});
+            }
+        }
+
+        public void UpdateProductByID(ProductDTO product)
+        {
+            string query;
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                query = "exec TradeCompany_DataBase.UpdateProductByID @ID, @Name, @StockAmount, @MeasureUnit, @MinPrice, @MaxPrice, @LastSupplyDate";
+                dbConnection.Query<ProductDTO>(query, new
+                {
+                    product.ID,
+                    product.Name,
+                    product.StockAmount,
+                    product.MeasureUnit,
+                    product.MinPrice,
+                    product.MaxPrice,
+                    product.LastSupplyDate
+                });
             }
         }
     }

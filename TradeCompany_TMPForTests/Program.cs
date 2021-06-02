@@ -9,28 +9,40 @@ namespace TradeCompany_TMPForTests
     {
         static void Main(string[] args)
         {
-            OrdersData ordersData = new OrdersData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
-            OrdersDTO ordersDTO = new OrdersDTO();
+            //OrdersData ordersData = new OrdersData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
+            //OrdersDTO ordersDTO = new OrdersDTO();
 
-            ProductsData productsData = new ProductsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
-            ProductDTO product = new ProductDTO();
+            //ProductsData productsData = new ProductsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
+            //ProductDTO product = new ProductDTO();
             //productsData.GetProductByID(2);
             //productsData.GetProductsByLetter("o");
             // productsData.GetProducts();
             //productsData.DeleteGroupFromProduct(2, 2);
             //productsData.GetProducts();
-            //product.Name = "maslo";
-            //product.StockAmount = 30;
+            //product.Name = "kolbasa";
+            //product.StockAmount = 20;
             //product.MeasureUnit = 1;
-            //product.MinPrice = 200;
-            //product.MaxPrice = 500;
+            //product.MinPrice = 300;
             //DateTime date = DateTime.Now;
             //product.LastSupplyDate = date;
             //productsData.AddProduct(product);
             //productsData.GetProducts();
-            productsData.AddProductToProductGroup(8, 3);
-            productsData.GetProducts();
+            //productsData.AddProductToProductGroup(8, 4);
+            //product = productsData.GetProductByID(8);
+            //product.Name = "maslo slivochnoe";
+            //productsData.UpdateProductByID(product);
+            //productsData.GetProducts();
 
+            ProductGroupsData groupsData = new ProductGroupsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
+            //groupsData.GetProductGroupByID(3);
+            //ProductGroupDTO group = new ProductGroupDTO();
+            //group.Name = "electronika";
+            //groupsData.AddProductGroup(group);
+            //ProductGroupDTO group = groupsData.GetProductGroupByID(5);
+            //group.Name = "электроника";
+            //groupsData.UpdateProductGroupByID(group);
+            groupsData.DeleteProductGroupByID(5);
+            groupsData.GetProductGroups();
 
             //ordersDTO.AddressID = 2;
             //ordersDTO.ClientsID = 2;
