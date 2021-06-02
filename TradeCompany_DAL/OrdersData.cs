@@ -97,9 +97,10 @@ namespace TradeCompany_DAL
             using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
             {
                 query = "exec TradeCompany_DataBase.GetOrders";
-                dbConnection.Query<OrdersDTO, OrderListsDTO, OrdersDTO>(query,
-                    (order, orderList) =>
+                dbConnection.Query<OrdersDTO, OrderListsDTO, ClientDTO, ProductDTO, OrdersDTO>(query,
+                    (order, orderList, client, product) =>
                     {
+                        orderList.productDTO = product;
                         OrdersDTO crntOrder = null;
                         foreach (var o in result)
                         {
@@ -111,6 +112,7 @@ namespace TradeCompany_DAL
                         if (crntOrder == null)
                         {
                             crntOrder = order;
+                            crntOrder.ClientDTO = client;
                             result.Add(crntOrder);
                         }
                         if (orderList != null)
@@ -130,9 +132,10 @@ namespace TradeCompany_DAL
             using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
             {
                 query = "exec TradeCompany_DataBase.GetOrdersByID @ID";
-                dbConnection.Query<OrdersDTO, OrderListsDTO, OrdersDTO>(query,
-                    (order, orderList) =>
+                dbConnection.Query<OrdersDTO, OrderListsDTO, ClientDTO, ProductDTO, OrdersDTO>(query,
+                    (order, orderList, client, product) =>
                     {
+                        orderList.productDTO = product;
                         OrdersDTO crntOrder = null;
                         foreach (var o in result)
                         {
@@ -144,6 +147,7 @@ namespace TradeCompany_DAL
                         if (crntOrder == null)
                         {
                             crntOrder = order;
+                            crntOrder.ClientDTO = client;
                             result.Add(crntOrder);
                         }
                         if (orderList != null)
