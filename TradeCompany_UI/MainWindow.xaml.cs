@@ -33,6 +33,7 @@ namespace TradeCompany_UI
         private void MainButton_Click(object sender, RoutedEventArgs e)
         {
             MainFrame.Content = new StartPage();
+            //MainFrame.Content = new SpecificOrder(7);
         }
     }
 }

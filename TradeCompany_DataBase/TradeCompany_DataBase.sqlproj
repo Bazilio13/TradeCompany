@@ -108,6 +108,7 @@
     <Build Include="TradeCompany_DataBase\Stored Procedures\DeleteAddressByIDAndAddress.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\GetAddressesByClientID.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\UpdateFeedBackById.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetProductsByOrderId.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="TradeCompany_DataBase.refactorlog" />
