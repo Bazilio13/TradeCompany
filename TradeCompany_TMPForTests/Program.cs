@@ -5,6 +5,7 @@ using TradeCompany_BLL.Models;
 using TradeCompany_DAL;
 using TradeCompany_DAL.DTOs;
 
+
 namespace TradeCompany_TMPForTests
 {
     class Program
