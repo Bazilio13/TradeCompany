@@ -68,7 +68,7 @@
     <Build Include="TradeCompany_DataBase\Tables\MeasureUnits.sql" />
     <Build Include="TradeCompany_DataBase\Tables\OrderLists.sql" />
     <Build Include="TradeCompany_DataBase\Tables\Orders.sql" />
-    <Build Include="TradeCompany_DataBase\Tables\Product_ProductGroups.sql" />
+    <Build Include="TradeCompany_DataBase\Tables\Product_ProductGroups_Old.sql" />
     <Build Include="TradeCompany_DataBase\Tables\ProductGroups.sql" />
     <Build Include="TradeCompany_DataBase\Tables\Products.sql" />
     <Build Include="TradeCompany_DataBase\Tables\Supplies.sql" />
@@ -101,6 +101,7 @@
     <Build Include="TradeCompany_DataBase\Stored Procedures\UpdateProductGroupByID.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\GetProductByLetter.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\DeleteGroupFromProductByProductID.sql" />
+    <Build Include="TradeCompany_DataBase\Tables\Product_ProductGroups.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="TradeCompany_DataBase.refactorlog" />

@@ -12,7 +12,7 @@ namespace TradeCompany_TMPForTests
             //OrdersData ordersData = new OrdersData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
             //OrdersDTO ordersDTO = new OrdersDTO();
 
-            //ProductsData productsData = new ProductsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
+            ProductsData productsData = new ProductsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
             //ProductDTO product = new ProductDTO();
             //productsData.GetProductByID(2);
             //productsData.GetProductsByLetter("o");
@@ -31,9 +31,11 @@ namespace TradeCompany_TMPForTests
             //product = productsData.GetProductByID(8);
             //product.Name = "maslo slivochnoe";
             //productsData.UpdateProductByID(product);
-            //productsData.GetProducts();
+            productsData.AddProductToProductGroup(9, 3);
+            productsData.GetProducts();
 
-            ProductGroupsData groupsData = new ProductGroupsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
+
+            //ProductGroupsData groupsData = new ProductGroupsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
             //groupsData.GetProductGroupByID(3);
             //ProductGroupDTO group = new ProductGroupDTO();
             //group.Name = "electronika";
@@ -41,8 +43,8 @@ namespace TradeCompany_TMPForTests
             //ProductGroupDTO group = groupsData.GetProductGroupByID(5);
             //group.Name = "электроника";
             //groupsData.UpdateProductGroupByID(group);
-            groupsData.DeleteProductGroupByID(5);
-            groupsData.GetProductGroups();
+            //groupsData.DeleteProductGroupByID(5);
+            //groupsData.GetProductGroups();
 
             //ordersDTO.AddressID = 2;
             //ordersDTO.ClientsID = 2;

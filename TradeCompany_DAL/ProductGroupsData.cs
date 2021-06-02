@@ -26,7 +26,7 @@ namespace TradeCompany_DAL
         {
             List<ProductGroupDTO> groups = new List<ProductGroupDTO>();
             string query;
-            using (System.Data.IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
             {
                 query = "exec TradeCompany_DataBase.GetProductGroups";
                 dbConnection.Query<ProductGroupDTO, ProductDTO, ProductGroupDTO>(query,
