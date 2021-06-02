@@ -24,6 +24,7 @@
     <DefaultCollation>Cyrillic_General_CI_AS</DefaultCollation>
     <DefaultFilegroup>PRIMARY</DefaultFilegroup>
     <IncludeSchemaNameInFileName>False</IncludeSchemaNameInFileName>
+    <DefaultSchema>TradeCompany_DataBase</DefaultSchema>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -106,6 +107,7 @@
     <Build Include="TradeCompany_DataBase\Stored Procedures\AddAddress.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\DeleteAddressByIDAndAddress.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\GetAddressesByClientID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\UpdateFeedBackById.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="TradeCompany_DataBase.refactorlog" />
