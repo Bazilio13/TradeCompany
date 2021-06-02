@@ -36,5 +36,24 @@ namespace TradeCompany_UI
         {
 
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void textInput(object sender, TextCompositionEventArgs e)
+        {
+            MapsDTOtoModel map = new MapsDTOtoModel();
+            if (ClientFiltr.Text == "")
+            {
+                dgClientsTable.ItemsSource = map.MapClientDTOToClientBaseModelList();
+
+            }
+            else
+            {
+                dgClientsTable.ItemsSource = map.MapClientDTOToClientBaseModelListByName(ClientFiltr.Text + e.Text);
+            }
+        }
     }
 }

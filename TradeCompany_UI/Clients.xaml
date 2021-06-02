@@ -9,12 +9,19 @@
       Title="Clients">
 
 
-    <Grid Margin="10px">
+    <Grid Background="WhiteSmoke" Margin="10px">
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"></RowDefinition>
-            <RowDefinition Height="3*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <DataGrid x:Name="dgClientsTable" FontSize="16"  AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" Grid.Row="1">
+                <RowDefinition Height="45"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Button Name="CreateOrder" Content="Новый клиент" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="25" Width="80"/>
+
+        <TextBox   x:Name="ClientFiltr" Margin="305,0,0,0"  TextWrapping="Wrap" Height="25" VerticalAlignment="Center" HorizontalAlignment="Left" Width="200" TextInput="textInput" PreviewTextInput="textInput"/>
+
+            <DatePicker Name="MinDate" HorizontalAlignment="Left" Margin="95,0,0,0" VerticalAlignment="Center" Height="25" Width="100"/>
+            <DatePicker Name="MaxDate" HorizontalAlignment="Left" Margin="200,0,0,0" VerticalAlignment="Center" Height="25" Width="100"/>
+            
+            <DataGrid x:Name="dgClientsTable" FontSize="16"  AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" Grid.Row="1">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding ="{Binding Path = ID}"  IsReadOnly="True" Header="id" Width="30"/>
                 <DataGridTextColumn Binding ="{Binding Path = Name}"  IsReadOnly="True" Header="ФИО/Название" Width="200"/>
@@ -23,7 +30,8 @@
                 <DataGridTextColumn Binding ="{Binding Path = LastOrderDate}" IsReadOnly="True" Header="Дата последнего заказа" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-
+        <Button Content="Применить фильтр" HorizontalAlignment="Left" Margin="550 ,0,0,0" VerticalAlignment="Center" Height="25" Width="117" Click="Button_Click"/>
+        
         <Border BorderThickness="1" BorderBrush="Black" Loaded="Border_Loaded"/>
      </Grid>
 </Page>
