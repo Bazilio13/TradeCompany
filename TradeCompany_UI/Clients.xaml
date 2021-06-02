@@ -8,9 +8,13 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Clients">
 
-    
+
     <Grid Margin="10px">
-        <DataGrid x:Name="dgClientsTable" FontSize="16"  AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="3*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <DataGrid x:Name="dgClientsTable" FontSize="16"  AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" Grid.Row="1">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding ="{Binding Path = ID}"  IsReadOnly="True" Header="id" Width="30"/>
                 <DataGridTextColumn Binding ="{Binding Path = Name}"  IsReadOnly="True" Header="ФИО/Название" Width="200"/>
@@ -19,6 +23,7 @@
                 <DataGridTextColumn Binding ="{Binding Path = LastOrderDate}" IsReadOnly="True" Header="Дата последнего заказа" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
+
         <Border BorderThickness="1" BorderBrush="Black" Loaded="Border_Loaded"/>
-    </Grid>
+     </Grid>
 </Page>
