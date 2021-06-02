@@ -12,7 +12,8 @@
     <Grid Margin="10px">
         <DataGrid x:Name="dgClientsTable" FontSize="16"  AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" >
             <DataGrid.Columns>
-                <DataGridTextColumn Binding ="{Binding Path = Name}"  IsReadOnly="True" Header="Имя/Название" Width="200"/>
+                <DataGridTextColumn Binding ="{Binding Path = ID}"  IsReadOnly="True" Header="id" Width="30"/>
+                <DataGridTextColumn Binding ="{Binding Path = Name}"  IsReadOnly="True" Header="ФИО/Название" Width="200"/>
                 <DataGridTextColumn Binding ="{Binding Path = Phone}" IsReadOnly="True" Header="Телефон" Width="200"/>
                 <DataGridTextColumn Binding ="{Binding Path = E_mail}" IsReadOnly="True" Header="Email" Width="200" />
                 <DataGridTextColumn Binding ="{Binding Path = LastOrderDate}" IsReadOnly="True" Header="Дата последнего заказа" Width="*"/>
