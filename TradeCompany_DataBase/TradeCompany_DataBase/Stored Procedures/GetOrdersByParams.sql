@@ -14,9 +14,8 @@ AS
 	left join [TradeCompany_DataBase].MeasureUnits as M on m.ID = P.MeasureUnit
 	left join [TradeCompany_DataBase].Addresses as A on o.AddressID = A.ID
 	Where 
-	(@Client IS NULL OR O.ClientsID LIKE '%'+@Client+'%') AND
+	(@Client IS NULL OR c.Name LIKE '%'+@Client+'%') AND
 	(@Address IS NULL OR A.Address LIKE '%'+@Address+'%') AND
 	(@MinDateTime IS NULL OR O.DateTime >= @MinDateTime) AND
 	(@MaxDateTime IS NULL OR O.DateTime <= @MaxDateTime) 
 	order by o.DateTime desc, o.ID desc
-	
