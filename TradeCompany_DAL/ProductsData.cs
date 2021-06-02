@@ -145,15 +145,17 @@ namespace TradeCompany_DAL
             string query;
             using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
             {
-                query = "exec TradeCompany_DataBase.AddProduct @Name, @StockAmount, @MeasureUnit, @MinPrice, @MaxPrice, @LastSupplyDate";
+                query = "exec TradeCompany_DataBase.AddProduct @Name, @StockAmount, @MeasureUnit, @WholesalePrice, @RetailPrice, @LastSupplyDate, @Description, @Comments";
                 dbConnection.Query<ProductDTO>(query, new
                 {
                     product.Name,
                     product.StockAmount,
                     product.MeasureUnit,
-                    product.MinPrice,
-                    product.MaxPrice,
-                    product.LastSupplyDate
+                    product.WholesalePrice,
+                    product.RetailPrice,
+                    product.LastSupplyDate,
+                    product.Description,
+                    product.Comments
                 }) ;
             }
         }
@@ -173,16 +175,18 @@ namespace TradeCompany_DAL
             string query;
             using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
             {
-                query = "exec TradeCompany_DataBase.UpdateProductByID @ID, @Name, @StockAmount, @MeasureUnit, @MinPrice, @MaxPrice, @LastSupplyDate";
+                query = "exec TradeCompany_DataBase.UpdateProductByID @ID, @Name, @StockAmount, @MeasureUnit, @WholesalePrice, @RetailPrice, @LastSupplyDate, @Description, @Comments";
                 dbConnection.Query<ProductDTO>(query, new
                 {
                     product.ID,
                     product.Name,
                     product.StockAmount,
                     product.MeasureUnit,
-                    product.MinPrice,
-                    product.MaxPrice,
-                    product.LastSupplyDate
+                    product.WholesalePrice,
+                    product.RetailPrice,
+                    product.LastSupplyDate,
+                    product.Description,
+                    product.Comments
                 });
             }
         }

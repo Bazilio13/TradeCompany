@@ -5,7 +5,7 @@
     [MeasureUnit]    INT            NOT NULL,
     [WholesalePrice] FLOAT (53)     NOT NULL,
     [RetailPrice]    FLOAT (53)     NOT NULL,
-    [LastSupplyDate] DATETIME       NOT NULL,
+    [LastSupplyDate] DATETIME       NULL,
     [Description]    NVARCHAR (500) NULL,
     [Comments]       NVARCHAR (500) NULL,
     CONSTRAINT [PK_PRODUCTS] PRIMARY KEY CLUSTERED ([ID] ASC),
