@@ -8,7 +8,6 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Orders">
 
-
     <Grid Background="WhiteSmoke">
         <Grid.RowDefinitions>
             <RowDefinition Height="45"></RowDefinition>
@@ -19,14 +18,16 @@
         <TextBox x:Name="Client_Copy" Margin="95,10,0,0" Text="TextBox" TextWrapping="Wrap"  Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200"/>
         <DatePicker Name="MinDate" HorizontalAlignment="Left" Margin="300,10,0,0" VerticalAlignment="Top" Height="25" Width="100"/>
         <DatePicker Name="MaxDate" HorizontalAlignment="Left" Margin="405,10,0,0" VerticalAlignment="Top" Height="25" Width="100"/>
-        <StackPanel x:Name="OrdersPanel" Grid.Row="1">
-            <StackPanel Orientation="Horizontal">
-            <Button x:Name="OrderNumberColumn" Content="№" Width="40" HorizontalAlignment="Left"/>
-            <Button x:Name="OrderDateColumn" Content="Дата заказа" Width="100" HorizontalAlignment="Left"/>
-            <Button x:Name="OrderClientColumn" Content="Клиент" Width="200" HorizontalAlignment="Left"/>
-                <Button x:Name="OrderSumColumn" Content="Сумма заказа" Width="100" HorizontalAlignment="Left"/>
-
-            </StackPanel>
-        </StackPanel>
+        <DataGrid x:Name="dgOrders" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.Columns >
+                <DataGridTextColumn Binding="{Binding Path=ID}" Header="№ заказа" Width="65"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=DateTime}" Header="Дата заказа" Width="100"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Client}" Header="Клиент" Width="200"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Summ}" Header="Сумма заказа" Width="100"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Address}" Header="Адрес" Width="65"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Comment}" Header="Комментарий" Width="*"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Применить фильтр" HorizontalAlignment="Left" Margin="510,0,0,0" VerticalAlignment="Center" Height="25" Width="117" Click="Button_Click"/>
     </Grid>
 </Page>

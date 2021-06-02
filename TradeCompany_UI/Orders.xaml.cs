@@ -32,11 +32,17 @@ namespace TradeCompany_UI
             ordersDTOs = ordersData.GetOrders();
             MapsDTOtoModel map = new MapsDTOtoModel();
             List<OrderModel> orderModels = map.MapOrdersDTOToOrderModel(ordersDTOs);
-            foreach (OrderModel orderModel in orderModels)
-            {
-                this.OrdersPanel.Children.Add(new OrderRow(orderModel));
-            }
+            dgOrders.ItemsSource = orderModels;
+            //foreach (OrderModel orderModel in orderModels)
+            //{
+            //    this.OrdersPanel.Children.Add(new OrderRow(orderModel));
+            //}
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            //int a = OrderTable.RowDetailsTemplate.;
+            //this.Width;
+        }
     }
 }
