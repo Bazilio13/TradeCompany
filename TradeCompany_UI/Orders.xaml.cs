@@ -41,8 +41,22 @@ namespace TradeCompany_UI
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //int a = OrderTable.RowDetailsTemplate.;
-            //this.Width;
+            string client = null;
+            string address = null;
+            if (ClientFiltr.Text != "")
+            {
+                client = ClientFiltr.Text;
+            } 
+            if (AddressFiltr.Text != "")
+            {
+                address = AddressFiltr.Text;
+            }
+            OrdersData ordersData = new OrdersData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
+            List<OrdersDTO> ordersDTOs = new List<OrdersDTO>();
+            ordersDTOs = ordersData.GetOrdersByParams(client, MinDate.SelectedDate, MaxDate.SelectedDate, address);
+            MapsDTOtoModel map = new MapsDTOtoModel();
+            List<OrderModel> orderModels = map.MapOrdersDTOToOrderModel(ordersDTOs);
+            dgOrders.ItemsSource = orderModels;
         }
     }
 }

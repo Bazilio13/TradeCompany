@@ -31,7 +31,7 @@ namespace TradeCompany_DAL
                 ordersDTO.ID = dbConnection.Query<int>(query, new
                 {
                     ordersDTO.ClientsID,
-                    ordersDTO.Datetime,
+                    ordersDTO.DateTime,
                     ordersDTO.AddressID,
                     ordersDTO.Comment
                 }).AsList<int>()[0];
@@ -117,22 +117,21 @@ namespace TradeCompany_DAL
             return result;
         }
 
-        public List<OrdersDTO> GetOrdersByParams(int? clientsID, DateTime? minDateTime, DateTime? maxDateTime, int? addressID, int? productID)
+        public List<OrdersDTO> GetOrdersByParams(string client, DateTime? minDateTime, DateTime? maxDateTime, string address)
         {
             List<OrdersDTO> result = new List<OrdersDTO>();
             string query;
             using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
             {
-                query = "exec TradeCompany_DataBase.GetOrdersByParams @ClientsID, @MinDateTime, @MaxDateTime, @AddressID, @ProductID";
+                query = "exec TradeCompany_DataBase.GetOrdersByParams @Client, @MinDateTime, @MaxDateTime, @Address";
                 dbConnection.Query<OrdersDTO, OrderListsDTO, ClientDTO, ProductDTO, OrdersDTO>(query,
                     (order, orderList, client, product) => MapsOrdersDTO(order, orderList, client, product, result),
                     new
                     {
-                        clientsID,
+                        client,
                         minDateTime,
                         maxDateTime,
-                        addressID,
-                        productID
+                        address
                     });
             }
             return result;
@@ -147,7 +146,7 @@ namespace TradeCompany_DAL
                 {
                     ordersDTO.ID,
                     ordersDTO.ClientsID,
-                    ordersDTO.Datetime,
+                    ordersDTO.DateTime,
                     ordersDTO.AddressID,
                     ordersDTO.Comment
                 });

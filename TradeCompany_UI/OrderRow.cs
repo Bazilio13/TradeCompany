@@ -25,7 +25,7 @@ namespace TradeCompany_UI
             sum.Content = orderModel.Summ;
             sum.Width = 100;
             Button date = new Button();
-            date.Content = orderModel.Datetime;
+            date.Content = orderModel.DateTime;
             date.Width = 100;
             this.Children.Add(orderID);
             this.Children.Add(date);

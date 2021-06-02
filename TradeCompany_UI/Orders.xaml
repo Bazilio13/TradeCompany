@@ -5,8 +5,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TradeCompany_UI"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="Orders">
+      d:DesignHeight="450"
+      Title="Orders" Width="942">
 
     <Grid Background="WhiteSmoke">
         <Grid.RowDefinitions>
@@ -15,9 +15,9 @@
         </Grid.RowDefinitions>
         <Button Name="CreateOrder" Content="Новый заказ" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="25" Width="80"/>
 
-        <TextBox x:Name="Client_Copy" Margin="95,10,0,0" Text="TextBox" TextWrapping="Wrap"  Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200"/>
-        <DatePicker Name="MinDate" HorizontalAlignment="Left" Margin="300,10,0,0" VerticalAlignment="Top" Height="25" Width="100"/>
-        <DatePicker Name="MaxDate" HorizontalAlignment="Left" Margin="405,10,0,0" VerticalAlignment="Top" Height="25" Width="100"/>
+        <TextBox x:Name="ClientFiltr" Margin="305,0,0,0" TextWrapping="Wrap"  Height="25" VerticalAlignment="Center" HorizontalAlignment="Left" Width="200"/>
+        <DatePicker Name="MinDate" HorizontalAlignment="Left" Margin="95,0,0,0" VerticalAlignment="Center" Height="25" Width="100"/>
+        <DatePicker Name="MaxDate" HorizontalAlignment="Left" Margin="200,0,0,0" VerticalAlignment="Center" Height="25" Width="100"/>
         <DataGrid x:Name="dgOrders" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns >
                 <DataGridTextColumn Binding="{Binding Path=ID}" Header="№ заказа" Width="65"></DataGridTextColumn>
@@ -28,6 +28,7 @@
                 <DataGridTextColumn Binding="{Binding Path=Comment}" Header="Комментарий" Width="*"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Применить фильтр" HorizontalAlignment="Left" Margin="510,0,0,0" VerticalAlignment="Center" Height="25" Width="117" Click="Button_Click"/>
+        <Button Content="Применить фильтр" HorizontalAlignment="Left" Margin="715,0,0,0" VerticalAlignment="Center" Height="25" Width="117" Click="Button_Click"/>
+        <TextBox x:Name="AddressFiltr" Margin="510,0,0,0" TextWrapping="Wrap"  Height="25" VerticalAlignment="Center" HorizontalAlignment="Left" Width="200"/>
     </Grid>
 </Page>
