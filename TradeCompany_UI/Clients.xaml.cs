@@ -60,24 +60,34 @@ namespace TradeCompany_UI
 
         private void ClientsFiltr(object sender, RoutedEventArgs e)
         {
-            DateTime? minDate = MinDate.SelectedDate;
-            DateTime? maxDate = MaxDate.SelectedDate;
-            bool? ChechF = CheckBoxF.IsChecked;
-            bool? ChechU = CheckBoxU.IsChecked;
-            bool? ChechOpt = CheckBoxOpt.IsChecked;
-            bool? ChechRoz = CheckBoxRetail.IsChecked;
-            if (ChechU ==null && ChechF ==null)
+            bool? person = null;
+            bool? sale = null;
+            MapsDTOtoModel map = new MapsDTOtoModel();
+            if (CheckBoxF.IsChecked != CheckBoxU.IsChecked)
             {
+                if(CheckBoxF.IsChecked == true)
+                {
+                    person = true;
+                }
+                else
+                {
+                    person = false;
+                }
+            }
 
-            }
-            if (minDate < maxDate)
+            if (CheckBoxOpt.IsChecked != CheckBoxRetail.IsChecked)
             {
-                ChechRoz = CheckBoxRetail.IsChecked;
+                if (CheckBoxOpt.IsChecked == true)
+                {
+                    sale = true;
+                }
+                else
+                {
+                    sale = false;
+                }
             }
-            if (minDate > maxDate)
-            {
-                ChechRoz = CheckBoxRetail.IsChecked;
-            }
+            dgClientsTable.ItemsSource = map.MapClientDTOToClientBaseModelListByParam(person, sale, MinDate.SelectedDate, MaxDate.SelectedDate);
+
 
         }
     }
