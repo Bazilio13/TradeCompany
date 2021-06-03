@@ -121,6 +121,7 @@
     <Build Include="TradeCompany_DataBase\Stored Procedures\GetProducts.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\UpdateProductByID.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\UpdateProductGroupByID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetProductsByOrderId.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="TradeCompany_DataBase.refactorlog" />

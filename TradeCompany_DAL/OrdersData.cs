@@ -117,6 +117,19 @@ namespace TradeCompany_DAL
             return result;
         }
 
+        public List<ProductForOrderDTO> GetProductsByOrderId(int orderId)
+        {
+            List<ProductForOrderDTO> result = new List<ProductForOrderDTO>();
+            string query;
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                //query = "exec TradeCompany_DataBase.GetProductsInOrderByOrderId @ID";
+                query = "exec TradeCompany_DataBase.GetProductsByOrderId @ID";
+                dbConnection.Query<ProductForOrderDTO>(query, new { orderId });
+            }
+            return result;
+        }
+
         public List<OrdersDTO> GetOrdersByParams(string client, DateTime? minDateTime, DateTime? maxDateTime, string address)
         {
             List<OrdersDTO> result = new List<OrdersDTO>();
