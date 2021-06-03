@@ -36,6 +36,7 @@ namespace TradeCompany_UI
             {
                 this.OrdersPanel.Children.Add(new OrderRow(orderModel));
             }
+           // OrderNumberColumn.Content = new SpecificOrder(7);
         }
 
     }

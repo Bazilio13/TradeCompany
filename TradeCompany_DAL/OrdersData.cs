@@ -161,7 +161,7 @@ namespace TradeCompany_DAL
             return result;
         }
 
-        public List<ProductForOrderDTO> GetProductsByOrderId(int orderId)
+        public List<ProductForOrderDTO> GetProductsByOrderId(int ID)
         {
             List<ProductForOrderDTO> result = new List<ProductForOrderDTO>();
             string query;
@@ -169,7 +169,7 @@ namespace TradeCompany_DAL
             {
                 //query = "exec TradeCompany_DataBase.GetProductsInOrderByOrderId @ID";
                 query = "exec TradeCompany_DataBase.GetProductsByOrderId @ID";
-                dbConnection.Query<ProductForOrderDTO>(query, new { orderId });
+                result = dbConnection.Query<ProductForOrderDTO>(query, new { ID }).ToList();
             }
             return result;
         }

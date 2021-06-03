@@ -24,44 +24,26 @@
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="52,19,0,0" Text="Дата" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="15"/>
             <TextBlock Grid.Column="2" HorizontalAlignment="Left" Margin="58,19,0,0" Text="ID" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="15"/>
-            <TextBlock Grid.Column="3" HorizontalAlignment="Center" Text="Клиент" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="15"/>
+            <TextBlock Grid.Column="3" HorizontalAlignment="Left" Margin="47,19,0,0" Text="Клиент" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="15"/>
             <TextBlock Grid.Column="4" HorizontalAlignment="Left" Margin ="60,19,0,0"  Text="Адрес" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="15"/>
         </Grid>
         <DataGrid x:Name="dgSpecificOrder" FontSize="15" Margin="30" Loaded="dgSpecificOrder_Loaded" Grid.Row="1">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="№" Width="0.1*"/>
-                <DataGridTextColumn Header="ID Товара" Width="0.3*"/>
-                <DataGridTextColumn Header="Товар" Width="1*"/>
-                <DataGridTextColumn Header="Количество" Width="0.5*"/>
-                <DataGridTextColumn Header="Цена" Width="0.5*"/>
+                <DataGridTextColumn Binding="{Binding Path= ProductID}" Header="ID Товара" Width="0.3*"/>
+                <DataGridTextColumn Binding="{Binding Path= Name}" Header="Товар" Width="1*"/>
+                <DataGridTextColumn Binding="{Binding Path= Amount}" Header="Количество" Width="0.5*"/>
+                <DataGridTextColumn Binding="{Binding Path= Price}" Header="Цена" Width="0.5*"/>
 
             </DataGrid.Columns>
         </DataGrid>
         <Grid Grid.Row="2">
-            <Button Name="PlaceOrder" Background="SteelBlue" Height="40" Width="300" Content="Сформировать" FontSize="15"></Button>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="583*"/>
+                <ColumnDefinition Width="8*"/>
+                <ColumnDefinition Width="209*"/>
+            </Grid.ColumnDefinitions>
+            <Button Name="PlaceOrder" HorizontalAlignment="Center" Background="SteelBlue" Height="40" Width="300" Content="Сформировать" FontSize="15" Margin="248,12,35,12"></Button>
         </Grid>
-        
-
-
-
     </Grid>
-
-
-
-
-
-
-    <!--<DataGrid x:Name="dgSpecificOrder" FontSize="15" Margin="30" Loaded="dgSpecificOrder_Loaded">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="№" Width="0.1*"/>
-                    <DataGridTextColumn Header="ID Товара" Width="0.3*"/>
-                    <DataGridTextColumn Header="Товар" Width="1*"/>
-                    <DataGridTextColumn Header="Количество" Width="0.5*"/>
-                    <DataGridTextColumn Header="Цена" Width="0.5*"/>
-
-                </DataGrid.Columns>
-            </DataGrid>-->
-
-
-
 </Page>
