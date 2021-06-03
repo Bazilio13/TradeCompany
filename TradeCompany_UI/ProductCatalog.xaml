@@ -66,6 +66,8 @@
             </DataGrid.Columns>
         </DataGrid>
         <TextBox x:Name="ProductSearch" Grid.Column="1" HorizontalAlignment="Left" Margin="10,60,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="25" TextChanged="textChange"/>
+        <ComboBox x:Name="ProductGroupSelect" Grid.Column="1" Margin="261,50,420,28" Selected="selectionChanged"/>
+        <Button x:Name="ApplyFilters" Content="Применить фильтр" Grid.Column="1" Margin="675,25,20,50" Click="ApplyFilters_Click"/>
 
     </Grid>
 </Page>

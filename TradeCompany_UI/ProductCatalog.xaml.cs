@@ -50,5 +50,23 @@ namespace TradeCompany_UI
                 dgProductCatalog.ItemsSource = map.MapProductDTOToProductBaseModelByLetter(ProductSearch.Text);
             }
         }
+
+        private void selectionChanged(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ApplyFilters_Click(object sender, RoutedEventArgs e)
+        {
+            MapsDTOtoModel map = new MapsDTOtoModel();
+            if (ProductGroupSelect.Text == "Категория")
+            {
+                dgProductCatalog.ItemsSource = map.MapProductDTOToProductBaseModel();
+            }
+            else
+            {
+
+            }
+        }
     }
 }

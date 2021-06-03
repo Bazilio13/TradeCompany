@@ -57,5 +57,16 @@ namespace TradeCompany_BLL
             List<ProductBaseModel> productBaseModel = mapper.Map<List<ProductBaseModel>>(productDTO);
             return productBaseModel;
         }
+
+        public List<ProductGroupModel> MapProductGroupToProductGroupModel()
+        {
+            ProductGroupsData groups = new ProductGroupsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
+            List<ProductGroupDTO> groupDTO = groups.GetProductGroups();
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<ProductGroupDTO, ProductGroupModel>());
+            Mapper mapper = new Mapper(config);
+            List<ProductGroupModel> groupModel = mapper.Map<List<ProductGroupModel>>(groupDTO);
+            return groupModel;
+        }
+        
     }
 }
