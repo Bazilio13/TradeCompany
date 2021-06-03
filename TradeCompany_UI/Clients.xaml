@@ -11,17 +11,17 @@
 
     <Grid Background="WhiteSmoke" Margin="10px">
         <Grid.RowDefinitions>
-                <RowDefinition Height="45"></RowDefinition>
-                <RowDefinition></RowDefinition>
-            </Grid.RowDefinitions>
-            <Button Name="CreateOrder" Content="Новый клиент" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="25" Width="80"/>
+            <RowDefinition Height="100px"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Button Name="CreateOrder" Content="Новый клиент" HorizontalAlignment="Left" Margin="663,65,0,0" VerticalAlignment="Top" Height="25" Width="80"/>
 
-        <TextBox   x:Name="ClientFiltr" Margin="305,0,0,0"  TextWrapping="Wrap" Height="25" VerticalAlignment="Center" HorizontalAlignment="Left" Width="200" TextInput="textInput" PreviewTextInput="textInput"/>
+        <TextBox   x:Name="ClientFiltr" Margin="10,10,0,0"  TextWrapping="Wrap" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="464" TextInput="textInput" PreviewTextInput="textInput"/>
 
-            <DatePicker Name="MinDate" HorizontalAlignment="Left" Margin="95,0,0,0" VerticalAlignment="Center" Height="25" Width="100"/>
-            <DatePicker Name="MaxDate" HorizontalAlignment="Left" Margin="200,0,0,0" VerticalAlignment="Center" Height="25" Width="100"/>
-            
-            <DataGrid x:Name="dgClientsTable" FontSize="16"  AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" Grid.Row="1">
+        <DatePicker Name="MinDate" HorizontalAlignment="Left" Margin="10,65,0,0" VerticalAlignment="Top" Height="25" Width="100"/>
+        <DatePicker Name="MaxDate" HorizontalAlignment="Left" Margin="130,65,0,0" VerticalAlignment="Top" Height="25" Width="100"/>
+
+        <DataGrid x:Name="dgClientsTable" FontSize="16"  AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" Grid.Row="1">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding ="{Binding Path = ID}"  IsReadOnly="True" Header="id" Width="30"/>
                 <DataGridTextColumn Binding ="{Binding Path = Name}"  IsReadOnly="True" Header="ФИО/Название" Width="200"/>
@@ -30,8 +30,17 @@
                 <DataGridTextColumn Binding ="{Binding Path = LastOrderDate}" IsReadOnly="True" Header="Дата последнего заказа" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Применить фильтр" HorizontalAlignment="Left" Margin="550 ,0,0,0" VerticalAlignment="Center" Height="25" Width="117" Click="Button_Click"/>
-        
+        <Button Content="Применить фильтр" HorizontalAlignment="Left" Margin="615,19,0,0" VerticalAlignment="Top" Height="25" Width="117" Click="Button_Click"/>
+
         <Border BorderThickness="1" BorderBrush="Black" Loaded="Border_Loaded"/>
-     </Grid>
+        <StackPanel Margin="254,56,390,10">
+            <CheckBox Content="Физическое лицо"/>
+            <CheckBox Content="Юридическое лицо"/>
+        </StackPanel>
+
+        <StackPanel  Margin="420,56,224,10">
+            <CheckBox Content="Оптовый"/>
+            <CheckBox Content="Розничный"/>
+        </StackPanel>
+    </Grid>
 </Page>
