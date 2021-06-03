@@ -16,10 +16,16 @@ namespace TradeCompany_TMPForTests
             //OrdersDTO ordersDTO = new OrdersDTO();
             ProductGroupsData groupsData = new ProductGroupsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
             //groupsData.DeleteProductGroupByID(3);
-            groupsData.GetProductGroups();
             ProductsData productsData = new ProductsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
             ProductDTO product = new ProductDTO();
-            productsData.DeleteProductByID(8);
+            product.Name = "ноутбук";
+            product.StockAmount = 4;
+            product.MeasureUnit = 1;
+            product.WholesalePrice = 30000;
+            product.RetailPrice = 50000;
+            product.LastSupplyDate = DateTime.Now;
+            product.Comments = "лидер продаж";
+            productsData.AddProductToProductGroup(10, 6);
             productsData.GetProducts();
             //productsData.GetProducts();
             //productsData.GetProductsByLetter("o");
