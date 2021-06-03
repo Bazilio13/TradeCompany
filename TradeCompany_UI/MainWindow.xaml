@@ -26,5 +26,6 @@
         <Frame Name="MainFrame" NavigationUIVisibility="Hidden" Grid.Row="1" Source="StartPage.xaml"></Frame>
         <Button Name="OrdersButton" Content="Заказы" FontSize="25" FontWeight="Medium" HorizontalAlignment="Left" Margin="142,0,0,0" VerticalAlignment="Center" Height="55" Width="127" Click="OrdersButton_Click"/>
         <Button Name="MainButton" Content="Главная" Background="BlanchedAlmond" FontSize="25" FontWeight="Medium" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Height="55" Width="127" Click="MainButton_Click"/>
+        <Button Name="ProductButton" Content="Товары" Background="BlanchedAlmond" FontSize="25" FontWeight="Medium" HorizontalAlignment="Left" Margin="274,0,0,0" VerticalAlignment="Center" Height="55" Width="127" Click="ProductButton_Click"/>
     </Grid>
 </Window>

@@ -66,5 +66,10 @@ namespace TradeCompany_UI
             OrderModel crntModel = (OrderModel)dgOrders.CurrentItem;
             _frame.Content = new SpecificOrder(crntModel.ID);
         }
+
+        private void CreateOrder_Click(object sender, RoutedEventArgs e)
+        {
+            _frame.Content = new SpecificOrder();
+        }
     }
 }
