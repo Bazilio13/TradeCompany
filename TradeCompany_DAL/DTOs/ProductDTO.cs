@@ -13,9 +13,11 @@ namespace TradeCompany_DAL.DTOs
         public float StockAmount { get; set; }
         public int MeasureUnit { get; set; }
         public string MeasureUnitName { get; set; }
-        public float MinPrice { get; set; }
-        public float MaxPrice { get; set; }
-        public DateTime LastSupplyDate { get; set; }
+        public float WholesalePrice { get; set; }
+        public float RetailPrice { get; set; }
+        public DateTime? LastSupplyDate { get; set; }
+        public string Description { get; set; }
+        public string Comments { get; set; }
         public List<ProductGroupDTO> Group { get; set; } = new List<ProductGroupDTO>();
     }
 }
