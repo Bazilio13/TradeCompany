@@ -10,6 +10,6 @@ namespace TradeCompany_DAL.DTOs
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public List <ProductDTO> Products { get; set; }
+        public List <ProductDTO> Products { get; set; } = new List<ProductDTO>();
     }
 }
