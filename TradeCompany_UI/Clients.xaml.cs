@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TradeCompany_BLL;
+using TradeCompany_BLL.Models;
 
 namespace TradeCompany_UI
 {
@@ -54,6 +55,19 @@ namespace TradeCompany_UI
             {
                 dgClientsTable.ItemsSource = map.MapClientDTOToClientBaseModelListByName(ClientFiltr.Text + e.Text);
             }
+        }
+
+        private void dgClientsTable_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DataGrid dg = (DataGrid)sender;
+            ClientBaseModel item = (ClientBaseModel)dg.CurrentItem;
+            int id = item.ID;
+            frame.Content = new OneClient(id);
+        }
+
+        private void CreateOrder_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            frame.Content = new AddedClient();
         }
     }
 }
