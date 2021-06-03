@@ -102,7 +102,6 @@
     <Build Include="TradeCompany_DataBase\Stored Procedures\UpdateProductByID.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\UpdateProductGroupByID.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\GetProductByLetter.sql" />
-    <Build Include="TradeCompany_DataBase\Stored Procedures\DeleteGroupFromProductByProductID.sql" />
     <Build Include="TradeCompany_DataBase\Tables\Product_ProductGroups.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\GetClientsByName.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\AddFeedback.sql" />
@@ -135,6 +134,7 @@
     <Build Include="TradeCompany_DataBase\Stored Procedures\UpdateProductByID.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\UpdateProductGroupByID.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\GetProductsByOrderId.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\SearchOrders.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="TradeCompany_DataBase.refactorlog" />

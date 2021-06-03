@@ -71,5 +71,10 @@ namespace TradeCompany_UI
         {
             _frame.Content = new SpecificOrder();
         }
+
+        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

@@ -8,12 +8,34 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Pictures\arrow-left.png" />
+    <None Remove="Pictures\check simple disable.png" />
+    <None Remove="Pictures\check simple.png" />
+    <None Remove="Pictures\Clients.png" />
+    <None Remove="Pictures\Orders.png" />
+    <None Remove="Pictures\plus.png" />
+    <None Remove="Pictures\Products.png" />
+    <None Remove="Pictures\search.png" />
+    <None Remove="Pictures\settings.png" />
+    <None Remove="Pictures\Supplies.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\TradeCompany_BLL\TradeCompany_BLL.csproj" />
     <ProjectReference Include="..\TradeCompany_DAL\TradeCompany_DAL.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pictures\" />
+    <Resource Include="Pictures\arrow-left.png" />
+    <Resource Include="Pictures\check simple disable.png" />
+    <Resource Include="Pictures\check simple.png" />
+    <Resource Include="Pictures\Clients.png" />
+    <Resource Include="Pictures\Orders.png" />
+    <Resource Include="Pictures\plus.png" />
+    <Resource Include="Pictures\Products.png" />
+    <Resource Include="Pictures\search.png" />
+    <Resource Include="Pictures\settings.png" />
+    <Resource Include="Pictures\Supplies.png" />
   </ItemGroup>
 
 </Project>
