@@ -24,6 +24,10 @@ namespace TradeCompany_UI
         private InformationAboutOrderList informationAboutOrderList;
         private int orderId;
 
+        public SpecificOrder()
+        {
+
+        }
         public SpecificOrder(int id)
         {
             InitializeComponent();
