@@ -13,8 +13,4 @@
     <ProjectReference Include="..\TradeCompany_DataBase\TradeCompany_DataBase.sqlproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DTOs\" />
-  </ItemGroup>
-
 </Project>
