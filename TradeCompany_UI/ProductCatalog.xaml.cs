@@ -16,28 +16,23 @@ using System.Windows.Shapes;
 namespace TradeCompany_UI
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ProductCatalog.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ProductCatalog : Page
     {
-        public MainWindow()
+        public ProductCatalog()
         {
             InitializeComponent();
         }
 
-        private void OrdersButton_Click(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Content = new Orders();
-        }
-
-        private void MainButton_Click(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Content = new StartPage();
-        }
-
         private void ProductButton_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new ProductCatalog();
+            
+        }
+
+        private void OrdersButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
