@@ -21,5 +21,3 @@ set
 	Comments = @Comments
 where 
 	ID = @ProductID
-
-

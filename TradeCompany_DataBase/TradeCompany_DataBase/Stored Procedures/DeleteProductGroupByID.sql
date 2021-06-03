@@ -5,4 +5,3 @@ AS
 	where Product_ProductGroups.ProductGroupID = @ProductGroupID
 	delete from [ProductGroups] 
 	where ProductGroups.ID = @ProductGroupID
-
