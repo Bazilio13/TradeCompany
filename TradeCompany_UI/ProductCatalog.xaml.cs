@@ -37,5 +37,18 @@ namespace TradeCompany_UI
         {
 
         }
+
+        private void textChange(object sender, TextChangedEventArgs e)
+        {
+            MapsDTOtoModel map = new MapsDTOtoModel();
+            if(ProductSearch.Text == "")
+            {
+                dgProductCatalog.ItemsSource = map.MapProductDTOToProductBaseModel();
+            }
+            else
+            {
+                dgProductCatalog.ItemsSource = map.MapProductDTOToProductBaseModelByLetter(ProductSearch.Text);
+            }
+        }
     }
 }
