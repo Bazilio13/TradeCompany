@@ -60,12 +60,16 @@ namespace TradeCompany_UI
 
         private void ClientsFiltr(object sender, RoutedEventArgs e)
         {
-            DateTime minDate = MinDate.DisplayDate;
-            DateTime maxDate = MaxDate.DisplayDate;
+            DateTime? minDate = MinDate.SelectedDate;
+            DateTime? maxDate = MaxDate.SelectedDate;
             bool? ChechF = CheckBoxF.IsChecked;
             bool? ChechU = CheckBoxU.IsChecked;
             bool? ChechOpt = CheckBoxOpt.IsChecked;
             bool? ChechRoz = CheckBoxRetail.IsChecked;
+            if (ChechU ==null && ChechF ==null)
+            {
+
+            }
             if (minDate < maxDate)
             {
                 ChechRoz = CheckBoxRetail.IsChecked;
