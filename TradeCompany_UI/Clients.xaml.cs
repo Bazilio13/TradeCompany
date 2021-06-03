@@ -42,6 +42,7 @@ namespace TradeCompany_UI
 
         }
 
+
         private void textInput(object sender, TextCompositionEventArgs e)
         {
             MapsDTOtoModel map = new MapsDTOtoModel();
@@ -54,6 +55,26 @@ namespace TradeCompany_UI
             {
                 dgClientsTable.ItemsSource = map.MapClientDTOToClientBaseModelListByName(ClientFiltr.Text + e.Text);
             }
+        }
+
+
+        private void ClientsFiltr(object sender, RoutedEventArgs e)
+        {
+            DateTime minDate = MinDate.DisplayDate;
+            DateTime maxDate = MaxDate.DisplayDate;
+            bool? ChechF = CheckBoxF.IsChecked;
+            bool? ChechU = CheckBoxU.IsChecked;
+            bool? ChechOpt = CheckBoxOpt.IsChecked;
+            bool? ChechRoz = CheckBoxRetail.IsChecked;
+            if (minDate < maxDate)
+            {
+                ChechRoz = CheckBoxRetail.IsChecked;
+            }
+            if (minDate > maxDate)
+            {
+                ChechRoz = CheckBoxRetail.IsChecked;
+            }
+
         }
     }
 }

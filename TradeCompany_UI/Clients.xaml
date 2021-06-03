@@ -14,12 +14,12 @@
             <RowDefinition Height="100px"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Button Name="CreateOrder" Content="Новый клиент" HorizontalAlignment="Left" Margin="663,65,0,0" VerticalAlignment="Top" Height="25" Width="80"/>
+        <Button Name="CreateOrder" Content="Новый клиент" HorizontalAlignment="Left" Margin="690,19,0,0" VerticalAlignment="Top" Height="25" Width="80"/>
 
-        <TextBox   x:Name="ClientFiltr" Margin="10,10,0,0"  TextWrapping="Wrap" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="464" TextInput="textInput" PreviewTextInput="textInput"/>
+        <TextBox   x:Name="ClientFiltr" Margin="10,10,0,0"  TextWrapping="Wrap" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="464" TextInput="textInput" PreviewTextInput="textInput" Panel.ZIndex="1"/>
 
-        <DatePicker Name="MinDate" HorizontalAlignment="Left" Margin="10,65,0,0" VerticalAlignment="Top" Height="25" Width="100"/>
-        <DatePicker Name="MaxDate" HorizontalAlignment="Left" Margin="130,65,0,0" VerticalAlignment="Top" Height="25" Width="100"/>
+        <DatePicker Name="MinDate" HorizontalAlignment="Left" Margin="10,65,0,0" VerticalAlignment="Top" Height="25" Width="100" Panel.ZIndex="1"/>
+        <DatePicker Name="MaxDate" HorizontalAlignment="Left" Margin="130,65,0,0" VerticalAlignment="Top" Height="25" Width="100" Panel.ZIndex="1"/>
 
         <DataGrid x:Name="dgClientsTable" FontSize="16"  AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" Grid.Row="1">
             <DataGrid.Columns>
@@ -30,17 +30,17 @@
                 <DataGridTextColumn Binding ="{Binding Path = LastOrderDate}" IsReadOnly="True" Header="Дата последнего заказа" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Применить фильтр" HorizontalAlignment="Left" Margin="615,19,0,0" VerticalAlignment="Top" Height="25" Width="117" Click="Button_Click"/>
+        <Button Content="Применить фильтр" HorizontalAlignment="Left" Margin="531,54,0,0" VerticalAlignment="Top" Height="36" Width="117" Click="Button_Click" Panel.ZIndex="1"/>
 
         <Border BorderThickness="1" BorderBrush="Black" Loaded="Border_Loaded"/>
         <StackPanel Margin="254,56,390,10">
-            <CheckBox Content="Физическое лицо"/>
-            <CheckBox Content="Юридическое лицо"/>
+            <CheckBox x:Name="CheckBoxF" Content="Физическое лицо" Click="ClientsFiltr"/>
+            <CheckBox x:Name="CheckBoxU" Content="Юридическое лицо"/>
         </StackPanel>
 
         <StackPanel  Margin="420,56,224,10">
-            <CheckBox Content="Оптовый"/>
-            <CheckBox Content="Розничный"/>
+            <CheckBox x:Name="CheckBoxOpt" Content="Оптовый"/>
+            <CheckBox x:Name="CheckBoxRetail" Content="Розничный"/>
         </StackPanel>
     </Grid>
 </Page>
