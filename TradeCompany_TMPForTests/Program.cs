@@ -19,6 +19,7 @@ namespace TradeCompany_TMPForTests
             groupsData.GetProductGroups();
             ProductsData productsData = new ProductsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
             ProductDTO product = new ProductDTO();
+            productsData.GetProducts();
             //productsData.GetProducts();
             //productsData.GetProductsByLetter("o");
             // productsData.GetProducts();
