@@ -9,7 +9,7 @@ namespace TradeCompany_BLL.Models
     public class OrderModel
     {
         public int ID { get; set; }
-        public DateTime Datetime { get; set; }
+        public DateTime DateTime { get; set; }
         public int ClientsID { get; set; }
         public string Client { get; set; }
         public string ClientsPhone { get; set; }

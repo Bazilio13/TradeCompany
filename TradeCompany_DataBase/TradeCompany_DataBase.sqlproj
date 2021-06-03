@@ -121,6 +121,20 @@
     <Build Include="TradeCompany_DataBase\Stored Procedures\DeleteAddressByIDAndAddress.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\GetAddressesByClientID.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\UpdateFeedBackById.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\AddProduct.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\AddProductGroup.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\AddProductToProductGroup.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\DeleteGroupFromProduct.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\DeleteProductByID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\DeleteProductGroupByID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetProductByID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetProductByLetter.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetProductGroupByID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetProductGroups.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetProducts.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\UpdateProductByID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\UpdateProductGroupByID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetProductsByOrderId.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="TradeCompany_DataBase.refactorlog" />

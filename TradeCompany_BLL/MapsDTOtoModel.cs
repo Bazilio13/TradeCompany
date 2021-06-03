@@ -36,5 +36,15 @@ namespace TradeCompany_BLL
             orderListModel = mapper.Map<List<OrderListModel>>(orderListsDTO);
             return orderListModel;
         }
+
+        public List<ProductsForOrderModel> Map_ProductsForOrderDTO_To_ProductsForOrderModel(List<ProductForOrderDTO> productForOrderDTO)
+        {
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<ProductForOrderDTO, ProductsForOrderModel>());
+            Mapper mapper = new Mapper(config);
+            List<ProductsForOrderModel> productsForOrderModel;
+            productsForOrderModel = mapper.Map<List<ProductsForOrderModel>>(productForOrderDTO);
+
+            return productsForOrderModel;
+        }
     }
 }

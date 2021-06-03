@@ -5,6 +5,7 @@
     [E_Mail]        NVARCHAR (100) NULL,
     [Phone]         NVARCHAR (50)  NULL,
     [Comment]       NVARCHAR (500) NULL,
+    [ContactPerson] NVARCHAR (255) NULL,
     [CorporateBody] BIT            NOT NULL,
     [Type]          BIT            NOT NULL,
     [LastOrderDate] DATETIME       NULL,

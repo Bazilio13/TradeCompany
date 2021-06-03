@@ -24,19 +24,47 @@ namespace TradeCompany_UI
     /// </summary>
     public partial class Orders : Page
     {
-        public Orders()
+        Frame _frame;
+        public Orders(Frame frame)
         {
+            _frame = frame;
             InitializeComponent();
             OrdersData ordersData = new OrdersData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
             List<OrdersDTO> ordersDTOs = new List<OrdersDTO>();
             ordersDTOs = ordersData.GetOrders();
             MapsDTOtoModel map = new MapsDTOtoModel();
             List<OrderModel> orderModels = map.MapOrdersDTOToOrderModel(ordersDTOs);
-            foreach (OrderModel orderModel in orderModels)
-            {
-                this.OrdersPanel.Children.Add(new OrderRow(orderModel));
-            }
+            dgOrders.ItemsSource = orderModels;
+            //foreach (OrderModel orderModel in orderModels)
+            //{
+            //    this.OrdersPanel.Children.Add(new OrderRow(orderModel));
+            //}
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            string client = null;
+            string address = null;
+            if (ClientFiltr.Text != "")
+            {
+                client = ClientFiltr.Text;
+            } 
+            if (AddressFiltr.Text != "")
+            {
+                address = AddressFiltr.Text;
+            }
+            OrdersData ordersData = new OrdersData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
+            List<OrdersDTO> ordersDTOs = new List<OrdersDTO>();
+            ordersDTOs = ordersData.GetOrdersByParams(client, MinDate.SelectedDate, MaxDate.SelectedDate, address);
+            MapsDTOtoModel map = new MapsDTOtoModel();
+            List<OrderModel> orderModels = map.MapOrdersDTOToOrderModel(ordersDTOs);
+            dgOrders.ItemsSource = orderModels;
+        }
+
+        private void dgOrders_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            OrderModel crntModel = (OrderModel)dgOrders.CurrentItem;
+            _frame.Content = new SpecificOrder(crntModel.ID);
+        }
     }
 }
