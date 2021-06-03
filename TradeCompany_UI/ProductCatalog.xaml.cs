@@ -24,5 +24,15 @@ namespace TradeCompany_UI
         {
             InitializeComponent();
         }
+
+        private void ProductButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void OrdersButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

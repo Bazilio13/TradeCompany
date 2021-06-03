@@ -8,24 +8,52 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ProductCatalog">
 
-    <Grid Background="WhiteSmoke">
+    <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="45"></RowDefinition>
+            <RowDefinition Height="100"></RowDefinition>
             <RowDefinition></RowDefinition>
+
         </Grid.RowDefinitions>
-        
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="125"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Button HorizontalAlignment="Center" Margin="0,15,0,0" Grid.Row="1" VerticalAlignment="Top" Height="30" Width="124" Background="White" BorderBrush="White" Click="ProductButton_Click">
+            <StackPanel Height="30" Width="105" Orientation="Horizontal">
+                <Image Margin="0,0,0,0" Width="19" Source="Pictures/Clients.png" />
+                <TextBlock Margin="10,5,0,0" FontWeight="Bold" FontSize="14">Клиенты</TextBlock>
+            </StackPanel>
+        </Button>
+        <Button x:Name="ProductButton" Margin="0,60,0,0" Grid.Row="1" VerticalAlignment="Top" Height="30" Background="White" BorderBrush="White" HorizontalAlignment="Left" Width="124" Click="ProductButton_Click">
+        <StackPanel Height="30" Width="105" Orientation="Horizontal">
+                <Image Margin="0,0,0,0" Source="Pictures/Products.png" Width="19"/>
+                <TextBlock Margin="10,5,0,0" FontWeight="Bold" FontSize="14">Товары</TextBlock>
+            </StackPanel>
+        </Button>
+        <Button HorizontalAlignment="Center" Margin="0,105,0,0" Grid.Row="1" VerticalAlignment="Top" Height="30" Width="124" Background="White" BorderBrush="White">
+            <StackPanel Height="30" Width="105" Orientation="Horizontal">
+                <Image Margin="0,0,0,0" Source="Pictures/Supplies.png" Width="19"/>
+                <TextBlock Margin="10,5,0,0" FontWeight="Bold" FontSize="14">Поставки</TextBlock>
+            </StackPanel>
+        </Button>
+        <Button x:Name="OrdersButton" HorizontalAlignment="Center" Margin="0,150,0,0" Grid.Row="1" VerticalAlignment="Top" Height="30" Width="124" Background="White" BorderBrush="White" Click="OrdersButton_Click">
+            <StackPanel Height="30" Width="105" Orientation="Horizontal">
+                <Image Margin="0,0,0,0" Source="Pictures/Orders.png" Width="19"/>
+                <TextBlock Margin="10,5,0,0" FontWeight="Bold" FontSize="14">Заказы</TextBlock>
+            </StackPanel>
+        </Button>
+        <Button HorizontalAlignment="Center" Margin="0,195,0,0" Grid.Row="1" VerticalAlignment="Top" Height="30" Width="124" Background="White" BorderBrush="White">
+            <StackPanel Height="30" Width="105" Orientation="Horizontal">
+                <Image Margin="0,0,0,0" Source="Pictures/Orders.png" Width="19"/>
+                <TextBlock Margin="10,5,0,0" FontWeight="Bold" FontSize="14">Статистика</TextBlock>
+            </StackPanel>
+        </Button>
+        <Button HorizontalAlignment="Center" Margin="0,240,0,0" Grid.Row="1" VerticalAlignment="Top" Height="30" Width="124" Background="White" BorderBrush="White">
+            <StackPanel Height="30" Width="105" Orientation="Horizontal">
+                <Image Margin="0,0,0,0" Source="Pictures/settings.png" Width="19"/>
+                <TextBlock Margin="10,5,0,0" FontWeight="Bold" FontSize="14">Настройки</TextBlock>
+            </StackPanel>
+        </Button>
 
-
-        <DataGrid Name="Products" AutoGenerateColumns="True" Grid.Row="1">
-            <DataGrid.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="0"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </DataGrid.RenderTransform>
-        </DataGrid>
     </Grid>
 </Page>
