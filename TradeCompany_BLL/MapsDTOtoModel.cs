@@ -66,7 +66,6 @@ namespace TradeCompany_BLL
             Mapper mapper = new Mapper(config);
             List<ProductGroupModel> groupModel = mapper.Map<List<ProductGroupModel>>(groupDTO);
             return groupModel;
-        }
-        
+        }        
     }
 }

@@ -66,8 +66,20 @@
             </DataGrid.Columns>
         </DataGrid>
         <TextBox x:Name="ProductSearch" Grid.Column="1" HorizontalAlignment="Left" Margin="10,60,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="25" TextChanged="textChange"/>
-        <ComboBox x:Name="ProductGroupSelect" Grid.Column="1" Margin="261,50,420,28" Selected="selectionChanged"/>
+        <ComboBox x:Name="ProductGroupSelect" Grid.Column="1" Margin="248,62,433,16"  SelectionChanged="ProductGroupSelect_SelectionChanged" SelectedIndex="0"/>
         <Button x:Name="ApplyFilters" Content="Применить фильтр" Grid.Column="1" Margin="675,25,20,50" Click="ApplyFilters_Click"/>
+        <DatePicker Grid.Column="1" Margin="437,53,282,15"/>
+        <DatePicker Grid.Column="1" Margin="561,53,157,15"/>
+        <TextBlock TextWrapping="Wrap" Grid.Column="1" Margin="10,22,736,52" FontSize="14"><Run Language="ru-ru" Text="Остаток от:"/></TextBlock>
+        <TextBox TextWrapping="Wrap" Grid.Column="1" Margin="89,20,674,50" BorderBrush="Black" VerticalAlignment="Center" VerticalContentAlignment="Center" Text="" TextAlignment="Center"/>
+        <TextBlock TextWrapping="Wrap" Grid.Column="1" Margin="155,26,644,56"><Run Language="ru-ru" Text="до:"/></TextBlock>
+        <TextBox Text="" TextWrapping="Wrap" Grid.Column="1" Margin="181,26,582,0" BorderBrush="Black" VerticalAlignment="Top" VerticalContentAlignment="Center" TextAlignment="Center" Width="57" Height="18"/>
+        <TextBlock TextWrapping="Wrap" Grid.Column="1" Margin="259,18,487,56" FontSize="14"><Run Language="ru-ru" Text="Цена от:"/></TextBlock>
+        <TextBox TextWrapping="Wrap" Grid.Column="1" Margin="338,22,425,0" BorderBrush="Black" VerticalAlignment="Top" VerticalContentAlignment="Center" Text="" TextAlignment="Center"/>
+        <TextBlock TextWrapping="Wrap" Grid.Column="1" Margin="405,22,395,60"><Run Language="ru-ru" Text="до:"/></TextBlock>
+        <TextBox Text="" TextWrapping="Wrap" Grid.Column="1" Margin="431,22,333,0" BorderBrush="Black" VerticalAlignment="Top" VerticalContentAlignment="Center" TextAlignment="Center" Height="18"/>
+        <RadioButton Content="Розница" Grid.Column="1" Margin="492,6,203,73" IsChecked="True" FontSize="14"/>
+        <RadioButton Content="Опт" RenderTransformOrigin="4.365,2.474" Grid.Column="1" Margin="492,27,203,50" FontSize="14"/>
 
     </Grid>
 </Page>

@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TradeCompany_BLL;
+using TradeCompany_BLL.Models;
 
 namespace TradeCompany_UI
 {
@@ -26,6 +27,15 @@ namespace TradeCompany_UI
             InitializeComponent();
             MapsDTOtoModel map = new MapsDTOtoModel();
             dgProductCatalog.ItemsSource = map.MapProductDTOToProductBaseModel();
+
+            List<ProductGroupModel> productGroupName = map.MapProductGroupToProductGroupModel();
+            ProductGroupSelect.Items.Add("Категория");
+            for (int i = 0; i < productGroupName.Count; i++)
+            {
+                ProductGroupSelect.Items.Add(productGroupName[i].Name);
+            }
+
+
         }
 
         private void ProductButton_Click(object sender, RoutedEventArgs e)
@@ -51,22 +61,27 @@ namespace TradeCompany_UI
             }
         }
 
-        private void selectionChanged(object sender, RoutedEventArgs e)
-        {
+        //private void selectionChanged(object sender, RoutedEventArgs e)
+        //{
 
-        }
+        //}
 
         private void ApplyFilters_Click(object sender, RoutedEventArgs e)
         {
-            MapsDTOtoModel map = new MapsDTOtoModel();
-            if (ProductGroupSelect.Text == "Категория")
-            {
-                dgProductCatalog.ItemsSource = map.MapProductDTOToProductBaseModel();
-            }
-            else
-            {
+            //MapsDTOtoModel map = new MapsDTOtoModel();
+            //if (ProductGroupSelect.Text == "Категория")
+            //{
+            //    dgProductCatalog.ItemsSource = map.MapProductDTOToProductBaseModel();
+            //}
+            //else
+            //{
 
-            }
+            //}
+        }
+
+        private void ProductGroupSelect_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

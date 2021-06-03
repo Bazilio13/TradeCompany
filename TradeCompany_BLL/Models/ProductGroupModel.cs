@@ -10,6 +10,6 @@ namespace TradeCompany_BLL.Models
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public List<ProductBaseModel> Products { get; set; } = new List<ProductBaseModel>();
+        //public List<ProductBaseModel> Products { get; set; } = new List<ProductBaseModel>();
     }
 }
