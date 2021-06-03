@@ -18,7 +18,7 @@
         <TextBox x:Name="ClientFiltr" Margin="305,0,0,0" TextWrapping="Wrap"  Height="25" VerticalAlignment="Center" HorizontalAlignment="Left" Width="200"/>
         <DatePicker Name="MinDate" HorizontalAlignment="Left" Margin="95,0,0,0" VerticalAlignment="Center" Height="25" Width="100"/>
         <DatePicker Name="MaxDate" HorizontalAlignment="Left" Margin="200,0,0,0" VerticalAlignment="Center" Height="25" Width="100"/>
-        <DataGrid x:Name="dgOrders" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True">
+        <DataGrid x:Name="dgOrders" Grid.Row="1" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="True" MouseLeftButtonUp="dgOrders_MouseLeftButtonUp">
             <DataGrid.Columns >
                 <DataGridTextColumn Binding="{Binding Path=ID}" Header="№ заказа" Width="65"></DataGridTextColumn>
                 <DataGridTextColumn Binding="{Binding Path=DateTime}" Header="Дата заказа" Width="100"></DataGridTextColumn>

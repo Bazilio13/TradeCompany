@@ -24,8 +24,10 @@ namespace TradeCompany_UI
     /// </summary>
     public partial class Orders : Page
     {
-        public Orders()
+        Frame _frame;
+        public Orders(Frame frame)
         {
+            _frame = frame;
             InitializeComponent();
             OrdersData ordersData = new OrdersData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
             List<OrdersDTO> ordersDTOs = new List<OrdersDTO>();
@@ -57,6 +59,11 @@ namespace TradeCompany_UI
             MapsDTOtoModel map = new MapsDTOtoModel();
             List<OrderModel> orderModels = map.MapOrdersDTOToOrderModel(ordersDTOs);
             dgOrders.ItemsSource = orderModels;
+        }
+
+        private void dgOrders_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            //_frame.Content = new 
         }
     }
 }
