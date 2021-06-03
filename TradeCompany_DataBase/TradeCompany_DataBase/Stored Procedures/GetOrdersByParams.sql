@@ -19,4 +19,3 @@ AS
 	(@MinDateTime IS NULL OR O.DateTime >= @MinDateTime) AND
 	(@MaxDateTime IS NULL OR O.DateTime <= @MaxDateTime) 
 	order by o.DateTime desc, o.ID desc
-	
