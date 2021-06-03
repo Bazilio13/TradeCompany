@@ -63,7 +63,8 @@ namespace TradeCompany_UI
 
         private void dgOrders_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            //_frame.Content = new 
+            OrderModel crntModel = (OrderModel)dgOrders.CurrentItem;
+            _frame.Content = new SpecificOrder(crntModel.ID);
         }
     }
 }

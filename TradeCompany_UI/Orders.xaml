@@ -20,12 +20,12 @@
         <DatePicker Name="MaxDate" HorizontalAlignment="Left" Margin="200,0,0,0" VerticalAlignment="Center" Height="25" Width="100"/>
         <DataGrid x:Name="dgOrders" Grid.Row="1" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="True" MouseLeftButtonUp="dgOrders_MouseLeftButtonUp">
             <DataGrid.Columns >
-                <DataGridTextColumn Binding="{Binding Path=ID}" Header="№ заказа" Width="65"></DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding Path=DateTime}" Header="Дата заказа" Width="100"></DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding Path=Client}" Header="Клиент" Width="200"></DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding Path=Summ}" Header="Сумма заказа" Width="100"></DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding Path=Address}" Header="Адрес" Width="65"></DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding Path=Comment}" Header="Комментарий" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=ID}"  Header="№" Width="30" MinWidth="30"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=DateTime}" Header="Дата заказа" Width="100" MinWidth="100"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Client}" Header="Клиент" Width="200" MinWidth="100"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Summ}" Header="Сумма заказа" Width="100" MinWidth="100"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Address}" Header="Адрес" Width="100" MinWidth="65"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Comment}" Header="Комментарий" Width="*" MinWidth="150"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
         <Button Content="Применить фильтр" HorizontalAlignment="Left" Margin="715,0,0,0" VerticalAlignment="Center" Height="25" Width="117" Click="Button_Click"/>
