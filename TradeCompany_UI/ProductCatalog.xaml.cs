@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TradeCompany_BLL;
 
 namespace TradeCompany_UI
 {
@@ -23,6 +24,8 @@ namespace TradeCompany_UI
         public ProductCatalog()
         {
             InitializeComponent();
+            MapsDTOtoModel map = new MapsDTOtoModel();
+            dgProductCatalog.ItemsSource = map.MapProductDTOToProductBaseModel();
         }
 
         private void ProductButton_Click(object sender, RoutedEventArgs e)

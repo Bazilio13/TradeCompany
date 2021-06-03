@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TradeCompany_BLL.Models;
+using TradeCompany_DAL;
 using TradeCompany_DAL.DTOs;
 
 namespace TradeCompany_BLL
@@ -35,6 +36,26 @@ namespace TradeCompany_BLL
             List<OrderListModel> orderListModel;
             orderListModel = mapper.Map<List<OrderListModel>>(orderListsDTO);
             return orderListModel;
+        }
+
+        public List<ProductBaseModel> MapProductDTOToProductBaseModel()
+        {
+            ProductsData products = new ProductsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
+            List<ProductDTO> productDTO = products.GetProducts();
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<ProductDTO, ProductBaseModel>());
+            Mapper mapper = new Mapper(config);
+            List<ProductBaseModel> productBaseModel = mapper.Map<List<ProductBaseModel>>(productDTO);
+            return productBaseModel;
+        }
+
+        public List<ProductBaseModel> MapProductDTOToProductBaseModelByLetter(string inputString)
+        {
+            ProductsData products = new ProductsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
+            List<ProductDTO> productDTO = products.GetProductsByLetter(inputString);
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<ProductDTO, ProductBaseModel>());
+            Mapper mapper = new Mapper(config);
+            List<ProductBaseModel> productBaseModel = mapper.Map<List<ProductBaseModel>>(productDTO);
+            return productBaseModel;
         }
     }
 }
