@@ -36,6 +36,23 @@ namespace TradeCompany_DAL
             return clientsList;
         }
 
+        public List<ClientDTO> GetClientsByParams(int? person, int? sale, DateTime? minData, DateTime? maxData)
+        {
+            List<ClientDTO> clientsList = new List<ClientDTO>();
+            string query = "exec TradeCompany_DataBase.GetClientsByParams @Person, @Sale, @MinData, @MaxData";
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                clientsList = dbConnection.Query<ClientDTO>(query, new { 
+                person,
+                sale,
+                minData,
+                maxData
+                }).AsList<ClientDTO>();
+            }
+
+            return clientsList;
+        }
+
         public ClientDTO GetClientByID(int id)
         {
             ClientDTO client = new ClientDTO();
@@ -50,18 +67,19 @@ namespace TradeCompany_DAL
 
         public void AddClient(ClientDTO client)
         {
-            string query = "exec TradeCompany_DataBase.AddClient @Name, @INN, @Email, @Phone, @Comment, @CorporateBody, @Type, @LastOrderDate";
+            string query = "exec TradeCompany_DataBase.AddClient @Name, @INN, @E_mail, @Phone, @Comment, @CorporateBody, @Type, @LastOrderDate, @ContactPerson";
             using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
             {
                 dbConnection.Query<ClientDTO>(query, new {
                 client.Name,
                 client.INN,
-                client.Email, 
+                client.E_mail, 
                 client.Phone,
-                client.Type,
+                client.Comment,
                 client.CorporateBody,
+                client.Type,
                 client.LastOrderDate,
-                client.Comment
+                client.ContactPerson
                 });
             }
         }
@@ -78,7 +96,7 @@ namespace TradeCompany_DAL
 
         public void UpdateClientByID(ClientDTO client)
         {
-            string query1 = "exec TradeCompany_DataBase.UpdateClientByID @ID, @Name, @INN, @Email, @Phone, @Comment, @CorporateBody, @Type, @LastOrderDate";
+            string query1 = "exec TradeCompany_DataBase.UpdateClientByID @ID, @Name, @INN, @E_mail, @Phone,  @Comment, @CorporateBody, @Type, @LastOrderDate, @ContactPerson";
             using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
             {
                 dbConnection.Query<ClientDTO>(query1, new
@@ -86,13 +104,14 @@ namespace TradeCompany_DAL
                     client.ID,
                     client.Name,
                     client.INN,
-                    client.Email,
+                    client.E_mail,
                     client.Phone,
                     client.Comment,
                     client.CorporateBody,
                     client.Type,
-                    client.LastOrderDate
-                });
+                    client.LastOrderDate,
+                    client.ContactPerson
+                }) ;
             }
 
         }

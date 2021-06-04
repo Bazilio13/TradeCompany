@@ -36,5 +36,10 @@ namespace TradeCompany_UI
             MainFrame.Content = new StartPage();
             //MainFrame.Content = new SpecificOrder(7);
         }
+
+        private void ClientsButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new Clients();
+        }
     }
 }

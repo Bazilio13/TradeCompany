@@ -2,7 +2,7 @@
 	@ClientID int,
 	@Name nvarchar(255),
 	@INN int,
-	@Email nvarchar(100),
+	@E_mail nvarchar(100),
 	@Phone nvarchar(50),
 	@Comment nvarchar(500),
 	@CorporateBody binary,
@@ -13,7 +13,7 @@ AS
 	set 
 	[Name] = @Name,
 	[INN] = @INN,
-	[E_Mail] = @Email,
+	[E_Mail] = @E_mail,
 	[Phone] = @Phone,
 	[Comment] = @Comment,
 	[CorporateBody] = @CorporateBody,
