@@ -14,5 +14,7 @@ namespace TradeCompany_BLL.Models
         public string ProductMeasureUnit { get; set; }
         public int Amount { get; set; }
         public int Price { get; set; }
+
+        public decimal Sum { get; set; }
     }
 }

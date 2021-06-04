@@ -31,7 +31,7 @@
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="1" HorizontalAlignment="Left" Margin="47,0,0,0" Text="Телефон
+                <TextBlock x:Name="Phone" Grid.Row="1"  HorizontalAlignment="Left" Margin="47,0,0,0" Text="Телефон
 " TextWrapping="Wrap" VerticalAlignment="Center" FontSize="15"/>
             </Grid>
         </Grid>
@@ -40,10 +40,10 @@
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="NumberOfProduct"  Header="№" Width="0.1*"/>
                 <DataGridTextColumn Binding="{Binding Path= ProductID}" Header="ID Товара" Width="0.3*"/>
-                <DataGridTextColumn Binding="{Binding Path= Name}" Header="Товар" Width="1*"/>
+                <DataGridTextColumn Binding="{Binding Path= ProductName}" Header="Товар" Width="1*"/>
                 <DataGridTextColumn Binding="{Binding Path= Amount}" Header="Количество" Width="0.5*"/>
                 <DataGridTextColumn Binding="{Binding Path= Price}" Header="Цена" Width="0.5*"/>
-                <DataGridTextColumn Binding="{Binding Path= Amount}" Header="Сумма" Width="0.5*"/>
+                <DataGridTextColumn Binding="{Binding Path= Sum}" Header="Сумма" Width="0.5*"/>
 
             </DataGrid.Columns>
         </DataGrid>

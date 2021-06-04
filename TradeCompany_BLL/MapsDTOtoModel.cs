@@ -31,7 +31,8 @@ namespace TradeCompany_BLL
         {
             var config = new MapperConfiguration(cfg => cfg.CreateMap<OrderListsDTO, OrderListModel>()
             .ForMember(dest => dest.ProductName, option => option.MapFrom(sorse => sorse.productDTO.Name))
-            .ForMember(dest => dest.ProductMeasureUnit, option => option.MapFrom(sorse => sorse.productDTO.MeasureUnitName)));
+            .ForMember(dest => dest.ProductMeasureUnit, option => option.MapFrom(sorse => sorse.productDTO.MeasureUnitName))
+            .ForMember(dest => dest.Sum, option => option.MapFrom(sorse => sorse.Amount * sorse.Price)));
             Mapper mapper = new Mapper(config);
             List<OrderListModel> orderListModel;
             orderListModel = mapper.Map<List<OrderListModel>>(orderListsDTO);
