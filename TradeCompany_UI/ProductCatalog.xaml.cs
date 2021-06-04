@@ -22,20 +22,20 @@ namespace TradeCompany_UI
     /// </summary>
     public partial class ProductCatalog : Page
     {
+        private ProductsDataAccess _products = new ProductsDataAccess();
+
+
         public ProductCatalog()
         {
             InitializeComponent();
-            MapsDTOtoModel map = new MapsDTOtoModel();
-            dgProductCatalog.ItemsSource = map.MapProductDTOToProductBaseModel();
+            dgProductCatalog.ItemsSource = _products.GetAllProducts();
 
-            List<ProductGroupModel> productGroupName = map.MapProductGroupToProductGroupModel();
+            List<ProductGroupModel> productGroupName = _products.GetAllGroups();
             ProductGroupSelect.Items.Add("Категория");
             for (int i = 0; i < productGroupName.Count; i++)
             {
                 ProductGroupSelect.Items.Add(productGroupName[i].Name);
             }
-
-
         }
 
         private void ProductButton_Click(object sender, RoutedEventArgs e)
@@ -50,14 +50,13 @@ namespace TradeCompany_UI
 
         private void textChange(object sender, TextChangedEventArgs e)
         {
-            MapsDTOtoModel map = new MapsDTOtoModel();
-            if(ProductSearch.Text == "")
+            if (ProductSearch.Text == "")
             {
-                dgProductCatalog.ItemsSource = map.MapProductDTOToProductBaseModel();
+                dgProductCatalog.ItemsSource = _products.GetAllProducts();
             }
             else
             {
-                dgProductCatalog.ItemsSource = map.MapProductDTOToProductBaseModelByLetter(ProductSearch.Text);
+                dgProductCatalog.ItemsSource = _products.GetProductsByLetter(ProductSearch.Text);
             }
         }
 
@@ -68,20 +67,27 @@ namespace TradeCompany_UI
 
         private void ApplyFilters_Click(object sender, RoutedEventArgs e)
         {
-            //MapsDTOtoModel map = new MapsDTOtoModel();
-            //if (ProductGroupSelect.Text == "Категория")
-            //{
-            //    dgProductCatalog.ItemsSource = map.MapProductDTOToProductBaseModel();
-            //}
-            //else
-            //{
 
-            //}
         }
 
-        private void ProductGroupSelect_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
 
+        private void ProductGroupSelect_DropDownClosed(object sender, EventArgs e)
+        {
+            if (ProductGroupSelect.Text == "Категория")
+            {
+                dgProductCatalog.ItemsSource = _products.GetAllProducts();
+            }
+            else
+            {
+                List<ProductGroupModel> productsOfGroup = _products.GetAllGroups();
+                for (int i = 0; i < productsOfGroup.Count; i++)
+                {
+                    if (productsOfGroup[i].Name == ProductGroupSelect.Text)
+                    {
+                        dgProductCatalog.ItemsSource = productsOfGroup[i].Products;
+                    }
+                }
+            }
         }
     }
 }

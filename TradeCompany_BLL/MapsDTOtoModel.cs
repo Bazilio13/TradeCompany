@@ -38,31 +38,26 @@ namespace TradeCompany_BLL
             return orderListModel;
         }
 
-        public List<ProductBaseModel> MapProductDTOToProductBaseModel()
+        public List<ProductBaseModel> MapProductDTOToProductBaseModel(List<ProductDTO> productDTO)
         {
-            ProductsData products = new ProductsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
-            List<ProductDTO> productDTO = products.GetProducts();
             var config = new MapperConfiguration(cfg => cfg.CreateMap<ProductDTO, ProductBaseModel>());
             Mapper mapper = new Mapper(config);
             List<ProductBaseModel> productBaseModel = mapper.Map<List<ProductBaseModel>>(productDTO);
             return productBaseModel;
         }
 
-        public List<ProductBaseModel> MapProductDTOToProductBaseModelByLetter(string inputString)
+        public List<ProductBaseModel> MapProductDTOToProductBaseModelByLetter(List<ProductDTO> productDTO)
         {
-            ProductsData products = new ProductsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
-            List<ProductDTO> productDTO = products.GetProductsByLetter(inputString);
             var config = new MapperConfiguration(cfg => cfg.CreateMap<ProductDTO, ProductBaseModel>());
             Mapper mapper = new Mapper(config);
             List<ProductBaseModel> productBaseModel = mapper.Map<List<ProductBaseModel>>(productDTO);
             return productBaseModel;
         }
 
-        public List<ProductGroupModel> MapProductGroupToProductGroupModel()
+        public List<ProductGroupModel> MapProductGroupToProductGroupModel(List<ProductGroupDTO> groupDTO)
         {
-            ProductGroupsData groups = new ProductGroupsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
-            List<ProductGroupDTO> groupDTO = groups.GetProductGroups();
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<ProductGroupDTO, ProductGroupModel>());
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<ProductGroupDTO, ProductGroupModel>()
+            .ForMember(dest => dest.Products, option => option.MapFrom(sorse => MapProductDTOToProductBaseModel(sorse.Products))));
             Mapper mapper = new Mapper(config);
             List<ProductGroupModel> groupModel = mapper.Map<List<ProductGroupModel>>(groupDTO);
             return groupModel;
