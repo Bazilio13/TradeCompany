@@ -94,11 +94,11 @@ namespace TradeCompany_UI
             client.ID = _id;
             client.Name = textBoxName.Text.Trim();
             client.INN = Convert.ToInt32(textBoxINN.Text);
-            client.E_mail = textBoxName.Text.Trim(' ');
+            client.E_mail = textBoxE_mail.Text.Trim(' ');
             client.Phone = textBoxPhone.Text;
             client.ContactPerson = textBoxContactPerson.Text;
             client.Comment = textBoxComments.Text;
-            client.LastOrderDate = DateTime.Now;
+            client.LastOrderDate = DateTime.Now; // что-то нужно сделат с нулевой датой 
             client.Type = false; //добавить флажок 
             client.CorporateBody = false; //добавить флажок 
             return client;
