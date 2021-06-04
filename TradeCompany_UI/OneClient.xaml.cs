@@ -69,16 +69,44 @@ namespace TradeCompany_UI
             }
         }
 
-
         private void ChangeClient(object sender, RoutedEventArgs e)
         {
             Panel.IsEnabled = true;
+            ButtonChange.IsEnabled = false;
         }
 
         private void SaveClient(object sender, RoutedEventArgs e)
         {
-            Panel.IsEnabled = false;
+            if (FieldValidation())
+            {
+                Panel.IsEnabled = false;
+            }
+        }
 
+        private bool FieldValidation()
+        {
+            bool validation = true;
+            if (string.IsNullOrEmpty(textBoxName.Text.Trim()))
+            {
+                textBoxName.Background = Brushes.Pink;
+                validation = false;
+            }
+            if (string.IsNullOrEmpty(textBoxPhone.Text.Trim()))
+            {
+                textBoxPhone.Background = Brushes.Pink;
+                validation = false;
+            }
+            if (string.IsNullOrEmpty(textBoxContactPerson.Text.Trim()))
+            {
+                textBoxContactPerson.Background = Brushes.Pink;
+                validation = false;
+            }
+            return validation;
+        }
+
+        private void focus(object sender, MouseButtonEventArgs e)
+        {
+           Background = Brushes.White;
         }
     }
 }
