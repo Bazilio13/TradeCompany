@@ -56,57 +56,108 @@ namespace TradeCompany_UI
             {
                 dgClientsTable.ItemsSource = map.MapClientDTOToClientBaseModelListByName(ClientFiltr.Text + e.Text);
             }
-        }
-
-
-        private void ClientsFiltr(object sender, RoutedEventArgs e)
-        {
-            int? person = null;
-            int? sale = null;
-            MapsDTOtoModel map = new MapsDTOtoModel();
-            if (CheckBoxF.IsChecked != CheckBoxU.IsChecked)
-            {
-                if(CheckBoxF.IsChecked == true)
-                {
-                    person = 1;
-                }
-                else
-                {
-                    person = 0;
-                }
-            }
-
-            if (CheckBoxOpt.IsChecked != CheckBoxRetail.IsChecked)
-            {
-                if (CheckBoxOpt.IsChecked == true)
-                {
-                    sale = 1;
-                }
-                else
-                {
-                    sale = 0;
-                }
-            }
-            dgClientsTable.ItemsSource = map.MapClientDTOToClientBaseModelListByParam(person, sale, MinDate.SelectedDate, MaxDate.SelectedDate);
-
-
-        }
-
-        private void ClientsFiltr(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void ButtonFiltr_Click(object sender, RoutedEventArgs e)
-        {
-            CheckBoxF.IsChecked = false;
-            CheckBoxU.IsChecked = false;
-            CheckBoxOpt.IsChecked = false;
-            CheckBoxRetail.IsChecked = false;
-            MinDate.SelectedDate = null;
-            MinDate.SelectedDate = null;
-            ClientsFiltr(sender, e);
-        }
+        }
+
+
+
+
+
+        private void ClientsFiltr(object sender, RoutedEventArgs e)
+
+        {
+
+            int? person = null;
+
+            int? sale = null;
+
+            MapsDTOtoModel map = new MapsDTOtoModel();
+
+            if (CheckBoxF.IsChecked != CheckBoxU.IsChecked)
+
+            {
+
+                if(CheckBoxF.IsChecked == true)
+
+                {
+
+                    person = 1;
+
+                }
+
+                else
+
+                {
+
+                    person = 0;
+
+                }
+
+            }
+
+
+
+            if (CheckBoxOpt.IsChecked != CheckBoxRetail.IsChecked)
+
+            {
+
+                if (CheckBoxOpt.IsChecked == true)
+
+                {
+
+                    sale = 1;
+
+                }
+
+                else
+
+                {
+
+                    sale = 0;
+
+                }
+
+            }
+
+            dgClientsTable.ItemsSource = map.MapClientDTOToClientBaseModelListByParam(person, sale, MinDate.SelectedDate, MaxDate.SelectedDate);
+
+
+
+
+
+        }
+
+
+
+        private void ClientsFiltr(object sender, SelectionChangedEventArgs e)
+
+        {
+
+
+
+        }
+
+
+
+        private void ButtonFiltr_Click(object sender, RoutedEventArgs e)
+
+        {
+
+            CheckBoxF.IsChecked = false;
+
+            CheckBoxU.IsChecked = false;
+
+            CheckBoxOpt.IsChecked = false;
+
+            CheckBoxRetail.IsChecked = false;
+
+            MinDate.SelectedDate = null;
+
+            MinDate.SelectedDate = null;
+
+            ClientsFiltr(sender, e);
+
+        }
+
 
         private void dgClientsTable_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
