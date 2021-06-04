@@ -43,5 +43,6 @@
         </TextBox>
         <TextBox x:Name="SearchBox" Margin="728,12,0,0" BorderThickness="0" TextWrapping="Wrap"   Height="21" VerticalAlignment="Top" HorizontalAlignment="Left" Width="174" TextChanged="SearchBox_TextChanged">
         </TextBox>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="704,50,0,0" VerticalAlignment="Top" Click="Button_Click"/>
     </Grid>
 </Page>

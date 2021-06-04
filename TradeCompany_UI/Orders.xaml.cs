@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,12 +27,14 @@ namespace TradeCompany_UI
     {
         Frame _frame;
         OrderDataAccess _orderDataAccess;
+        ObservableCollection<OrderModel> orderModels;
         public Orders(Frame frame)
         {
             _frame = frame;
             InitializeComponent();
             _orderDataAccess = new OrderDataAccess();
-            List<OrderModel> orderModels = _orderDataAccess.GetOrderModelsByParams();
+            //ObservableCollection<OrderModel> 
+                orderModels = _orderDataAccess.GetOrderModelsByParams();
             dgOrders.ItemsSource = orderModels;
         }
 
@@ -56,8 +59,8 @@ namespace TradeCompany_UI
             {
                 address = AddressFiltr.Text;
             }
-            List<OrderModel> orderModels = _orderDataAccess.GetOrderModelsByParams(client, MinDate.SelectedDate, MaxDate.SelectedDate, address);
-            dgOrders.ItemsSource = orderModels;
+            //List<OrderModel> orderModels = _orderDataAccess.GetOrderModelsByParams(client, MinDate.SelectedDate, MaxDate.SelectedDate, address);
+            //dgOrders.ItemsSource = orderModels;
         }
 
         private void dgOrders_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -95,6 +98,11 @@ namespace TradeCompany_UI
         private void MaxDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             FilterOrders();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            orderModels[0].Address = "hop hey la la ley";
         }
     }
 }
