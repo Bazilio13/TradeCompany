@@ -60,18 +60,18 @@ namespace TradeCompany_UI
 
         private void ClientsFiltr(object sender, RoutedEventArgs e)
         {
-            bool? person = null;
-            bool? sale = null;
+            int? person = null;
+            int? sale = null;
             MapsDTOtoModel map = new MapsDTOtoModel();
             if (CheckBoxF.IsChecked != CheckBoxU.IsChecked)
             {
                 if(CheckBoxF.IsChecked == true)
                 {
-                    person = true;
+                    person = 1;
                 }
                 else
                 {
-                    person = false;
+                    person = 0;
                 }
             }
 
@@ -79,16 +79,32 @@ namespace TradeCompany_UI
             {
                 if (CheckBoxOpt.IsChecked == true)
                 {
-                    sale = true;
+                    sale = 1;
                 }
                 else
                 {
-                    sale = false;
+                    sale = 0;
                 }
             }
             dgClientsTable.ItemsSource = map.MapClientDTOToClientBaseModelListByParam(person, sale, MinDate.SelectedDate, MaxDate.SelectedDate);
 
 
+        }
+
+        private void ClientsFiltr(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void ButtonFiltr_Click(object sender, RoutedEventArgs e)
+        {
+            CheckBoxF.IsChecked = false;
+            CheckBoxU.IsChecked = false;
+            CheckBoxOpt.IsChecked = false;
+            CheckBoxRetail.IsChecked = false;
+            MinDate.SelectedDate = null;
+            MinDate.SelectedDate = null;
+            ClientsFiltr(sender, e);
         }
     }
 }

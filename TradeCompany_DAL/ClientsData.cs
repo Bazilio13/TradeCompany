@@ -36,13 +36,18 @@ namespace TradeCompany_DAL
             return clientsList;
         }
 
-        public List<ClientDTO> GetClientsByParam(bool? person, bool? sale, DateTime? minData, DateTime? maxData)
+        public List<ClientDTO> GetClientsByParams(int? person, int? sale, DateTime? minData, DateTime? maxData)
         {
             List<ClientDTO> clientsList = new List<ClientDTO>();
-            string query = "exec TradeCompany_DataBase.GetClientsByParam @Person, @Sale, @MinData, @maxData";
+            string query = "exec TradeCompany_DataBase.GetClientsByParams @Person, @Sale, @MinData, @MaxData";
             using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
             {
-                clientsList = dbConnection.Query<ClientDTO>(query).AsList<ClientDTO>();
+                clientsList = dbConnection.Query<ClientDTO>(query, new { 
+                person,
+                sale,
+                minData,
+                maxData
+                }).AsList<ClientDTO>();
             }
 
             return clientsList;

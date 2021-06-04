@@ -65,10 +65,10 @@ namespace TradeCompany_BLL
             return clientBaseModel;
         }
 
-        public List<ClientBaseModel> MapClientDTOToClientBaseModelListByParam(bool? person, bool? sale, DateTime? minData, DateTime? maxData)
+        public List<ClientBaseModel> MapClientDTOToClientBaseModelListByParam(int? person, int? sale, DateTime? minData, DateTime? maxData)
         {
             ClientsData clients = new ClientsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
-            List<ClientDTO> clientsDTO = clients.GetClientsByParam(person, sale, minData, maxData);
+            List<ClientDTO> clientsDTO = clients.GetClientsByParams(person, sale, minData, maxData);
             var config = new MapperConfiguration(cfg => cfg.CreateMap<ClientDTO, ClientBaseModel>());
             Mapper mapper = new Mapper(config);
             List<ClientBaseModel> clientBaseModel = mapper.Map<List<ClientBaseModel>>(clientsDTO);
