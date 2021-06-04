@@ -23,5 +23,10 @@ namespace TradeCompany_UI
         {
             InitializeComponent();
         }
+
+        private void ClientFiltr_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }
