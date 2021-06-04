@@ -27,13 +27,12 @@ namespace TradeCompany_UI
     {
         Frame _frame;
         OrderDataAccess _orderDataAccess;
-        ObservableCollection<OrderModel> orderModels;
+        List<OrderModel> orderModels;
         public Orders(Frame frame)
         {
             _frame = frame;
             InitializeComponent();
             _orderDataAccess = new OrderDataAccess();
-            //ObservableCollection<OrderModel> 
                 orderModels = _orderDataAccess.GetOrderModelsByParams();
             dgOrders.ItemsSource = orderModels;
         }
@@ -59,8 +58,8 @@ namespace TradeCompany_UI
             {
                 address = AddressFiltr.Text;
             }
-            //List<OrderModel> orderModels = _orderDataAccess.GetOrderModelsByParams(client, MinDate.SelectedDate, MaxDate.SelectedDate, address);
-            //dgOrders.ItemsSource = orderModels;
+            List<OrderModel> orderModels = _orderDataAccess.GetOrderModelsByParams(client, MinDate.SelectedDate, MaxDate.SelectedDate, address);
+            dgOrders.ItemsSource = orderModels;
         }
 
         private void dgOrders_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
