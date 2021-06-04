@@ -124,7 +124,7 @@ namespace TradeCompany_DAL
             using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
             {
                 //query = "exec TradeCompany_DataBase.GetProductsInOrderByOrderId @ID";
-                query = "exec TradeCompany_DataBase.GetProductsByOrderId @OrderId";
+                query = "exec TradeCompany_DataBase.GetProductsByOrderId @ID";
                 result = dbConnection.Query<ProductForOrderDTO>(query, new { ID }).ToList();
             }
             return result;
