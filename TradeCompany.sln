@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TradeCompany_UI", "TradeCom
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TradeCompany_TMPForTests", "TradeCompany_TMPForTests\TradeCompany_TMPForTests.csproj", "{78E1F081-5BA3-45B9-9F3B-4EB24380AFC6}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "TradeCompany_DataBase", "TradeCompany_DataBase\TradeCompany_DataBase.sqlproj", "{433E903B-E651-4EA9-B5F2-238437442A20}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,12 @@ Global
 		{78E1F081-5BA3-45B9-9F3B-4EB24380AFC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78E1F081-5BA3-45B9-9F3B-4EB24380AFC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78E1F081-5BA3-45B9-9F3B-4EB24380AFC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{433E903B-E651-4EA9-B5F2-238437442A20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{433E903B-E651-4EA9-B5F2-238437442A20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{433E903B-E651-4EA9-B5F2-238437442A20}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{433E903B-E651-4EA9-B5F2-238437442A20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{433E903B-E651-4EA9-B5F2-238437442A20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{433E903B-E651-4EA9-B5F2-238437442A20}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
