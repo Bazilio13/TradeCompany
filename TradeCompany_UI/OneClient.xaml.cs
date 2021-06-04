@@ -104,9 +104,10 @@ namespace TradeCompany_UI
             return validation;
         }
 
-        private void focus(object sender, MouseButtonEventArgs e)
+        private void Focus(object sender, MouseButtonEventArgs e)
         {
-           Background = Brushes.White;
+            TextBox textBox = (TextBox)sender;
+            textBox.Background = Brushes.White;
         }
     }
 }
