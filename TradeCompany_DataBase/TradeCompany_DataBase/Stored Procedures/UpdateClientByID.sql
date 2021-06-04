@@ -7,7 +7,8 @@
 	@Comment nvarchar(500),
 	@CorporateBody binary,
 	@Type binary,
-	@LastOrderDate datetime
+	@LastOrderDate datetime,
+	@ContactPerson nvarchar(255)
 AS
 	update [Clients]
 	set 
@@ -18,5 +19,6 @@ AS
 	[Comment] = @Comment,
 	[CorporateBody] = @CorporateBody,
 	[Type] = @Type,
-	[LastOrderDate] = @LastOrderDate
+	[LastOrderDate] = @LastOrderDate,
+	[ContactPerson] = @ContactPerson
 	where Clients.ID = @ClientID
