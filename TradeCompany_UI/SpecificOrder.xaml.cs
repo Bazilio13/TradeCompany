@@ -23,62 +23,55 @@ namespace TradeCompany_UI
     /// </summary>
     public partial class SpecificOrder : Page
     {
-        //private InformationAboutOrderList informationAboutOrderList;
         
-        //private BindingList<ProductsForOrderModel> productsInOrder;
-        //private BindingList<OrderListModel> productsInOrder;
         private OrderModel _orderModel;
-
-        private string _client;
-        private string _clientsPhone;
-
-
+       
+        ContactInformation _clientInfo;
         OrderDataAccess _orderDataAccess;
         public SpecificOrder()
         {
+
             _orderDataAccess = new OrderDataAccess();
+            _clientInfo = new ContactInformation();
+            _orderDataAccess = new OrderDataAccess();
+            _orderModel = _orderDataAccess.GetOrderById(7)[0];
+            SetContactInformation();
         }  
         public SpecificOrder(int id)
         {
             InitializeComponent();
-            //orderId = id;
-            //var connectionString = @"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16";
-            //informationAboutOrderList = new InformationAboutOrderList(connectionString);
+
             _orderDataAccess = new OrderDataAccess();
-            //_orderModel = _orderDataAccess.GetOrderById(id);
+            _orderModel = _orderDataAccess.GetOrderById(7)[0];
+            SetContactInformation();
+
         }
 
         private void dgSpecificOrder_Loaded(object sender, RoutedEventArgs e)
         {
-
-            //var connectionString = @"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16";
-            //informationAboutOrderList = new InformationAboutOrderList(connectionString);
-            //var productsForOrder = informationAboutOrderList.GetProductsForOrderByOrderId(7);
-            //productsInOrder = new BindingList<ProductsForOrderModel>();
-            //// либо сделать маппер для ui либо сразу использовать productsForOrder
-            //foreach (var product in productsForOrder)
-            //{
-            //    productsInOrder.Add(product);
-
-            //}
-
-            //ClientName.Text = productsForOrder.First().Name;
-            //dgSpecificOrder.ItemsSource = productsInOrder;
-            
-            _orderModel = _orderDataAccess.GetOrderById(7)[0];
-            _client = _orderModel.Client;
-            _clientsPhone = _orderModel.ClientsPhone;
-            if(_clientsPhone == null)
-            
-            ClientName.Text = _client;
-            Phone.Text = _clientsPhone;
+            ShowClientInformation();
             dgSpecificOrder.ItemsSource = _orderModel.OrderListModel;
-
-
         }
 
-    private void PlaceOrder_Click(object sender, RoutedEventArgs e)
+        private void PlaceOrder_Click(object sender, RoutedEventArgs e)
         {
+
+        }
+        private void SetContactInformation()
+        {
+            _clientInfo.ID = _orderModel.ClientsID;
+            _clientInfo.Client = _orderModel.Client;
+            _clientInfo.ClientsPhone = _orderModel.ClientsPhone;
+            _clientInfo.dateTime = _orderModel.DateTime;
+            _clientInfo.Address = _orderModel.Address;
+        }
+        private void ShowClientInformation()
+        {
+            Data.Text = _clientInfo.dateTime.ToString();
+            ID.Text = _clientInfo.ID.ToString();
+            ClientName.Text = _clientInfo.Client;
+            Phone.Text = _clientInfo.ClientsPhone;
+            Adress.Text = _clientInfo.Address;
 
         }
     }
