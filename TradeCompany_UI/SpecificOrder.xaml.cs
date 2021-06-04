@@ -24,7 +24,7 @@ namespace TradeCompany_UI
     public partial class SpecificOrder : Page
     {
         private InformationAboutOrderList informationAboutOrderList;
-        private int orderId;
+        private int orderId = 1;
         private BindingList<ProductsForOrderModel> productsInOrder;
         public SpecificOrder()
         {
@@ -50,9 +50,10 @@ namespace TradeCompany_UI
             foreach (var product in productsForOrder)
             {
                 productsInOrder.Add(product);
+                
             }
 
-
+            ClientName.Text = productsForOrder.First().Name;
             dgSpecificOrder.ItemsSource = productsInOrder;
         }
     }

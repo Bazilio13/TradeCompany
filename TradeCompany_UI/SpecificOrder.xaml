@@ -24,12 +24,12 @@
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="52,19,0,0" Text="Дата" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="15"/>
             <TextBlock Grid.Column="2" HorizontalAlignment="Left" Margin="58,19,0,0" Text="ID" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="15"/>
-            <TextBlock Grid.Column="3" HorizontalAlignment="Left" Margin="47,19,0,0" Text="Клиент" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="15"/>
+            <TextBlock x:Name="ClientName" Grid.Column="3" HorizontalAlignment="Left" Margin="47,19,0,0" Text="Клиент" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="15"/>
             <TextBlock Grid.Column="4" HorizontalAlignment="Left" Margin ="60,19,0,0"  Text="Адрес" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="15"/>
         </Grid>
         <DataGrid x:Name="dgSpecificOrder" FontSize="15" Margin="30" Loaded="dgSpecificOrder_Loaded" Grid.Row="1">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="№" Width="0.1*"/>
+                <DataGridTextColumn x:Name="NumberOfProduct"  Header="№" Width="0.1*"/>
                 <DataGridTextColumn Binding="{Binding Path= ProductID}" Header="ID Товара" Width="0.3*"/>
                 <DataGridTextColumn Binding="{Binding Path= Name}" Header="Товар" Width="1*"/>
                 <DataGridTextColumn Binding="{Binding Path= Amount}" Header="Количество" Width="0.5*"/>
