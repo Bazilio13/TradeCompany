@@ -31,6 +31,10 @@ namespace TradeCompany_UI
 
         }
 
+        public SpecificOrder()
+        {
+
+        }
         public SpecificOrder(int id)
         {
             InitializeComponent();

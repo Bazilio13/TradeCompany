@@ -5,28 +5,43 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TradeCompany_UI"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="450"
       Title="Orders">
-
 
     <Grid Background="WhiteSmoke">
         <Grid.RowDefinitions>
-            <RowDefinition Height="45"></RowDefinition>
+            <RowDefinition Height="90"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <Button Name="CreateOrder" Content="Новый заказ" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="25" Width="80"/>
+        <Button Name="CreateOrder" Content="Новый заказ" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="25" Width="80" Click="CreateOrder_Click"/>
 
-        <TextBox x:Name="Client_Copy" Margin="95,10,0,0" Text="TextBox" TextWrapping="Wrap"  Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200"/>
-        <DatePicker Name="MinDate" HorizontalAlignment="Left" Margin="300,10,0,0" VerticalAlignment="Top" Height="25" Width="100"/>
-        <DatePicker Name="MaxDate" HorizontalAlignment="Left" Margin="405,10,0,0" VerticalAlignment="Top" Height="25" Width="100"/>
-        <StackPanel x:Name="OrdersPanel" Grid.Row="1">
-            <StackPanel Orientation="Horizontal">
-            <Button x:Name="OrderNumberColumn" Content="№" Width="40" HorizontalAlignment="Left"/>
-            <Button x:Name="OrderDateColumn" Content="Дата заказа" Width="100" HorizontalAlignment="Left"/>
-            <Button x:Name="OrderClientColumn" Content="Клиент" Width="200" HorizontalAlignment="Left"/>
-                <Button x:Name="OrderSumColumn" Content="Сумма заказа" Width="100" HorizontalAlignment="Left"/>
-
-            </StackPanel>
-        </StackPanel>
+        <TextBox x:Name="ClientFiltr" Margin="281,10,0,0" TextWrapping="Wrap"  Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" TextChanged="ClientFiltr_TextChanged"/>
+        <DatePicker Name="MinDate" HorizontalAlignment="Left" Margin="120,10,0,0" VerticalAlignment="Top" Height="25" Width="100" SelectedDateChanged="MinDate_SelectedDateChanged"/>
+        <DatePicker Name="MaxDate" HorizontalAlignment="Left" Margin="120,40,0,0" VerticalAlignment="Top" Height="25" Width="100" SelectedDateChanged="MaxDate_SelectedDateChanged"/>
+        <DataGrid x:Name="dgOrders" Grid.Row="1" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="True" MouseLeftButtonUp="dgOrders_MouseLeftButtonUp">
+            <DataGrid.Columns >
+                <DataGridTextColumn Binding="{Binding Path=ID}"  Header="№" Width="30" MinWidth="30"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=DateTime}" Header="Дата заказа" Width="100" MinWidth="100"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Client}" Header="Клиент" Width="200" MinWidth="100"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Summ}" Header="Сумма заказа" Width="100" MinWidth="100"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Address}" Header="Адрес" Width="100" MinWidth="65"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Comment}" Header="Комментарий" Width="*" MinWidth="150"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Сбросить фильтр" HorizontalAlignment="Left" Margin="496,10,0,0" VerticalAlignment="Top" Height="25" Width="117" Click="ResetButton_Click"/>
+        <TextBox x:Name="AddressFiltr" Margin="281,40,0,0" TextWrapping="Wrap"  Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" TextChanged="AddressFiltr_TextChanged"/>
+        <TextBlock HorizontalAlignment="Left" Height="25" Margin="110,15,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="10"><Run Language="ru-ru" Text="С"/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Height="25" Margin="100,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="20"><Run Language="ru-ru" Text="По"/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Height="25" Margin="237,15,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="39"><Run Language="ru-ru" Text="Клиент"/><LineBreak/><Run Language="ru-ru"/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Height="25" Margin="237,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="44"><Run Language="ru-ru" Text="Адресс"/></TextBlock>
+        <TextBox IsReadOnly="True" Margin="704,10,0,0" TextWrapping="Wrap"  Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200">
+        </TextBox>
+        <TextBox IsReadOnly="True" Margin="704,10,0,0" TextWrapping="Wrap"  Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200">
+            <TextBox.Background>
+                <ImageBrush ImageSource="/Pictures/search.png" AlignmentX="Left" Stretch="None"/>
+            </TextBox.Background>
+        </TextBox>
+        <TextBox x:Name="SearchBox" Margin="728,12,0,0" BorderThickness="0" TextWrapping="Wrap"   Height="21" VerticalAlignment="Top" HorizontalAlignment="Left" Width="174" TextChanged="SearchBox_TextChanged">
+        </TextBox>
     </Grid>
 </Page>

@@ -31,7 +31,7 @@ namespace TradeCompany_DAL
                 ordersDTO.ID = dbConnection.Query<int>(query, new
                 {
                     ordersDTO.ClientsID,
-                    ordersDTO.Datetime,
+                    ordersDTO.DateTime,
                     ordersDTO.AddressID,
                     ordersDTO.Comment
                 }).AsList<int>()[0];
@@ -98,29 +98,7 @@ namespace TradeCompany_DAL
             {
                 query = "exec TradeCompany_DataBase.GetOrders";
                 dbConnection.Query<OrdersDTO, OrderListsDTO, ClientDTO, ProductDTO, OrdersDTO>(query,
-                    (order, orderList, client, product) =>
-                    {
-                        orderList.productDTO = product;
-                        OrdersDTO crntOrder = null;
-                        foreach (var o in result)
-                        {
-                            if (o.ID == order.ID)
-                            {
-                                crntOrder = o;
-                            }
-                        }
-                        if (crntOrder == null)
-                        {
-                            crntOrder = order;
-                            crntOrder.ClientDTO = client;
-                            result.Add(crntOrder);
-                        }
-                        if (orderList != null)
-                        {
-                            crntOrder.OrderLists.Add(orderList);
-                        }
-                        return order;
-                    });
+                    (order, orderList, client, product) => MapsOrdersDTO(order, orderList, client, product, result));
             }
             return result;
         }
@@ -133,29 +111,7 @@ namespace TradeCompany_DAL
             {
                 query = "exec TradeCompany_DataBase.GetOrdersByID @ID";
                 dbConnection.Query<OrdersDTO, OrderListsDTO, ClientDTO, ProductDTO, OrdersDTO>(query,
-                    (order, orderList, client, product) =>
-                    {
-                        orderList.productDTO = product;
-                        OrdersDTO crntOrder = null;
-                        foreach (var o in result)
-                        {
-                            if (o.ID == order.ID)
-                            {
-                                crntOrder = o;
-                            }
-                        }
-                        if (crntOrder == null)
-                        {
-                            crntOrder = order;
-                            crntOrder.ClientDTO = client;
-                            result.Add(crntOrder);
-                        }
-                        if (orderList != null)
-                        {
-                            crntOrder.OrderLists.Add(orderList);
-                        }
-                        return order;
-                    },
+                    (order, orderList, client, product) => MapsOrdersDTO(order, orderList, client, product, result),
                     new { id });
             }
             return result;
@@ -168,48 +124,42 @@ namespace TradeCompany_DAL
             using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
             {
                 //query = "exec TradeCompany_DataBase.GetProductsInOrderByOrderId @ID";
-                query = "exec TradeCompany_DataBase.GetProductsByOrderId @ID";
+                query = "exec TradeCompany_DataBase.GetProductsByOrderId @OrderId";
                 result = dbConnection.Query<ProductForOrderDTO>(query, new { ID }).ToList();
             }
             return result;
         }
 
-        public List<OrdersDTO> GetOrdersByParams(int? clientsID, DateTime? minDateTime, DateTime? maxDateTime, int? addressID, int? productID)
+        public List<OrdersDTO> GetOrdersByParams(string client, DateTime? minDateTime, DateTime? maxDateTime, string address)
         {
             List<OrdersDTO> result = new List<OrdersDTO>();
             string query;
             using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
             {
-                query = "exec TradeCompany_DataBase.GetOrdersByParams @ClientsID, @MinDateTime, @MaxDateTime, @AddressID, @ProductID";
-                dbConnection.Query<OrdersDTO, OrderListsDTO, OrdersDTO>(query,
-                    (order, orderList) =>
+                query = "exec TradeCompany_DataBase.GetOrdersByParams @Client, @MinDateTime, @MaxDateTime, @Address";
+                dbConnection.Query<OrdersDTO, OrderListsDTO, ClientDTO, ProductDTO, OrdersDTO>(query,
+                    (order, orderList, client, product) => MapsOrdersDTO(order, orderList, client, product, result),
+                    new
                     {
-                        OrdersDTO crntOrder = null;
-                        foreach (var o in result)
-                        {
-                            if (o.ID == order.ID)
-                            {
-                                crntOrder = o;
-                            }
-                        }
-                        if (crntOrder == null)
-                        {
-                            crntOrder = order;
-                            result.Add(crntOrder);
-                        }
-                        if (orderList != null)
-                        {
-                            crntOrder.OrderLists.Add(orderList);
-                        }
-                        return order;
-                    },
-                    new { 
-                        clientsID,
+                        client,
                         minDateTime,
                         maxDateTime,
-                        addressID,
-                        productID
+                        address
                     });
+            }
+            return result;
+        }
+
+        public List<OrdersDTO> SearchOrders(string str)
+        {
+            List<OrdersDTO> result = new List<OrdersDTO>();
+            string query;
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                query = "TradeCompany_DataBase.SearchOrders";
+                dbConnection.Query<OrdersDTO, OrderListsDTO, ClientDTO, ProductDTO, OrdersDTO>(query,
+                    (order, orderList, client, product) => MapsOrdersDTO(order, orderList, client, product, result),
+                    new { str }, commandType: CommandType.StoredProcedure);
             }
             return result;
         }
@@ -219,10 +169,11 @@ namespace TradeCompany_DAL
             using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
             {
                 query = "exec TradeCompany_DataBase.UpdateOrder @ID, @ClientsID, @Datetime, @AddressID, @Comment";
-                dbConnection.Query(query,new {
+                dbConnection.Query(query, new
+                {
                     ordersDTO.ID,
                     ordersDTO.ClientsID,
-                    ordersDTO.Datetime,
+                    ordersDTO.DateTime,
                     ordersDTO.AddressID,
                     ordersDTO.Comment
                 });
@@ -239,6 +190,29 @@ namespace TradeCompany_DAL
                     });
                 }
             }
-        }        
+        }
+        public OrdersDTO MapsOrdersDTO(OrdersDTO order, OrderListsDTO orderList, ClientDTO client, ProductDTO product, List<OrdersDTO> result)
+        {
+            orderList.productDTO = product;
+            OrdersDTO crntOrder = null;
+            foreach (var o in result)
+            {
+                if (o.ID == order.ID)
+                {
+                    crntOrder = o;
+                }
+            }
+            if (crntOrder == null)
+            {
+                crntOrder = order;
+                crntOrder.ClientDTO = client;
+                result.Add(crntOrder);
+            }
+            if (orderList != null)
+            {
+                crntOrder.OrderLists.Add(orderList);
+            }
+            return order;
+        }
     }
 }

@@ -24,20 +24,77 @@ namespace TradeCompany_UI
     /// </summary>
     public partial class Orders : Page
     {
-        public Orders()
+        Frame _frame;
+        OrderDataAccess _orderDataAccess;
+        public Orders(Frame frame)
         {
+            _frame = frame;
             InitializeComponent();
-            OrdersData ordersData = new OrdersData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
-            List<OrdersDTO> ordersDTOs = new List<OrdersDTO>();
-            ordersDTOs = ordersData.GetOrders();
-            MapsDTOtoModel map = new MapsDTOtoModel();
-            List<OrderModel> orderModels = map.MapOrdersDTOToOrderModel(ordersDTOs);
-            foreach (OrderModel orderModel in orderModels)
-            {
-                this.OrdersPanel.Children.Add(new OrderRow(orderModel));
-            }
-           // OrderNumberColumn.Content = new SpecificOrder(7);
+            _orderDataAccess = new OrderDataAccess();
+            List<OrderModel> orderModels = _orderDataAccess.GetOrderModelsByParams();
+            dgOrders.ItemsSource = orderModels;
         }
 
+        private void ResetButton_Click(object sender, RoutedEventArgs e)
+        {
+            ClientFiltr.Text = null;
+            AddressFiltr.Text = null;
+            MinDate.SelectedDate = null;
+            MaxDate.SelectedDate = null;
+            FilterOrders();
+        }
+
+        private void FilterOrders()
+        {
+            string client = null;
+            string address = null;
+            if (ClientFiltr.Text != "")
+            {
+                client = ClientFiltr.Text;
+            }
+            if (AddressFiltr.Text != "")
+            {
+                address = AddressFiltr.Text;
+            }
+            List<OrderModel> orderModels = _orderDataAccess.GetOrderModelsByParams(client, MinDate.SelectedDate, MaxDate.SelectedDate, address);
+            dgOrders.ItemsSource = orderModels;
+        }
+
+        private void dgOrders_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            OrderModel crntModel = (OrderModel)dgOrders.CurrentItem;
+            _frame.Content = new SpecificOrder(crntModel.ID);
+        }
+
+        private void CreateOrder_Click(object sender, RoutedEventArgs e)
+        {
+            _frame.Content = new SpecificOrder();
+        }
+
+        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            List<OrderModel> orderModels = _orderDataAccess.SearchOrderModels(SearchBox.Text);
+            dgOrders.ItemsSource = orderModels;
+        }
+
+        private void ClientFiltr_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            FilterOrders();
+        }
+
+        private void AddressFiltr_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            FilterOrders();
+        }
+
+        private void MinDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            FilterOrders();
+        }
+
+        private void MaxDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            FilterOrders();
+        }
     }
 }

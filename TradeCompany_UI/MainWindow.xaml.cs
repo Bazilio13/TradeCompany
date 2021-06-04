@@ -27,19 +27,24 @@ namespace TradeCompany_UI
 
         private void OrdersButton_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new Orders();
+            MainFrame.Content = new Orders(MainFrame);
             OrdersButton.Content = new Orders();
         }
 
         private void MainButton_Click(object sender, RoutedEventArgs e)
         {
             MainFrame.Content = new StartPage();
-            //MainFrame.Content = new SpecificOrder(7);
         }
+        
 
         private void ClientsButton_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new Clients();
+        MainFrame.Content = new Clients();
+        }
+        private void ProductButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new ProductCatalog();
+            
         }
     }
 }

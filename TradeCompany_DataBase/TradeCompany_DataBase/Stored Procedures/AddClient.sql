@@ -6,7 +6,8 @@
 	@Comment nvarchar(500),
 	@CorporateBody binary,
 	@Type binary,
-	@LastOrderDate datetime
+	@LastOrderDate datetime,
+	@ContactPerson nvarchar(255)
 AS
-	insert into Clients (Name, INN, E_Mail, Phone, Type, CorporateBody, LastOrderDate, Comment)
-	values(@Name, @INN, @E_mail, @Phone, @Type, @CorporateBody, @LastOrderDate, @Comment)
+	insert into Clients (Name, INN, E_Mail, Phone, ContactPerson, Type, CorporateBody, LastOrderDate, Comment)
+	values(@Name, @INN, @E_mail, @Phone, @ContactPerson, @Type, @CorporateBody, @LastOrderDate, @Comment)
