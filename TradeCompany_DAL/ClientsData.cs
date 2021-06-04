@@ -67,7 +67,7 @@ namespace TradeCompany_DAL
 
         public void AddClient(ClientDTO client)
         {
-            string query = "exec TradeCompany_DataBase.AddClient @Name, @INN, @E_mail, @Phone, @ContactPerson, @Comment, @CorporateBody, @Type, @LastOrderDate";
+            string query = "exec TradeCompany_DataBase.AddClient @Name, @INN, @E_mail, @Phone, @Comment, @CorporateBody, @Type, @LastOrderDate, @ContactPerson";
             using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
             {
                 dbConnection.Query<ClientDTO>(query, new {
@@ -75,11 +75,11 @@ namespace TradeCompany_DAL
                 client.INN,
                 client.E_mail, 
                 client.Phone,
-                client.ContactPerson,
-                client.Type,
+                client.Comment,
                 client.CorporateBody,
+                client.Type,
                 client.LastOrderDate,
-                client.Comment
+                client.ContactPerson
                 });
             }
         }
@@ -106,11 +106,12 @@ namespace TradeCompany_DAL
                     client.INN,
                     client.E_mail,
                     client.Phone,
+                    client.ContactPerson,
                     client.Comment,
                     client.CorporateBody,
                     client.Type,
                     client.LastOrderDate
-                });
+                }) ;
             }
 
         }

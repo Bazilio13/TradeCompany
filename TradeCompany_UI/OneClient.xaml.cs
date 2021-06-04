@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TradeCompany_BLL;
 using TradeCompany_BLL.Models;
+using System.Runtime;
 
 namespace TradeCompany_UI
 {
@@ -79,8 +80,28 @@ namespace TradeCompany_UI
         {
             if (FieldValidation())
             {
+                ClientModel client = new ClientModel();
+                client = ToFormClientModel();
                 Panel.IsEnabled = false;
+                MapsModelToDTO maps = new MapsModelToDTO();
+                maps.MapClientModelToClientDTO(client);
             }
+        }
+
+        private ClientModel ToFormClientModel()
+        {
+            ClientModel client = new ClientModel();
+            client.ID = _id;
+            client.Name = textBoxName.Text.Trim();
+            client.INN = Convert.ToInt32(textBoxINN.Text);
+            client.E_mail = textBoxName.Text.Trim(' ');
+            client.Phone = textBoxPhone.Text;
+            client.ContactPerson = textBoxContactPerson.Text;
+            client.Comment = textBoxComments.Text;
+            client.LastOrderDate = DateTime.Now;
+            client.Type = false; //добавить флажок 
+            client.CorporateBody = false; //добавить флажок 
+            return client;
         }
 
         private bool FieldValidation()
@@ -101,6 +122,15 @@ namespace TradeCompany_UI
                 textBoxContactPerson.Background = Brushes.Pink;
                 validation = false;
             }
+            int member;
+            if(textBoxINN.Text.Trim(' ') != null)
+            {
+                if (!Int32.TryParse(textBoxINN.Text, out member))
+                {
+                    textBoxINN.Background = Brushes.Pink;
+                    validation = false;
+                }
+            }
             return validation;
         }
 
@@ -108,6 +138,18 @@ namespace TradeCompany_UI
         {
             TextBox textBox = (TextBox)sender;
             textBox.Background = Brushes.White;
+        }
+
+        private void ValidationByNumber(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !(e.Text=="0" || e.Text == "1" || e.Text == "2" || e.Text == "3" || e.Text == "4" ||
+                e.Text == "5" || e.Text == "6" || e.Text == "7" || e.Text == "8" || e.Text == "9" || e.Text == "+" ||
+                e.Text == "(" || e.Text == ")" );
+        }
+
+        private void ValidationByINN(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !(Char.IsDigit(e.Text, 0));
         }
     }
 }
