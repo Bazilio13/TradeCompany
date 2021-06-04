@@ -76,5 +76,30 @@ namespace TradeCompany_BLL
             return clientBaseModel;
         }
 
+        public ClientModel MapClientDTOToClientModelByID(int id)
+        {
+            ClientsData clients = new ClientsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
+            ClientDTO clientDTO = clients.GetClientByID(id);
+
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<ClientDTO, ClientModel>());
+            Mapper mapper = new Mapper(config);
+            ClientModel clientModel = mapper.Map<ClientModel>(clientDTO);
+
+            return clientModel;
+        }
+
+
+        public List<AddressModel> MapClientDTOToAddressesModelByID(int id)
+        {
+            AddressesData addresses = new AddressesData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
+            List<AddressDTO> addressDTO = addresses.GetAddressesByID(id);
+
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<AddressDTO, AddressModel>());
+            Mapper mapper = new Mapper(config);
+            List<AddressModel> addressModel = mapper.Map<List<AddressModel>>(addressDTO);
+
+            return addressModel;
+        }
+
     }
 }

@@ -14,14 +14,14 @@
             <RowDefinition Height="100px"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Button Name="CreateOrder" Content="Новый клиент" HorizontalAlignment="Left" Margin="690,19,0,0" VerticalAlignment="Top" Height="25" Width="80"/>
+            <Button Name="CreateOrder" Content="Новый клиент" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="25" Width="80" MouseLeftButtonDown="CreateOrder_MouseLeftButtonDown"/>
 
         <TextBox   x:Name="ClientFiltr" Margin="10,10,0,0"  TextWrapping="Wrap" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="464" TextInput="textInput" PreviewTextInput="textInput" Panel.ZIndex="1"/>
 
         <DatePicker Name="MinDate" HorizontalAlignment="Left" Margin="10,65,0,0" VerticalAlignment="Top" Height="25" Width="100" Panel.ZIndex="1" CalendarClosed="ClientsFiltr"/>
         <DatePicker Name="MaxDate" HorizontalAlignment="Left" Margin="130,65,0,0" VerticalAlignment="Top" Height="25" Width="100" Panel.ZIndex="1" CalendarClosed="ClientsFiltr"/>
 
-        <DataGrid x:Name="dgClientsTable" FontSize="16"  AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" Grid.Row="1">
+            <DataGrid x:Name="dgClientsTable" FontSize="16"  AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" Grid.Row="1" SelectionMode="Single" MouseLeftButtonDown="dgClientsTable_MouseLeftButtonDown">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding ="{Binding Path = ID}"  IsReadOnly="True" Header="id" Width="30"/>
                 <DataGridTextColumn Binding ="{Binding Path = Name}"  IsReadOnly="True" Header="ФИО/Название" Width="200"/>
@@ -41,6 +41,7 @@
         <StackPanel  Margin="420,56,224,10">
             <CheckBox x:Name="CheckBoxOpt" Content="Оптовый" Click="ClientsFiltr"/>
             <CheckBox x:Name="CheckBoxRetail" Content="Розничный" Click="ClientsFiltr"/>
-        </StackPanel>
+        <Frame Name="frame" NavigationUIVisibility="Hidden" Grid.RowSpan="2"/>
     </Grid>
+
 </Page>
