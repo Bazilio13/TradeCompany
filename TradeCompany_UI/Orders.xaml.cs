@@ -25,39 +25,37 @@ namespace TradeCompany_UI
     public partial class Orders : Page
     {
         Frame _frame;
+        OrderDataAccess _orderDataAccess;
         public Orders(Frame frame)
         {
             _frame = frame;
             InitializeComponent();
-            OrdersData ordersData = new OrdersData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
-            List<OrdersDTO> ordersDTOs = new List<OrdersDTO>();
-            ordersDTOs = ordersData.GetOrders();
-            MapsDTOtoModel map = new MapsDTOtoModel();
-            List<OrderModel> orderModels = map.MapOrdersDTOToOrderModel(ordersDTOs);
+            _orderDataAccess = new OrderDataAccess();
+            List<OrderModel> orderModels = _orderDataAccess.GetOrderModelsByParams();
             dgOrders.ItemsSource = orderModels;
-            //foreach (OrderModel orderModel in orderModels)
-            //{
-            //    this.OrdersPanel.Children.Add(new OrderRow(orderModel));
-            //}
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ResetButton_Click(object sender, RoutedEventArgs e)
+        {
+            ClientFiltr.Text = null;
+            AddressFiltr.Text = null;
+            MinDate.SelectedDate = null;
+            MaxDate.SelectedDate = null;            
+        }
+
+        private void FilterOrders()
         {
             string client = null;
             string address = null;
             if (ClientFiltr.Text != "")
             {
                 client = ClientFiltr.Text;
-            } 
+            }
             if (AddressFiltr.Text != "")
             {
                 address = AddressFiltr.Text;
             }
-            OrdersData ordersData = new OrdersData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
-            List<OrdersDTO> ordersDTOs = new List<OrdersDTO>();
-            ordersDTOs = ordersData.GetOrdersByParams(client, MinDate.SelectedDate, MaxDate.SelectedDate, address);
-            MapsDTOtoModel map = new MapsDTOtoModel();
-            List<OrderModel> orderModels = map.MapOrdersDTOToOrderModel(ordersDTOs);
+            List<OrderModel> orderModels = _orderDataAccess.GetOrderModelsByParams(client, MinDate.SelectedDate, MaxDate.SelectedDate, address);
             dgOrders.ItemsSource = orderModels;
         }
 
@@ -73,6 +71,12 @@ namespace TradeCompany_UI
         }
 
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            List<OrderModel> orderModels = _orderDataAccess.SearchOrderModels(SearchBox.Text + e.Handled);
+            dgOrders.ItemsSource = orderModels;
+        }
+
+        private void ClientFiltr_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }

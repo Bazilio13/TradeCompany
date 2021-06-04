@@ -149,6 +149,20 @@ namespace TradeCompany_DAL
             }
             return result;
         }
+
+        public List<OrdersDTO> SearchOrders(string str)
+        {
+            List<OrdersDTO> result = new List<OrdersDTO>();
+            string query;
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                query = "exec TradeCompany_DataBase.SearchOrders @String";
+                dbConnection.Query<OrdersDTO, OrderListsDTO, ClientDTO, ProductDTO, OrdersDTO>(query,
+                    (order, orderList, client, product) => MapsOrdersDTO(order, orderList, client, product, result),
+                    new {str});
+            }
+            return result;
+        }
         public void UpdateOrdersByID(OrdersDTO ordersDTO)
         {
             string query;
