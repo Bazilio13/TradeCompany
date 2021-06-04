@@ -96,7 +96,7 @@ namespace TradeCompany_DAL
 
         public void UpdateClientByID(ClientDTO client)
         {
-            string query1 = "exec TradeCompany_DataBase.UpdateClientByID @ID, @Name, @INN, @E_mail, @Phone, @ContactPerson, @Comment, @CorporateBody, @Type, @LastOrderDate";
+            string query1 = "exec TradeCompany_DataBase.UpdateClientByID @ID, @Name, @INN, @E_mail, @Phone,  @Comment, @CorporateBody, @Type, @LastOrderDate, @ContactPerson";
             using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
             {
                 dbConnection.Query<ClientDTO>(query1, new
@@ -106,11 +106,11 @@ namespace TradeCompany_DAL
                     client.INN,
                     client.E_mail,
                     client.Phone,
-                    client.ContactPerson,
                     client.Comment,
                     client.CorporateBody,
                     client.Type,
-                    client.LastOrderDate
+                    client.LastOrderDate,
+                    client.ContactPerson
                 }) ;
             }
 
