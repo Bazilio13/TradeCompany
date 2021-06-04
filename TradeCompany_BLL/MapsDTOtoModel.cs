@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AutoMapper;
 using TradeCompany_BLL.Models;
 using TradeCompany_DAL;
 using TradeCompany_DAL.DTOs;
@@ -76,6 +75,7 @@ namespace TradeCompany_BLL
             return productsForOrderModel;
         }
         public List<ClientBaseModel> MapClientDTOToClientBaseModelList()
+        { 
         
             ClientsData clients = new ClientsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
             List<ClientDTO> clientsDTO = clients.GetClients();
