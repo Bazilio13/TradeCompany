@@ -122,6 +122,7 @@
     <Build Include="TradeCompany_DataBase\Stored Procedures\UpdateFeedBackById.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\DeleteProductByID_1.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\GetProductsByParams_1.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetProductsByAllParams.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="TradeCompany_DataBase.refactorlog" />
