@@ -16,8 +16,8 @@
         <Button Name="CreateOrder" Content="Новый заказ" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="25" Width="80" Click="CreateOrder_Click"/>
 
         <TextBox x:Name="ClientFiltr" Margin="281,10,0,0" TextWrapping="Wrap"  Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" TextChanged="ClientFiltr_TextChanged"/>
-        <DatePicker Name="MinDate" HorizontalAlignment="Left" Margin="120,10,0,0" VerticalAlignment="Top" Height="25" Width="100"/>
-        <DatePicker Name="MaxDate" HorizontalAlignment="Left" Margin="120,40,0,0" VerticalAlignment="Top" Height="25" Width="100"/>
+        <DatePicker Name="MinDate" HorizontalAlignment="Left" Margin="120,10,0,0" VerticalAlignment="Top" Height="25" Width="100" SelectedDateChanged="MinDate_SelectedDateChanged"/>
+        <DatePicker Name="MaxDate" HorizontalAlignment="Left" Margin="120,40,0,0" VerticalAlignment="Top" Height="25" Width="100" SelectedDateChanged="MaxDate_SelectedDateChanged"/>
         <DataGrid x:Name="dgOrders" Grid.Row="1" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="True" MouseLeftButtonUp="dgOrders_MouseLeftButtonUp">
             <DataGrid.Columns >
                 <DataGridTextColumn Binding="{Binding Path=ID}"  Header="№" Width="30" MinWidth="30"></DataGridTextColumn>
@@ -29,7 +29,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button Content="Сбросить фильтр" HorizontalAlignment="Left" Margin="496,10,0,0" VerticalAlignment="Top" Height="25" Width="117" Click="ResetButton_Click"/>
-        <TextBox x:Name="AddressFiltr" Margin="281,40,0,0" TextWrapping="Wrap"  Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200"/>
+        <TextBox x:Name="AddressFiltr" Margin="281,40,0,0" TextWrapping="Wrap"  Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" TextChanged="AddressFiltr_TextChanged"/>
         <TextBlock HorizontalAlignment="Left" Height="25" Margin="110,15,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="10"><Run Language="ru-ru" Text="С"/></TextBlock>
         <TextBlock HorizontalAlignment="Left" Height="25" Margin="100,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="20"><Run Language="ru-ru" Text="По"/></TextBlock>
         <TextBlock HorizontalAlignment="Left" Height="25" Margin="237,15,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="39"><Run Language="ru-ru" Text="Клиент"/><LineBreak/><Run Language="ru-ru"/></TextBlock>

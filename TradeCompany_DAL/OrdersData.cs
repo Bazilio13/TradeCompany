@@ -156,10 +156,10 @@ namespace TradeCompany_DAL
             string query;
             using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
             {
-                query = "exec TradeCompany_DataBase.SearchOrders @String";
+                query = "TradeCompany_DataBase.SearchOrders";
                 dbConnection.Query<OrdersDTO, OrderListsDTO, ClientDTO, ProductDTO, OrdersDTO>(query,
                     (order, orderList, client, product) => MapsOrdersDTO(order, orderList, client, product, result),
-                    new {str});
+                    new { str }, commandType: CommandType.StoredProcedure);
             }
             return result;
         }

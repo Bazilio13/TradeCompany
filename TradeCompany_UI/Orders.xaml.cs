@@ -40,7 +40,8 @@ namespace TradeCompany_UI
             ClientFiltr.Text = null;
             AddressFiltr.Text = null;
             MinDate.SelectedDate = null;
-            MaxDate.SelectedDate = null;            
+            MaxDate.SelectedDate = null;
+            FilterOrders();
         }
 
         private void FilterOrders()
@@ -72,13 +73,28 @@ namespace TradeCompany_UI
 
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            List<OrderModel> orderModels = _orderDataAccess.SearchOrderModels(SearchBox.Text + e.Handled);
+            List<OrderModel> orderModels = _orderDataAccess.SearchOrderModels(SearchBox.Text);
             dgOrders.ItemsSource = orderModels;
         }
 
         private void ClientFiltr_TextChanged(object sender, TextChangedEventArgs e)
         {
+            FilterOrders();
+        }
 
+        private void AddressFiltr_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            FilterOrders();
+        }
+
+        private void MinDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            FilterOrders();
+        }
+
+        private void MaxDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            FilterOrders();
         }
     }
 }
