@@ -34,12 +34,14 @@
         <TextBlock HorizontalAlignment="Left" Height="25" Margin="100,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="20"><Run Language="ru-ru" Text="По"/></TextBlock>
         <TextBlock HorizontalAlignment="Left" Height="25" Margin="237,15,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="39"><Run Language="ru-ru" Text="Клиент"/><LineBreak/><Run Language="ru-ru"/></TextBlock>
         <TextBlock HorizontalAlignment="Left" Height="25" Margin="237,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="44"><Run Language="ru-ru" Text="Адресс"/></TextBlock>
-        <TextBox Margin="704,10,0,0" TextWrapping="Wrap"  Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200">
+        <TextBox IsReadOnly="True" Margin="704,10,0,0" TextWrapping="Wrap"  Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200">
         </TextBox>
-        <TextBox x:Name="SearchBox" Margin="704,10,0,0" TextWrapping="Wrap"  Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" TextChanged="SearchBox_TextChanged">
+        <TextBox IsReadOnly="True" Margin="704,10,0,0" TextWrapping="Wrap"  Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200">
             <TextBox.Background>
                 <ImageBrush ImageSource="/Pictures/search.png" AlignmentX="Left" Stretch="None"/>
             </TextBox.Background>
+        </TextBox>
+        <TextBox x:Name="SearchBox" Margin="728,12,0,0" BorderThickness="0" TextWrapping="Wrap"   Height="21" VerticalAlignment="Top" HorizontalAlignment="Left" Width="174" TextChanged="SearchBox_TextChanged">
         </TextBox>
     </Grid>
 </Page>
