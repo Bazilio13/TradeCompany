@@ -56,5 +56,10 @@ namespace TradeCompany_UI
             ClientName.Text = productsForOrder.First().Name;
             dgSpecificOrder.ItemsSource = productsInOrder;
         }
+
+        private void PlaceOrder_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
