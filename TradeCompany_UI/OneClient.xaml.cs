@@ -28,33 +28,56 @@ namespace TradeCompany_UI
         {
             InitializeComponent();
             _id = id;
+        } 
+
+        public OneClient()
+        {
+            InitializeComponent();
+            _id = -1;
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            MapsDTOtoModel map = new MapsDTOtoModel();
-            ClientModel client = map.MapClientDTOToClientModelByID(_id);
-            textBoxName.Text = client.Name;
-            if (client.INN != null)
+            if(_id != -1)
             {
-                textBoxINN.Text = client.INN.ToString();
-            }
-            if (client.Phone != null)
-            {
-                textBoxPhone.Text = client.Phone;
-            }
-            if (client.E_mail != null)
-            {
-                textBoxE_mail.Text = client.E_mail;
-            }
-            if (client.ContactPerson != null)
-            {
-                textBoxContactPerson.Text = client.ContactPerson;
-            }
+                MapsDTOtoModel map = new MapsDTOtoModel();
+                ClientModel client = map.MapClientDTOToClientModelByID(_id);
+                textBoxName.Text = client.Name;
+                if (client.INN != null)
+                {
+                    textBoxINN.Text = client.INN.ToString();
+                }
+                if (client.Phone != null)
+                {
+                    textBoxPhone.Text = client.Phone;
+                }
+                if (client.E_mail != null)
+                {
+                    textBoxE_mail.Text = client.E_mail;
+                }
+                if (client.ContactPerson != null)
+                {
+                    textBoxContactPerson.Text = client.ContactPerson;
+                }
+                List<AddressModel> addresses = map.MapClientDTOToAddressesModelByID(_id);
 
-            List<AddressModel> addresses = map.MapClientDTOToAddressesModelByID(_id);
+            }
+            else
+            {
+                ButtonChange.IsEnabled = false;
+                Panel.IsEnabled = true;
+            }
+        }
 
 
+        private void ChangeClient(object sender, RoutedEventArgs e)
+        {
+            Panel.IsEnabled = true;
+        }
+
+        private void SaveClient(object sender, RoutedEventArgs e)
+        {
+            Panel.IsEnabled = false;
 
         }
     }

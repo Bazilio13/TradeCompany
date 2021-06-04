@@ -14,14 +14,12 @@
             <RowDefinition Height="100px"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-            <Button Name="CreateOrder" Content="Новый клиент" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="25" Width="80" MouseLeftButtonDown="CreateOrder_MouseLeftButtonDown"/>
-
         <TextBox   x:Name="ClientFiltr" Grid.Row="0" Margin="10,10,0,0"  TextWrapping="Wrap" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="464" TextInput="textInput" PreviewTextInput="textInput"/>
 
         <DatePicker Name="MinDate" Grid.Row="0" HorizontalAlignment="Left" Margin="10,65,0,0" VerticalAlignment="Top" Height="25" Width="100" Panel.ZIndex="1" CalendarClosed="ClientsFiltr"/>
         <DatePicker Name="MaxDate" Grid.Row="0" HorizontalAlignment="Left" Margin="130,65,0,0" VerticalAlignment="Top" Height="25" Width="100" Panel.ZIndex="1" CalendarClosed="ClientsFiltr"/>
 
-            <DataGrid x:Name="dgClientsTable" FontSize="16"  AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" Grid.Row="1" SelectionMode="Single" MouseLeftButtonDown="dgClientsTable_MouseLeftButtonDown">
+        <DataGrid x:Name="dgClientsTable" FontSize="16"  AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" Grid.Row="1" SelectionMode="Single" MouseLeftButtonDown="dgClientsTable_MouseLeftButtonDown">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding ="{Binding Path = ID}"  IsReadOnly="True" Header="id" Width="30"/>
                 <DataGridTextColumn Binding ="{Binding Path = Name}"  IsReadOnly="True" Header="ФИО/Название" Width="200"/>
@@ -43,6 +41,7 @@
             <CheckBox x:Name="CheckBoxRetail" Content="Розничный" Click="ClientsFiltr"/>
         </StackPanel>
         <Frame Name="frame" NavigationUIVisibility="Hidden" Grid.RowSpan="2" Panel.ZIndex="2"/>
+        <Button x:Name="ButtonNewClient" Content="Новый клиент" HorizontalAlignment="Left" Margin="531,10,0,0" VerticalAlignment="Top" Width="117" Height="32" Click="AddNewClient"/>
     </Grid>
 
 </Page>
