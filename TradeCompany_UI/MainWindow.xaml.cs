@@ -39,5 +39,10 @@ namespace TradeCompany_UI
         {
             MainFrame.Content = new Clients();
         }
+
+        private void ProductButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new ProductCatalog();
+        }
     }
 }

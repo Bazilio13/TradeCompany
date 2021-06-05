@@ -13,5 +13,6 @@ namespace TradeCompany_DAL.DTOs
         public int ProductID { get; set; }
         public float Amount { get; set; }
         public float Price { get; set; }
+        public ProductDTO productDTO { get; set; }
     }
 }

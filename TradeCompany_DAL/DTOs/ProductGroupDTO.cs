@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace TradeCompany_DAL.DTOs
 {
-    public class AddressDTO
+    public class ProductGroupDTO
     {
         public int ID { get; set; }
-        public int ClientID { get; set; }
-        public string Address { get; set; }
+        public string Name { get; set; }
+        public List <ProductDTO> Products { get; set; } = new List<ProductDTO>();
     }
 }
