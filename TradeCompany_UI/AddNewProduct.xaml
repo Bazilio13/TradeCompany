@@ -5,13 +5,41 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TradeCompany_UI"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="AddNewProduct">
+      d:DesignHeight="500"
+      Title="AddNewProduct" Width="1000">
 
-    <Grid Background="White" Margin="0,-16,-145,0">
+    <Grid Background="White" Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="100"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
+        <TextBlock HorizontalAlignment="Center" Margin="0,62,0,0" Text="Добавление товара" TextWrapping="Wrap" VerticalAlignment="Top" Height="28" Width="204" FontSize="22"/>
+        <TextBox x:Name="ID_Text" HorizontalAlignment="Left" Margin="235,57,0,0" Grid.Row="1" Text="ID" TextWrapping="Wrap" VerticalAlignment="Top" Width="563" SelectionOpacity="1" FontSize="16" IsEnabled="False" Height="25"/>
+        <TextBox x:Name="Name_Text" HorizontalAlignment="Left" Margin="235,87,0,0" Grid.Row="1" Text="Название*" TextWrapping="Wrap" VerticalAlignment="Top" Width="563" SelectionOpacity="1" FontSize="16" Height="25" TextChanged="Name_Text_TextChanged" TextInput="Name_Text_TextInput"/>
+        <TextBox x:Name="Text_Description" HorizontalAlignment="Left" Margin="235,147,0,0" Grid.Row="1" Text="Описание / Характеристика" TextWrapping="Wrap" VerticalAlignment="Top" Width="563" SelectionOpacity="1" FontSize="16" Height="25"/>
+        <ComboBox x:Name="Category" HorizontalAlignment="Left" Margin="235,117,0,0" Grid.Row="1" VerticalAlignment="Top" Width="281" Height="25" BorderBrush="White">
+            <ComboBox.Background>
+                <LinearGradientBrush EndPoint="0,1">
+                    <GradientStop Color="#FFF0F0F0"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </ComboBox.Background>
+        </ComboBox>
+        <TextBox x:Name="Text_RetailPrice" HorizontalAlignment="Left" Margin="235,0,0,0" Grid.Row="1" Text="Розничная цена*" TextWrapping="Wrap" VerticalAlignment="Center" Width="270" SelectionOpacity="1" FontSize="16" Height="25"/>
+        <TextBox x:Name="Text_WholesalePrice" HorizontalAlignment="Left" Margin="528,0,0,0" Grid.Row="1" Text="Оптовая цена*" TextWrapping="Wrap" VerticalAlignment="Center" Width="270" SelectionOpacity="1" FontSize="16" Height="25"/>
+        <TextBox x:Name="Text_StockAmount" HorizontalAlignment="Left" Margin="235,208,0,0" Grid.Row="1" Text="Количество*" TextWrapping="Wrap" VerticalAlignment="Top" Width="270" SelectionOpacity="1" FontSize="16" Height="25"/>
+        <ComboBox x:Name="MeasureUnit" HorizontalAlignment="Left" Margin="528,208,0,0" Grid.Row="1" VerticalAlignment="Top" Width="270" Height="25" BorderBrush="White">
+            <ComboBox.Background>
+                <LinearGradientBrush EndPoint="0,1">
+                    <GradientStop Color="#FFF0F0F0"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </ComboBox.Background>
+        </ComboBox>
+        <TextBox x:Name="Text_Connebts" HorizontalAlignment="Left" Margin="235,238,0,0" Grid.Row="1" Text="Комментарии" TextWrapping="Wrap" VerticalAlignment="Top" Width="563" SelectionOpacity="1" FontSize="16" Height="25
+                 "/>
+        <Button x:Name="Add_Category" Content="Добавить категорию" HorizontalAlignment="Left" Margin="552,117,0,0" Grid.Row="1" VerticalAlignment="Top" RenderTransformOrigin="-0.732,-0.726" Width="246" Height="25" FontSize="16"/>
+        <Button x:Name="Buton_Cancel" Content="Отменить" HorizontalAlignment="Left" Margin="342,309,0,0" Grid.Row="1" VerticalAlignment="Top" Height="36" Width="163" FontSize="16"/>
+        <Button x:Name="Button_Save" Content="Сохранить" HorizontalAlignment="Left" Margin="528,309,0,0" Grid.Row="1" VerticalAlignment="Top" Height="36" Width="163" FontSize="16" Click="Button_Save_Click"/>
     </Grid>
 </Page>

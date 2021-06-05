@@ -202,6 +202,7 @@ namespace TradeCompany_UI
 
         private void AddProductButton_Click(object sender, RoutedEventArgs e)
         {
+            frame.Content = new AddNewProduct();
         }
 
         private float? InputValidation(float? filtr, TextBox textbox)
