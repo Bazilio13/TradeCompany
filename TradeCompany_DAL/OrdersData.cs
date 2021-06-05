@@ -70,6 +70,22 @@ namespace TradeCompany_DAL
             }
             return orderListsDTO;
         }
+        public void AddSpecificProductInOrder(SpecificProductDTO specificProductDTO)
+        {
+            string query;
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                query = "exec TradeCompany_DataBase.AddOrderList @OrderID, @ProductID, @Amount, @Price";
+                dbConnection.Query(query, new
+                {
+                    specificProductDTO.OrderID,
+                    specificProductDTO.ProductID,
+                    specificProductDTO.Amount,
+                    specificProductDTO.Price
+                });
+            }
+            
+        }
 
         public void DeleteOrderByID(int id)
         {

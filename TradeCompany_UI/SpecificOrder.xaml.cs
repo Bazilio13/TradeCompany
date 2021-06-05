@@ -29,14 +29,18 @@ namespace TradeCompany_UI
         private OrderModel _orderModel;
         private int _orderId = 7 ;
         private string text;
-        private OrderListsDTO old;
-       
+
+        private SpecificProductDTO _specificProductDTO;
+
+
+
         ContactInformation _clientInfo;
         OrderDataAccess _orderDataAccess;
         ProductsData _productsData = new ProductsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
         BindingList<OrderListModel> _bdOrderListModel = new BindingList<OrderListModel>();
         OrdersData od;
-        List<OrderListsDTO> orderListsDTOs;
+        
+     
        
         public SpecificOrder()
         {
@@ -138,6 +142,7 @@ namespace TradeCompany_UI
 
         private void dgSpecificOrder_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+          
 
         }
 
@@ -154,32 +159,40 @@ namespace TradeCompany_UI
         private void dgSpecificOrder_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
             // Only handles cases where the cell contains a TextBox
+
             var editedTextbox = e.EditingElement as TextBox;
 
             if (editedTextbox != null)
             {
                 text = editedTextbox.Text;
+               
             }
-           // ProductDTO newItem = new ProductDTO();
+            // ProductDTO newItem = new ProductDTO();
             List<ProductDTO> newItem = new List<ProductDTO>();
             OrderListsDTO newOrderList = new OrderListsDTO();
 
             newOrderList.OrderID = _orderId;
-            //string name = dgSpecificOrder.
-
-
-
             newItem = _productsData.GetProductsByLetter(text);
-            old = new OrderListsDTO();
-            old.OrderID = _orderId;
-            old.ProductID = newItem.First().ID;
-            old.Amount = 1;
-            old.Price = newItem.First().RetailPrice;
-            orderListsDTOs.Add(old);
+            _specificProductDTO = new SpecificProductDTO();
+
+            _specificProductDTO.ProductID = newItem.First().ID;
+            _specificProductDTO.Price = newItem.First().RetailPrice;
+            _specificProductDTO.Amount = 3;
+            _specificProductDTO.OrderID = _orderId;
+
             od = new OrdersData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
-            od.AddOrderList(orderListsDTOs);
+            od.AddSpecificProductInOrder(_specificProductDTO);
 
+        }
 
+        private void dgSpecificOrder_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
+        {
+            //var editedTextbox = e.EditAction;
+            //if (this.dgSpecificOrder.SelectedItem != null)
+            //{
+            //    // var i = e.Row.DataContext;
+            //    var i = e.Row.DataContext;
+            //}
 
         }
     }

@@ -36,12 +36,12 @@
             </Grid>
         </Grid>
 
-        <DataGrid x:Name="dgSpecificOrder" FontSize="15" Margin="30" Loaded="dgSpecificOrder_Loaded" Grid.Row="1" AutoGenerateColumns="False" SelectionChanged="dgSpecificOrder_SelectionChanged" BeginningEdit="dgSpecificOrder_BeginningEdit" KeyUp="dgSpecificOrder_KeyUp" CellEditEnding="dgSpecificOrder_CellEditEnding">
+        <DataGrid x:Name="dgSpecificOrder" FontSize="15" Margin="30" Loaded="dgSpecificOrder_Loaded" Grid.Row="1" AutoGenerateColumns="False" SelectionChanged="dgSpecificOrder_SelectionChanged" BeginningEdit="dgSpecificOrder_BeginningEdit" KeyUp="dgSpecificOrder_KeyUp" CellEditEnding="dgSpecificOrder_CellEditEnding" RowEditEnding="dgSpecificOrder_RowEditEnding">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="NumberOfProduct"  Header="№" Width="0.1*"/>
                 <DataGridTextColumn Binding="{Binding Path= ProductID}" Header="ID Товара" Width="0.3*"/>
                 <DataGridTextColumn x:Name="Product" Binding="{Binding Path= ProductName}" Header="Товар" Width="1*"/>
-                <DataGridTextColumn Binding="{Binding Path= Amount}" Header="Количество" Width="0.5*"/>
+                <DataGridTextColumn x:Name="Amount" Binding="{Binding Path= Amount}" Header="Количество" Width="0.5*"/>
                 <DataGridTextColumn Binding="{Binding Path= Price}" Header="Цена" Width="0.5*"/>
                 <DataGridTextColumn Binding="{Binding Path= Sum}" Header="Сумма" Width="0.5*"/>
 
