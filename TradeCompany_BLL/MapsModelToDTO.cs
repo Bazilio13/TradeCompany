@@ -25,9 +25,26 @@ namespace TradeCompany_BLL
             else
             {
                 data.UpdateClientByID(clientDTO);
+            }               
+        }
+
+        public void MapWishListModelToWishListDTO(List<WishModel> wishListModel, int id)
+        {
+            ClientsData data = new ClientsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
+            data.DeleteWishListByID(id);
+
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<WishModel, WishDTO>());
+            Mapper mapper = new Mapper(config);
+            List<WishDTO> wishListDTO = mapper.Map<List<WishDTO>>(wishListModel);
+
+            foreach (WishDTO wishDTO in wishListDTO)
+            {
+                data.AddWishByID(id);
             }
-         
+
+
         }
 
     }
+
 }

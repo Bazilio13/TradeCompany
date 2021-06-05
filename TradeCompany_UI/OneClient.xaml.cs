@@ -69,7 +69,6 @@ namespace TradeCompany_UI
                 }   
                 List<AddressModel> addresses = map.MapClientDTOToAddressesModelByID(_id);
                 LoadWishPanel();
-                //Panel.IsEnabled = true;
                 Locked(true);
 
                 //List<WishModel> wishList = map.MapWishesDTOToWishesModelListByID(_id);
@@ -79,8 +78,8 @@ namespace TradeCompany_UI
             {
                 ButtonChange.IsEnabled = false;
             }
-
-            List<ClientBaseModel> allProducts = map.MapClientDTOToClientBaseModelList(); //Заменить на модель продуктов после мерджа
+            ProductsDataAccess product = new ProductsDataAccess();
+            List<ProductBaseModel> allProducts = product.GetAllProducts(); //Заменить на модель продуктов после мерджа
             cbWish.ItemsSource = allProducts;
 
         }
@@ -99,6 +98,7 @@ namespace TradeCompany_UI
                 client = ToFormClientModel();
                 MapsModelToDTO maps = new MapsModelToDTO();
                 maps.MapClientModelToClientDTO(client);
+                maps.MapWishListModelToWishListDTO(_wishList);
                 Locked(true);
 
             }
@@ -171,9 +171,16 @@ namespace TradeCompany_UI
         private void clicNewpWishProduct(object sender, SelectionChangedEventArgs e)
         {
             ComboBox comboBox = (ComboBox)sender;
-            ClientBaseModel selectedItem = (ClientBaseModel)comboBox.SelectedItem;
+            ProductBaseModel selectedItem = (ProductBaseModel)comboBox.SelectedItem;
 
-            MessageBox.Show(selectedItem.Name.ToString()); 
+            WishModel wish = new WishModel();
+            wish.ID = selectedItem.ID;
+            wish.Name = selectedItem.Name;
+            _wishList.Add(wish);
+            WPWish.Children.Clear();
+            LoadWishPanel();
+
+            //MessageBox.Show(selectedItem.Name.ToString()); 
         }
 
         private void LoadWishPanel()

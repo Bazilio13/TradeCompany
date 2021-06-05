@@ -141,5 +141,30 @@ namespace TradeCompany_DAL
 
             return wishList;
         }
+
+        public void DeleteWishListByID(int id)
+        {
+            string query = "exec TradeCompany_DataBase.DeleteWishListByID @id";
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                dbConnection.Query<ClientDTO>(query, new { id });
+            }
+        }
+
+        public void AddWishByID(int id, WishDTO wish)
+        {
+            string query = "exec TradeCompany_DataBase.AddWishByID @id, @IDProduct";
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                dbConnection.Query<ClientDTO>(query, new 
+                { 
+                    id,
+                    wish.ID
+                });
+            }
+        }
+
+
+
     }
 }
