@@ -106,6 +106,7 @@ namespace TradeCompany_UI
         private void FromStockAmount_TextChanged(object sender, TextChangedEventArgs e)
         {
             FromStockAmount.Text = Regex.Replace(FromStockAmount.Text, @"[^0-9.]+", "");
+            FromStockAmount.SelectionStart = FromStockAmount.Text.Length;
             if (FromStockAmount.Text == "")
             {
                 _filtrFromStockAmount = null;
@@ -114,11 +115,6 @@ namespace TradeCompany_UI
             {
                 _filtrFromStockAmount = (float)Convert.ToDouble(FromStockAmount.Text);
             }
-        }
-
-        private bool IsTextAllowed(string text)
-        {
-            return !_regexForNumbers.IsMatch(text);
         }
     }
 }
