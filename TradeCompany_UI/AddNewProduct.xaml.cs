@@ -37,19 +37,56 @@ namespace TradeCompany_UI
 
         private void Button_Save_Click(object sender, RoutedEventArgs e)
         {
-            _product.Name = Name_Text.Text;
-            _product.RetailPrice = 100;
-            _product.WholesalePrice = 500;
-            _product.StockAmount = 20;
-            _product.MeasureUnit = 1;
-            _product.Comments = "top";
-            _product.LastSupplyDate = DateTime.Now;
-            _products.AddNewProduct(_product);
+            if (CheckingFieldsForData())
+            {
+                _product.Name = Name_Text.Text;
+                _product.RetailPrice = (float)Convert.ToDouble(Text_RetailPrice.Text);
+                _product.WholesalePrice = (float)Convert.ToDouble(Text_WholesalePrice.Text);
+                _product.StockAmount = (float)Convert.ToDouble(Text_StockAmount.Text);
+                _product.MeasureUnit = 1;
+                _product.Comments = Text_Description.Text;
+                _product.LastSupplyDate = DateTime.Now;
+                _products.AddNewProduct(_product);
+            }
+            else
+            {
+                MessageBox.Show("Вы ввели не все данные");
+            }
         }
 
         private void Name_Text_TextInput(object sender, TextCompositionEventArgs e)
         {
             Name_Text.Clear();
+        }
+
+        private bool CheckingFieldsForData()
+        {
+            if (Name_Text.Text == "Название*" || Name_Text.Text == null)
+            {
+                return false;
+            }
+
+            if (Text_RetailPrice.Text == "Розничная цена*" || Name_Text.Text == null)
+            {
+                return false;
+            }
+
+            if (Text_WholesalePrice.Text == "Оптовая цена*" || Text_WholesalePrice.Text == null)
+            {
+                return false;
+            }
+
+            if (Text_StockAmount.Text == "Количество*" || Text_StockAmount.Text == null)
+            {
+                return false;
+            }
+
+            if (Category.SelectedItem == null)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
