@@ -61,18 +61,61 @@ namespace TradeCompany_UI
                     textBoxContactPerson.Text = client.ContactPerson;
                 }
                 List<AddressModel> addresses = map.MapClientDTOToAddressesModelByID(_id);
-
+                if(addresses.Count != 0)
+                {
+                    comboBoxAddresses.ItemsSource = addresses;
+                }
+                DenyAccessForPanel();
             }
             else
             {
                 ButtonChange.IsEnabled = false;
-                Panel.IsEnabled = true;
+
+            }
+        }
+
+        private void DenyAccessForPanel()
+        {
+            foreach (UIElement item in Panel.Children)
+            {
+                if (item is ComboBox)
+                {
+                    ComboBox itemComboBox = (ComboBox)item;
+                    itemComboBox.IsReadOnly = true;
+                }
+
+                if (item is TextBox)
+                {
+                    TextBox itemTextBox = (TextBox)item;
+                    itemTextBox.IsEnabled = false;
+                }
+            }
+        }
+
+
+
+        private void GiveAccessForPanel()
+        {
+            foreach (UIElement item in Panel.Children)
+            {
+                if (item is ComboBox)
+                {
+                    ComboBox itemComboBox = (ComboBox)item;
+                    itemComboBox.IsReadOnly = false;
+                    itemComboBox.IsEditable = true;
+                }
+
+                if (item is TextBox)
+                {
+                    TextBox itemTextBox = (TextBox)item;
+                    itemTextBox.IsEnabled = true;
+                }
             }
         }
 
         private void ChangeClient(object sender, RoutedEventArgs e)
         {
-            Panel.IsEnabled = true;
+            GiveAccessForPanel();
             ButtonChange.IsEnabled = false;
         }
 
@@ -82,7 +125,7 @@ namespace TradeCompany_UI
             {
                 ClientModel client = new ClientModel();
                 client = ToFormClientModel();
-                Panel.IsEnabled = false;
+                DenyAccessForPanel();
                 MapsModelToDTO maps = new MapsModelToDTO();
                 maps.MapClientModelToClientDTO(client);
             }

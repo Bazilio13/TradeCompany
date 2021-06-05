@@ -10,23 +10,24 @@
 
     <Grid Background="White" >
 
-        <StackPanel x:Name="Panel" IsEnabled=" false"  Width="424" Margin="0,52,0,0" >
+        <StackPanel x:Name="Panel"  Width="424" Margin="0,52,0,0" >
             <TextBox Name="textBoxName" HorizontalAlignment="center"  TextWrapping="Wrap" VerticalAlignment="Top" Width="424" Height="21" AutomationProperties.HelpText="ФИО/Название*" Text="ФИО/Название*" Margin="0,0,0,10" PreviewMouseDown="Focus" />
             <TextBox Name ="textBoxINN" HorizontalAlignment="center" Text="ИНН" TextWrapping="Wrap" VerticalAlignment="Top" Width="424" Height="21" Margin="0,0,0,10" PreviewTextInput="ValidationByINN"/>
             <TextBox x:Name ="textBoxPhone"  Text="Номер телефона*" TextWrapping="Wrap" Width="204" Height="21" HorizontalAlignment="Left" PreviewMouseDown="Focus" PreviewTextInput="ValidationByNumber" />
             <TextBox x:Name ="textBoxE_mail"  Text="E_mail" TextWrapping="Wrap" Width="204" Height="21" VerticalAlignment="Stretch" Margin="0,-21,0,10" HorizontalAlignment="Right"/>
-            <TextBox Name ="textBoxAddress" HorizontalAlignment="center" Text="Адрес" TextWrapping="Wrap" VerticalAlignment="Top" Width="424" Height="21" Margin="0,0,0,10" />
+            <ComboBox Name ="comboBoxAddresses" HorizontalAlignment="center" Text="Адрес" VerticalAlignment="Top" Width="424" Height="21" Margin="0,0,0,10" AutomationProperties.HelpText="Адрес" IsEditable="True">
+
+            </ComboBox>
             <TextBox Name ="textBoxContactPerson" HorizontalAlignment="center" Text="Контактное лицо*" TextWrapping="Wrap" VerticalAlignment="Top" Width="424" Height="21" Margin="0,0,0,10" PreviewMouseDown="Focus"/>
             <TextBox Name ="textBoxFeedBacks" HorizontalAlignment="center"  Text="Отзывы" TextWrapping="Wrap" VerticalAlignment="Top" Width="424" Height="21" Margin="0,0,0,10"/>
             <TextBox Name ="textBoxComments" HorizontalAlignment="center"  Text="Комментарии" TextWrapping="Wrap" VerticalAlignment="Top" Width="424" Height="21" Margin="0,0,0,10"/>
             <TextBox Name ="textBoxHistoryOrders" HorizontalAlignment="center" Text="Истории заказов" TextWrapping="Wrap" VerticalAlignment="Top" Width="424" Height="21" Margin="0,0,0,10"/>
             <TextBox Name ="textBoxWant" HorizontalAlignment="center"  Text="Хочу" TextWrapping="Wrap" VerticalAlignment="Top" Width="424" Height="21" Margin="0,0,0,10"/>
 
+
         </StackPanel>
         <Button x:Name="ButtonChange" Content="Изменить" Margin="0,20,39,0" Click="ChangeClient" Grid.Row="0" HorizontalAlignment="Right" Width="74" Height="26" VerticalAlignment="Top"/>
         <Button x:Name="ButtonSave" Content="Сохранить" Margin="0,61,39,0" VerticalAlignment="Top" Height="26" IsCancel="True" Click="SaveClient" HorizontalAlignment="Right" Width="74"/>
-
-
 
     </Grid>
 </Page>
