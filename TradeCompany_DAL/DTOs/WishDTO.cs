@@ -8,7 +8,7 @@ namespace TradeCompany_DAL.DTOs
 {
     public class WishDTO
     {
-        int ID { get; set; }
-        string Name { get; set; }
+        public int ID { get; set; }
+        public string Name { get; set; }
     }
 }

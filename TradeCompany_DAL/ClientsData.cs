@@ -133,7 +133,7 @@ namespace TradeCompany_DAL
         {
             List<WishDTO> wishList = new List<WishDTO>();
 
-            string query = "exec TradeCompany_DataBase.GetClientsByName @id";
+            string query = "exec TradeCompany_DataBase.GetWishesListByClientID @id";
             using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
             {
                 wishList = dbConnection.Query<WishDTO>(query, new { id }).AsList<WishDTO>();

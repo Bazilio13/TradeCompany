@@ -64,13 +64,16 @@ namespace TradeCompany_UI
                     textBoxContactPerson.Text = client.ContactPerson;
                 }   
                 List<AddressModel> addresses = map.MapClientDTOToAddressesModelByID(_id);
-                List<WishModel> wishList = map.MapWishesDTOToWishesModelListByID(_id);
+                LoadWishPanel(map.MapWishesDTOToWishesModelListByID(_id));
+                //Panel.IsEnabled = true;
+                Locked(true);
+
+                //List<WishModel> wishList = map.MapWishesDTOToWishesModelListByID(_id);
 
             }
             else
             {
                 ButtonChange.IsEnabled = false;
-                Panel.IsEnabled = true;
             }
 
             List<ClientBaseModel> allProducts = map.MapClientDTOToClientBaseModelList(); //Заменить на модель продуктов после мерджа
@@ -80,7 +83,7 @@ namespace TradeCompany_UI
 
         private void ChangeClient(object sender, RoutedEventArgs e)
         {
-            Panel.IsEnabled = true;
+            Locked(false);
             ButtonChange.IsEnabled = false;
         }
 
@@ -90,9 +93,10 @@ namespace TradeCompany_UI
             {
                 ClientModel client = new ClientModel();
                 client = ToFormClientModel();
-                Panel.IsEnabled = false;
                 MapsModelToDTO maps = new MapsModelToDTO();
                 maps.MapClientModelToClientDTO(client);
+                Locked(true);
+
             }
         }
 
@@ -166,6 +170,39 @@ namespace TradeCompany_UI
             ClientBaseModel selectedItem = (ClientBaseModel)comboBox.SelectedItem;
 
             MessageBox.Show(selectedItem.Name.ToString()); 
+        }
+
+        private void LoadWishPanel(List<WishModel> wishList)
+        {
+            int i = 0;
+            foreach(WishModel wish in wishList)
+            {
+                i++;
+                Button tag = new Button();
+                tag.Content = wish.Name;
+                tag.Margin = new Thickness(5, 5, 5, 5);
+                tag.Padding = new Thickness(5, 3, 5, 3);
+                tag.Background = new SolidColorBrush(Color.FromRgb(243, 223, 196));
+                tag.TabIndex = i;
+                WPWish.Children.Add(tag);
             }
+        }
+
+        private void Locked(bool key)
+        {
+            textBoxAddress.IsReadOnly = key;
+            textBoxName.IsReadOnly = key;
+            textBoxINN.IsReadOnly = key;
+            textBoxPhone.IsReadOnly = key;
+            textBoxE_mail.IsReadOnly = key;
+            textBoxAddress.IsReadOnly = key;
+            textBoxContactPerson.IsReadOnly = key;
+            textBoxFeedBacks.IsReadOnly = key;
+            textBoxComments.IsReadOnly = key;
+            textBoxHistoryOrders.IsReadOnly = key;
+            textBoxWant.IsReadOnly = key;
+            cbWish.IsReadOnly = key;
+            //WPWish.IsReadOnly = key;
+        }
     }
 }
