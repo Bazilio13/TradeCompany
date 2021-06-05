@@ -15,12 +15,12 @@ namespace TradeCompany_UI
         public DateTime dateTime { get; set; }
         public string Address { get; set; }
 
-        public string _deafaultInformation = "Информация отсутствует";
+        //public string _deafaultInformation = "Информация отсутствует";
         public ContactInformation()
         {
-            Client = _deafaultInformation;
-            ClientsPhone = _deafaultInformation;
-           Address = _deafaultInformation;
+           // Client = _deafaultInformation;
+           // ClientsPhone = _deafaultInformation;
+           //Address = _deafaultInformation;
 
         }
     }
