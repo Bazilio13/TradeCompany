@@ -40,15 +40,8 @@ namespace TradeCompany_BLL
 
         public List<ProductBaseModel> MapProductDTOToProductBaseModel(List<ProductDTO> productDTO)
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<ProductDTO, ProductBaseModel>());
-            Mapper mapper = new Mapper(config);
-            List<ProductBaseModel> productBaseModel = mapper.Map<List<ProductBaseModel>>(productDTO);
-            return productBaseModel;
-        }
-
-        public List<ProductBaseModel> MapProductDTOToProductBaseModelByLetter(List<ProductDTO> productDTO)
-        {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<ProductDTO, ProductBaseModel>());
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<ProductDTO, ProductBaseModel>()
+            .ForMember(dest => dest.Groups, option => option.MapFrom(sorse => MapProductGroupToProductGroupModel(sorse.Group))));
             Mapper mapper = new Mapper(config);
             List<ProductBaseModel> productBaseModel = mapper.Map<List<ProductBaseModel>>(productDTO);
             return productBaseModel;

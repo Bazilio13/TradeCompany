@@ -57,6 +57,58 @@ namespace TradeCompany_DAL
             return products;
         }
 
+        public List<ProductDTO> GetProductsByAllParams(string inputString, int? ProductGroupID, float? fromStockAmount, float? toStockAmount,
+            float? fromWholesalePrice, float? toWholesalePrice, float? fromRetailPrice, float? toRetailPrice,
+            DateTime? minDateTime, DateTime? maxDateTime)
+        {
+            List<ProductDTO> products = new List<ProductDTO>();
+            string query;
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                query = "exec TradeCompany_DataBase.GetProductsByAllParams @InputString, @ProductGroupID, " +
+                    "@FromStockAmount, @ToStockAmount, @FromWholesalePrice, @ToWholesalePrice, @FromRetailPrice, " +
+                    "@ToRetailPrice, @MinDateTime, @MaxDateTime";
+                dbConnection.Query<ProductDTO, ProductGroupDTO, ProductDTO>(query,
+                    (product, group) =>
+                    {
+                        ProductDTO crntProduct = null;
+                        foreach (var p in products)
+                        {
+                            if (p.ID == product.ID)
+                            {
+                                crntProduct = p;
+                                break;
+                            }
+                        }
+                        if (crntProduct is null)
+                        {
+                            crntProduct = product;
+                            products.Add(crntProduct);
+                        }
+                        if (!(group is null))
+                        {
+                            crntProduct.Group.Add(group);
+                        }
+                        return crntProduct;
+                    },
+                    new
+                    {
+                        inputString,
+                        ProductGroupID,
+                        fromStockAmount,
+                        toStockAmount,
+                        fromWholesalePrice,
+                        toWholesalePrice,
+                        fromRetailPrice,
+                        toRetailPrice,
+                        minDateTime,
+                        maxDateTime
+                    },
+                    splitOn: "ID");
+            }
+            return products;
+        }
+
         public ProductDTO GetProductByID(int id)
         {
             List<ProductDTO> products = new List<ProductDTO>();

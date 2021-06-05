@@ -15,5 +15,11 @@ namespace TradeCompany_BLL.Models
         public float WholesalePrice { get; set; }
         public float RetailPrice { get; set; }
         public DateTime? LastSupplyDate { get; set; }
+        public List<ProductGroupModel> Groups { get; set; } = new List<ProductGroupModel>();
+
+        public ProductBaseModel()
+        {
+            Groups = new List<ProductGroupModel>();
+        }
     }
 }

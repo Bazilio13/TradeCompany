@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,7 +24,17 @@ namespace TradeCompany_UI
     public partial class ProductCatalog : Page
     {
         private ProductsDataAccess _products = new ProductsDataAccess();
-
+        private string _filtrByText;
+        private int? _filtrByGategory;
+        private float? _filtrFromStockAmount;
+        private float? _filtrToStockAmount;
+        private float? _filtrFromWholesalePrice;
+        private float? _filtrToWholesalePrice;
+        private float? _filtrFromRetailPrice;
+        private float? _filtrToRetailPrice;
+        private DateTime? _filtrMinDateTime;
+        private DateTime? _filtrMaxDateTime;
+        Regex _regexForNumbers = new Regex(@"[^0-9.]+");
 
         public ProductCatalog()
         {
@@ -52,11 +63,13 @@ namespace TradeCompany_UI
         {
             if (ProductSearch.Text == "")
             {
-                dgProductCatalog.ItemsSource = _products.GetAllProducts();
+                _filtrByText = null;
+                dgProductCatalog.ItemsSource = _products.GetAllProductsByAllParams(_filtrByText, _filtrByGategory, _filtrFromStockAmount, _filtrToStockAmount, _filtrFromWholesalePrice, _filtrToWholesalePrice, _filtrFromRetailPrice, _filtrToRetailPrice, _filtrMinDateTime, _filtrMaxDateTime);
             }
             else
             {
-                dgProductCatalog.ItemsSource = _products.GetProductsByLetter(ProductSearch.Text);
+                _filtrByText = ProductSearch.Text;
+                dgProductCatalog.ItemsSource = _products.GetAllProductsByAllParams(_filtrByText, _filtrByGategory, _filtrFromStockAmount, _filtrToStockAmount, _filtrFromWholesalePrice, _filtrToWholesalePrice, _filtrFromRetailPrice, _filtrToRetailPrice, _filtrMinDateTime, _filtrMaxDateTime);
             }
         }
 
@@ -67,7 +80,7 @@ namespace TradeCompany_UI
 
         private void ApplyFilters_Click(object sender, RoutedEventArgs e)
         {
-
+            dgProductCatalog.ItemsSource = _products.GetAllProductsByAllParams(_filtrByText, _filtrByGategory, _filtrFromStockAmount, _filtrToStockAmount, _filtrFromWholesalePrice, _filtrToWholesalePrice, _filtrFromRetailPrice, _filtrToRetailPrice, _filtrMinDateTime, _filtrMaxDateTime);
         }
 
 
@@ -75,7 +88,7 @@ namespace TradeCompany_UI
         {
             if (ProductGroupSelect.Text == "Категория")
             {
-                dgProductCatalog.ItemsSource = _products.GetAllProducts();
+                _filtrByGategory = null;
             }
             else
             {
@@ -84,10 +97,28 @@ namespace TradeCompany_UI
                 {
                     if (productsOfGroup[i].Name == ProductGroupSelect.Text)
                     {
-                        dgProductCatalog.ItemsSource = productsOfGroup[i].Products;
+                        _filtrByGategory = productsOfGroup[i].ID;
                     }
                 }
             }
+        }
+
+        private void FromStockAmount_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            FromStockAmount.Text = Regex.Replace(FromStockAmount.Text, @"[^0-9.]+", "");
+            if (FromStockAmount.Text == "")
+            {
+                _filtrFromStockAmount = null;
+            }
+            else
+            {
+                _filtrFromStockAmount = (float)Convert.ToDouble(FromStockAmount.Text);
+            }
+        }
+
+        private bool IsTextAllowed(string text)
+        {
+            return !_regexForNumbers.IsMatch(text);
         }
     }
 }

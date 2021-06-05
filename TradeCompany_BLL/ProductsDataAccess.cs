@@ -22,6 +22,17 @@ namespace TradeCompany_BLL
             return productsModel;
         }
 
+        public List<ProductBaseModel> GetAllProductsByAllParams(string? inputString, int? productGroupID,
+            float? fromStockAmount, float? toStockAmount, float? fromWholesalePrice, float? toWholesalePrice,
+            float? fromRetailPrice, float? toRetailPrice, DateTime? minDateTime, DateTime? maxDateTime)
+        {
+            List<ProductDTO> productDTO = _productsData.GetProductsByAllParams(inputString, productGroupID, 
+                     fromStockAmount, toStockAmount, fromWholesalePrice, toWholesalePrice, fromRetailPrice,
+                     toRetailPrice, minDateTime, maxDateTime);
+            List<ProductBaseModel> productsModel = _mapsDTOtoModel.MapProductDTOToProductBaseModel(productDTO);
+            return productsModel;
+        }
+
         public List<ProductBaseModel> GetProductsByLetter(string inputString)
         {
             List<ProductDTO> productDTO = _productsData.GetProductsByLetter(inputString);
