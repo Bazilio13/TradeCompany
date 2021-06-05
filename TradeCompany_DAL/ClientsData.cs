@@ -128,5 +128,18 @@ namespace TradeCompany_DAL
 
             return clientsList;
         }
+
+        public List<WishDTO> GetWishesListByClientID(int id)
+        {
+            List<WishDTO> wishList = new List<WishDTO>();
+
+            string query = "exec TradeCompany_DataBase.GetClientsByName @id";
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                wishList = dbConnection.Query<WishDTO>(query, new { id }).AsList<WishDTO>();
+            }
+
+            return wishList;
+        }
     }
 }

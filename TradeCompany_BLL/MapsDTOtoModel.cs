@@ -101,5 +101,17 @@ namespace TradeCompany_BLL
             return addressModel;
         }
 
+        public List<WishModel> MapWishesDTOToWishesModelListByID(int id)
+        {
+            ClientsData client = new ClientsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
+            List<WishDTO> wishList = client.GetWishesListByClientID(id);
+
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<WishDTO, WishModel>());
+            Mapper mapper = new Mapper(config);
+            List<WishModel> wishModel = mapper.Map<List<WishModel>>(wishList);
+
+            return wishModel;
+        }
+
     }
 }

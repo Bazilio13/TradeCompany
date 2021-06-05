@@ -64,8 +64,7 @@ namespace TradeCompany_UI
                     textBoxContactPerson.Text = client.ContactPerson;
                 }   
                 List<AddressModel> addresses = map.MapClientDTOToAddressesModelByID(_id);
-
-
+                List<WishModel> wishList = map.MapWishesDTOToWishesModelListByID(_id);
 
             }
             else
@@ -165,6 +164,7 @@ namespace TradeCompany_UI
         {
             ComboBox comboBox = (ComboBox)sender;
             ClientBaseModel selectedItem = (ClientBaseModel)comboBox.SelectedItem;
+
             MessageBox.Show(selectedItem.Name.ToString()); 
             }
     }
