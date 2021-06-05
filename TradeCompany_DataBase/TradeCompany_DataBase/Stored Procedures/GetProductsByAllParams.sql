@@ -16,7 +16,7 @@ AS
   left join [TradeCompany_DataBase].[ProductGroups] as PG on PG.ID = P_PG.ProductGroupID
   left join [TradeCompany_DataBase].MeasureUnits as MU on MU.ID = P.MeasureUnit
 where
-  (@InputString IS NULL OR P.Name like '%' + @InputString + '%') AND
+  (@InputString IS NULL OR P.Name like '%' + @InputString + '%' OR P.ID like '%' + CONVERT(nvarchar (255), @InputString) + '%') AND
   (@ProductGroupID IS NULL OR PG.ID = @ProductGroupID) AND
   (@FromStockAmount IS NULL OR P.StockAmount >= @FromStockAmount) AND
   (@ToStockAmount IS NULL OR P.StockAmount <= @ToStockAmount) AND
