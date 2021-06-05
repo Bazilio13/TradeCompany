@@ -40,10 +40,11 @@ namespace TradeCompany_UI
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            if(_id != -1)
+            MapsDTOtoModel map = new MapsDTOtoModel();
+
+            if (_id != -1)
             {
 
-                MapsDTOtoModel map = new MapsDTOtoModel();
                 ClientModel client = map.MapClientDTOToClientModelByID(_id);
                 textBoxName.Text = client.Name;
                 if (client.INN != null)
@@ -61,12 +62,10 @@ namespace TradeCompany_UI
                 if (client.ContactPerson != null)
                 {
                     textBoxContactPerson.Text = client.ContactPerson;
-                }
+                }   
                 List<AddressModel> addresses = map.MapClientDTOToAddressesModelByID(_id);
 
-                List<ClientBaseModel> allProducts = new List<ClientBaseModel>(); //Заменить на модель продуктов после мерджа
-                allProducts = map.MapClientDTOToClientBaseModelList();
-                cbWish.ItemsSource = allProducts;
+
 
             }
             else
@@ -74,6 +73,10 @@ namespace TradeCompany_UI
                 ButtonChange.IsEnabled = false;
                 Panel.IsEnabled = true;
             }
+
+            List<ClientBaseModel> allProducts = map.MapClientDTOToClientBaseModelList(); //Заменить на модель продуктов после мерджа
+            cbWish.ItemsSource = allProducts;
+
         }
 
         private void ChangeClient(object sender, RoutedEventArgs e)
@@ -158,5 +161,11 @@ namespace TradeCompany_UI
             e.Handled = !(Char.IsDigit(e.Text, 0));
         }
 
+        private void clicNewpWishProduct(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox comboBox = (ComboBox)sender;
+            ClientBaseModel selectedItem = (ClientBaseModel)comboBox.SelectedItem;
+            MessageBox.Show(selectedItem.Name.ToString()); 
+            }
     }
 }
