@@ -24,12 +24,16 @@ namespace TradeCompany_UI
     /// </summary>
     public partial class OneClient : Page
     {
-        int _id;
+        private int _id;
+        private List<WishModel> _wishList = new List<WishModel>();
+        private MapsDTOtoModel _map = new MapsDTOtoModel();
+
 
         public OneClient(int id)
         {
             InitializeComponent();
             _id = id;
+            _wishList = _map.MapWishesDTOToWishesModelListByID(_id);
         } 
 
         public OneClient()
@@ -64,7 +68,7 @@ namespace TradeCompany_UI
                     textBoxContactPerson.Text = client.ContactPerson;
                 }   
                 List<AddressModel> addresses = map.MapClientDTOToAddressesModelByID(_id);
-                LoadWishPanel(map.MapWishesDTOToWishesModelListByID(_id));
+                LoadWishPanel();
                 //Panel.IsEnabled = true;
                 Locked(true);
 
@@ -172,10 +176,10 @@ namespace TradeCompany_UI
             MessageBox.Show(selectedItem.Name.ToString()); 
         }
 
-        private void LoadWishPanel(List<WishModel> wishList)
+        private void LoadWishPanel()
         {
             int i = 0;
-            foreach(WishModel wish in wishList)
+            foreach(WishModel wish in _wishList)
             {
                 i++;
                 Button tag = new Button();
@@ -184,8 +188,27 @@ namespace TradeCompany_UI
                 tag.Padding = new Thickness(5, 3, 5, 3);
                 tag.Background = new SolidColorBrush(Color.FromRgb(243, 223, 196));
                 tag.TabIndex = i;
+                tag.Click += (sender, e) =>
+                  {
+                      Button tmp = (Button)sender;
+                      ChangeWishList(tmp.Content.ToString());
+                  };
                 WPWish.Children.Add(tag);
             }
+        }
+
+        private void ChangeWishList(string name)
+        {
+            foreach (WishModel wish in _wishList)
+            {
+                if (wish.Name == name)
+                {
+                    _wishList.Remove(wish);
+                    break;
+                }
+            }
+            WPWish.Children.Clear();
+            LoadWishPanel();
         }
 
         private void Locked(bool key)
@@ -200,7 +223,6 @@ namespace TradeCompany_UI
             textBoxFeedBacks.IsReadOnly = key;
             textBoxComments.IsReadOnly = key;
             textBoxHistoryOrders.IsReadOnly = key;
-            textBoxWant.IsReadOnly = key;
             cbWish.IsReadOnly = key;
             //WPWish.IsReadOnly = key;
         }
