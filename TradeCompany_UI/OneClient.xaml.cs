@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using TradeCompany_BLL;
 using TradeCompany_BLL.Models;
 using System.Runtime;
+using TradeCompany_DAL.DTOs;
 
 namespace TradeCompany_UI
 {
@@ -41,6 +42,7 @@ namespace TradeCompany_UI
         {
             if(_id != -1)
             {
+
                 MapsDTOtoModel map = new MapsDTOtoModel();
                 ClientModel client = map.MapClientDTOToClientModelByID(_id);
                 textBoxName.Text = client.Name;
@@ -61,6 +63,10 @@ namespace TradeCompany_UI
                     textBoxContactPerson.Text = client.ContactPerson;
                 }
                 List<AddressModel> addresses = map.MapClientDTOToAddressesModelByID(_id);
+
+                List<ClientBaseModel> allProducts = new List<ClientBaseModel>(); //Заменить на модель продуктов после мерджа
+                allProducts = map.MapClientDTOToClientBaseModelList();
+                cbWish.ItemsSource = allProducts;
 
             }
             else
@@ -151,5 +157,6 @@ namespace TradeCompany_UI
         {
             e.Handled = !(Char.IsDigit(e.Text, 0));
         }
+
     }
 }
