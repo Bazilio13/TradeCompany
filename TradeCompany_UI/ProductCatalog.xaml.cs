@@ -103,18 +103,43 @@ namespace TradeCompany_UI
             }
         }
 
-        private void FromStockAmount_TextChanged(object sender, TextChangedEventArgs e)
+        private void FromStockAmount_TextChange(object sender, TextChangedEventArgs e)
         {
-            FromStockAmount.Text = Regex.Replace(FromStockAmount.Text, @"[^0-9.]+", "");
-            FromStockAmount.SelectionStart = FromStockAmount.Text.Length;
-            if (FromStockAmount.Text == "")
+            _filtrFromStockAmount = InputValidation(_filtrFromStockAmount, FromStockAmount);    
+        }
+
+        private void ToStockAmount_TextChange(object sender, TextChangedEventArgs e)
+        {
+            _filtrToStockAmount = InputValidation(_filtrToStockAmount, ToStockAmount);
+        }
+
+
+
+        private float? InputValidation(float? filtr, TextBox textbox)
+        {
+            textbox.Text = Regex.Replace(textbox.Text, @"[.]+", ",");
+            textbox.Text = Regex.Replace(textbox.Text, @"[^0-9,.]+", "");
+            textbox.SelectionStart = textbox.Text.Length;
+            if (textbox.Text == "")
             {
-                _filtrFromStockAmount = null;
+                filtr = null;
             }
             else
             {
-                _filtrFromStockAmount = (float)Convert.ToDouble(FromStockAmount.Text);
+                try
+                {
+                    filtr = (float)Convert.ToDouble(textbox.Text);
+                }
+                catch (FormatException ex)
+                {
+                    textbox.Text = "";
+                    MessageBox.Show("Неверный ввод");
+                }
             }
+
+            return filtr;
         }
+
+        
     }
 }
