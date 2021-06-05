@@ -1,5 +1,5 @@
 ﻿CREATE PROCEDURE [TradeCompany_DataBase].[DeleteWishListByID]
-	@id
+	@id int
 AS
-	delete [Wishes]
-	where Wishes.ClientsID = @ClientID
+	delete from [Wishes]
+	where Wishes.ClientsID = @id
