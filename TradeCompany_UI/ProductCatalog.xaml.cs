@@ -35,6 +35,7 @@ namespace TradeCompany_UI
         private DateTime? _filtrMinDateTime;
         private DateTime? _filtrMaxDateTime;
         Regex _regexForNumbers = new Regex(@"[^0-9.]+");
+        
 
         public ProductCatalog()
         {
@@ -47,6 +48,8 @@ namespace TradeCompany_UI
             {
                 ProductGroupSelect.Items.Add(productGroupName[i].Name);
             }
+
+            
         }
 
         private void ProductButton_Click(object sender, RoutedEventArgs e)
@@ -113,7 +116,58 @@ namespace TradeCompany_UI
             _filtrToStockAmount = InputValidation(_filtrToStockAmount, ToStockAmount);
         }
 
+        private void FromPrice_TextChange(object sender, TextChangedEventArgs e)
+        {
+            if (RadioButtonRetailPrice.IsChecked == true)
+            {
+                _filtrFromRetailPrice = InputValidation(_filtrFromRetailPrice, FromPrice);
+                _filtrToRetailPrice = InputValidation(_filtrToRetailPrice, ToPrice);
+                _filtrToWholesalePrice = null;
+                _filtrFromWholesalePrice = null;
+            }
+            if (RadioButtonWholesalePrice.IsChecked == true)
+            {
+                _filtrFromWholesalePrice = InputValidation(_filtrFromWholesalePrice, FromPrice);
+                _filtrToWholesalePrice = InputValidation(_filtrToWholesalePrice, ToPrice);
+                _filtrToRetailPrice = null;
+                _filtrFromRetailPrice = null;
+            }
+        }
 
+        private void ToPrice_TextChange(object sender, TextChangedEventArgs e)
+        {
+            if (RadioButtonRetailPrice.IsChecked == true)
+            {
+                _filtrFromRetailPrice = InputValidation(_filtrFromRetailPrice, FromPrice);
+                _filtrToRetailPrice = InputValidation(_filtrToRetailPrice, ToPrice);
+                _filtrToWholesalePrice = null;
+                _filtrFromWholesalePrice = null;
+            }
+            if (RadioButtonWholesalePrice.IsChecked == true)
+            {
+                _filtrFromWholesalePrice = InputValidation(_filtrFromWholesalePrice, FromPrice);
+                _filtrToWholesalePrice = InputValidation(_filtrToWholesalePrice, ToPrice);
+                _filtrToRetailPrice = null;
+                _filtrFromRetailPrice = null;
+            }
+        }
+
+        private void RadioButtonRetailPrice_Checked(object sender, RoutedEventArgs e)
+        {
+            _filtrFromRetailPrice = InputValidation(_filtrFromRetailPrice, FromPrice);
+            _filtrToRetailPrice = InputValidation(_filtrToRetailPrice, ToPrice);
+            _filtrToWholesalePrice = null;
+            _filtrFromWholesalePrice = null;
+
+        }
+
+        private void RadioButtonWholesalePrice_Checked(object sender, RoutedEventArgs e)
+        {
+            _filtrFromWholesalePrice = InputValidation(_filtrFromWholesalePrice, FromPrice);
+            _filtrToWholesalePrice = InputValidation(_filtrToWholesalePrice, ToPrice);
+            _filtrToRetailPrice = null;
+            _filtrFromRetailPrice = null;
+        }
 
         private float? InputValidation(float? filtr, TextBox textbox)
         {
@@ -138,8 +192,6 @@ namespace TradeCompany_UI
             }
 
             return filtr;
-        }
-
-        
+        }        
     }
 }
