@@ -151,16 +151,12 @@ namespace TradeCompany_DAL
             }
         }
 
-        public void AddWishByID(int id, WishDTO wish)
+        public void AddWishByID(int id, int productsID)
         {
-            string query = "exec TradeCompany_DataBase.AddWishByID @id, @IDProduct";
+            string query = "exec TradeCompany_DataBase.AddWishByID @ID, @ProductsID";
             using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
             {
-                dbConnection.Query<WishDTO>(query, new 
-                { 
-                    id,
-                    wish.ID
-                });
+                dbConnection.Query(query, new {id, productsID });
             }
         }
 

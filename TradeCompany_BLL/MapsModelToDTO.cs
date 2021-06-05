@@ -39,7 +39,7 @@ namespace TradeCompany_BLL
 
             foreach (WishDTO wishDTO in wishListDTO)
             {
-                data.AddWishByID(id, wishDTO);
+                data.AddWishByID(id, wishDTO.ID);
             }
 
 
