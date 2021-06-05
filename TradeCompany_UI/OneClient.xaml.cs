@@ -98,7 +98,7 @@ namespace TradeCompany_UI
                 client = ToFormClientModel();
                 MapsModelToDTO maps = new MapsModelToDTO();
                 maps.MapClientModelToClientDTO(client);
-                maps.MapWishListModelToWishListDTO(_wishList);
+                maps.MapWishListModelToWishListDTO(_wishList, _id);
                 Locked(true);
 
             }

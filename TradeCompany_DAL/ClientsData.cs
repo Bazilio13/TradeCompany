@@ -147,7 +147,7 @@ namespace TradeCompany_DAL
             string query = "exec TradeCompany_DataBase.DeleteWishListByID @id";
             using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
             {
-                dbConnection.Query<ClientDTO>(query, new { id });
+                dbConnection.Query<WishDTO>(query, new { id });
             }
         }
 
@@ -156,7 +156,7 @@ namespace TradeCompany_DAL
             string query = "exec TradeCompany_DataBase.AddWishByID @id, @IDProduct";
             using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
             {
-                dbConnection.Query<ClientDTO>(query, new 
+                dbConnection.Query<WishDTO>(query, new 
                 { 
                     id,
                     wish.ID
