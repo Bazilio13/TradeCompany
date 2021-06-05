@@ -134,6 +134,7 @@
     <Build Include="TradeCompany_DataBase\Stored Procedures\UpdateProductGroupByID.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\GetClientsByParams.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\GetProductsByAllParams.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetWishesListByClientID.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="TradeCompany_DataBase.refactorlog" />
