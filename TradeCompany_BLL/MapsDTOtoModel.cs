@@ -123,16 +123,12 @@ namespace TradeCompany_BLL
         }
 
 
-        public List<AddressModel> MapClientDTOToAddressesModelByID(int id)
+        public List<String> MapClientDTOToAddressesModelByID(int id)
         {
             AddressesData addresses = new AddressesData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
-            List<AddressDTO> addressDTO = addresses.GetAddressesByID(id);
+            List<String> addressesList = addresses.GetAddressesByID(id);
 
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<AddressDTO, AddressModel>());
-            Mapper mapper = new Mapper(config);
-            List<AddressModel> addressModel = mapper.Map<List<AddressModel>>(addressDTO);
-
-            return addressModel;
+            return addressesList;
         }
 
     }

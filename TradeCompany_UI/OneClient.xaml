@@ -15,7 +15,7 @@
             <TextBox Name ="textBoxINN" HorizontalAlignment="center" Text="ИНН" TextWrapping="Wrap" VerticalAlignment="Top" Width="424" Height="21" Margin="0,0,0,10" PreviewTextInput="ValidationByINN"/>
             <TextBox x:Name ="textBoxPhone"  Text="Номер телефона*" TextWrapping="Wrap" Width="204" Height="21" HorizontalAlignment="Left" PreviewMouseDown="Focus" PreviewTextInput="ValidationByNumber" />
             <TextBox x:Name ="textBoxE_mail"  Text="E_mail" TextWrapping="Wrap" Width="204" Height="21" VerticalAlignment="Stretch" Margin="0,-21,0,10" HorizontalAlignment="Right"/>
-            <ComboBox Name ="comboBoxAddresses" HorizontalAlignment="center" Text="Адрес" VerticalAlignment="Top" Width="424" Height="21" Margin="0,0,0,10" AutomationProperties.HelpText="Адрес" IsEditable="True">
+            <ComboBox Name ="comboBoxAddresses" HorizontalAlignment="center"  VerticalAlignment="Top" Width="424" Height="21" Margin="0,0,0,10">
 
             </ComboBox>
             <TextBox Name ="textBoxContactPerson" HorizontalAlignment="center" Text="Контактное лицо*" TextWrapping="Wrap" VerticalAlignment="Top" Width="424" Height="21" Margin="0,0,0,10" PreviewMouseDown="Focus"/>

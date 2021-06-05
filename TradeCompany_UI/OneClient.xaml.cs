@@ -60,11 +60,20 @@ namespace TradeCompany_UI
                 {
                     textBoxContactPerson.Text = client.ContactPerson;
                 }
-                List<AddressModel> addresses = map.MapClientDTOToAddressesModelByID(_id);
+                List<String> addresses = map.MapClientDTOToAddressesModelByID(_id);
                 if(addresses.Count != 0)
                 {
-                    comboBoxAddresses.ItemsSource = addresses;
+                    foreach (String address in addresses)
+                    {
+                        comboBoxAddresses.Items.Add(address);
+                    }
                 }
+                else
+                {
+                    comboBoxAddresses.Items.Add("Адрес");
+                }
+
+                comboBoxAddresses.SelectedIndex = 0;
                 DenyAccessForPanel();
             }
             else
@@ -80,8 +89,9 @@ namespace TradeCompany_UI
             {
                 if (item is ComboBox)
                 {
-                    ComboBox itemComboBox = (ComboBox)item;
+                    ComboBox itemComboBox = (ComboBox)item;                 
                     itemComboBox.IsReadOnly = true;
+                    itemComboBox.IsEditable = false;
                 }
 
                 if (item is TextBox)
