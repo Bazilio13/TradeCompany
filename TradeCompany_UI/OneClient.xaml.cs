@@ -41,6 +41,8 @@ namespace TradeCompany_UI
         public OneClient()
         {
             InitializeComponent();
+            dgOrdersTable.Visibility = Visibility.Hidden;
+            LabelStori.Visibility = Visibility.Hidden;
             _id = -1;
         }
 
