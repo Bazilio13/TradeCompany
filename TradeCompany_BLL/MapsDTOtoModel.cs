@@ -51,6 +51,19 @@ namespace TradeCompany_BLL
             List<ClientBaseModel> clientBaseModel = mapper.Map<List<ClientBaseModel>>(clientsDTO);
 
             return clientBaseModel;
+        } 
+        
+        
+        public ClientBaseModel MapLastClientDTOToLastClientBaseModel()
+        {
+            ClientsData clients = new ClientsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
+            ClientDTO clientDTO = clients.GetLastClient();
+
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<ClientDTO, ClientBaseModel>());
+            Mapper mapper = new Mapper(config);
+            ClientBaseModel clientBaseModel = mapper.Map<ClientBaseModel>(clientDTO);
+
+            return clientBaseModel;
         }
 
         public List<ClientBaseModel> MapClientDTOToClientBaseModelListByName(string partOfTheName)

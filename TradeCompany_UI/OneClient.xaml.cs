@@ -114,6 +114,10 @@ namespace TradeCompany_UI
                 client = ToFormClientModel();
                 MapsModelToDTO maps = new MapsModelToDTO();
                 maps.MapClientModelToClientDTO(client);
+                if (_id == -1)
+                {
+                    _id = _map.MapLastClientDTOToLastClientBaseModel().ID;
+                }
                 maps.MapWishListModelToWishListDTO(_wishList, _id);
             }
         }

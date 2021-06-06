@@ -63,6 +63,18 @@ namespace TradeCompany_DAL
             }
 
             return client;
+        } 
+
+        public ClientDTO GetLastClient()
+        {
+            ClientDTO client = new ClientDTO();
+            string query = "exec TradeCompany_DataBase.GetLastClient";
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                client = dbConnection.Query<ClientDTO>(query).Single<ClientDTO>();
+            }
+
+            return client;
         }
 
         public void AddClient(ClientDTO client)
