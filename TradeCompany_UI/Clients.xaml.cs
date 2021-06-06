@@ -112,8 +112,11 @@ namespace TradeCompany_UI
         {
             DataGrid dg = (DataGrid)sender;
             ClientBaseModel item = (ClientBaseModel)dg.CurrentItem;
-            int id = item.ID;
-            frame.Content = new OneClient(id);
+            if(item != null)
+            {
+                int id = item.ID;
+                frame.Content = new OneClient(id);
+            }
         }
 
         private void AddNewClient(object sender, RoutedEventArgs e)
