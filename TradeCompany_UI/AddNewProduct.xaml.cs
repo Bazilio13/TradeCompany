@@ -32,7 +32,7 @@ namespace TradeCompany_UI
 
         private void Name_Text_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //Name_Text.Clear();
+            //Name_Text.Clear(); 
         }
 
         private void Button_Save_Click(object sender, RoutedEventArgs e)
