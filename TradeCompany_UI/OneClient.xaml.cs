@@ -111,37 +111,36 @@ namespace TradeCompany_UI
         }
 
         private void ChangeClient(object sender, RoutedEventArgs e)
-        {
-            ButtonChange.IsEnabled = false;
+        {
+            ButtonChange.IsEnabled = false;
         }
 
         private void SaveClient(object sender, RoutedEventArgs e)
-        {
+        {
             if (FieldValidation())
-            {
-                ClientModel client = new ClientModel();
-                client = ToFormClientModel();
-                MapsModelToDTO maps = new MapsModelToDTO();
-                maps.MapClientModelToClientDTO(client);
-                if (_id == -1)
-                {
-                    _id = _map.MapLastClientDTOToLastClientBaseModel().ID;
-                }
-                maps.MapWishListModelToWishListDTO(_wishList, _id);
-            }
+            {
+                ClientModel client = new ClientModel();
+                client = ToFormClientModel();
+                MapsModelToDTO maps = new MapsModelToDTO();
+                maps.MapClientModelToClientDTO(client);
+                if (_id == -1)
+                {
+                    _id = _map.MapLastClientDTOToLastClientBaseModel().ID;
+                }
+                maps.MapWishListModelToWishListDTO(_wishList, _id);                maps.MapAddressesListModelToAddressesListDTO(_addresses, _id);
+            }
         }
-
         private ClientModel ToFormClientModel()
         {
             ClientModel client = new ClientModel();
-            client.ID = _id;
-            client.Name = textBoxName.Text.Trim();
-            client.INN = textBoxINN.Text.Trim();
-            client.E_mail = textBoxE_mail.Text.Trim(' ');
-            client.Phone = textBoxPhone.Text;
-            client.ContactPerson = textBoxContactPerson.Text;
-            client.Comment = textBoxComments.Text;
-            client.Type = (bool)RadioButtonTypePersonF.IsChecked;
+            client.ID = _id;
+            client.Name = textBoxName.Text.Trim();
+            client.INN = textBoxINN.Text.Trim();
+            client.E_mail = textBoxE_mail.Text.Trim(' ');
+            client.Phone = textBoxPhone.Text;
+            client.ContactPerson = textBoxContactPerson.Text;
+            client.Comment = textBoxComments.Text;
+            client.Type = (bool)RadioButtonTypePersonF.IsChecked;
             client.CorporateBody = (bool)RadioButtonTypeBayO.IsChecked;
             return client;
         }
