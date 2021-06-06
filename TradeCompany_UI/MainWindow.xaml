@@ -5,15 +5,59 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TradeCompany_UI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="768" Width="1024">
+    <Window.Resources>
+        <ResourceDictionary Source="StyleDictionary.xaml"/>
+    </Window.Resources>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="75"></RowDefinition>
-            <RowDefinition></RowDefinition>
-        </Grid.RowDefinitions>
-        <Frame Name="MainFrame" NavigationUIVisibility="Hidden" Grid.Row="1" Source="StartPage.xaml"></Frame>
-        <Button Name="OrdersButton" Content="Заказы" Background="BlanchedAlmond" FontSize="25" FontWeight="Medium" HorizontalAlignment="Left" Margin="142,0,0,0" VerticalAlignment="Center" Height="55" Width="127" Click="OrdersButton_Click"/>
-        <Button Name="MainButton" Content="Главная" Background="BlanchedAlmond" FontSize="25" FontWeight="Medium" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Height="55" Width="127" Click="MainButton_Click"/>
-        <Button Name="ProductButton" Content="Товары" Background="BlanchedAlmond" FontSize="25" FontWeight="Medium" HorizontalAlignment="Left" Margin="274,0,0,0" VerticalAlignment="Center" Height="55" Width="127" Click="ProductButton_Click"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="155"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Frame Name="MainFrame" NavigationUIVisibility="Hidden" Grid.Column="0" Source="StartPage.xaml"/>
+        <StackPanel Margin="0,136,0,0" Grid.Column="0" Orientation="Vertical">
+            <Button Style="{StaticResource ButtonNavigation}" Click="ProductButton_Click">
+                <StackPanel Height="75" Width="105" Orientation="Vertical">
+                    <Image Style="{StaticResource ButtonNavigationIcons}" Source="Pictures/clients.png"/>
+                    <TextBlock Style="{StaticResource ButtonNavigationText}">Клиенты</TextBlock>
+                </StackPanel>
+            </Button>
+
+            <Button Style="{StaticResource ButtonNavigation}" Click="ProductButton_Click">
+                <StackPanel Height="75" Width="105" Orientation="Vertical">
+                    <Image Style="{StaticResource ButtonNavigationIcons}" Source="Pictures/products.png"/>
+                    <TextBlock Style="{StaticResource ButtonNavigationText}">Товары</TextBlock>
+                </StackPanel>
+            </Button>
+
+            <Button Style="{StaticResource ButtonNavigation}">
+                <StackPanel Height="75" Width="105" Orientation="Vertical">
+                    <Image Style="{StaticResource ButtonNavigationIcons}" Source="Pictures/phone.png"/>
+                    <TextBlock Style="{StaticResource ButtonNavigationText}">Поставки</TextBlock>
+                </StackPanel>
+            </Button>
+
+            <Button Style="{StaticResource ButtonNavigation}">
+                <StackPanel Height="75" Width="105" Orientation="Vertical">
+                    <Image Style="{StaticResource ButtonNavigationIcons}" Source="Pictures/orders.png"/>
+                    <TextBlock Style="{StaticResource ButtonNavigationText}">Заказы</TextBlock>
+                </StackPanel>
+            </Button>
+
+            <Button Style="{StaticResource ButtonNavigation}">
+                <StackPanel Height="75" Width="105" Orientation="Vertical">
+                    <Image Style="{StaticResource ButtonNavigationIcons}" Source="Pictures/stats.png"/>
+                    <TextBlock Style="{StaticResource ButtonNavigationText}">Статистика</TextBlock>
+                </StackPanel>
+            </Button>
+
+            <Button Style="{StaticResource ButtonNavigation}">
+                <StackPanel Height="75" Width="105" Orientation="Vertical">
+                    <Image Style="{StaticResource ButtonNavigationIcons}" Source="Pictures/settings.png"/>
+                    <TextBlock Style="{StaticResource ButtonNavigationText}">Настройки</TextBlock>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+        <Button Name="MainButton" Content="Главная" Background="BlanchedAlmond" FontSize="25" FontWeight="Medium" HorizontalAlignment="Center" Margin="0,618,0,0" VerticalAlignment="Top" Height="55" Width="127" Click="MainButton_Click"/>
     </Grid>
 </Window>
