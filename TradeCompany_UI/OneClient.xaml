@@ -8,26 +8,66 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="OneClient" Loaded="Page_Loaded">
 
-    <Grid Background="White" >
+    <Grid Background="White" Margin="0,0,0,-227" >
 
-        <StackPanel x:Name="Panel" Width="424" Margin="0,52,0,0" >
-            <TextBox Name="textBoxName" HorizontalAlignment="center"  TextWrapping="Wrap" VerticalAlignment="Top" Width="424" Height="21" AutomationProperties.HelpText="ФИО/Название*" Text="ФИО/Название*" Margin="0,0,0,10" PreviewMouseDown="Focus" />
-            <TextBox Name ="textBoxINN" HorizontalAlignment="center" Text="ИНН" TextWrapping="Wrap" VerticalAlignment="Top" Width="424" Height="21" Margin="0,0,0,10" PreviewTextInput="ValidationByINN"/>
-            <TextBox x:Name ="textBoxPhone"  Text="Номер телефона*" TextWrapping="Wrap" Width="204" Height="21" HorizontalAlignment="Left" PreviewMouseDown="Focus" PreviewTextInput="ValidationByNumber" />
-            <TextBox x:Name ="textBoxE_mail"  Text="E_mail" TextWrapping="Wrap" Width="204" Height="21" VerticalAlignment="Stretch" Margin="0,-21,0,10" HorizontalAlignment="Right"/>
-            <TextBox Name ="textBoxAddress" HorizontalAlignment="center" Text="Адрес" TextWrapping="Wrap" VerticalAlignment="Top" Width="424" Height="21" Margin="0,0,0,10" />
-            <TextBox Name ="textBoxContactPerson" HorizontalAlignment="center" Text="Контактное лицо*" TextWrapping="Wrap" VerticalAlignment="Top" Width="424" Height="21" Margin="0,0,0,10" PreviewMouseDown="Focus"/>
-            <TextBox Name ="textBoxFeedBacks" HorizontalAlignment="center"  Text="Отзывы" TextWrapping="Wrap" VerticalAlignment="Top" Width="424" Height="21" Margin="0,0,0,10"/>
-            <TextBox Name ="textBoxComments" HorizontalAlignment="center"  Text="Комментарии" TextWrapping="Wrap" VerticalAlignment="Top" Width="424" Height="21" Margin="0,0,0,10"/>
-            <TextBox Name ="textBoxHistoryOrders" HorizontalAlignment="center" Text="Истории заказов" TextWrapping="Wrap" VerticalAlignment="Top" Width="424" Height="21" Margin="0,0,0,10"/>
-            <ComboBox x:Name="cbWish" Text="Интересующие товары" IsEditable="True" SelectionChanged="clicNewpWishProduct" DisplayMemberPath="Name" Margin="0,0,0,10"/>
+        <StackPanel x:Name="Panel" Width="500" Margin="0,52,0,0" >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition ></RowDefinition>
+                    <RowDefinition ></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <WrapPanel Grid.Row="0" Grid.Column="1" Margin="0,7,-300,0" Grid.RowSpan="2">
+                    <RadioButton x:Name="RadioButtonTypePersonF" Content="Физическое лицо" Margin="0,0,30,0"/>
+                    <RadioButton x:Name="RadioButtonTypePersonU" Content="Юридическое лицо"/>
+                </WrapPanel>
+
+                <WrapPanel Grid.Column ="1" Margin="0,28,-300,0" Grid.Row="1">
+                    <RadioButton x:Name="RadioButtonTypeBayR" Content="Розница" Margin="0,0,30,0"/>
+                    <RadioButton x:Name="RadioButtonTypeBayO" Content="Опт"/>
+                </WrapPanel>
+                
+                <StackPanel Grid.Row="0" Grid.RowSpan="2">
+                    <Label Content="Тип клиента"/>
+                    <Label Content="Тип заказа"/>
+                </StackPanel>
+
+
+
+
+            </Grid>
+
+            <Label Content="ФИО/Название*" FontSize="9" Margin="0,4,0,0"/>
+            <TextBox Name="textBoxName" HorizontalAlignment="center"  TextWrapping="Wrap" VerticalAlignment="Top" Width="500" Height="21" AutomationProperties.HelpText="ФИО/Название*" Margin="0,-5,0,3" PreviewMouseDown="Focus" />
+            <Label Content="ИНН" FontSize="9" Margin="0,0,0,0"/>
+            <TextBox Name ="textBoxINN" HorizontalAlignment="center" TextWrapping="Wrap" VerticalAlignment="Top" Width="500" Height="21" Margin="0,-5,0,3" PreviewTextInput="ValidationByINN"/>
+            <Label Content="Номер телефона*" FontSize="9"/>
+            <Label Content="Email" FontSize="9"  Width="245" Height="21" VerticalAlignment="Stretch" Margin="0,-21,0,10" HorizontalAlignment="Right"/>
+            <TextBox x:Name ="textBoxPhone"  TextWrapping="Wrap" Width="245" Height="21" HorizontalAlignment="Left" PreviewMouseDown="Focus" PreviewTextInput="ValidationByNumber" Margin="0,-12,0,3" />
+            <TextBox x:Name ="textBoxE_mail"  TextWrapping="Wrap" Width="245" Height="21" VerticalAlignment="Stretch" Margin="0,-29,0,-1" HorizontalAlignment="Right"/>
+            <Label Content="Адреса" FontSize="9"/>
+            <TextBox Name ="textBoxAddress" HorizontalAlignment="center" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="500" Height="21" Margin="0,-5,0,3" />
+            <Label Content="Контактное лицо*" FontSize="9"/>
+            <TextBox Name ="textBoxContactPerson" HorizontalAlignment="center"  TextWrapping="Wrap" VerticalAlignment="Top" Width="500" Height="21" Margin="0,-5,0,3" PreviewMouseDown="Focus"/>
+            <Label Content="Отзывы" FontSize="9"/>
+            <TextBox Name ="textBoxFeedBacks" HorizontalAlignment="center"  TextWrapping="Wrap" VerticalAlignment="Top" Width="500" Height="21" Margin="0,-5,0,3"/>
+            <Label Content="Комментарий" FontSize="9" Margin="0,0,0,0"/>
+            <TextBox Name ="textBoxComments" HorizontalAlignment="center"  TextWrapping="Wrap" VerticalAlignment="Top" Width="500" Height="21" Margin="0,-5,0,3"/>
+            <Label Content="История заказов" FontSize="9" Margin="0,0,0,0"/>
+            <TextBox Name ="textBoxHistoryOrders" HorizontalAlignment="center"  TextWrapping="Wrap" VerticalAlignment="Top" Width="500" Height="21" Margin="0,-6,0,17"/>
+            <ComboBox x:Name="cbWish" Text="Интересующие товары" IsEditable="True" SelectionChanged="clicNewpWishProduct" DisplayMemberPath="Name" Margin="0,-3,0,10"/>
             <WrapPanel x:Name ="WPWish" Height="41"/>
 
         </StackPanel>
         <Button x:Name="ButtonChange" Content="Изменить" Margin="0,20,39,0" Click="ChangeClient" Grid.Row="0" HorizontalAlignment="Right" Width="74" Height="26" VerticalAlignment="Top"/>
         <Button x:Name="ButtonSave" Content="Сохранить" Margin="0,61,39,0" VerticalAlignment="Top" Height="26" IsCancel="True" Click="SaveClient" HorizontalAlignment="Right" Width="74"/>
-    
-        
+
+
 
     </Grid>
 </Page>

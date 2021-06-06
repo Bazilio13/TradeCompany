@@ -66,7 +66,20 @@ namespace TradeCompany_UI
                 if (client.ContactPerson != null)
                 {
                     textBoxContactPerson.Text = client.ContactPerson;
-                }   
+                }
+                if (client.Type)
+                {
+                    RadioButtonTypePersonF.IsChecked = true;
+                }
+                else { RadioButtonTypePersonU.IsChecked = true; } 
+                
+                if (client.CorporateBody)
+                {
+                    RadioButtonTypeBayO.IsChecked = true;
+                }
+                else { RadioButtonTypeBayR.IsChecked = true; }
+
+
                 List<AddressModel> addresses = map.MapClientDTOToAddressesModelByID(_id);
                 LoadWishPanel();
                 Locked(true);
@@ -76,7 +89,12 @@ namespace TradeCompany_UI
             }
             else
             {
+                RadioButtonTypePersonF.IsChecked = true;
+                RadioButtonTypeBayR.IsChecked = true;
+
                 ButtonChange.IsEnabled = false;
+                RadioButtonTypeBayO.IsChecked = true;
+                RadioButtonTypeBayR.IsChecked = true;
             }
             ProductsDataAccess product = new ProductsDataAccess();
             List<ProductBaseModel> allProducts = product.GetAllProducts(); //Заменить на модель продуктов после мерджа
@@ -115,8 +133,8 @@ namespace TradeCompany_UI
             client.ContactPerson = textBoxContactPerson.Text;
             client.Comment = textBoxComments.Text;
             client.LastOrderDate = DateTime.Now; // что-то нужно сделат с нулевой датой 
-            client.Type = false; //добавить флажок 
-            client.CorporateBody = false; //добавить флажок 
+            client.Type = (bool)RadioButtonTypePersonF.IsChecked; 
+            client.CorporateBody = (bool)RadioButtonTypeBayO.IsChecked; 
             return client;
         }
 
