@@ -59,16 +59,15 @@
             <Label Content="Комментарий" FontSize="9" Margin="0,0,0,0"/>
             <TextBox Name ="textBoxComments" HorizontalAlignment="center"  TextWrapping="Wrap" VerticalAlignment="Top" Width="500" Height="21" Margin="0,-5,0,3"/>
             <Label Content="История заказов" FontSize="9" Margin="0,0,0,0"/>
-            <DataGrid x:Name="dgOrdersTable" FontSize="16"  AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" Grid.Row="1" SelectionMode="Single" >
+            <DataGrid x:Name="dgOrdersTable" FontSize="16"  AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" Grid.Row="1" SelectionMode="Single" Margin="0,0,0,20" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding ="{Binding Path = ID}"  IsReadOnly="True" Header="id" Width="30"/>
                     <DataGridTextColumn Binding ="{Binding Path = Address}"  IsReadOnly="True" Header="Адрес" Width="150"/>
-                    <DataGridTextColumn Binding ="{Binding Path = DateTime}" IsReadOnly="True" Header="Дата" Width="200"/>
+                    <DataGridTextColumn Binding ="{Binding Path = Datetime}" IsReadOnly="True" Header="Дата" Width="200"/>
                     <DataGridTextColumn Binding ="{Binding Path = Comment}" IsReadOnly="True" Header="Комментарий" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
 
-            <TextBox Name ="textBoxHistoryOrders" HorizontalAlignment="center"  TextWrapping="Wrap" VerticalAlignment="Top" Width="500" Height="21" Margin="0,-6,0,17"/>
             <ComboBox x:Name="cbWish" Text="Интересующие товары" IsEditable="True" SelectionChanged="clicNewpWishProduct" DisplayMemberPath="Name" Margin="0,-3,0,10"/>
             <WrapPanel x:Name ="WPWish" Height="50"/>
 

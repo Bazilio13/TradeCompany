@@ -135,7 +135,6 @@ namespace TradeCompany_UI
             client.Phone = textBoxPhone.Text;
             client.ContactPerson = textBoxContactPerson.Text;
             client.Comment = textBoxComments.Text;
-            //client.LastOrderDate = _orderList[0].Datetime;
             client.Type = (bool)RadioButtonTypePersonF.IsChecked; 
             client.CorporateBody = (bool)RadioButtonTypeBayO.IsChecked; 
             return client;
