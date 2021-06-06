@@ -63,13 +63,14 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding ="{Binding Path = ID}"  IsReadOnly="True" Header="id" Width="30"/>
                     <DataGridTextColumn Binding ="{Binding Path = Address}"  IsReadOnly="True" Header="Адрес" Width="150"/>
+                    <DataGridTextColumn Binding ="{Binding Path = Summ}"  IsReadOnly="True" Header="Сумма" Width="40"/>
                     <DataGridTextColumn Binding ="{Binding Path = Datetime}" IsReadOnly="True" Header="Дата" Width="85"/>
                     <DataGridTextColumn Binding ="{Binding Path = Comment}" IsReadOnly="True" Header="Комментарий" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
 
-            <ComboBox x:Name="cbWish" Text="Интересующие товары" IsEditable="True" SelectionChanged="clicNewpWishProduct" DisplayMemberPath="Name" Margin="0,-3,0,10"/>
-            <WrapPanel x:Name ="WPWish" Height="50"/>
+            <ComboBox x:Name="cbWish" Text="Интересующие товары"  StaysOpenOnEdit="True"  IsEditable="True" SelectionChanged="clicNewWishProduct" DisplayMemberPath="Name" Margin="0,-3,0,10" />
+            <WrapPanel x:Name ="WPWish"/>
 
         </StackPanel>
         <Button x:Name="ButtonChange" Content="Изменить" Margin="0,20,39,0" Click="ChangeClient" Grid.Row="0" HorizontalAlignment="Right" Width="74" Height="26" VerticalAlignment="Top"/>

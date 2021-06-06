@@ -36,7 +36,7 @@ namespace TradeCompany_UI
             _id = id;
             _wishList = _map.MapWishesDTOToWishesModelListByID(_id);
             _orderList = _map.MapOrdersDTOToOrdersModelByClientID(_id);
-        } 
+        }
 
         public OneClient()
         {
@@ -74,8 +74,8 @@ namespace TradeCompany_UI
                 {
                     RadioButtonTypePersonF.IsChecked = true;
                 }
-                else { RadioButtonTypePersonU.IsChecked = true; } 
-                
+                else { RadioButtonTypePersonU.IsChecked = true; }
+
                 if (client.CorporateBody)
                 {
                     RadioButtonTypeBayO.IsChecked = true;
@@ -135,8 +135,8 @@ namespace TradeCompany_UI
             client.Phone = textBoxPhone.Text;
             client.ContactPerson = textBoxContactPerson.Text;
             client.Comment = textBoxComments.Text;
-            client.Type = (bool)RadioButtonTypePersonF.IsChecked; 
-            client.CorporateBody = (bool)RadioButtonTypeBayO.IsChecked; 
+            client.Type = (bool)RadioButtonTypePersonF.IsChecked;
+            client.CorporateBody = (bool)RadioButtonTypeBayO.IsChecked;
             return client;
         }
 
@@ -178,9 +178,9 @@ namespace TradeCompany_UI
 
         private void ValidationByNumber(object sender, TextCompositionEventArgs e)
         {
-            e.Handled = !(e.Text=="0" || e.Text == "1" || e.Text == "2" || e.Text == "3" || e.Text == "4" ||
+            e.Handled = !(e.Text == "0" || e.Text == "1" || e.Text == "2" || e.Text == "3" || e.Text == "4" ||
                 e.Text == "5" || e.Text == "6" || e.Text == "7" || e.Text == "8" || e.Text == "9" || e.Text == "+" ||
-                e.Text == "(" || e.Text == ")" );
+                e.Text == "(" || e.Text == ")");
         }
 
         private void ValidationByINN(object sender, TextCompositionEventArgs e)
@@ -188,17 +188,19 @@ namespace TradeCompany_UI
             e.Handled = !(Char.IsDigit(e.Text, 0));
         }
 
-        private void clicNewpWishProduct(object sender, SelectionChangedEventArgs e)
+        private void clicNewWishProduct(object sender, SelectionChangedEventArgs e)
         {
             ComboBox comboBox = (ComboBox)sender;
             ProductBaseModel selectedItem = (ProductBaseModel)comboBox.SelectedItem;
-
-            WishModel wish = new WishModel();
-            wish.ID = selectedItem.ID;
-            wish.Name = selectedItem.Name;
-            _wishList.Add(wish);
-            WPWish.Children.Clear();
-            LoadWishPanel();
+            if (selectedItem != null && comboBox.Text.Length >= 3)
+            {
+                WishModel wish = new WishModel();
+                wish.ID = selectedItem.ID;
+                wish.Name = selectedItem.Name;
+                _wishList.Add(wish);
+                WPWish.Children.Clear();
+                LoadWishPanel();
+            }
 
             //MessageBox.Show(selectedItem.Name.ToString()); 
         }
@@ -206,7 +208,7 @@ namespace TradeCompany_UI
         private void LoadWishPanel()
         {
             int i = 0;
-            foreach(WishModel wish in _wishList)
+            foreach (WishModel wish in _wishList)
             {
                 i++;
                 Button tag = new Button();
