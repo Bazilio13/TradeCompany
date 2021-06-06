@@ -73,5 +73,17 @@ namespace TradeCompany_DAL
             }
         }
 
+        public void DeleteAllAddressByID(int clientId)
+        {
+            string query = "exec TradeCompany_DataBase.DeleteAllAddressesByID @ClientId";
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                dbConnection.Query<AddressDTO>(query, new
+                {
+                    clientId
+                });
+            }
+        }
+
     }
 }

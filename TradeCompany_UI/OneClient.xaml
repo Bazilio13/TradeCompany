@@ -28,6 +28,7 @@
         </StackPanel>
         <Button x:Name="ButtonChange" Content="Изменить" Margin="0,20,39,0" Click="ChangeClient" Grid.Row="0" HorizontalAlignment="Right" Width="74" Height="26" VerticalAlignment="Top"/>
         <Button x:Name="ButtonSave" Content="Сохранить" Margin="0,61,39,0" VerticalAlignment="Top" Height="26" IsCancel="True" Click="SaveClient" HorizontalAlignment="Right" Width="74"/>
+        <Button Name="ButtonAddAddress"  Content="+" HorizontalAlignment="Left" Margin="621,148,0,0" VerticalAlignment="Top" Click="ButtonAddAddress_Click" />
 
     </Grid>
 </Page>

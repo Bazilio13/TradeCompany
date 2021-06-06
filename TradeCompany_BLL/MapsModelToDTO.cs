@@ -29,5 +29,15 @@ namespace TradeCompany_BLL
          
         }
 
+        public void MapAddAddressesList(int id, List<String> addressesList)
+        {
+            AddressesData data = new AddressesData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
+            data.DeleteAllAddressByID(id);
+            foreach(String address in addressesList)
+            {
+                data.AddAddress(id, address);
+            }
+        }
+
     }
 }

@@ -24,6 +24,7 @@ namespace TradeCompany_UI
     public partial class OneClient : Page
     {
         int _id;
+        List<String> _addresses = new List<String>();
 
         public OneClient(int id)
         {
@@ -60,10 +61,10 @@ namespace TradeCompany_UI
                 {
                     textBoxContactPerson.Text = client.ContactPerson;
                 }
-                List<String> addresses = map.MapClientDTOToAddressesModelByID(_id);
-                if(addresses.Count != 0)
+                _addresses = map.MapClientDTOToAddressesModelByID(_id);
+                if (_addresses.Count != 0)
                 {
-                    foreach (String address in addresses)
+                    foreach (String address in _addresses)
                     {
                         comboBoxAddresses.Items.Add(address);
                     }
@@ -72,7 +73,6 @@ namespace TradeCompany_UI
                 {
                     comboBoxAddresses.Items.Add("Адрес");
                 }
-
                 comboBoxAddresses.SelectedIndex = 0;
                 DenyAccessForPanel();
             }
@@ -83,45 +83,7 @@ namespace TradeCompany_UI
             }
         }
 
-        private void DenyAccessForPanel()
-        {
-            foreach (UIElement item in Panel.Children)
-            {
-                if (item is ComboBox)
-                {
-                    ComboBox itemComboBox = (ComboBox)item;                 
-                    itemComboBox.IsReadOnly = true;
-                    itemComboBox.IsEditable = false;
-                }
 
-                if (item is TextBox)
-                {
-                    TextBox itemTextBox = (TextBox)item;
-                    itemTextBox.IsEnabled = false;
-                }
-            }
-        }
-
-
-
-        private void GiveAccessForPanel()
-        {
-            foreach (UIElement item in Panel.Children)
-            {
-                if (item is ComboBox)
-                {
-                    ComboBox itemComboBox = (ComboBox)item;
-                    itemComboBox.IsReadOnly = false;
-                    itemComboBox.IsEditable = true;
-                }
-
-                if (item is TextBox)
-                {
-                    TextBox itemTextBox = (TextBox)item;
-                    itemTextBox.IsEnabled = true;
-                }
-            }
-        }
 
         private void ChangeClient(object sender, RoutedEventArgs e)
         {
@@ -138,7 +100,20 @@ namespace TradeCompany_UI
                 DenyAccessForPanel();
                 MapsModelToDTO maps = new MapsModelToDTO();
                 maps.MapClientModelToClientDTO(client);
+
+                List<String> addressList = ToFormAddressesModel();
+                maps.MapAddAddressesList(_id, addressList);
             }
+        }
+
+        private List<String> ToFormAddressesModel()
+        {
+            List<String> addressesList = new List<String>();
+            for(int i = 0; i < comboBoxAddresses.Items.Count; i++)
+            {
+                addressesList.Add(comboBoxAddresses.Items[i].ToString());
+            }
+            return addressesList;
         }
 
         private ClientModel ToFormClientModel()
@@ -203,6 +178,53 @@ namespace TradeCompany_UI
         private void ValidationByINN(object sender, TextCompositionEventArgs e)
         {
             e.Handled = !(Char.IsDigit(e.Text, 0));
+        }
+
+        private void DenyAccessForPanel()
+        {
+            foreach (UIElement item in Panel.Children)
+            {
+                if (item is ComboBox)
+                {
+                    ComboBox itemComboBox = (ComboBox)item;
+                    itemComboBox.IsReadOnly = true;
+                    itemComboBox.IsEditable = false;
+                }
+
+                if (item is TextBox)
+                {
+                    TextBox itemTextBox = (TextBox)item;
+                    itemTextBox.IsEnabled = false;
+                }
+            }
+        }
+
+        private void GiveAccessForPanel()
+        {
+            foreach (UIElement item in Panel.Children)
+            {
+                if (item is ComboBox)
+                {
+                    ComboBox itemComboBox = (ComboBox)item;
+                    itemComboBox.IsReadOnly = false;
+                    itemComboBox.IsEditable = true;
+                }
+
+                if (item is TextBox)
+                {
+                    TextBox itemTextBox = (TextBox)item;
+                    itemTextBox.IsEnabled = true;
+                }
+            }
+        }
+
+        private void ButtonAddAddress_Click(object sender, RoutedEventArgs e)
+        {
+            String selectedValue = comboBoxAddresses.SelectedValue.ToString();
+            if (selectedValue != "Адрес" && !(_addresses.Contains(selectedValue)))
+            {
+                
+            }
         }
     }
 }
