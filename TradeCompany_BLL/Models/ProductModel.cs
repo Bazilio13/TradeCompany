@@ -12,7 +12,7 @@ namespace TradeCompany_BLL.Models
         public string Name { get; set; }
         public float StockAmount { get; set; }
         public string MeasureUnitName { get; set; }
-        public int MeasureUnit { get; set; }
+        public int? MeasureUnit { get; set; }
         public float WholesalePrice { get; set; }
         public float RetailPrice { get; set; }
         public DateTime? LastSupplyDate { get; set; }
