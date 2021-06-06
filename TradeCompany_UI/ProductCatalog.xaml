@@ -82,6 +82,6 @@
         <RadioButton x:Name="RadioButtonWholesalePrice" Content="Опт"  FontSize="14" Height="16" Width="50" Checked="RadioButtonWholesalePrice_Checked" HorizontalAlignment="Left" Grid.Column="1" Margin="251,50,0,34"/>
         <Button x:Name="ResetFilters" Content="Сбросить фильтры" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="669,46,0,0" Click="ResetFiltersButton_Click" Height="22" Width="120"/>
         <Button x:Name="AddProduct" Content="Добавить товар" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="669,73,0,0" Click="AddProductButton_Click" Height="22" Width="120"/>
-        <Frame Name="frame" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" VerticalAlignment="Top"  Panel.ZIndex="0" Grid.ColumnSpan="2" Grid.RowSpan="2" Width="1000" Height="450"/>
+        <Frame Name="frame" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" VerticalAlignment="Top"  Panel.ZIndex="0" Grid.ColumnSpan="2" Grid.RowSpan="2" Width="1000" Height="700"/>
     </Grid>
 </Page>
