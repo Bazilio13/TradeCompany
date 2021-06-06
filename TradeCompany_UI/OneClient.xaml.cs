@@ -82,7 +82,6 @@ namespace TradeCompany_UI
 
                 List<AddressModel> addresses = map.MapClientDTOToAddressesModelByID(_id);
                 LoadWishPanel();
-                Locked(true);
 
                 //List<WishModel> wishList = map.MapWishesDTOToWishesModelListByID(_id);
 
@@ -104,7 +103,6 @@ namespace TradeCompany_UI
 
         private void ChangeClient(object sender, RoutedEventArgs e)
         {
-            Locked(false);
             ButtonChange.IsEnabled = false;
         }
 
@@ -117,8 +115,6 @@ namespace TradeCompany_UI
                 MapsModelToDTO maps = new MapsModelToDTO();
                 maps.MapClientModelToClientDTO(client);
                 maps.MapWishListModelToWishListDTO(_wishList, _id);
-                Locked(true);
-
             }
         }
 
@@ -236,20 +232,5 @@ namespace TradeCompany_UI
             LoadWishPanel();
         }
 
-        private void Locked(bool key)
-        {
-            textBoxAddress.IsReadOnly = key;
-            textBoxName.IsReadOnly = key;
-            textBoxINN.IsReadOnly = key;
-            textBoxPhone.IsReadOnly = key;
-            textBoxE_mail.IsReadOnly = key;
-            textBoxAddress.IsReadOnly = key;
-            textBoxContactPerson.IsReadOnly = key;
-            textBoxFeedBacks.IsReadOnly = key;
-            textBoxComments.IsReadOnly = key;
-            textBoxHistoryOrders.IsReadOnly = key;
-            cbWish.IsReadOnly = key;
-            //WPWish.IsReadOnly = key;
-        }
     }
 }
