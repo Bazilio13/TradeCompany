@@ -123,7 +123,7 @@ namespace TradeCompany_UI
             ClientModel client = new ClientModel();
             client.ID = _id;
             client.Name = textBoxName.Text.Trim();
-            client.INN = Convert.ToInt32(textBoxINN.Text);
+            client.INN = textBoxINN.Text.Trim();
             client.E_mail = textBoxE_mail.Text.Trim(' ');
             client.Phone = textBoxPhone.Text;
             client.ContactPerson = textBoxContactPerson.Text;
