@@ -1,6 +1,6 @@
 ﻿CREATE PROCEDURE [TradeCompany_DataBase].[AddClient]
 	@Name nvarchar(255),
-	@INN int,
+	@INN nvarchar(50),
 	@E_mail nvarchar(100),
 	@Phone nvarchar(50),
 	@Comment nvarchar(500),
