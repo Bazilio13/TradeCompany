@@ -26,6 +26,7 @@ namespace TradeCompany_UI
     {
         private int _id;
         private List<WishModel> _wishList = new List<WishModel>();
+        private List<OrderModel> _orderList = new List<OrderModel>();
         private MapsDTOtoModel _map = new MapsDTOtoModel();
 
 
@@ -34,6 +35,7 @@ namespace TradeCompany_UI
             InitializeComponent();
             _id = id;
             _wishList = _map.MapWishesDTOToWishesModelListByID(_id);
+            _orderList = _map.MapOrdersDTOToOrdersModelByClientID(_id);
         } 
 
         public OneClient()
@@ -44,11 +46,12 @@ namespace TradeCompany_UI
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+
             MapsDTOtoModel map = new MapsDTOtoModel();
 
             if (_id != -1)
             {
-
+                dgOrdersTable.ItemsSource = _orderList;
                 ClientModel client = map.MapClientDTOToClientModelByID(_id);
                 textBoxName.Text = client.Name;
                 if (client.INN != null)
@@ -132,7 +135,7 @@ namespace TradeCompany_UI
             client.Phone = textBoxPhone.Text;
             client.ContactPerson = textBoxContactPerson.Text;
             client.Comment = textBoxComments.Text;
-            client.LastOrderDate = DateTime.Now; // что-то нужно сделат с нулевой датой 
+            //client.LastOrderDate = _orderList[0].Datetime;
             client.Type = (bool)RadioButtonTypePersonF.IsChecked; 
             client.CorporateBody = (bool)RadioButtonTypeBayO.IsChecked; 
             return client;

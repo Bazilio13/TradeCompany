@@ -226,6 +226,23 @@ namespace TradeCompany_DAL
                     });
                 }
             }
-        }        
+        }
+
+        public List<OrdersDTO> GetOrdersByClientID(int id)
+        {
+            List<OrdersDTO> ordersList = new List<OrdersDTO>();
+
+            string query = "exec TradeCompany_DataBase.GetOrdersByClientID @id";
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                ordersList = dbConnection.Query<OrdersDTO>(query, new { id }).AsList<OrdersDTO>();
+            }
+
+            return ordersList;
+        }
+
+
+
+
     }
 }
