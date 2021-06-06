@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,7 +27,8 @@ namespace TradeCompany_UI
         private int _id;
         private List<WishModel> _wishList = new List<WishModel>();
         private List<OrderModel> _orderList = new List<OrderModel>();
-        private List<String> _addresses = new List<String>();
+        private List<String> _oldAddresses = new List<String>();
+        private List<String> _newAddresses = new List<String>();
         private MapsDTOtoModel _map = new MapsDTOtoModel();
 
 
@@ -84,7 +85,7 @@ namespace TradeCompany_UI
                 else { RadioButtonTypeBayR.IsChecked = true; }
 
 
-                _addresses = map.MapClientDTOToAddressesByID(_id);
+                _oldAddresses = map.MapClientDTOToAddressesByID(_id);
 
                 AddAddress();
 
@@ -126,7 +127,7 @@ namespace TradeCompany_UI
                     _id = _map.MapLastClientDTOToLastClientBaseModel().ID;
                 }
                 maps.MapWishListModelToWishListDTO(_wishList, _id);
-                maps.MapAddressesListModelToAddressesListDTO(_addresses, _id);
+                maps.MapAddressesListModelToAddressesListDTO(_newAddresses, _id);
             }
         }
 
@@ -245,7 +246,7 @@ namespace TradeCompany_UI
 
         private void AddAddress()
         {
-            foreach (String address in _addresses)
+            foreach (String address in _oldAddresses)
             {
                 stackPanelAddresses.Children.Add(new TextBox
                 {
@@ -274,7 +275,7 @@ namespace TradeCompany_UI
                     Margin = new Thickness(0, 5, 0, 0)
                 });
                 ((TextBox)stackPanelAddresses.Children[0]).Text = "";
-                _addresses.Add(addedAddress);
+                _newAddresses.Add(addedAddress);
             }
         }
     }
