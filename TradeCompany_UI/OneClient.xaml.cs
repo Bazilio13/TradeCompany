@@ -27,6 +27,7 @@ namespace TradeCompany_UI
         private int _id;
         private List<WishModel> _wishList = new List<WishModel>();
         private List<OrderModel> _orderList = new List<OrderModel>();
+        private List<String> _addresses = new List<String>();
         private MapsDTOtoModel _map = new MapsDTOtoModel();
 
 
@@ -36,8 +37,8 @@ namespace TradeCompany_UI
             _id = id;
             _wishList = _map.MapWishesDTOToWishesModelListByID(_id);
             _orderList = _map.MapOrdersDTOToOrdersModelByClientID(_id);
-        }
-
+        }
+
         public OneClient()
         {
             InitializeComponent();
@@ -76,8 +77,8 @@ namespace TradeCompany_UI
                 {
                     RadioButtonTypePersonF.IsChecked = true;
                 }
-                else { RadioButtonTypePersonU.IsChecked = true; }
-
+                else { RadioButtonTypePersonU.IsChecked = true; } 
+                
                 if (client.CorporateBody)
                 {
                     RadioButtonTypeBayO.IsChecked = true;
@@ -85,7 +86,10 @@ namespace TradeCompany_UI
                 else { RadioButtonTypeBayR.IsChecked = true; }
 
 
-                List<AddressModel> addresses = map.MapClientDTOToAddressesModelByID(_id);
+                _addresses = map.MapClientDTOToAddressesByID(_id);
+
+                AddAddress();
+
                 LoadWishPanel();
 
                 //List<WishModel> wishList = map.MapWishesDTOToWishesModelListByID(_id);
@@ -104,143 +108,177 @@ namespace TradeCompany_UI
             List<ProductBaseModel> allProducts = product.GetAllProducts(); //Заменить на модель продуктов после мерджа
             cbWish.ItemsSource = allProducts;
 
-        }
-
-        private void ChangeClient(object sender, RoutedEventArgs e)
+        }
+
+        private void ChangeClient(object sender, RoutedEventArgs e)
+        {
+            ButtonChange.IsEnabled = false;
+        }
+
+        private void SaveClient(object sender, RoutedEventArgs e)
+        {
+            if (FieldValidation())
+            {
+                ClientModel client = new ClientModel();
+                client = ToFormClientModel();
+                MapsModelToDTO maps = new MapsModelToDTO();
+                maps.MapClientModelToClientDTO(client);
+                if (_id == -1)
+                {
+                    _id = _map.MapLastClientDTOToLastClientBaseModel().ID;
+                }
+                maps.MapWishListModelToWishListDTO(_wishList, _id);
+            }
+        }
+
+        private ClientModel ToFormClientModel()
+        {
+            ClientModel client = new ClientModel();
+            client.ID = _id;
+            client.Name = textBoxName.Text.Trim();
+            client.INN = textBoxINN.Text.Trim();
+            client.E_mail = textBoxE_mail.Text.Trim(' ');
+            client.Phone = textBoxPhone.Text;
+            client.ContactPerson = textBoxContactPerson.Text;
+            client.Comment = textBoxComments.Text;
+            client.Type = (bool)RadioButtonTypePersonF.IsChecked;
+            client.CorporateBody = (bool)RadioButtonTypeBayO.IsChecked;
+            return client;
+        }
+
+        private bool FieldValidation()
+        {
+            bool validation = true;
+            if (string.IsNullOrEmpty(textBoxName.Text.Trim()))
+            {
+                textBoxName.Background = Brushes.Pink;
+                validation = false;
+            }
+            if (string.IsNullOrEmpty(textBoxPhone.Text.Trim()))
+            {
+                textBoxPhone.Background = Brushes.Pink;
+                validation = false;
+            }
+            if (string.IsNullOrEmpty(textBoxContactPerson.Text.Trim()))
+            {
+                textBoxContactPerson.Background = Brushes.Pink;
+                validation = false;
+            }
+            //int member;
+            //if(textBoxINN.Text.Trim(' ') != null)
+            //{
+            //    if (!Int32.TryParse(textBoxINN.Text, out member))
+            //    {
+            //        textBoxINN.Background = Brushes.Pink;
+            //        validation = false;
+            //    }
+            //}
+            return validation;
+        }
+
+        private void Focus(object sender, MouseButtonEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            textBox.Background = Brushes.White;
+        }
+
+        private void ValidationByNumber(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !(e.Text == "0" || e.Text == "1" || e.Text == "2" || e.Text == "3" || e.Text == "4" ||
+                e.Text == "5" || e.Text == "6" || e.Text == "7" || e.Text == "8" || e.Text == "9" || e.Text == "+" ||
+                e.Text == "(" || e.Text == ")");
+        }
+
+        private void ValidationByINN(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !(Char.IsDigit(e.Text, 0));
+        }
+
+        private void clicNewWishProduct(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox comboBox = (ComboBox)sender;
+            ProductBaseModel selectedItem = (ProductBaseModel)comboBox.SelectedItem;
+            if (selectedItem != null && comboBox.Text.Length >= 3)
+            {
+                WishModel wish = new WishModel();
+                wish.ID = selectedItem.ID;
+                wish.Name = selectedItem.Name;
+                _wishList.Add(wish);
+                WPWish.Children.Clear();
+                LoadWishPanel();
+            }
+
+            //MessageBox.Show(selectedItem.Name.ToString()); 
+        }
+
+        private void LoadWishPanel()
+        {
+            int i = 0;
+            foreach (WishModel wish in _wishList)
+            {
+                i++;
+                Button tag = new Button();
+                tag.Content = wish.Name;
+                tag.Margin = new Thickness(5, 5, 5, 5);
+                tag.Padding = new Thickness(5, 3, 5, 3);
+                tag.Background = new SolidColorBrush(Color.FromRgb(243, 223, 196));
+                tag.TabIndex = i;
+                tag.Click += (sender, e) =>
+                  {
+                      Button tmp = (Button)sender;
+                      ChangeWishList(tmp.Content.ToString());
+                  };
+                WPWish.Children.Add(tag);
+            }
+        }
+
+        private void ChangeWishList(string name)
+        {
+            foreach (WishModel wish in _wishList)
+            {
+                if (wish.Name == name)
+                {
+                    _wishList.Remove(wish);
+                    break;
+                }
+            }
+            WPWish.Children.Clear();
+            LoadWishPanel();
+        }
+
+        private void AddAddress()
         {
-            ButtonChange.IsEnabled = false;
-        }
-
-        private void SaveClient(object sender, RoutedEventArgs e)
-        {
-            if (FieldValidation())
+            foreach (String address in _addresses)
             {
-                ClientModel client = new ClientModel();
-                client = ToFormClientModel();
-                MapsModelToDTO maps = new MapsModelToDTO();
-                maps.MapClientModelToClientDTO(client);
-                if (_id == -1)
+                stackPanelAddresses.Children.Add(new TextBox
                 {
-                    _id = _map.MapLastClientDTOToLastClientBaseModel().ID;
-                }
-                maps.MapWishListModelToWishListDTO(_wishList, _id);
+                    Text = address,
+                    HorizontalAlignment = HorizontalAlignment.Left,
+                    TextWrapping = TextWrapping.Wrap,
+                    Width = 390,
+                    Height = 21,
+                    Margin = new Thickness(0, 5, 0, 0)
+                });          
             }
         }
 
-        private ClientModel ToFormClientModel()
+        private void buttonAddAddress_Click(object sender, RoutedEventArgs e)
         {
-            ClientModel client = new ClientModel();
-            client.ID = _id;
-            client.Name = textBoxName.Text.Trim();
-            client.INN = textBoxINN.Text.Trim();
-            client.E_mail = textBoxE_mail.Text.Trim(' ');
-            client.Phone = textBoxPhone.Text;
-            client.ContactPerson = textBoxContactPerson.Text;
-            client.Comment = textBoxComments.Text;
-            client.Type = (bool)RadioButtonTypePersonF.IsChecked;
-            client.CorporateBody = (bool)RadioButtonTypeBayO.IsChecked;
-            return client;
-        }
-
-        private bool FieldValidation()
-        {
-            bool validation = true;
-            if (string.IsNullOrEmpty(textBoxName.Text.Trim()))
+            String addedAddress = ((TextBox)stackPanelAddresses.Children[0]).Text;
+            if (addedAddress != "")
             {
-                textBoxName.Background = Brushes.Pink;
-                validation = false;
-            }
-            if (string.IsNullOrEmpty(textBoxPhone.Text.Trim()))
-            {
-                textBoxPhone.Background = Brushes.Pink;
-                validation = false;
-            }
-            if (string.IsNullOrEmpty(textBoxContactPerson.Text.Trim()))
-            {
-                textBoxContactPerson.Background = Brushes.Pink;
-                validation = false;
-            }
-            //int member;
-            //if(textBoxINN.Text.Trim(' ') != null)
-            //{
-            //    if (!Int32.TryParse(textBoxINN.Text, out member))
-            //    {
-            //        textBoxINN.Background = Brushes.Pink;
-            //        validation = false;
-            //    }
-            //}
-            return validation;
-        }
-
-        private void Focus(object sender, MouseButtonEventArgs e)
-        {
-            TextBox textBox = (TextBox)sender;
-            textBox.Background = Brushes.White;
-        }
-
-        private void ValidationByNumber(object sender, TextCompositionEventArgs e)
-        {
-            e.Handled = !(e.Text == "0" || e.Text == "1" || e.Text == "2" || e.Text == "3" || e.Text == "4" ||
-                e.Text == "5" || e.Text == "6" || e.Text == "7" || e.Text == "8" || e.Text == "9" || e.Text == "+" ||
-                e.Text == "(" || e.Text == ")");
-        }
-
-        private void ValidationByINN(object sender, TextCompositionEventArgs e)
-        {
-            e.Handled = !(Char.IsDigit(e.Text, 0));
-        }
-
-        private void clicNewWishProduct(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBox comboBox = (ComboBox)sender;
-            ProductBaseModel selectedItem = (ProductBaseModel)comboBox.SelectedItem;
-            if (selectedItem != null && comboBox.Text.Length >= 3)
-            {
-                WishModel wish = new WishModel();
-                wish.ID = selectedItem.ID;
-                wish.Name = selectedItem.Name;
-                _wishList.Add(wish);
-                WPWish.Children.Clear();
-                LoadWishPanel();
-            }
-
-            //MessageBox.Show(selectedItem.Name.ToString()); 
-        }
-
-        private void LoadWishPanel()
-        {
-            int i = 0;
-            foreach (WishModel wish in _wishList)
-            {
-                i++;
-                Button tag = new Button();
-                tag.Content = wish.Name;
-                tag.Margin = new Thickness(5, 5, 5, 5);
-                tag.Padding = new Thickness(5, 3, 5, 3);
-                tag.Background = new SolidColorBrush(Color.FromRgb(243, 223, 196));
-                tag.TabIndex = i;
-                tag.Click += (sender, e) =>
-                  {
-                      Button tmp = (Button)sender;
-                      ChangeWishList(tmp.Content.ToString());
-                  };
-                WPWish.Children.Add(tag);
-            }
-        }
-
-        private void ChangeWishList(string name)
-        {
-            foreach (WishModel wish in _wishList)
-            {
-                if (wish.Name == name)
+                stackPanelAddresses.Children.Add(new TextBox
                 {
-                    _wishList.Remove(wish);
-                    break;
-                }
+                    Text = addedAddress,
+                    HorizontalAlignment = HorizontalAlignment.Left,
+                    TextWrapping = TextWrapping.Wrap,
+                    Width = 390,
+                    Height = 21,
+                    Margin = new Thickness(0, 5, 0, 0)
+                });
+                ((TextBox)stackPanelAddresses.Children[0]).Text = "";
+                _addresses.Add(addedAddress);
             }
-            WPWish.Children.Clear();
-            LoadWishPanel();
         }
-
     }
 }
