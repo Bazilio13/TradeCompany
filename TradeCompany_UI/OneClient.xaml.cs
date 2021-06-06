@@ -27,6 +27,7 @@ namespace TradeCompany_UI
         private int _id;
         private List<WishModel> _wishList = new List<WishModel>();
         private List<OrderModel> _orderList = new List<OrderModel>();
+        private List<String> _addresses = new List<String>();
         private MapsDTOtoModel _map = new MapsDTOtoModel();
 
 
@@ -83,7 +84,10 @@ namespace TradeCompany_UI
                 else { RadioButtonTypeBayR.IsChecked = true; }
 
 
-                List<AddressModel> addresses = map.MapClientDTOToAddressesModelByID(_id);
+                _addresses = map.MapClientDTOToAddressesByID(_id);
+
+                AddAddress();
+
                 LoadWishPanel();
 
                 //List<WishModel> wishList = map.MapWishesDTOToWishesModelListByID(_id);
@@ -122,6 +126,7 @@ namespace TradeCompany_UI
                     _id = _map.MapLastClientDTOToLastClientBaseModel().ID;
                 }
                 maps.MapWishListModelToWishListDTO(_wishList, _id);
+                maps.MapAddressesListModelToAddressesListDTO(_addresses, _id);
             }
         }
 
@@ -238,5 +243,42 @@ namespace TradeCompany_UI
             LoadWishPanel();
         }
 
+        private void AddAddress()
+        {
+            foreach (String address in _addresses)
+            {
+                stackPanelAddresses.Children.Add(new TextBox
+                {
+                    Text = address,
+                    HorizontalAlignment = HorizontalAlignment.Left,
+                    TextWrapping = TextWrapping.Wrap,
+                    Width = 390,
+                    Height = 21,
+                    Margin = new Thickness(0, 5, 0, 0)
+                });          
+            }
+        }
+
+        private void buttonAddAddress_Click(object sender, RoutedEventArgs e)
+        {
+            String addedAddress = ((TextBox)stackPanelAddresses.Children[0]).Text;
+            if (addedAddress != "")
+            {
+                stackPanelAddresses.Children.Add(new TextBox
+                {
+                    Text = addedAddress,
+                    HorizontalAlignment = HorizontalAlignment.Left,
+                    TextWrapping = TextWrapping.Wrap,
+                    Width = 390,
+                    Height = 21,
+                    Margin = new Thickness(0, 5, 0, 0)
+                });
+                ((TextBox)stackPanelAddresses.Children[0]).Text = "";
+                _addresses.Add(addedAddress);
+            }
+        }
     }
+
+
+
 }

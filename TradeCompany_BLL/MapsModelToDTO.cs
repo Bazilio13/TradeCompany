@@ -45,6 +45,17 @@ namespace TradeCompany_BLL
 
         }
 
+        public void MapAddressesListModelToAddressesListDTO(List<String> addressesList, int id)
+        {
+            AddressesData data = new AddressesData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
+            //data.DeleteAddressByID(id);
+
+            foreach (String address in addressesList)
+            {
+                data.AddAddress(id, address);
+            }
+        }
+
     }
 
 }
