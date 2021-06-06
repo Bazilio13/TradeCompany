@@ -69,7 +69,8 @@
                 </DataGrid.Columns>
             </DataGrid>
 
-            <ComboBox x:Name="cbWish" Text="Интересующие товары"  StaysOpenOnEdit="True"  IsEditable="True" SelectionChanged="clicNewWishProduct" DisplayMemberPath="Name" Margin="0,-3,0,10" />
+            <ComboBox x:Name="cbWish" Text="Интересующие товары"  StaysOpenOnEdit="True"  IsEditable="True" SelectionChanged="clicNewWishProduct" DisplayMemberPath="Name" Margin="0,-3,0,10" />
+
             <WrapPanel x:Name ="WPWish"/>
 
         </StackPanel>

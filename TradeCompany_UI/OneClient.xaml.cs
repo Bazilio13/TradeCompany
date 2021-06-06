@@ -38,8 +38,10 @@ namespace TradeCompany_UI
             _id = id;
             _wishList = _map.MapWishesDTOToWishesModelListByID(_id);
             _orderList = _map.MapOrdersDTOToOrdersModelByClientID(_id);
-        }
-
+        }
+
+
+
         public OneClient()
         {
             InitializeComponent();
@@ -109,16 +111,23 @@ namespace TradeCompany_UI
             List<ProductBaseModel> allProducts = product.GetAllProducts(); //Заменить на модель продуктов после мерджа
             cbWish.ItemsSource = allProducts;
 
-        }
-
-        private void ChangeClient(object sender, RoutedEventArgs e)
+        }
+
+
+
+        private void ChangeClient(object sender, RoutedEventArgs e)
+
         {
             ButtonChange.IsEnabled = false;
-        }
-
-        private void SaveClient(object sender, RoutedEventArgs e)
+        }
+
+
+
+        private void SaveClient(object sender, RoutedEventArgs e)
+
         {
-            if (FieldValidation())
+            if (FieldValidation())
+
             {
                 ClientModel client = new ClientModel();
                 client = ToFormClientModel();
@@ -131,10 +140,14 @@ namespace TradeCompany_UI
                 maps.MapWishListModelToWishListDTO(_wishList, _id);
                 maps.MapAddressesListModelToAddressesListDTO(_newAddresses, _id);
             }
-        }
-        private ClientModel ToFormClientModel()
-        {
-            ClientModel client = new ClientModel();
+        }
+
+        private ClientModel ToFormClientModel()
+
+        {
+
+            ClientModel client = new ClientModel();
+
             client.ID = _id;
             client.Name = textBoxName.Text.Trim();
             client.INN = textBoxINN.Text.Trim();
@@ -143,113 +156,114 @@ namespace TradeCompany_UI
             client.ContactPerson = textBoxContactPerson.Text;
             client.Comment = textBoxComments.Text;
             client.Type = (bool)RadioButtonTypePersonF.IsChecked;
-            client.CorporateBody = (bool)RadioButtonTypeBayO.IsChecked;
-            return client;
-        }
-
-        private bool FieldValidation()
-        {
-            bool validation = true;
-            if (string.IsNullOrEmpty(textBoxName.Text.Trim()))
-            {
-                textBoxName.Background = Brushes.Pink;
-                validation = false;
-            }
-            if (string.IsNullOrEmpty(textBoxPhone.Text.Trim()))
-            {
-                textBoxPhone.Background = Brushes.Pink;
-                validation = false;
-            }
-            if (string.IsNullOrEmpty(textBoxContactPerson.Text.Trim()))
-            {
-                textBoxContactPerson.Background = Brushes.Pink;
-                validation = false;
-            }
-            //int member;
-            //if(textBoxINN.Text.Trim(' ') != null)
-            //{
-            //    if (!Int32.TryParse(textBoxINN.Text, out member))
-            //    {
-            //        textBoxINN.Background = Brushes.Pink;
-            //        validation = false;
-            //    }
-            //}
-            return validation;
-        }
-
-        private void Focus(object sender, MouseButtonEventArgs e)
-        {
-            TextBox textBox = (TextBox)sender;
-            textBox.Background = Brushes.White;
-        }
-
-        private void ValidationByNumber(object sender, TextCompositionEventArgs e)
-        {
-            e.Handled = !(e.Text == "0" || e.Text == "1" || e.Text == "2" || e.Text == "3" || e.Text == "4" ||
-                e.Text == "5" || e.Text == "6" || e.Text == "7" || e.Text == "8" || e.Text == "9" || e.Text == "+" ||
-                e.Text == "(" || e.Text == ")");
-        }
-
-        private void ValidationByINN(object sender, TextCompositionEventArgs e)
-        {
-            e.Handled = !(Char.IsDigit(e.Text, 0));
-        }
-
-        private void clicNewWishProduct(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBox comboBox = (ComboBox)sender;
-            ProductBaseModel selectedItem = (ProductBaseModel)comboBox.SelectedItem;
-            if (selectedItem != null && comboBox.Text.Length >= 3)
-            {
-                WishModel wish = new WishModel();
-                wish.ID = selectedItem.ID;
-                wish.Name = selectedItem.Name;
-                _wishList.Add(wish);
-                WPWish.Children.Clear();
-                LoadWishPanel();
-            }
-
-            //MessageBox.Show(selectedItem.Name.ToString()); 
-        }
-
-        private void LoadWishPanel()
-        {
-            int i = 0;
-            foreach (WishModel wish in _wishList)
-            {
-                i++;
-                Button tag = new Button();
-                tag.Content = wish.Name;
-                tag.Margin = new Thickness(5, 5, 5, 5);
-                tag.Padding = new Thickness(5, 3, 5, 3);
-                tag.Background = new SolidColorBrush(Color.FromRgb(243, 223, 196));
-                tag.TabIndex = i;
-                tag.Click += (sender, e) =>
-                  {
-                      Button tmp = (Button)sender;
-                      ChangeWishList(tmp.Content.ToString());
-                  };
-                WPWish.Children.Add(tag);
-            }
-        }
-
-        private void ChangeWishList(string name)
-        {
-            foreach (WishModel wish in _wishList)
-            {
-                if (wish.Name == name)
-                {
-                    _wishList.Remove(wish);
-                    break;
-                }
-            }
-            WPWish.Children.Clear();
-            LoadWishPanel();
-        }
-
+            client.CorporateBody = (bool)RadioButtonTypeBayO.IsChecked;
+
+            return client;
+        }
+
+        private bool FieldValidation()
+        {
+            bool validation = true;
+            if (string.IsNullOrEmpty(textBoxName.Text.Trim()))
+            {
+                textBoxName.Background = Brushes.Pink;
+                validation = false;
+            }
+            if (string.IsNullOrEmpty(textBoxPhone.Text.Trim()))
+            {
+                textBoxPhone.Background = Brushes.Pink;
+                validation = false;
+            }
+            if (string.IsNullOrEmpty(textBoxContactPerson.Text.Trim()))
+            {
+                textBoxContactPerson.Background = Brushes.Pink;
+                validation = false;
+            }
+            //int member;
+            //if(textBoxINN.Text.Trim(' ') != null)
+            //{
+            //    if (!Int32.TryParse(textBoxINN.Text, out member))
+            //    {
+            //        textBoxINN.Background = Brushes.Pink;
+            //        validation = false;
+            //    }
+            //}
+            return validation;
+        }
+
+        private void Focus(object sender, MouseButtonEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            textBox.Background = Brushes.White;
+        }
+
+        private void ValidationByNumber(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !(e.Text == "0" || e.Text == "1" || e.Text == "2" || e.Text == "3" || e.Text == "4" ||
+                e.Text == "5" || e.Text == "6" || e.Text == "7" || e.Text == "8" || e.Text == "9" || e.Text == "+" ||
+                e.Text == "(" || e.Text == ")");
+        }
+
+        private void ValidationByINN(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !(Char.IsDigit(e.Text, 0));
+        }
+
+        private void clicNewWishProduct(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox comboBox = (ComboBox)sender;
+            ProductBaseModel selectedItem = (ProductBaseModel)comboBox.SelectedItem;
+            if (selectedItem != null && comboBox.Text.Length >= 3)
+            {
+                WishModel wish = new WishModel();
+                wish.ID = selectedItem.ID;
+                wish.Name = selectedItem.Name;
+                _wishList.Add(wish);
+                WPWish.Children.Clear();
+                LoadWishPanel();
+            }
+
+            //MessageBox.Show(selectedItem.Name.ToString()); 
+        }
+
+        private void LoadWishPanel()
+        {
+            int i = 0;
+            foreach (WishModel wish in _wishList)
+            {
+                i++;
+                Button tag = new Button();
+                tag.Content = wish.Name;
+                tag.Margin = new Thickness(5, 5, 5, 5);
+                tag.Padding = new Thickness(5, 3, 5, 3);
+                tag.Background = new SolidColorBrush(Color.FromRgb(243, 223, 196));
+                tag.TabIndex = i;
+                tag.Click += (sender, e) =>
+                  {
+                      Button tmp = (Button)sender;
+                      ChangeWishList(tmp.Content.ToString());
+                  };
+                WPWish.Children.Add(tag);
+            }
+        }
+
+        private void ChangeWishList(string name)
+        {
+            foreach (WishModel wish in _wishList)
+            {
+                if (wish.Name == name)
+                {
+                    _wishList.Remove(wish);
+                    break;
+                }
+            }
+            WPWish.Children.Clear();
+            LoadWishPanel();
+        }
+
         private void AddAddress()
         {
-            foreach (String address in _oldAddresses)
+           foreach (String address in _oldAddresses)
             {
                 stackPanelAddresses.Children.Add(new TextBox
                 {
@@ -258,7 +272,8 @@ namespace TradeCompany_UI
                     TextWrapping = TextWrapping.Wrap,
                     Width = 390,
                     Height = 21,
-                    Margin = new Thickness(0, 5, 0, 0)
+                    Margin = new Thickness(0, 5, 0, 0),
+                    IsEnabled = false
                 });          
             }
         }
@@ -275,8 +290,9 @@ namespace TradeCompany_UI
                     TextWrapping = TextWrapping.Wrap,
                     Width = 390,
                     Height = 21,
-                    Margin = new Thickness(0, 5, 0, 0)
-                });
+                    Margin = new Thickness(0, 5, 0, 0),
+                    IsEnabled = false
+                }); ;
                 ((TextBox)stackPanelAddresses.Children[0]).Text = "";
                 _newAddresses.Add(addedAddress);
             }
