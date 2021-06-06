@@ -139,6 +139,7 @@
     <Build Include="TradeCompany_DataBase\Stored Procedures\DeleteWishListByID.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\AddWishByID.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\GetLastClient.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetOrderByClientID.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="TradeCompany_DataBase.refactorlog" />
