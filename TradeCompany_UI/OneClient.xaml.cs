@@ -152,15 +152,15 @@ namespace TradeCompany_UI
                 textBoxContactPerson.Background = Brushes.Pink;
                 validation = false;
             }
-            int member;
-            if(textBoxINN.Text.Trim(' ') != null)
-            {
-                if (!Int32.TryParse(textBoxINN.Text, out member))
-                {
-                    textBoxINN.Background = Brushes.Pink;
-                    validation = false;
-                }
-            }
+            //int member;
+            //if(textBoxINN.Text.Trim(' ') != null)
+            //{
+            //    if (!Int32.TryParse(textBoxINN.Text, out member))
+            //    {
+            //        textBoxINN.Background = Brushes.Pink;
+            //        validation = false;
+            //    }
+            //}
             return validation;
         }
 
