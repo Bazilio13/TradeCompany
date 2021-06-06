@@ -63,7 +63,7 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding ="{Binding Path = ID}"  IsReadOnly="True" Header="id" Width="30"/>
                     <DataGridTextColumn Binding ="{Binding Path = Address}"  IsReadOnly="True" Header="Адрес" Width="150"/>
-                    <DataGridTextColumn Binding ="{Binding Path = Datetime}" IsReadOnly="True" Header="Дата" Width="200"/>
+                    <DataGridTextColumn Binding ="{Binding Path = Datetime}" IsReadOnly="True" Header="Дата" Width="85"/>
                     <DataGridTextColumn Binding ="{Binding Path = Comment}" IsReadOnly="True" Header="Комментарий" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
