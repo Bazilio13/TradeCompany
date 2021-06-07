@@ -47,9 +47,16 @@ namespace TradeCompany_BLL
             _productsData.AddProduct(productDTO);
         }
 
+        public void AddNewProductGroup(ProductGroupModel groupModel)
+        {
+            ProductGroupDTO groupDTO = _mapsModelToDTO.MapProductGroupModelToProductGroupDTO(groupModel);
+            _groupsData.AddProductGroup(groupDTO);
+        }
+
         public void AddProductToProductGroup(int ProductID, int ProductGroupID)
         {
             _productsData.AddProductToProductGroup(ProductID, ProductGroupID);
         }
+
     }
 }

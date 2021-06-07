@@ -21,6 +21,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Prism.Wpf" Version="8.1.97" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\TradeCompany_BLL\TradeCompany_BLL.csproj" />
     <ProjectReference Include="..\TradeCompany_DAL\TradeCompany_DAL.csproj" />
   </ItemGroup>

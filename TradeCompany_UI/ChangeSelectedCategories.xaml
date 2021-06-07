@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TradeCompany_UI"
         mc:Ignorable="d"
-        Title="" Height="195" Width="382" FontSize="14">
+        Title="" Height="195" Width="382" FontSize="14" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

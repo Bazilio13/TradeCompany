@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Prism.Services.Dialogs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,20 +24,20 @@ namespace TradeCompany_UI
     /// </summary>
     public partial class AddNewProduct : Page
     {
-        private ProductsDataAccess _products = new ProductsDataAccess();
+        private ProductsDataAccess _productsData = new ProductsDataAccess();
         private ProductModel _product = new ProductModel();
-        private List<int> _chosenCategoriesIDs = new List<int>();
-        private List<ProductGroupModel> _allGroups;
+        private ProductGroupModel _newGroup = new ProductGroupModel();
+        private List<int> _chosenGroupsIDs = new List<int>();
         private List<ProductGroupModel> _chosenGroups = new List<ProductGroupModel>();
+        private List<ProductGroupModel> _allGroups;
 
         public AddNewProduct()
         {
             InitializeComponent();
             ID_Text.Text = GetCurrentProductID().ToString();
-
-            _allGroups = _products.GetAllGroups();
-            Category.ItemsSource = _allGroups;
-            Category.DisplayMemberPath = "Name";
+            
+            RefreshGroupsCombobox();
+            
 
             CreationDate.Text = DateTime.Now.ToString();
             Button_Save.IsEnabled = false;
@@ -52,10 +53,10 @@ namespace TradeCompany_UI
             _product.Description = Text_Description.Text;
             _product.Comments = Text_Comments.Text;
             _product.LastSupplyDate = DateTime.Now;
-            _products.AddNewProduct(_product);
-            foreach(int ID in _chosenCategoriesIDs)
+            _productsData.AddNewProduct(_product);
+            foreach(int ID in _chosenGroupsIDs)
             {
-                _products.AddProductToProductGroup(GetCurrentProductID() - 1, ID);
+                _productsData.AddProductToProductGroup(GetCurrentProductID() - 1, ID);
             }
 
             frame.Content = new ProductCatalog();
@@ -90,30 +91,46 @@ namespace TradeCompany_UI
 
         private void Buton_Cancel_Click(object sender, RoutedEventArgs e)
         {
-            frame.Content = new ProductCatalog();
+            if(Name_Text.Text != "" || Text_RetailPrice.Text != "" || Text_WholesalePrice.Text != ""
+                || Text_StockAmount.Text != "" || ChosenCategories.Text != "Не выбрано" || MeasureUnit.Text != ""
+                || Text_Description.Text != "" || Text_Comments.Text != "")
+            {
+                if (MessageBox.Show("Есть заполненные поля. Отменить?",
+                        "Подтверждение", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    frame.Content = new ProductCatalog();
+                }
+            }
+            else
+            {
+                frame.Content = new ProductCatalog();
+            }
         }
 
         private void AddCategoryButton_Click(object sender, RoutedEventArgs e)
         {
             //формируем список ID категорий, которые надо присвоить нашему продукту
             ProductGroupModel selectedItem = (ProductGroupModel)Category.SelectedItem;
-            _chosenGroups.Add(selectedItem);
-            _chosenCategoriesIDs.Add(selectedItem.ID);
-
-            if (ChosenCategories.Text == "Не выбрано")
+            if(!(selectedItem is null))
             {
-                ChosenCategories.Text = "";
-            }
-            if (ChosenCategories.Text.Contains(Category.Text))
-            {
+                if (ChosenCategories.Text.Contains(Category.Text))
+                {
+                    Category.Text = "";
+                    MessageBox.Show("Данная категория уже выбрана");
+                    return;
+                }
+                if (ChosenCategories.Text == "Не выбрано")
+                {
+                    ChosenCategories.Text = "";
+                }
+                ChosenCategories.Text += Category.Text + " / ";
                 Category.Text = "";
-                MessageBox.Show("Данная категория уже выбрана");
-                return;
-            }
-            ChosenCategories.Text += Category.Text + " / ";
-            Category.Text = "";            
 
-            EnableSaveButton();
+                _chosenGroups.Add(selectedItem);
+                _chosenGroupsIDs.Add(selectedItem.ID);
+
+                EnableSaveButton();
+            }
         }
 
         private void MeasureUnit_DropDownClosed(object sender, EventArgs e)
@@ -187,19 +204,46 @@ namespace TradeCompany_UI
 
         private int GetCurrentProductID()
         {
-            ProductBaseModel lastProductInDB = _products.GetAllProducts()[_products.GetAllProducts().Count - 1];
+            ProductBaseModel lastProductInDB = _productsData.GetAllProducts()[_productsData.GetAllProducts().Count - 1];
             int currentProductID = lastProductInDB.ID + 1;
             return currentProductID;
         }
 
         private void ChangeCategoriesButton_Click(object sender, RoutedEventArgs e)
         {
-            ChangeSelectedCategories changeCtaegoriesWindow = new ChangeSelectedCategories(_chosenGroups, ChosenCategories);
-
-            if (changeCtaegoriesWindow.ShowDialog() == true)
+            if(_chosenGroups.Count > 0) 
             {
-                changeCtaegoriesWindow.Close();
+                ChangeSelectedCategories changeCtaegoriesWindow = new ChangeSelectedCategories(_chosenGroups, ChosenCategories);
+
+                if (changeCtaegoriesWindow.ShowDialog() == true)
+                {
+                    changeCtaegoriesWindow.Close();
+                }
             }
+            else
+            {
+                MessageBox.Show("Не выбрано ни одной категории");
+            }
+        }
+
+        private void CreateCategoryButton_Click(object sender, RoutedEventArgs e)
+        {
+            AddNewCategoryWindow addNewCategoryWindow = new AddNewCategoryWindow();
+
+            if (addNewCategoryWindow.ShowDialog() == true)
+            {
+                _newGroup.Name = addNewCategoryWindow.NewCategoryName;
+                _productsData.AddNewProductGroup(_newGroup);
+                RefreshGroupsCombobox();
+                addNewCategoryWindow.Close();
+            }
+        }
+
+        private void RefreshGroupsCombobox()
+        {
+            _allGroups = _productsData.GetAllGroups();
+            Category.ItemsSource = _allGroups;
+            Category.DisplayMemberPath = "Name";
         }
     }
 }
