@@ -111,37 +111,18 @@ namespace TradeCompany_UI
 
         private void FromPrice_TextChange(object sender, TextChangedEventArgs e)
         {
-            if (RadioButtonRetailPrice.IsChecked == true)
-            {
-                SetUpRetailPrice();
-                NullifyWholesalePrices();
-            }
-            if (RadioButtonWholesalePrice.IsChecked == true)
-            {
-                SetUpWholesalePrice();
-                NullifyRetailPrices();
-            }
+            SetUpPriceFilters();
         }
 
         private void ToPrice_TextChange(object sender, TextChangedEventArgs e)
         {
-            if (RadioButtonRetailPrice.IsChecked == true)
-            {
-                SetUpRetailPrice();
-                NullifyWholesalePrices();
-            }
-            if (RadioButtonWholesalePrice.IsChecked == true)
-            {
-                SetUpWholesalePrice();
-                NullifyRetailPrices();
-            }
+            SetUpPriceFilters();
         }
 
         private void RadioButtonRetailPrice_Checked(object sender, RoutedEventArgs e)
         {
             SetUpRetailPrice();
             NullifyWholesalePrices();
-
         }
 
         private void RadioButtonWholesalePrice_Checked(object sender, RoutedEventArgs e)
@@ -152,24 +133,21 @@ namespace TradeCompany_UI
 
         private void DateFrom_SelectedDateChange(object sender, SelectionChangedEventArgs e)
         {
-            if (DateFrom.SelectedDate > DateUntil.SelectedDate)
-            {
-                DateFrom.SelectedDate = null;
-                DateUntil.SelectedDate = null;
-                MessageBox.Show("Неверный выбор даты");
-            }
+            CheckDates();
             _filtrMinDateTime = DateFrom.SelectedDate;
         }
 
         private void DateUntil_SelectedDateChange(object sender, SelectionChangedEventArgs e)
         {
-            if (DateFrom.SelectedDate > DateUntil.SelectedDate)
+            CheckDates();
+            if(!(DateUntil.SelectedDate is null))
             {
-                DateFrom.SelectedDate = null;
-                DateUntil.SelectedDate = null;
-                MessageBox.Show("Неверный выбор даты");
+                DateTime timeTmp = (DateTime)DateUntil.SelectedDate;
+                timeTmp = timeTmp.AddDays(1);
+                timeTmp = timeTmp.AddMilliseconds(-1);
+                _filtrMaxDateTime = (DateTime?)timeTmp;
             }
-            _filtrMaxDateTime = DateUntil.SelectedDate;
+            
         }
 
         private void ResetFiltersButton_Click(object sender, RoutedEventArgs e)
@@ -225,7 +203,19 @@ namespace TradeCompany_UI
 
             return filtr;
         }  
-        
+        private void SetUpPriceFilters()
+        {
+            if (RadioButtonRetailPrice.IsChecked == true)
+            {
+                SetUpRetailPrice();
+                NullifyWholesalePrices();
+            }
+            if (RadioButtonWholesalePrice.IsChecked == true)
+            {
+                SetUpWholesalePrice();
+                NullifyRetailPrices();
+            }
+        }
         private void NullifyWholesalePrices()
         {
             _filtrToWholesalePrice = null;
@@ -250,6 +240,14 @@ namespace TradeCompany_UI
             _filtrToRetailPrice = InputValidation(_filtrToRetailPrice, ToPrice);
         }
 
-        
+        private void CheckDates()
+        {
+            if (DateFrom.SelectedDate > DateUntil.SelectedDate)
+            {
+                DateFrom.SelectedDate = null;
+                DateUntil.SelectedDate = null;
+                MessageBox.Show("Неверный выбор даты");
+            }
+        }
     }
 }

@@ -163,13 +163,13 @@ namespace TradeCompany_BLL
         public List<ProductBaseModel> MapProductDTOToProductBaseModel(List<ProductDTO> productDTO)
         {
             var config = new MapperConfiguration(cfg => cfg.CreateMap<ProductDTO, ProductBaseModel>()
-            .ForMember(dest => dest.Groups, option => option.MapFrom(sorse => MapProductGroupToProductGroupModel(sorse.Group))));
+            .ForMember(dest => dest.Groups, option => option.MapFrom(sorse => MapProductGroupDTOToProductGroupModel(sorse.Group))));
             Mapper mapper = new Mapper(config);
             List<ProductBaseModel> productBaseModel = mapper.Map<List<ProductBaseModel>>(productDTO);
             return productBaseModel;
         }
 
-        public List<ProductGroupModel> MapProductGroupToProductGroupModel(List<ProductGroupDTO> groupDTO)
+        public List<ProductGroupModel> MapProductGroupDTOToProductGroupModel(List<ProductGroupDTO> groupDTO)
         {
             var config = new MapperConfiguration(cfg => cfg.CreateMap<ProductGroupDTO, ProductGroupModel>()
             .ForMember(dest => dest.Products, option => option.MapFrom(sorse => MapProductDTOToProductBaseModel(sorse.Products))));
@@ -188,5 +188,12 @@ namespace TradeCompany_BLL
             return feedbackModels;
         }
 
+        public List<MeasureUnitsModel> MapMeasureUnitDTOToMeasureUnitModel(List<MeasureUnitsDTO> measureUnits)
+        {
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<MeasureUnitsDTO, MeasureUnitsModel>());
+            Mapper mapper = new Mapper(config);
+            List<MeasureUnitsModel> measureUnitsModels = mapper.Map<List<MeasureUnitsModel>>(measureUnits);
+            return measureUnitsModels;
+        }
     }
 }

@@ -8,17 +8,18 @@
         Title="" Height="195" Width="382" FontSize="14" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="20" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="30" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <WrapPanel Grid.Row="2" HorizontalAlignment="Center" Margin="0,15,0,0">
+        <WrapPanel Grid.Row="3" HorizontalAlignment="Center" Margin="0,15,0,0">
             <Button IsDefault="True" Click="Accept_Click" MinWidth="60" Margin="0,0,10,0" Height="32">Отмена</Button>
             <Button x:Name="DeleteButton" IsCancel="True" MinWidth="60" Height="32" Width="143" Content="Удалить выбранные" Click="DeleteButton_Click"/>
         </WrapPanel>
 
-        <StackPanel x:Name="StackPanel" Grid.RowSpan="2" Height="Auto" Margin="10,10,0,0"/>
+        <StackPanel x:Name="StackPanel" Height="Auto" Margin="46,0,38,0" Grid.Row="2"/>
 
     </Grid>
 </Window>

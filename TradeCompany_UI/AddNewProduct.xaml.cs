@@ -30,14 +30,22 @@ namespace TradeCompany_UI
         private List<int> _chosenGroupsIDs = new List<int>();
         private List<ProductGroupModel> _chosenGroups = new List<ProductGroupModel>();
         private List<ProductGroupModel> _allGroups;
+        private List<MeasureUnitsModel> _allMeasureUnits;
+        private int _currentProductID;
+        private int _measureUnitID;
 
         public AddNewProduct()
         {
             InitializeComponent();
-            ID_Text.Text = GetCurrentProductID().ToString();
+            _currentProductID = GetCurrentProductID();
+
+            ID_Text.Text = _currentProductID.ToString();
             
             RefreshGroupsCombobox();
-            
+
+            _allMeasureUnits = _productsData.GetAllMeasureUnits();
+            MeasureUnit.ItemsSource = _allMeasureUnits;
+            MeasureUnit.DisplayMemberPath = "Name";
 
             CreationDate.Text = DateTime.Now.ToString();
             Button_Save.IsEnabled = false;
@@ -47,7 +55,7 @@ namespace TradeCompany_UI
         {
             _product.Name = Name_Text.Text;
             _product.StockAmount = (float)Convert.ToDouble(Text_StockAmount.Text);
-            _product.MeasureUnit = 1; //добавить подтягивание из таблицы MeasureUnit
+            _product.MeasureUnit = _measureUnitID;
             _product.RetailPrice = (float)Convert.ToDouble(Text_RetailPrice.Text);
             _product.WholesalePrice = (float)Convert.ToDouble(Text_WholesalePrice.Text);
             _product.Description = Text_Description.Text;
@@ -56,7 +64,7 @@ namespace TradeCompany_UI
             _productsData.AddNewProduct(_product);
             foreach(int ID in _chosenGroupsIDs)
             {
-                _productsData.AddProductToProductGroup(GetCurrentProductID() - 1, ID);
+                _productsData.AddProductToProductGroup(_currentProductID, ID);
             }
 
             frame.Content = new ProductCatalog();
@@ -135,6 +143,8 @@ namespace TradeCompany_UI
 
         private void MeasureUnit_DropDownClosed(object sender, EventArgs e)
         {
+            MeasureUnitsModel selectedItem = (MeasureUnitsModel)MeasureUnit.SelectedItem;
+            _measureUnitID = selectedItem.ID;
             EnableSaveButton();
         }
 
@@ -204,7 +214,9 @@ namespace TradeCompany_UI
 
         private int GetCurrentProductID()
         {
-            ProductBaseModel lastProductInDB = _productsData.GetAllProducts()[_productsData.GetAllProducts().Count - 1];
+            //переделать через GetProductByID
+            int lastProductInDBCount = _productsData.GetAllProducts().Count - 1;
+            ProductBaseModel lastProductInDB = _productsData.GetAllProducts()[lastProductInDBCount];
             int currentProductID = lastProductInDB.ID + 1;
             return currentProductID;
         }
