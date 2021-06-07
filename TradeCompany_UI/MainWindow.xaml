@@ -14,7 +14,7 @@
             <ColumnDefinition Width="155"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Frame Name="MainFrame" NavigationUIVisibility="Hidden" Grid.Column="0" Source="StartPage.xaml"/>
+        <Frame Name="MainFrame" Background="#F9F9F9" NavigationUIVisibility="Hidden" Grid.Column="1" Source="StartPage.xaml"/>
         <StackPanel Margin="0,136,0,0" Grid.Column="0" Orientation="Vertical">
             <Button Style="{StaticResource ButtonNavigation}" Click="ProductButton_Click">
                 <StackPanel Height="75" Width="105" Orientation="Vertical">
