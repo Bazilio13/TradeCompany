@@ -36,6 +36,23 @@ namespace TradeCompany_DAL
             return clientsList;
         }
 
+        public List<ClientDTO> GetClientsByParams(int? person, int? sale, DateTime? minData, DateTime? maxData)
+        {
+            List<ClientDTO> clientsList = new List<ClientDTO>();
+            string query = "exec TradeCompany_DataBase.GetClientsByParams @Person, @Sale, @MinData, @MaxData";
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                clientsList = dbConnection.Query<ClientDTO>(query, new { 
+                person,
+                sale,
+                minData,
+                maxData
+                }).AsList<ClientDTO>();
+            }
+
+            return clientsList;
+        }
+
         public ClientDTO GetClientByID(int id)
         {
             ClientDTO client = new ClientDTO();
@@ -46,22 +63,34 @@ namespace TradeCompany_DAL
             }
 
             return client;
+        } 
+
+        public ClientDTO GetLastClient()
+        {
+            ClientDTO client = new ClientDTO();
+            string query = "exec TradeCompany_DataBase.GetLastClient";
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                client = dbConnection.Query<ClientDTO>(query).Single<ClientDTO>();
+            }
+
+            return client;
         }
 
         public void AddClient(ClientDTO client)
         {
-            string query = "exec TradeCompany_DataBase.AddClient @Name, @INN, @Email, @Phone, @Comment, @CorporateBody, @Type, @LastOrderDate";
+            string query = "exec TradeCompany_DataBase.AddClient @Name, @INN, @E_mail, @Phone, @Comment, @CorporateBody, @Type,  @ContactPerson";
             using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
             {
                 dbConnection.Query<ClientDTO>(query, new {
                 client.Name,
                 client.INN,
-                client.Email, 
+                client.E_mail, 
                 client.Phone,
-                client.Type,
+                client.Comment,
                 client.CorporateBody,
-                client.LastOrderDate,
-                client.Comment
+                client.Type,
+                client.ContactPerson
                 });
             }
         }
@@ -78,7 +107,7 @@ namespace TradeCompany_DAL
 
         public void UpdateClientByID(ClientDTO client)
         {
-            string query1 = "exec TradeCompany_DataBase.UpdateClientByID @ID, @Name, @INN, @Email, @Phone, @Comment, @CorporateBody, @Type, @LastOrderDate";
+            string query1 = "exec TradeCompany_DataBase.UpdateClientByID @ID, @Name, @INN, @E_mail, @Phone,  @Comment, @CorporateBody, @Type,  @ContactPerson";
             using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
             {
                 dbConnection.Query<ClientDTO>(query1, new
@@ -86,13 +115,13 @@ namespace TradeCompany_DAL
                     client.ID,
                     client.Name,
                     client.INN,
-                    client.Email,
+                    client.E_mail,
                     client.Phone,
                     client.Comment,
                     client.CorporateBody,
                     client.Type,
-                    client.LastOrderDate
-                });
+                    client.ContactPerson
+                }) ;
             }
 
         }
@@ -109,5 +138,39 @@ namespace TradeCompany_DAL
 
             return clientsList;
         }
+
+        public List<WishDTO> GetWishesListByClientID(int id)
+        {
+            List<WishDTO> wishList = new List<WishDTO>();
+
+            string query = "exec TradeCompany_DataBase.GetWishesListByClientID @id";
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                wishList = dbConnection.Query<WishDTO>(query, new { id }).AsList<WishDTO>();
+            }
+
+            return wishList;
+        }
+
+        public void DeleteWishListByID(int id)
+        {
+            string query = "exec TradeCompany_DataBase.DeleteWishListByID @id";
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                dbConnection.Query<WishDTO>(query, new { id });
+            }
+        }
+
+        public void AddWishByID(int id, int productsID)
+        {
+            string query = "exec TradeCompany_DataBase.AddWishByID @ID, @ProductsID";
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                dbConnection.Query(query, new {id, productsID });
+            }
+        }
+
+
+
     }
 }

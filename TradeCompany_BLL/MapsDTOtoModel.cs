@@ -1,16 +1,131 @@
-﻿using AutoMapper;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using TradeCompany_BLL.Models;
+using TradeCompany_DAL;
 using TradeCompany_DAL.DTOs;
 
 namespace TradeCompany_BLL
 {
     public class MapsDTOtoModel
     {
+
+        public ClientModel MapClientDTOToClientModel(ClientDTO clientDTO)
+        {
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<ClientDTO, ClientModel>());
+            Mapper mapper = new Mapper(config);
+            ClientModel clientModel = mapper.Map<ClientModel>(clientDTO);
+            return clientModel;
+        }
+
+        public ClientDTO MapClientModelToClientDTO(ClientModel clientModel)
+        {
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<ClientModel, ClientDTO>());
+            Mapper mapper = new Mapper(config);
+            ClientDTO clientDTO = mapper.Map<ClientDTO>(clientModel);
+            return clientDTO;
+        }
+
+        public List<ClientModel> MapClientsDTOToClientsModelList()
+        {
+            ClientsData clients = new ClientsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
+            List<ClientDTO> clientsDTO = clients.GetClients();
+
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<ClientDTO, ClientModel>());
+            Mapper mapper = new Mapper(config);
+            List<ClientModel> clientModel = mapper.Map<List<ClientModel>>(clientsDTO);
+
+            return clientModel;
+        }
+
+        public List<ClientBaseModel> MapClientDTOToClientBaseModelList()
+        {
+            ClientsData clients = new ClientsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
+            List<ClientDTO> clientsDTO = clients.GetClients();
+
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<ClientDTO, ClientBaseModel>());
+            Mapper mapper = new Mapper(config);
+            List<ClientBaseModel> clientBaseModel = mapper.Map<List<ClientBaseModel>>(clientsDTO);
+
+            return clientBaseModel;
+        } 
+        
+        
+        public ClientBaseModel MapLastClientDTOToLastClientBaseModel()
+        {
+            ClientsData clients = new ClientsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
+            ClientDTO clientDTO = clients.GetLastClient();
+
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<ClientDTO, ClientBaseModel>());
+            Mapper mapper = new Mapper(config);
+            ClientBaseModel clientBaseModel = mapper.Map<ClientBaseModel>(clientDTO);
+
+            return clientBaseModel;
+        }
+
+        public List<ClientBaseModel> MapClientDTOToClientBaseModelListByName(string partOfTheName)
+        {
+            ClientsData clients = new ClientsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
+            List<ClientDTO> clientsDTO = clients.GetClientsByName(partOfTheName);
+
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<ClientDTO, ClientBaseModel>());
+            Mapper mapper = new Mapper(config);
+            List<ClientBaseModel> clientBaseModel = mapper.Map<List<ClientBaseModel>>(clientsDTO);
+
+            return clientBaseModel;
+        }
+
+        public List<ClientBaseModel> MapClientDTOToClientBaseModelListByParam(int? person, int? sale, DateTime? minData, DateTime? maxData)
+        {
+            ClientsData clients = new ClientsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
+            List<ClientDTO> clientsDTO = clients.GetClientsByParams(person, sale, minData, maxData);
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<ClientDTO, ClientBaseModel>());
+            Mapper mapper = new Mapper(config);
+            List<ClientBaseModel> clientBaseModel = mapper.Map<List<ClientBaseModel>>(clientsDTO);
+
+            return clientBaseModel;
+        }
+
+        public ClientModel MapClientDTOToClientModelByID(int id)
+        {
+            ClientsData clients = new ClientsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
+            ClientDTO clientDTO = clients.GetClientByID(id);
+
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<ClientDTO, ClientModel>());
+            Mapper mapper = new Mapper(config);
+            ClientModel clientModel = mapper.Map<ClientModel>(clientDTO);
+
+            return clientModel;
+        }
+
+
+
+
+
+
+        public List<String> MapClientDTOToAddressesByID(int id)
+        {
+            AddressesData addresses = new AddressesData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
+            List<String> addressesList = addresses.GetAddressesByID(id);
+
+            return addressesList;
+        }
+
+        public List<WishModel> MapWishesDTOToWishesModelListByID(int id)
+        {
+            ClientsData client = new ClientsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
+            List<WishDTO> wishList = client.GetWishesListByClientID(id);
+
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<WishDTO, WishModel>());
+            Mapper mapper = new Mapper(config);
+            List<WishModel> wishModel = mapper.Map<List<WishModel>>(wishList);
+
+            return wishModel;
+        }
+
         public List<OrderModel> MapOrdersDTOToOrderModel(List<OrdersDTO> ordersDTO)
         {
             var config = new MapperConfiguration(cfg => cfg.CreateMap<OrdersDTO, OrderModel>()
@@ -25,6 +140,20 @@ namespace TradeCompany_BLL
             orderModels = mapper.Map<List<OrderModel>>(ordersDTO);
             return orderModels;
         }
+
+
+        public List<OrderModel> MapOrdersDTOToOrdersModelByClientID(int id)
+        {
+            OrdersData order = new OrdersData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
+            List<OrdersDTO> orderDTO = order.GetOrdersByClientID(id);
+
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<OrdersDTO, OrderModel>());
+            Mapper mapper = new Mapper(config);
+            List<OrderModel> orderModels = mapper.Map<List<OrderModel>>(orderDTO);
+
+            return orderModels;
+        }
+
 
         public List<OrderListModel> MapOrderListsDTOToOrderListModel(List<OrderListsDTO> orderListsDTO)
         {
