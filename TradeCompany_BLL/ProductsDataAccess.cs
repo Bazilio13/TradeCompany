@@ -14,6 +14,7 @@ namespace TradeCompany_BLL
         private ProductsData _productsData = new ProductsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
         private ProductGroupsData _groupsData = new ProductGroupsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
         private MapsDTOtoModel _mapsDTOtoModel = new MapsDTOtoModel();
+        private MapModelToDTO _mapsModelToDTO = new MapModelToDTO();
 
         public List<ProductBaseModel> GetAllProducts()
         {
@@ -33,13 +34,6 @@ namespace TradeCompany_BLL
             return productsModel;
         }
 
-        public List<ProductBaseModel> GetProductsByLetter(string inputString)
-        {
-            List<ProductDTO> productDTO = _productsData.GetProductsByLetter(inputString);
-            List<ProductBaseModel> productsModel = _mapsDTOtoModel.MapProductDTOToProductBaseModel(productDTO);
-            return productsModel;
-        }
-
         public List<ProductGroupModel> GetAllGroups()
         {
             List<ProductGroupDTO> groupsDTO = _groupsData.GetProductGroups();
@@ -47,6 +41,15 @@ namespace TradeCompany_BLL
             return groupsModel;
         }
 
+        public void AddNewProduct(ProductModel productModel)
+        {
+            ProductDTO productDTO = _mapsModelToDTO.MapProductModelToProductDTO(productModel);
+            _productsData.AddProduct(productDTO);
+        }
 
+        public void AddProductToProductGroup(int ProductID, int ProductGroupID)
+        {
+            _productsData.AddProductToProductGroup(ProductID, ProductGroupID);
+        }
     }
 }
