@@ -175,5 +175,25 @@ namespace TradeCompany_BLL
 
             return productsForOrderModel;
         }
+
+
+        public List<ProductBaseModel> MapProductDTOToProductBaseModel(List<ProductDTO> productDTO)
+        {
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<ProductDTO, ProductBaseModel>()
+            .ForMember(dest => dest.Groups, option => option.MapFrom(sorse => MapProductGroupToProductGroupModel(sorse.Group))));
+            Mapper mapper = new Mapper(config);
+            List<ProductBaseModel> productBaseModel = mapper.Map<List<ProductBaseModel>>(productDTO);
+            return productBaseModel;
+        }
+
+        public List<ProductGroupModel> MapProductGroupToProductGroupModel(List<ProductGroupDTO> groupDTO)
+        {
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<ProductGroupDTO, ProductGroupModel>()
+            .ForMember(dest => dest.Products, option => option.MapFrom(sorse => MapProductDTOToProductBaseModel(sorse.Products))));
+            Mapper mapper = new Mapper(config);
+            List<ProductGroupModel> groupModel = mapper.Map<List<ProductGroupModel>>(groupDTO);
+            return groupModel;
+        }
+
     }
 }
