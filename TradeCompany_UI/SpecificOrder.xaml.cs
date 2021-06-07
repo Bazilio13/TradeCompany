@@ -28,20 +28,24 @@ namespace TradeCompany_UI
         
         private OrderModel _orderModel;
         private int _orderId = 7 ;
-        private string text;
+        private string nameOfAddedProduct;
+        private List<ProductDTO> newItem;
 
         private SpecificProductDTO _specificProductDTO;
 
-
+        
 
         ContactInformation _clientInfo;
         OrderDataAccess _orderDataAccess;
         ProductsData _productsData = new ProductsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
-        BindingList<OrderListModel> _bdOrderListModel = new BindingList<OrderListModel>();
-        OrdersData od;
+       BindingList<OrderListModel> _bdOrderListModel = new BindingList<OrderListModel>();
         
-     
-       
+        OrdersData od;
+
+        RoutedEventArgs ee;
+
+
+
         public SpecificOrder()
         {
 
@@ -50,13 +54,18 @@ namespace TradeCompany_UI
             _orderDataAccess = new OrderDataAccess();
             _orderModel = _orderDataAccess.GetOrderById(7)[0];
             SetContactInformation();
+            AddProductInTable();
+        }
+
+        private void AddProductInTable()
+        {
             foreach (var product in _orderModel.OrderListModel)
             {
                 _bdOrderListModel.Add(product);
-            //dgSpecificOrder.ItemsSource = _orderModel.OrderListModel;
-            
+
             }
-        }  
+        }
+
         public SpecificOrder(int id)
         {
             InitializeComponent();
@@ -74,49 +83,9 @@ namespace TradeCompany_UI
             ShowClientInformation();
             dgSpecificOrder.ItemsSource = _orderModel.OrderListModel;
             dgSpecificOrder.ItemsSource = _bdOrderListModel;
-            //_bdOrderListModel.ListChanged += _bdOrderListModel_ListChanged;
-
+            ee = e;
+            
         }
-
-        //private void _bdOrderListModel_ListChanged(object sender, ListChangedEventArgs e)
-        //{
-        //    switch (e.ListChangedType)
-        //    {
-        //        case ListChangedType.Reset:
-        //            break;
-        //        case ListChangedType.ItemAdded:
-                    
-        //            //ProductDTO newItem = new ProductDTO();
-        //            List<ProductDTO> newItem = new List<ProductDTO>();
-        //            OrderListsDTO newOrderList = new OrderListsDTO();
-                    
-        //            newOrderList.OrderID = _orderId;
-        //            //string name = dgSpecificOrder.
-
-                    
-                    
-        //            newItem = _productsData.GetProductsByLetter(text);
-
-
-        //            //newOrderList.ProductID = _productsData.GetProductsByLetter(text);
-
-        //            break;
-        //        case ListChangedType.ItemDeleted:
-        //            break;
-        //        case ListChangedType.ItemMoved:
-        //            break;
-        //        case ListChangedType.ItemChanged:
-        //            break;
-        //        case ListChangedType.PropertyDescriptorAdded:
-        //            break;
-        //        case ListChangedType.PropertyDescriptorDeleted:
-        //            break;
-        //        case ListChangedType.PropertyDescriptorChanged:
-        //            break;
-        //        default:
-        //            break;
-        //    }
-        //}
 
         private void PlaceOrder_Click(object sender, RoutedEventArgs e)
         {
@@ -156,44 +125,54 @@ namespace TradeCompany_UI
             var x = e.OriginalSource.ToString();
         }
 
-        private void dgSpecificOrder_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        
+
+        private void dgSpecificOrder_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
         {
-            // Only handles cases where the cell contains a TextBox
-
-            var editedTextbox = e.EditingElement as TextBox;
-
-            if (editedTextbox != null)
-            {
-                text = editedTextbox.Text;
-               
-            }
-            // ProductDTO newItem = new ProductDTO();
-            List<ProductDTO> newItem = new List<ProductDTO>();
-            OrderListsDTO newOrderList = new OrderListsDTO();
-
-            newOrderList.OrderID = _orderId;
-            newItem = _productsData.GetProductsByLetter(text);
+            
+            OrderListModel i = (OrderListModel)e.Row.Item;
             _specificProductDTO = new SpecificProductDTO();
+            newItem = new List<ProductDTO>();
 
-            _specificProductDTO.ProductID = newItem.First().ID;
-            _specificProductDTO.Price = newItem.First().RetailPrice;
-            _specificProductDTO.Amount = 3;
-            _specificProductDTO.OrderID = _orderId;
+            nameOfAddedProduct = i.ProductName;
+
+            var item = _productsData.GetProductsByLetter(nameOfAddedProduct);
+            if (item.Count == 0)
+            {
+                //return new window with information
+            }
+
+            newItem = item;
+
+            FillInfoAboutAddedProduct(i);
 
             od = new OrdersData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
             od.AddSpecificProductInOrder(_specificProductDTO);
 
+            _orderModel = new OrderModel();
+            _orderModel = _orderDataAccess.GetOrderById(7)[0];
+            AddProductInTable();
+
+            dgSpecificOrder_Loaded(sender, ee);
+
         }
 
-        private void dgSpecificOrder_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
+        private void FillInfoAboutAddedProduct(OrderListModel i)
         {
-            //var editedTextbox = e.EditAction;
-            //if (this.dgSpecificOrder.SelectedItem != null)
-            //{
-            //    // var i = e.Row.DataContext;
-            //    var i = e.Row.DataContext;
-            //}
+            _bdOrderListModel = new BindingList<OrderListModel>();
+            _specificProductDTO.ProductID = newItem.First().ID;
+            _specificProductDTO.Price = newItem.First().WholesalePrice;
+            _specificProductDTO.Amount = i.Amount;
+            _specificProductDTO.OrderID = _orderId;
+  
+        }
 
+        private void Refresh_Click(object sender, RoutedEventArgs e)
+        {
+            _orderModel = new OrderModel();
+            _orderModel = _orderDataAccess.GetOrderById(7)[0];
+            AddProductInTable();
+            dgSpecificOrder_Loaded(sender,e);
         }
     }
 }

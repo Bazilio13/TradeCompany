@@ -36,14 +36,14 @@
             </Grid>
         </Grid>
 
-        <DataGrid x:Name="dgSpecificOrder" FontSize="15" Margin="30" Loaded="dgSpecificOrder_Loaded" Grid.Row="1" AutoGenerateColumns="False" SelectionChanged="dgSpecificOrder_SelectionChanged" BeginningEdit="dgSpecificOrder_BeginningEdit" KeyUp="dgSpecificOrder_KeyUp" CellEditEnding="dgSpecificOrder_CellEditEnding" RowEditEnding="dgSpecificOrder_RowEditEnding">
+        <DataGrid x:Name="dgSpecificOrder" FontSize="15" Margin="30" Loaded="dgSpecificOrder_Loaded" Grid.Row="1" AutoGenerateColumns="False" BeginningEdit="dgSpecificOrder_BeginningEdit" KeyUp="dgSpecificOrder_KeyUp"  RowEditEnding="dgSpecificOrder_RowEditEnding" >
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="NumberOfProduct"  Header="№" Width="0.1*"/>
                 <DataGridTextColumn Binding="{Binding Path= ProductID}" Header="ID Товара" Width="0.3*"/>
-                <DataGridTextColumn x:Name="Product" Binding="{Binding Path= ProductName}" Header="Товар" Width="1*"/>
-                <DataGridTextColumn x:Name="Amount" Binding="{Binding Path= Amount}" Header="Количество" Width="0.5*"/>
+                <DataGridTextColumn x:Name="Product" Binding="{Binding Path= ProductName, UpdateSourceTrigger=PropertyChanged}" Header="Товар" Width="1*" />
+                <DataGridTextColumn x:Name="Amount" Binding="{Binding Path= Amount, UpdateSourceTrigger=PropertyChanged}" Header="Количество" Width="0.5*"/>
                 <DataGridTextColumn Binding="{Binding Path= Price}" Header="Цена" Width="0.5*"/>
-                <DataGridTextColumn Binding="{Binding Path= Sum}" Header="Сумма" Width="0.5*"/>
+                <DataGridTextColumn x:Name="Sum" Binding="{Binding Path= Sum }" Header="Сумма" Width="0.5*"/>
 
             </DataGrid.Columns>
         </DataGrid>
@@ -56,5 +56,6 @@
             </Grid.ColumnDefinitions>
             <Button Name="PlaceOrder" HorizontalAlignment="Left" Background="SteelBlue" Height="40" Width="300" Content="Сформировать" FontSize="15" Margin="248,12,0,12" Click="PlaceOrder_Click"></Button>
         </Grid>
+        <Button x:Name="Refresh" Content="Обновить информацию" HorizontalAlignment="Left"  Height="26" Margin="29,10,0,0" Grid.Row="2" VerticalAlignment="Top" Width="140" Click="Refresh_Click"/>
     </Grid>
 </Page>

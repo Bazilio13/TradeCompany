@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TradeCompany_BLL.Models
 {
-    public class OrderListModel : INotifyPropertyChanged
+    public class OrderListModel 
     {
         private int _ProductID;
         private string _ProductName;
@@ -21,7 +21,7 @@ namespace TradeCompany_BLL.Models
                 if (_ProductID == value) return;
 
                 _ProductID = value;
-                OnPropertyChanged("ProductID");
+             
             }
         }
             
@@ -33,7 +33,7 @@ namespace TradeCompany_BLL.Models
                 if (_ProductName == value) return;
 
                 _ProductName = value;
-                OnPropertyChanged("ProductName");
+              
             }
         }
         public string ProductMeasureUnit { get; set; }
@@ -45,18 +45,13 @@ namespace TradeCompany_BLL.Models
                 if (_Amount == value) return;
 
                 _Amount = value;
-                OnPropertyChanged("Amount");
+              
             }  
         }
         public int Price { get; set; }
 
         public decimal Sum { get; set; }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged(string propertyName ="")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
+        //public event PropertyChangedEventHandler PropertyChanged;
     }
 }
