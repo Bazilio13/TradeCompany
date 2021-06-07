@@ -54,7 +54,7 @@
                 <TextBlock Margin="10,5,0,0" FontWeight="Bold" FontSize="14">Настройки</TextBlock>
             </StackPanel>
         </Button>
-        <DataGrid x:Name="dgProductCatalog" Width="800"  FontSize="16"  AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" Grid.Row="1" Grid.Column="1" Background="White" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,23,0,0">
+        <DataGrid x:Name="dgProductCatalog" Width="784"  FontSize="16"  AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" Grid.Row="1" Grid.Column="1" Background="White" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,23,0,0">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding ="{Binding Path = ID}"  IsReadOnly="True" Header="ID" Width="30"/>
                 <DataGridTextColumn Binding ="{Binding Path = Name}"  IsReadOnly="True" Header="Наименование" Width="150"/>
@@ -66,7 +66,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <TextBox x:Name="ProductSearch" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Height="22" TextChanged="ProductSearch_TextChange" Margin="5,91,0,0" Grid.RowSpan="2"/>
-        <ComboBox x:Name="ProductGroupSelect" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="217,91,0,0" SelectedIndex="0" Height="22" Width="150" DropDownClosed="ProductGroupSelect_DropDownClosed" Grid.RowSpan="2"/>
+        <ComboBox x:Name="ProductGroupSelect" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="217,91,0,0" SelectedIndex="0" Height="22" Width="150" DropDownClosed="ProductGroupSelect_DropDownClosed" Grid.RowSpan="2" IsEditable="True"/>
         <Button x:Name="ApplyFilters" Content="Применить фильтры" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="669,20,0,0" Click="ApplyFiltersButton_Click" Height="22" Width="120"/>
         <DatePicker x:Name="DateFrom" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="347,30,0,0" RenderTransformOrigin="0.309,-0.578" Height="22" Width="100" SelectedDateChanged="DateFrom_SelectedDateChange"/>
         <DatePicker x:Name="DateUntil" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="467,30,0,0" Height="22" Width="100" SelectedDateChanged="DateUntil_SelectedDateChange"/>
