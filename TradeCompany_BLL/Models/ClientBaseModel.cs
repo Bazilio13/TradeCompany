@@ -14,6 +14,6 @@ namespace TradeCompany_BLL.Models
         public string Phone { get; set; }
         public string ContactPerson { get; set; }
 
-        public DateTime LastOrderDate { get; set; }
+        public DateTime? LastOrderDate { get; set; }
     }
 }
