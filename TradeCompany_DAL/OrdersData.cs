@@ -117,15 +117,15 @@ namespace TradeCompany_DAL
             return result;
         }
 
-        public List<ProductForOrderDTO> GetProductsByOrderId(int orderId)
+        public List<ProductForOrderDTO> GetProductsByOrderId(int ID)
         {
             List<ProductForOrderDTO> result = new List<ProductForOrderDTO>();
             string query;
             using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
             {
                 //query = "exec TradeCompany_DataBase.GetProductsInOrderByOrderId @ID";
-                query = "exec TradeCompany_DataBase.GetProductsByOrderId @OrderId";
-                dbConnection.Query<ProductForOrderDTO>(query, new { orderId });
+                query = "exec TradeCompany_DataBase.GetProductsByOrderId @ID";
+                result = dbConnection.Query<ProductForOrderDTO>(query, new { ID }).ToList();
             }
             return result;
         }
@@ -146,6 +146,20 @@ namespace TradeCompany_DAL
                         maxDateTime,
                         address
                     });
+            }
+            return result;
+        }
+
+        public List<OrdersDTO> SearchOrders(string str)
+        {
+            List<OrdersDTO> result = new List<OrdersDTO>();
+            string query;
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                query = "TradeCompany_DataBase.SearchOrders";
+                dbConnection.Query<OrdersDTO, OrderListsDTO, ClientDTO, ProductDTO, OrdersDTO>(query,
+                    (order, orderList, client, product) => MapsOrdersDTO(order, orderList, client, product, result),
+                    new { str }, commandType: CommandType.StoredProcedure);
             }
             return result;
         }

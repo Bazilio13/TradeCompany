@@ -13,6 +13,6 @@ namespace TradeCompany_DAL.DTOs
         public int Amount { get; set; }
         public int Price { get; set; }
         public int MeasureUnit { get; set; }
-        public string ProductGroupName { get; set; }
+        public string ProductGroupName { get; set; } // list?
     }
 }
