@@ -50,7 +50,9 @@ namespace TradeCompany_UI
         {
             InitializeComponent();
             dgOrdersTable.Visibility = Visibility.Collapsed;
-            LabelStori.Visibility = Visibility.Collapsed;
+            SPFeedbackPanel.Visibility = Visibility.Collapsed;
+            ButtonFeedback.Visibility = Visibility.Collapsed;
+            ButtonStory.Visibility = Visibility.Collapsed;
             _id = -1;
         }
 
@@ -314,13 +316,13 @@ namespace TradeCompany_UI
 
         private void VisibilityStory(object sender, RoutedEventArgs e)
         {
-            if(LabelStori.Visibility == Visibility.Visible)
+            if(dgOrdersTable.Visibility == Visibility.Visible)
             {
-                LabelStori.Visibility = Visibility.Collapsed;
+                dgOrdersTable.Visibility = Visibility.Collapsed;
             }
             else 
             {
-                LabelStori.Visibility = Visibility.Visible;
+                dgOrdersTable.Visibility = Visibility.Visible;
             }
         }
 
