@@ -39,22 +39,22 @@
                 </Grid>
 
             <Label Content="ФИО/Название*" FontSize="9" Margin="0,4,0,0"/>
-            <TextBox Name="textBoxName" HorizontalAlignment="center"  TextWrapping="Wrap" VerticalAlignment="Top" Width="500" Height="21" AutomationProperties.HelpText="ФИО/Название*" Margin="0,-5,0,3" PreviewMouseDown="Focus" />
+            <TextBox Name="textBoxName" MaxLength="255" HorizontalAlignment="center"  TextWrapping="Wrap" VerticalAlignment="Top" Width="500" Height="21" AutomationProperties.HelpText="ФИО/Название*" Margin="0,-5,0,3" PreviewMouseDown="Focus" />
             <Label Content="ИНН" FontSize="9" Margin="0,0,0,0"/>
-            <TextBox Name ="textBoxINN" HorizontalAlignment="center" TextWrapping="Wrap" VerticalAlignment="Top" Width="500" Height="21" Margin="0,-5,0,0" PreviewTextInput="ValidationByINN"/>
+            <TextBox Name ="textBoxINN" MaxLength="100" HorizontalAlignment="center" TextWrapping="Wrap" VerticalAlignment="Top" Width="500" Height="21" Margin="0,-5,0,0" PreviewTextInput="ValidationByINN"/>
             <Label Content="Номер телефона*" FontSize="9"/>
             <Label Content="Email" FontSize="9"  Width="245" Height="21" VerticalAlignment="Stretch" Margin="0,-25,0,10" HorizontalAlignment="Right"/>
-            <TextBox x:Name ="textBoxPhone"  TextWrapping="Wrap" Width="245" Height="21" HorizontalAlignment="Left" PreviewMouseDown="Focus" PreviewTextInput="ValidationByNumber" Margin="0,-12,0,3" />
-            <TextBox x:Name ="textBoxE_mail"  TextWrapping="Wrap" Width="245" Height="21" VerticalAlignment="Stretch" Margin="0,-29,0,-1" HorizontalAlignment="Right"/>
+            <TextBox x:Name ="textBoxPhone"  MaxLength="30" TextWrapping="Wrap" Width="245" Height="21" HorizontalAlignment="Left" PreviewMouseDown="Focus" PreviewTextInput="ValidationByNumber" Margin="0,-12,0,3" />
+            <TextBox x:Name ="textBoxE_mail"  MaxLength="100" TextWrapping="Wrap" Width="245" Height="21" VerticalAlignment="Stretch" Margin="0,-29,0,-1" HorizontalAlignment="Right"/>
+            <Label Content="Контактное лицо*" FontSize="9"/>
+            <TextBox Name ="textBoxContactPerson" MaxLength="255" HorizontalAlignment="center"  TextWrapping="Wrap" VerticalAlignment="Top" Width="500" Height="30" Margin="0,-5,0,3" PreviewMouseDown="Focus"/>
             <Label Content="Адреса" FontSize="9"/>
             <StackPanel Name="stackPanelAddresses" VerticalAlignment="Top" Margin="0,-5,0,3">
-                <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Width="390" Height="21" Margin="0,0,0,0" />
+                <TextBox HorizontalAlignment="Left" MaxLength="255" TextWrapping="Wrap" Width="390" Height="21" Margin="0,0,0,0" />
                 <Button x:Name="buttonAddAddress" HorizontalAlignment="Right" Content="Добавить адрес" Width="100" Height="21" Margin="0,-21,0,5" Click="buttonAddAddress_Click"/>
             </StackPanel >
-            <Label Content="Контактное лицо*" FontSize="9"/>
-            <TextBox Name ="textBoxContactPerson" HorizontalAlignment="center"  TextWrapping="Wrap" VerticalAlignment="Top" Width="500" Height="21" Margin="0,-5,0,3" PreviewMouseDown="Focus"/>
             <Label Content="Комментарий" FontSize="9" Margin="0,0,0,0"/>
-            <TextBox Name ="textBoxComments" HorizontalAlignment="center"  TextWrapping="Wrap" VerticalAlignment="Top" Width="500" Height="21" Margin="0,-5,0,3"/>
+            <TextBox Name ="textBoxComments" HorizontalAlignment="center" MaxLength="1500" TextWrapping="Wrap" VerticalAlignment="Top" Width="500" MinHeight="21" Margin="0,-5,0,3"/>
            
             <Button x:Name="ButtonFeedback" Content="Отзывы" Click="VisibilityFeedback" Margin="0,10,0,0" />
                 

@@ -17,6 +17,6 @@ namespace TradeCompany_BLL.Models
         public string Comment { get; set; }
         public bool Type { get; set; }
         public bool CorporateBody { get; set; }
-        public DateTime LastOrderDate { get; set; }
+        public DateTime? LastOrderDate { get; set; }
     }
 }
