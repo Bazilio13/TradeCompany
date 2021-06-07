@@ -84,6 +84,7 @@ namespace TradeCompany_DAL
 
             return result;
         }
+
         public void UpdateFeedBackById(FeedBacksDTO feedBacksDTO)
         {
             string query;
@@ -103,6 +104,20 @@ namespace TradeCompany_DAL
             }
 
         }
+
+        public List<FeedBacksDTO> GetFeedbackByClientID(int id)
+        {
+            string query;
+            List<FeedBacksDTO> result = new List<FeedBacksDTO>();
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                query = "exec [TradeCompany_DataBase].[GetFeedbackByClientID] @Id";
+                result = dbConnection.Query<FeedBacksDTO>(query, new { id }).AsList<FeedBacksDTO>();
+            }
+
+            return result;
+        }
+
 
 
     }

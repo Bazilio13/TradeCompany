@@ -30,6 +30,7 @@ namespace TradeCompany_UI
         private List<String> _oldAddresses = new List<String>();
         private List<String> _newAddresses = new List<String>();
         private MapsDTOtoModel _map = new MapsDTOtoModel();
+        private List<FeedbackModel> _feedback = new List<FeedbackModel>();
 
 
         public OneClient(int id)
@@ -37,9 +38,10 @@ namespace TradeCompany_UI
             InitializeComponent();
             _id = id;
             _wishList = _map.MapWishesDTOToWishesModelListByID(_id);
-
+            FeedbacksDataAccess fda = new FeedbacksDataAccess();
             OrderDataAccess dataAccess = new OrderDataAccess();
             _orderList = dataAccess.GetOrderModelsByClientID(_id);
+            _feedback = fda.GetFeedbacksByClientID(_id);
         }
 
 
@@ -47,8 +49,10 @@ namespace TradeCompany_UI
         public OneClient()
         {
             InitializeComponent();
-            dgOrdersTable.Visibility = Visibility.Hidden;
-            LabelStori.Visibility = Visibility.Hidden;
+            dgOrdersTable.Visibility = Visibility.Collapsed;
+            SPFeedbackPanel.Visibility = Visibility.Collapsed;
+            ButtonFeedback.Visibility = Visibility.Collapsed;
+            ButtonStory.Visibility = Visibility.Collapsed;
             _id = -1;
         }
 
@@ -82,8 +86,8 @@ namespace TradeCompany_UI
                 {
                     RadioButtonTypePersonF.IsChecked = true;
                 }
-                else { RadioButtonTypePersonU.IsChecked = true; } 
-                
+                else { RadioButtonTypePersonU.IsChecked = true; }
+
                 if (client.CorporateBody)
                 {
                     RadioButtonTypeBayO.IsChecked = true;
@@ -94,6 +98,7 @@ namespace TradeCompany_UI
                 _oldAddresses = map.MapClientDTOToAddressesByID(_id);
                 AddAddress();
                 LoadWishPanel();
+                LoadFeedback();
                 //List<WishModel> wishList = map.MapWishesDTOToWishesModelListByID(_id);
             }
             else
@@ -260,7 +265,7 @@ namespace TradeCompany_UI
 
         private void AddAddress()
         {
-           foreach (String address in _oldAddresses)
+            foreach (String address in _oldAddresses)
             {
                 stackPanelAddresses.Children.Add(new TextBox
                 {
@@ -271,7 +276,7 @@ namespace TradeCompany_UI
                     Height = 21,
                     Margin = new Thickness(0, 5, 0, 0),
                     IsEnabled = false
-                });          
+                });
             }
         }
 
@@ -293,6 +298,45 @@ namespace TradeCompany_UI
                 ((TextBox)stackPanelAddresses.Children[0]).Text = "";
                 _newAddresses.Add(addedAddress);
             }
+        }
+
+        public void LoadFeedback()
+        {
+            foreach (FeedbackModel feedback in _feedback)
+            {
+                TextBlock fb = new TextBlock();
+                fb.TextWrapping = TextWrapping.Wrap;
+                fb.Text = feedback.DateTime + "    " + "Заказ №  " + feedback.OrderID + "\n" +feedback.Text;
+                fb.Margin = new Thickness(5, 5, 5, 5);
+                fb.Padding = new Thickness(5, 3, 5, 3);
+                fb.Background = new SolidColorBrush(Color.FromRgb(243, 223, 196));
+                SPFeedbackPanel.Children.Add(fb);
+            }
+        }
+
+        private void VisibilityStory(object sender, RoutedEventArgs e)
+        {
+            if(dgOrdersTable.Visibility == Visibility.Visible)
+            {
+                dgOrdersTable.Visibility = Visibility.Collapsed;
+            }
+            else 
+            {
+                dgOrdersTable.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void VisibilityFeedback(object sender, RoutedEventArgs e)
+        {
+            if (SPFeedbackPanel.Visibility == Visibility.Visible)
+            {
+                SPFeedbackPanel.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                SPFeedbackPanel.Visibility = Visibility.Visible;
+            }
+
         }
     }
 }

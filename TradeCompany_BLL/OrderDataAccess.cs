@@ -15,6 +15,7 @@ namespace TradeCompany_BLL
         private OrdersData _ordersData = new OrdersData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
 
         private MapsDTOtoModel _map = new MapsDTOtoModel();
+
         public List<OrderModel> GetOrderModelsByParams(string client = null, DateTime? minDateTime = null, DateTime? maxDateTime = null, string address = null)
         {
             List<OrdersDTO> ordersDTOs;
