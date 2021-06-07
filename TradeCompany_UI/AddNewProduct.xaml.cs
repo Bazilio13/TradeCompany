@@ -25,16 +25,17 @@ namespace TradeCompany_UI
     {
         private ProductsDataAccess _products = new ProductsDataAccess();
         private ProductModel _product = new ProductModel();
-        List<int> chosenCategoriesIDs = new List<int>();
-        List<ProductGroupModel> allGroups;
+        private List<int> _chosenCategoriesIDs = new List<int>();
+        private List<ProductGroupModel> _allGroups;
+        private List<ProductGroupModel> _chosenGroups = new List<ProductGroupModel>();
 
         public AddNewProduct()
         {
             InitializeComponent();
             ID_Text.Text = GetCurrentProductID().ToString();
 
-            allGroups = _products.GetAllGroups();
-            Category.ItemsSource = allGroups;
+            _allGroups = _products.GetAllGroups();
+            Category.ItemsSource = _allGroups;
             Category.DisplayMemberPath = "Name";
 
             CreationDate.Text = DateTime.Now.ToString();
@@ -52,7 +53,7 @@ namespace TradeCompany_UI
             _product.Comments = Text_Comments.Text;
             _product.LastSupplyDate = DateTime.Now;
             _products.AddNewProduct(_product);
-            foreach(int ID in chosenCategoriesIDs)
+            foreach(int ID in _chosenCategoriesIDs)
             {
                 _products.AddProductToProductGroup(GetCurrentProductID() - 1, ID);
             }
@@ -96,7 +97,8 @@ namespace TradeCompany_UI
         {
             //формируем список ID категорий, которые надо присвоить нашему продукту
             ProductGroupModel selectedItem = (ProductGroupModel)Category.SelectedItem;
-            chosenCategoriesIDs.Add(selectedItem.ID);
+            _chosenGroups.Add(selectedItem);
+            _chosenCategoriesIDs.Add(selectedItem.ID);
 
             if (ChosenCategories.Text == "Не выбрано")
             {
@@ -190,6 +192,14 @@ namespace TradeCompany_UI
             return currentProductID;
         }
 
-        
+        private void ChangeCategoriesButton_Click(object sender, RoutedEventArgs e)
+        {
+            ChangeSelectedCategories changeCtaegoriesWindow = new ChangeSelectedCategories(_chosenGroups, ChosenCategories);
+
+            if (changeCtaegoriesWindow.ShowDialog() == true)
+            {
+                changeCtaegoriesWindow.Close();
+            }
+        }
     }
 }
