@@ -214,17 +214,21 @@ namespace TradeCompany_DAL
             }
             return order;
         }
+
         public List<OrdersDTO> GetOrdersByClientID(int id)
         {
-            List<OrdersDTO> ordersList = new List<OrdersDTO>();
-
-            string query = "exec TradeCompany_DataBase.GetOrderByClientID @id";
+            List<OrdersDTO> result = new List<OrdersDTO>();
+            string query;
             using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
             {
-                ordersList = dbConnection.Query<OrdersDTO>(query, new { id }).AsList<OrdersDTO>();
+                query = "exec TradeCompany_DataBase.GetOrderByClientID @id";
+                dbConnection.Query<OrdersDTO, OrderListsDTO, ClientDTO, ProductDTO, OrdersDTO>(query,
+                    (order, orderList, client, product) => MapsOrdersDTO(order, orderList, client, product, result),
+                    new{ id });
             }
+            return result;
 
-            return ordersList;
+
         }
 
 

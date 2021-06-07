@@ -102,10 +102,6 @@ namespace TradeCompany_BLL
         }
 
 
-
-
-
-
         public List<String> MapClientDTOToAddressesByID(int id)
         {
             AddressesData addresses = new AddressesData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
@@ -138,19 +134,6 @@ namespace TradeCompany_BLL
             Mapper mapper = new Mapper(config);
             List<OrderModel> orderModels;
             orderModels = mapper.Map<List<OrderModel>>(ordersDTO);
-            return orderModels;
-        }
-
-
-        public List<OrderModel> MapOrdersDTOToOrdersModelByClientID(int id)
-        {
-            OrdersData order = new OrdersData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
-            List<OrdersDTO> orderDTO = order.GetOrdersByClientID(id);
-
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<OrdersDTO, OrderModel>());
-            Mapper mapper = new Mapper(config);
-            List<OrderModel> orderModels = mapper.Map<List<OrderModel>>(orderDTO);
-
             return orderModels;
         }
 

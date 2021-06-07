@@ -37,7 +37,9 @@ namespace TradeCompany_UI
             InitializeComponent();
             _id = id;
             _wishList = _map.MapWishesDTOToWishesModelListByID(_id);
-            _orderList = _map.MapOrdersDTOToOrdersModelByClientID(_id);
+
+            OrderDataAccess dataAccess = new OrderDataAccess();
+            _orderList = dataAccess.GetOrderModelsByClientID(_id);
         }
 
 
@@ -90,13 +92,9 @@ namespace TradeCompany_UI
 
 
                 _oldAddresses = map.MapClientDTOToAddressesByID(_id);
-
                 AddAddress();
-
                 LoadWishPanel();
-
                 //List<WishModel> wishList = map.MapWishesDTOToWishesModelListByID(_id);
-
             }
             else
             {
@@ -223,7 +221,6 @@ namespace TradeCompany_UI
                 LoadWishPanel();
             }
 
-            //MessageBox.Show(selectedItem.Name.ToString()); 
         }
 
         private void LoadWishPanel()

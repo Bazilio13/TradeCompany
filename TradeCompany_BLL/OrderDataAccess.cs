@@ -30,5 +30,15 @@ namespace TradeCompany_BLL
             List<OrderModel> orderModels = _map.MapOrdersDTOToOrderModel(ordersDTOs);
             return orderModels;
         }
+
+
+        public List<OrderModel> GetOrderModelsByClientID(int id)
+        {
+            List<OrdersDTO> ordersDTOs;
+            ordersDTOs = _ordersData.GetOrdersByClientID(id);
+            List<OrderModel> orderModels = _map.MapOrdersDTOToOrderModel(ordersDTOs);
+            return orderModels;
+        }
+
     }
 }
