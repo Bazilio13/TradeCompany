@@ -212,13 +212,13 @@ namespace TradeCompany_DAL
             }
         }
 
-        public void AddProductToProductGroup(int productID, int productGroupID)
+        public void AddProductToProductGroup(int id, int productGroupID)
         {
             string query;
             using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
             {
-                query = "exec TradeCompany_DataBase.AddProductToProductGroup @productID, @ProductGroupID";
-                dbConnection.Query(query, new { productID, productGroupID});
+                query = "exec TradeCompany_DataBase.AddProductToProductGroup @ID, @ProductGroupID";
+                dbConnection.Query(query, new { id, productGroupID});
             }
         }
 

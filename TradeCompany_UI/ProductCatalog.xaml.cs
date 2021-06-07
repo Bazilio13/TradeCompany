@@ -42,14 +42,10 @@ namespace TradeCompany_UI
             _products = new ProductsDataAccess();
             dgProductCatalog.ItemsSource = _products.GetAllProducts();
 
-            List<ProductGroupModel> productGroupName = _products.GetAllGroups();
-            ProductGroupSelect.Items.Add("Категория");
-            for (int i = 0; i < productGroupName.Count; i++)
-            {
-                ProductGroupSelect.Items.Add(productGroupName[i].Name);
-            }
-
-            
+            List<ProductGroupModel> allGroups = _products.GetAllGroups();
+            ProductGroupSelect.ItemsSource = allGroups;
+            ProductGroupSelect.DisplayMemberPath = "Name";
+            ProductGroupSelect.Text = "";
         }
 
         private void ProductButton_Click(object sender, RoutedEventArgs e)
@@ -184,7 +180,7 @@ namespace TradeCompany_UI
             ToPrice.Text = "";
             RadioButtonRetailPrice.IsChecked = true;
             ProductSearch.Text = "";
-            ProductGroupSelect.SelectedItem = ProductGroupSelect.Items[0];
+            ProductGroupSelect.Text = "";
             DateFrom.SelectedDate = null;
             DateUntil.SelectedDate = null;
             _filtrByText = null;

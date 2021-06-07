@@ -5,8 +5,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TradeCompany_UI"
       mc:Ignorable="d" 
-      d:DesignHeight="700" d:DesignWidth="1000"
-      Title="ProductCatalog">
+      d:DesignHeight="500"
+      Title="ProductCatalog" Width="983">
 
     <Grid Background="White" Margin="10">
         <Grid.RowDefinitions>
@@ -54,7 +54,7 @@
                 <TextBlock Margin="10,5,0,0" FontWeight="Bold" FontSize="14">Настройки</TextBlock>
             </StackPanel>
         </Button>
-        <DataGrid x:Name="dgProductCatalog" Width="800"  FontSize="16"  AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" Grid.Row="1" Grid.Column="1" Background="White" HorizontalAlignment="Left" VerticalAlignment="Top">
+        <DataGrid x:Name="dgProductCatalog" Width="800"  FontSize="16"  AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" Grid.Row="1" Grid.Column="1" Background="White" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,23,0,0">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding ="{Binding Path = ID}"  IsReadOnly="True" Header="ID" Width="30"/>
                 <DataGridTextColumn Binding ="{Binding Path = Name}"  IsReadOnly="True" Header="Наименование" Width="150"/>
@@ -65,8 +65,8 @@
                 <DataGridTextColumn Binding ="{Binding Path = LastSupplyDate}" IsReadOnly="True" Header="Дата последней поставки" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <TextBox x:Name="ProductSearch" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Height="22" TextChanged="ProductSearch_TextChange" Margin="5,73,0,0"/>
-        <ComboBox x:Name="ProductGroupSelect" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="217,73,0,0" SelectedIndex="0" Height="22" Width="150" DropDownClosed="ProductGroupSelect_DropDownClosed"/>
+        <TextBox x:Name="ProductSearch" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Height="22" TextChanged="ProductSearch_TextChange" Margin="5,91,0,0" Grid.RowSpan="2"/>
+        <ComboBox x:Name="ProductGroupSelect" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="217,91,0,0" SelectedIndex="0" Height="22" Width="150" DropDownClosed="ProductGroupSelect_DropDownClosed" Grid.RowSpan="2"/>
         <Button x:Name="ApplyFilters" Content="Применить фильтры" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="669,20,0,0" Click="ApplyFiltersButton_Click" Height="22" Width="120"/>
         <DatePicker x:Name="DateFrom" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="347,30,0,0" RenderTransformOrigin="0.309,-0.578" Height="22" Width="100" SelectedDateChanged="DateFrom_SelectedDateChange"/>
         <DatePicker x:Name="DateUntil" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="467,30,0,0" Height="22" Width="100" SelectedDateChanged="DateUntil_SelectedDateChange"/>
@@ -82,6 +82,7 @@
         <RadioButton x:Name="RadioButtonWholesalePrice" Content="Опт"  FontSize="14" Height="16" Width="50" Checked="RadioButtonWholesalePrice_Checked" HorizontalAlignment="Left" Grid.Column="1" Margin="251,50,0,34"/>
         <Button x:Name="ResetFilters" Content="Сбросить фильтры" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="669,46,0,0" Click="ResetFiltersButton_Click" Height="22" Width="120"/>
         <Button x:Name="AddProduct" Content="Добавить товар" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="669,73,0,0" Click="AddProductButton_Click" Height="22" Width="120"/>
-        <Frame Name="frame" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" VerticalAlignment="Top"  Panel.ZIndex="0" Grid.ColumnSpan="2" Grid.RowSpan="2" Width="1000" Height="700"/>
+        <TextBlock TextWrapping="Wrap" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="217,71,0,0" FontSize="14" Width="91"><Run Language="ru-ru" Text="Категории:"/></TextBlock>
+        <Frame x:Name="frame" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" VerticalAlignment="Top"  Panel.ZIndex="0" Grid.ColumnSpan="2" Width="1000" Height="700" Grid.RowSpan="2"/>
     </Grid>
 </Page>

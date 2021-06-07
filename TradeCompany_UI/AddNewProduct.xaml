@@ -11,18 +11,17 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="1031"></RowDefinition>
         </Grid.RowDefinitions>
-        <Frame x:Name="frame" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" VerticalAlignment="Top"  Panel.ZIndex="0" Width="1000" Height="613"/>
         <TextBlock HorizontalAlignment="Center" Text="Добавление товара" TextWrapping="Wrap" VerticalAlignment="Top" Height="28" Width="204" FontSize="22" Margin="0,8,0,0"/>
         <TextBox x:Name="ID_Text" HorizontalAlignment="Left" Margin="239,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="270" SelectionOpacity="1" FontSize="16" IsEnabled="False" Height="25"/>
         <TextBox x:Name="Name_Text" HorizontalAlignment="Left" Margin="239,110,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="563" SelectionOpacity="1" FontSize="16" Height="25" TextChanged="Name_Text_TextChanged"/>
-        <ComboBox x:Name="Category" HorizontalAlignment="Left" Margin="239,158,0,0" VerticalAlignment="Top" Width="379" Height="24" DropDownClosed="Category_DropDownClosed" />
+        <ComboBox x:Name="Category" HorizontalAlignment="Left" Margin="239,158,0,0" VerticalAlignment="Top" Width="379" Height="24" />
         <TextBox x:Name="Text_Description" HorizontalAlignment="Left" Margin="239,345,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="563" SelectionOpacity="1" FontSize="16" Height="106"/>
         <TextBox x:Name="Text_RetailPrice" HorizontalAlignment="Left" Margin="239,252,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="270" SelectionOpacity="1" FontSize="16" Height="25" TextChanged="Text_RetailPrice_TextChanged"/>
         <TextBox x:Name="Text_WholesalePrice" HorizontalAlignment="Left" Margin="532,252,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="270" SelectionOpacity="1" FontSize="16" Height="25" TextChanged="Text_WholesalePrice_TextChanged"/>
         <TextBox x:Name="Text_StockAmount" HorizontalAlignment="Left" Margin="239,299,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="270" SelectionOpacity="1" FontSize="16" Height="24" TextChanged="Text_StockAmount_TextChanged"/>
         <ComboBox x:Name="MeasureUnit" HorizontalAlignment="Left" Margin="532,299,0,0" VerticalAlignment="Top" Width="270" Height="24" BorderBrush="White" DropDownClosed="MeasureUnit_DropDownClosed"/>
         <TextBox x:Name="Text_Comments" HorizontalAlignment="Left" Margin="239,473,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="563" SelectionOpacity="1" FontSize="16" Height="43"/>
-        <Button x:Name="AddCategoryButton" Content="Добавить" HorizontalAlignment="Left" Margin="638,158,0,0" VerticalAlignment="Top" Height="25" Width="75" FontWeight="Normal" Background="#FFE8E4E4"/>
+        <Button x:Name="AddCategoryButton" Content="Добавить" HorizontalAlignment="Left" Margin="638,158,0,0" VerticalAlignment="Top" Height="25" Width="75" FontWeight="Normal" Background="#FFE8E4E4" Click="AddCategoryButton_Click"/>
         <TextBlock HorizontalAlignment="Left" Margin="239,42,0,0" Text="ID" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Height="21" Width="23"/>
         <TextBlock HorizontalAlignment="Left" Margin="239,89,0,0" Text="Наименование*" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.543,0.551" FontSize="16" Height="21" Width="135"/>
         <TextBlock HorizontalAlignment="Left" Margin="239,135,0,0" Text="Категория*" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.541,0.711" FontSize="16" Height="21" Width="92"/>
@@ -39,5 +38,6 @@
         <TextBlock HorizontalAlignment="Left" Margin="239,183,0,0" Text="Выбранные категории" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.541,0.711" FontSize="16" Height="21" Width="227"/>
         <TextBox x:Name="CreationDate" HorizontalAlignment="Left" Margin="532,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="270" SelectionOpacity="1" FontSize="16" IsEnabled="False" Height="25"/>
         <TextBlock HorizontalAlignment="Left" Margin="532,42,0,0" Text="Дата создания" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Height="21" Width="120"/>
+        <Frame x:Name="frame" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" VerticalAlignment="Top"  Panel.ZIndex="0" Width="1000" Height="613"/>
     </Grid>
 </Page>
