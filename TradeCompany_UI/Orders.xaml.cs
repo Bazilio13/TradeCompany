@@ -27,14 +27,14 @@ namespace TradeCompany_UI
     {
         Frame _frame;
         OrderDataAccess _orderDataAccess;
-        List<OrderModel> orderModels;
+        List<OrderModel> _orderModels;
         public Orders(Frame frame)
         {
             _frame = frame;
             InitializeComponent();
             _orderDataAccess = new OrderDataAccess();
-                orderModels = _orderDataAccess.GetOrderModelsByParams();
-            dgOrders.ItemsSource = orderModels;
+            _orderModels = _orderDataAccess.GetOrderModelsByParams();
+            dgOrders.ItemsSource = _orderModels;
         }
 
         private void ResetButton_Click(object sender, RoutedEventArgs e)
@@ -58,14 +58,26 @@ namespace TradeCompany_UI
             {
                 address = AddressFiltr.Text;
             }
-            List<OrderModel> orderModels = _orderDataAccess.GetOrderModelsByParams(client, MinDate.SelectedDate, MaxDate.SelectedDate, address);
+            DateTime? maxDate = null;
+
+            if (MaxDate.SelectedDate != null)
+            {
+                DateTime dateTimeTmp = (DateTime)MaxDate.SelectedDate;
+                dateTimeTmp = dateTimeTmp.AddDays(1);
+                dateTimeTmp = dateTimeTmp.AddMilliseconds(-2);
+                maxDate = (DateTime?)dateTimeTmp;
+            }
+            List<OrderModel> orderModels = _orderDataAccess.GetOrderModelsByParams(client, MinDate.SelectedDate, maxDate, address);
             dgOrders.ItemsSource = orderModels;
         }
 
         private void dgOrders_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            OrderModel crntModel = (OrderModel)dgOrders.CurrentItem;
-            _frame.Content = new SpecificOrder(crntModel.ID);
+            if (dgOrders.CurrentItem != null)
+            {
+                OrderModel crntModel = (OrderModel)dgOrders.CurrentItem;
+                _frame.Content = new SpecificOrder(crntModel.ID);
+            }
         }
 
         private void CreateOrder_Click(object sender, RoutedEventArgs e)
@@ -101,7 +113,7 @@ namespace TradeCompany_UI
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            orderModels[0].Address = "hop hey la la ley";
+            _orderModels[0].Address = "hop hey la la ley";
         }
     }
 }

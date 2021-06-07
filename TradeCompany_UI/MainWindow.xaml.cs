@@ -44,5 +44,10 @@ namespace TradeCompany_UI
         {
             MainFrame.Content = new ProductCatalog();
         }
+
+        private void SupplysButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new Supplys(MainFrame);
+        }
     }
 }

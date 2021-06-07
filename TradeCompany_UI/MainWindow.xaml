@@ -28,5 +28,6 @@
         <Button Name="MainButton" Content="Главная" Background="BlanchedAlmond" FontSize="25" FontWeight="Medium" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Height="55" Width="127" Click="MainButton_Click"/>
         <Button Name="ClientsButton" Content="Клиенты" Background="BlanchedAlmond" FontSize="25" FontWeight="Medium" HorizontalAlignment="Left" Margin="278,0,0,0" VerticalAlignment="Center" Height="55" Width="127" Click="ClientsButton_Click"/>
         <Button Name="ProductButton" Content="Товары" Background="BlanchedAlmond" FontSize="25" FontWeight="Medium" HorizontalAlignment="Left" Margin="416,0,0,0" VerticalAlignment="Center" Height="55" Width="127" Click="ProductButton_Click"/>
+        <Button x:Name="SupplyButton" Content="Поставки" FontSize="25" FontWeight="Medium" HorizontalAlignment="Left" Margin="548,0,0,0" VerticalAlignment="Center" Height="55" Width="127" Click="SupplysButton_Click"/>
     </Grid>
 </Window>
