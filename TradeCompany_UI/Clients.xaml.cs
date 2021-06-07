@@ -90,7 +90,20 @@ namespace TradeCompany_UI
                     sale = 0;
                 }
             }
-            dgClientsTable.ItemsSource = map.MapClientDTOToClientBaseModelListByParam(person, sale, MinDate.SelectedDate, MaxDate.SelectedDate);
+
+
+            DateTime? maxDate = null;
+
+            if (MaxDate.SelectedDate != null)
+            {
+                DateTime timeTmp = (DateTime)MaxDate.SelectedDate;
+                timeTmp = timeTmp.AddDays(1);
+                timeTmp = timeTmp.AddMilliseconds(-1);
+                maxDate = (DateTime?)timeTmp;
+            }
+
+
+            dgClientsTable.ItemsSource = map.MapClientDTOToClientBaseModelListByParam(person, sale, MinDate.SelectedDate, maxDate);
         }
 
 
