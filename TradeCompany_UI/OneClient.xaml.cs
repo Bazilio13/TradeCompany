@@ -39,7 +39,7 @@ namespace TradeCompany_UI
             _wishList = _map.MapWishesDTOToWishesModelListByID(_id);
 
             OrderDataAccess dataAccess = new OrderDataAccess();
-            _orderList = dataAccess.GetOrderModelsByParams(textBoxName.Text);
+            _orderList = dataAccess.GetOrderModelsByClientID(_id);
         }
 
 
