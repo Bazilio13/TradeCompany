@@ -178,5 +178,15 @@ namespace TradeCompany_BLL
             return groupModel;
         }
 
+
+        public List<FeedbackModel> MapFeedbackDTOToFeedbackModel(List<FeedBacksDTO> feedBacksDTO)
+        {
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<FeedBacksDTO, FeedbackModel>());
+            Mapper mapper = new Mapper(config);
+            List<FeedbackModel> feedbackModels = mapper.Map<List<FeedbackModel>>(feedBacksDTO);
+
+            return feedbackModels;
+        }
+
     }
 }

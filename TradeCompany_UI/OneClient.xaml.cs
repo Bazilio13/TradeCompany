@@ -30,6 +30,7 @@ namespace TradeCompany_UI
         private List<String> _oldAddresses = new List<String>();
         private List<String> _newAddresses = new List<String>();
         private MapsDTOtoModel _map = new MapsDTOtoModel();
+        private List<FeedbackModel> _feedback = new List<FeedbackModel>();
 
 
         public OneClient(int id)
@@ -37,9 +38,10 @@ namespace TradeCompany_UI
             InitializeComponent();
             _id = id;
             _wishList = _map.MapWishesDTOToWishesModelListByID(_id);
-
+            FeedbacksDataAccess fda = new FeedbacksDataAccess();
             OrderDataAccess dataAccess = new OrderDataAccess();
             _orderList = dataAccess.GetOrderModelsByClientID(_id);
+            _feedback = fda.GetFeedbacksByClientID(_id);
         }
 
 
