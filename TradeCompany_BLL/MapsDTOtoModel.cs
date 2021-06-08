@@ -177,6 +177,8 @@ namespace TradeCompany_BLL
             List<ProductGroupModel> groupModel = mapper.Map<List<ProductGroupModel>>(groupDTO);
             return groupModel;
         }
+    }
+}
 
 
         public List<FeedbackModel> MapFeedbackDTOToFeedbackModel(List<FeedBacksDTO> feedBacksDTO)

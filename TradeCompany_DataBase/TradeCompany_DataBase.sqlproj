@@ -134,9 +134,10 @@
     <Build Include="TradeCompany_DataBase\Stored Procedures\UpdateProductGroupByID.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\GetProductsByOrderId.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\SearchOrders.sql" />
-    <Build Include="TradeCompany_DataBase\Stored Procedures\DeleteProductByID_1.sql" />
-    <Build Include="TradeCompany_DataBase\Stored Procedures\GetProductsByParams_1.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\GetProductsByAllParams.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetSypplysByParams.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\SearchSupplys.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\DeleteSupplyListsBySupplyID.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\GetAllMeasureUnits.sql" />
   </ItemGroup>
   <ItemGroup>

@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TradeCompany_BLL;
 using TradeCompany_BLL.Models;
+using TradeCompany_UI.Interfaces;
 
 namespace TradeCompany_UI
 {
@@ -34,12 +35,15 @@ namespace TradeCompany_UI
         private float? _filtrToRetailPrice;
         private DateTime? _filtrMinDateTime;
         private DateTime? _filtrMaxDateTime;
-        
+        Frame _frame;
+        Page _previosPage;
 
-        public ProductCatalog()
+        public ProductCatalog(Frame frame, Page previosPage = null)
         {
             InitializeComponent();
             _products = new ProductsDataAccess();
+            _frame = frame;
+            _previosPage = previosPage;
             dgProductCatalog.ItemsSource = _products.GetAllProducts();
 
             List<ProductGroupModel> allGroups = _products.GetAllGroups();
@@ -50,7 +54,7 @@ namespace TradeCompany_UI
 
         private void ProductButton_Click(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
         private void OrdersButton_Click(object sender, RoutedEventArgs e)
@@ -101,7 +105,7 @@ namespace TradeCompany_UI
 
         private void FromStockAmount_TextChange(object sender, TextChangedEventArgs e)
         {
-            _filtrFromStockAmount = InputValidation(_filtrFromStockAmount, FromStockAmount);    
+            _filtrFromStockAmount = InputValidation(_filtrFromStockAmount, FromStockAmount);
         }
 
         private void ToStockAmount_TextChange(object sender, TextChangedEventArgs e)
@@ -281,6 +285,17 @@ namespace TradeCompany_UI
                 int id = item.ID;
                 frame.Content = new SelectedProductPage();
                 MessageBox.Show("kjdfvh");
+            }
+        }
+
+        private void dgProductCatalog_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (_previosPage is IProductAddable)
+            {
+                ProductBaseModel productBaseModel = (ProductBaseModel)dgProductCatalog.SelectedItem;
+                IProductAddable productAddable = (IProductAddable)_previosPage;
+                productAddable.AddProductToCollection(productBaseModel.ID, productBaseModel.Name, productBaseModel.MeasureUnitName, productBaseModel.Groups);
+                _frame.Content = _previosPage;
             }
         }
     }
