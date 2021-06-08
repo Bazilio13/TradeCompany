@@ -100,7 +100,7 @@ namespace TradeCompany_UI
 
         private void AddProduct_Click(object sender, RoutedEventArgs e)
         {
-            _frame.Content = new ProductCatalog(_frame, this);
+            _frame.Content = new ProductCatalog(_frame, _mainWindow, this);
 
         }
 

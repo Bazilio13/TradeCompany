@@ -37,13 +37,15 @@ namespace TradeCompany_UI
         private DateTime? _filtrMaxDateTime;
         Frame _frame;
         Page _previosPage;
+        Window _mainWindow;
 
-        public ProductCatalog(Frame frame, Page previosPage = null)
+        public ProductCatalog(Frame frame, Window mainWindow, Page previosPage = null)
         {
             InitializeComponent();
             _products = new ProductsDataAccess();
             _frame = frame;
             _previosPage = previosPage;
+            _mainWindow = mainWindow;
             dgProductCatalog.ItemsSource = _products.GetAllProducts();
 
             List<ProductGroupModel> allGroups = _products.GetAllGroups();
@@ -184,7 +186,7 @@ namespace TradeCompany_UI
 
         private void AddProductButton_Click(object sender, RoutedEventArgs e)
         {
-            frame.Content = new AddNewProduct();
+            frame.Content = new AddNewProduct(_frame, _previosPage, _mainWindow);
         }
 
         private float? InputValidation(float? filtr, TextBox textbox)

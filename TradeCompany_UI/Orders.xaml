@@ -37,6 +37,7 @@
             <TextBlock HorizontalAlignment="Left" Height="15" Margin="20,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="44"><Run Language="ru-ru" Text="Адресс"/></TextBlock>
             <TextBox x:Name="AddressFiltr" Margin="0,0,0,0" TextWrapping="Wrap"  Height="25" VerticalAlignment="Top" HorizontalAlignment="Center" Width="200" TextChanged="AddressFiltr_TextChanged"/>
         </StackPanel>
+
         <Button Content="Сбросить фильтр" HorizontalAlignment="Center" Margin="0,155,0,0" VerticalAlignment="Top" Height="25" Width="118" Click="ResetButton_Click" Grid.Column="1" Grid.Row="1"/>
 
 

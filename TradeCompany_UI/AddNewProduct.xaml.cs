@@ -32,10 +32,17 @@ namespace TradeCompany_UI
         private List<MeasureUnitsModel> _allMeasureUnits;
         private int _currentProductID;
         private int _measureUnitID;
+        private Window _mainWindow;
+        private Frame _frame;
+        private Page _priviosPage;
 
-        public AddNewProduct()
+        public AddNewProduct(Frame frame, Page priviosPage, Window mainWindow)
         {
             InitializeComponent();
+            _mainWindow = mainWindow;
+            _frame = frame;
+            _priviosPage = priviosPage;
+
             _currentProductID = GetCurrentProductID();
 
             ID_Text.Text = _currentProductID.ToString();
@@ -66,7 +73,7 @@ namespace TradeCompany_UI
                 _productsData.AddProductToProductGroup(_currentProductID, ID);
             }
 
-            frame.Content = new ProductCatalog();
+            frame.Content = _priviosPage;
         }
 
         private void Name_Text_TextChanged(object sender, TextChangedEventArgs e)
@@ -106,12 +113,12 @@ namespace TradeCompany_UI
                 if (MessageBox.Show("Есть заполненные поля. Отменить?",
                         "Подтверждение", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
-                    frame.Content = new ProductCatalog();
+                    frame.Content = _priviosPage;
                 }
             }
             else
             {
-                frame.Content = new ProductCatalog();
+                frame.Content = _priviosPage;
             }
         }
 

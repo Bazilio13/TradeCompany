@@ -51,9 +51,9 @@ namespace TradeCompany_BLL
             List<ClientBaseModel> clientBaseModel = mapper.Map<List<ClientBaseModel>>(clientsDTO);
 
             return clientBaseModel;
-        } 
-        
-        
+        }
+
+
         public ClientBaseModel MapLastClientDTOToLastClientBaseModel()
         {
             ClientsData clients = new ClientsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
@@ -177,9 +177,6 @@ namespace TradeCompany_BLL
             List<ProductGroupModel> groupModel = mapper.Map<List<ProductGroupModel>>(groupDTO);
             return groupModel;
         }
-    }
-}
-
 
         public List<FeedbackModel> MapFeedbackDTOToFeedbackModel(List<FeedBacksDTO> feedBacksDTO)
         {
