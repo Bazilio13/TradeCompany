@@ -14,13 +14,14 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TradeCompany_BLL.DataAccess;
 using TradeCompany_BLL.Models;
+using TradeCompany_UI.Interfaces;
 
 namespace TradeCompany_UI
 {
     /// <summary>
     /// Interaction logic for CertainSupply.xaml
     /// </summary>
-    public partial class CertainSupply : Page
+    public partial class CertainSupply : Page, IProductAddable
     {
         private Frame _frame;
         private SupplysDataAccess _supplysDataAccess;
@@ -49,9 +50,15 @@ namespace TradeCompany_UI
             }
         }
 
-        public void RefreshDG()
+        public void AddProductToCollection(int productID, string productName, string productMeasureUnit, List<ProductGroupModel> productGroupModels)
         {
-            dgSupplyList.ItemsSource = SupplyModel.SupplyListModel;
+            SupplyListModel supplyListModel = new SupplyListModel();
+            supplyListModel.ProductID = productID;
+            supplyListModel.ProductMeasureUnit = productMeasureUnit;
+            supplyListModel.ProductName = productName;
+            supplyListModel.ProductGroups = productGroupModels;
+            SupplyModel.SupplyListModel.Add(supplyListModel);
+            dgSupplyList.Items.Refresh();
         }
 
         private void SupplysDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
@@ -61,13 +68,12 @@ namespace TradeCompany_UI
 
         private void AddProduct_Click(object sender, RoutedEventArgs e)
         {
-            SetPreviousPage();
-            //_frame.Content = new ProductCatalog(_frame);
+            _frame.Content = new ProductCatalog(_frame, this);
+
         }
 
         private void PotentialClients_Click(object sender, RoutedEventArgs e)
         {
-            SetPreviousPage();
         }
 
         private void Save_Click(object sender, RoutedEventArgs e)
@@ -79,16 +85,14 @@ namespace TradeCompany_UI
         {
 
         }
-        private void SetPreviousPage()
-        {
-            Grid grid = (Grid)_frame.Parent;
-            MainWindow mainWindow = (MainWindow)grid.Parent;
-            mainWindow._previosPage = this;
-        }
 
         private void AddNewProduct_Click(object sender, RoutedEventArgs e)
         {
-            SetPreviousPage();
+        }
+
+        private void dgSupplyList_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
+        {
+
         }
     }
 }

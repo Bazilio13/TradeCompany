@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TradeCompany_BLL;
 using TradeCompany_BLL.Models;
+using TradeCompany_UI.Interfaces;
 
 namespace TradeCompany_UI
 {
@@ -36,11 +37,13 @@ namespace TradeCompany_UI
         private DateTime? _filtrMaxDateTime;
         Regex _regexForNumbers = new Regex(@"[^0-9.]+");
         Frame _frame;
+        Page _previosPage;
 
-        public ProductCatalog(Frame frame)
+        public ProductCatalog(Frame frame, Page previosPage = null)
         {
             InitializeComponent();
             _frame = frame;
+            _previosPage = previosPage;
             dgProductCatalog.ItemsSource = _products.GetAllProducts();
 
             List<ProductGroupModel> productGroupName = _products.GetAllGroups();
@@ -50,12 +53,12 @@ namespace TradeCompany_UI
                 ProductGroupSelect.Items.Add(productGroupName[i].Name);
             }
 
-            
+
         }
 
         private void ProductButton_Click(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
         private void OrdersButton_Click(object sender, RoutedEventArgs e)
@@ -109,7 +112,7 @@ namespace TradeCompany_UI
 
         private void FromStockAmount_TextChange(object sender, TextChangedEventArgs e)
         {
-            _filtrFromStockAmount = InputValidation(_filtrFromStockAmount, FromStockAmount);    
+            _filtrFromStockAmount = InputValidation(_filtrFromStockAmount, FromStockAmount);
         }
 
         private void ToStockAmount_TextChange(object sender, TextChangedEventArgs e)
@@ -197,19 +200,13 @@ namespace TradeCompany_UI
 
         private void dgProductCatalog_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Grid grid = (Grid)_frame.Parent;
-            MainWindow mainWindow = (MainWindow)grid.Parent;
-            CertainSupply certainSupply = (CertainSupply)mainWindow._previosPage;
-            SupplyListModel supplyListModel = new SupplyListModel();
-            ProductBaseModel productBaseModel = (ProductBaseModel)dgProductCatalog.SelectedItem;
-            supplyListModel.ProductID = productBaseModel.ID;
-            supplyListModel.ProductMeasureUnit = productBaseModel.MeasureUnitName;
-            supplyListModel.ProductName = productBaseModel.Name;
-            certainSupply.SupplyModel.SupplyListModel.Add(supplyListModel);
-            certainSupply.dgSupplyList.ItemsSource = certainSupply.SupplyModel.SupplyListModel;
-            _frame.Content = mainWindow._previosPage;
-            mainWindow._previosPage = this;
-            certainSupply.RefreshDG();
+            if (_previosPage is IProductAddable)
+            {
+                ProductBaseModel productBaseModel = (ProductBaseModel)dgProductCatalog.SelectedItem;
+                IProductAddable productAddable = (IProductAddable)_previosPage;
+                productAddable.AddProductToCollection(productBaseModel.ID, productBaseModel.Name, productBaseModel.MeasureUnitName, productBaseModel.Groups);
+            }
+            _frame.Content = _previosPage;
         }
     }
 }

@@ -24,10 +24,12 @@ namespace TradeCompany_UI
     {
         private Frame _frame;
         private SupplysDataAccess _supplyDataAccess;
+        private Page _previosPage;
         public List<SupplyModel> SupplyModels { get; set; }
-        public Supplys(Frame frame)
+        public Supplys(Frame frame, Page previousPage = null)
         {
             _frame = frame;
+            _previosPage = previousPage;
             InitializeComponent();
             _supplyDataAccess = new SupplysDataAccess();
             SupplyModels = _supplyDataAccess.GetSupplyModelsByParams();
@@ -89,8 +91,7 @@ namespace TradeCompany_UI
 
         private void CreateSupply_Click(object sender, RoutedEventArgs e)
         {
-            SetPreviousPage();
-            _frame.Content = new CertainSupply(_frame);
+           _frame.Content = new CertainSupply(_frame);
         }
 
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -103,16 +104,9 @@ namespace TradeCompany_UI
         {
             if (dgSupplys.CurrentItem != null)
             {
-                SetPreviousPage();
                 SupplyModel crntModel = (SupplyModel)dgSupplys.CurrentItem;
                 _frame.Content = new CertainSupply(_frame, crntModel.ID);
             }
-        }
-        private void SetPreviousPage()
-        {
-            Grid grid = (Grid)_frame.Parent;
-            MainWindow mainWindow = (MainWindow)grid.Parent;
-            mainWindow._previosPage = this;
         }
     }
 }

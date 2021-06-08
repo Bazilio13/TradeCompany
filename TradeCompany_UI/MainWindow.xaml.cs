@@ -20,7 +20,6 @@ namespace TradeCompany_UI
     /// </summary>
     public partial class MainWindow : Window
     {
-        public Page _previosPage;
         public MainWindow()
         {
             InitializeComponent();
