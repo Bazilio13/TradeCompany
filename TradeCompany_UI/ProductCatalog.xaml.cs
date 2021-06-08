@@ -231,7 +231,6 @@ namespace TradeCompany_UI
             _filtrToWholesalePrice = null;
             _filtrFromWholesalePrice = null;
         }
-
         private void NullifyRetailPrices()
         {
             _filtrToRetailPrice = null;
