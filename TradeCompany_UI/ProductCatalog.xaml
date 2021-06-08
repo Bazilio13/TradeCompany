@@ -5,8 +5,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TradeCompany_UI"
       mc:Ignorable="d" 
-      d:DesignHeight="500"
-      Title="ProductCatalog" Width="869">
+      d:DesignHeight="450"
+      Title="ProductCatalog">
  
     <Grid Background="#F9F9F9">
         <Grid.RowDefinitions>            
@@ -16,19 +16,19 @@
             <ColumnDefinition Width="613"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0" Orientation="Vertical" Margin="20,143,20,0">
+        <StackPanel Grid.Column="0" Orientation="Vertical" Margin="20,50,20,0">
             <DockPanel Margin="0,0,0,20">
                 <Image Source="Pictures/search.png" Width="29" Height="29" Margin="0,5,0,0"></Image>
                 <TextBox x:Name="ProductSearch" DockPanel.Dock="Left" Background="#F9F9F9" BorderBrush="#6E304B" Width="191" Height="22" TextChanged="ProductSearch_TextChange" HorizontalContentAlignment="Left" BorderThickness="0,0,0,1"/>
                 <Button x:Name="AddProduct"  DockPanel.Dock="Right" Content="Добавить товар" Click="AddProductButton_Click" HorizontalAlignment="Right"/>
             </DockPanel>
             
-            <DataGrid x:Name="dgProductCatalog" Width="571" AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <DataGrid x:Name="dgProductCatalog" Width="571" AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" HorizontalAlignment="Center" VerticalAlignment="Top">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding ="{Binding Path = ID}" IsReadOnly="True" Header="ID" Width="58"/>
                     <DataGridTextColumn Binding ="{Binding Path = Name}"  IsReadOnly="True" Header="Наименование" Width="103"/>
                     <DataGridTextColumn Binding ="{Binding Path = StockAmount}" IsReadOnly="True" Header="Остаток" Width="82"/>
-                    <DataGridTextColumn Binding ="{Binding Path = MeasureUnitName}" IsReadOnly="True" Header="Единица измеререния" Width="82" />
+                    <DataGridTextColumn Binding ="{Binding Path = MeasureUnitName}" IsReadOnly="True" Header="Единица измерения" Width="82" />
                     <DataGridTextColumn Binding ="{Binding Path = WholesalePrice}" IsReadOnly="True" Header="Цена опт." Width="82"/>
                     <DataGridTextColumn Binding ="{Binding Path = RetailPrice}" IsReadOnly="True" Header="Цена розн." Width="82"/>
                     <DataGridTextColumn Binding ="{Binding Path = LastSupplyDate}" IsReadOnly="True" Header="Дата последней поставки" Width="82"/>
@@ -37,18 +37,18 @@
         </StackPanel>
 
         <StackPanel Grid.Column="1" Orientation="Vertical" Width="193" Margin="29,0,0,0">
-            <TextBlock HorizontalAlignment="Center" FontSize="18" FontWeight="Bold" Margin="0,0,0,35">Фильтр</TextBlock>
+            <TextBlock HorizontalAlignment="Center" FontSize="18" FontWeight="Bold" Margin="0,50,0,15">Фильтры</TextBlock>
 
-            <ComboBox x:Name="ProductGroupSelect" HorizontalAlignment="Center" Margin="0,0,0,33" SelectedIndex="0" Height="22" Width="150" DropDownClosed="ProductGroupSelect_DropDownClosed" Grid.RowSpan="2" IsEditable="True"/>
-            <StackPanel Width="78" HorizontalAlignment="Left" Margin="24,0,0,30">
+            <ComboBox x:Name="ProductGroupSelect" HorizontalAlignment="Center" Margin="0,0,0,10" SelectedIndex="0" Height="22" Width="150" DropDownClosed="ProductGroupSelect_DropDownClosed" Grid.RowSpan="2" IsEditable="True"/>
+            <StackPanel Width="95" HorizontalAlignment="Left" Margin="0,0,0,30">
                 <RadioButton x:Name="RadioButtonRetailPrice" Content="Розница" Height="16" Width="82" Checked="RadioButtonRetailPrice_Checked" HorizontalAlignment="Left"/>
                 <RadioButton x:Name="RadioButtonWholesalePrice" Content="Опт" Height="16" Width="50" Checked="RadioButtonWholesalePrice_Checked" HorizontalAlignment="Left"/>
             </StackPanel>
                         
-            <DatePicker x:Name="DateFrom"  HorizontalAlignment="Center" Margin="0,0,0,17" RenderTransformOrigin="0.309,-0.578" Height="22" Width="100" SelectedDateChanged="DateFrom_SelectedDateChange"/>
-            <DatePicker x:Name="DateUntil"  HorizontalAlignment="Center" Margin="0,0,0,30" Height="22" Width="100" SelectedDateChanged="DateUntil_SelectedDateChange"/>
+            <DatePicker x:Name="DateFrom"  HorizontalAlignment="Center" Margin="0,-15,0,10" RenderTransformOrigin="0.309,-0.578" Height="22" Width="100" SelectedDateChanged="DateFrom_SelectedDateChange"/>
+            <DatePicker x:Name="DateUntil"  HorizontalAlignment="Center" Margin="0,0,0,10" Height="22" Width="100" SelectedDateChanged="DateUntil_SelectedDateChange"/>
 
-            <DockPanel  Margin="0,0,0,31">
+            <DockPanel HorizontalAlignment="Center" Margin="0,-5,0,25" Width="169">
                 <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" FontSize="14">Остаток:</TextBlock>
                 <StackPanel DockPanel.Dock="Right">                    
                     <TextBlock Margin="30,0,0,0">до</TextBlock>
@@ -60,7 +60,7 @@
                 </StackPanel>
             </DockPanel>
 
-            <DockPanel Margin="0,0,0,27">
+            <DockPanel HorizontalAlignment="Center" Margin="0,-15,0,25" Width="169">
                 <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center">Цена:</TextBlock>
                 <StackPanel DockPanel.Dock="Right">
                     <TextBlock Margin="30,0,0,0">до</TextBlock>
@@ -72,10 +72,8 @@
                 </StackPanel>
             </DockPanel>
 
-            <Button x:Name="ApplyFilters" Content="Применить фильтры" HorizontalAlignment="Center" Click="ApplyFiltersButton_Click" Margin="0,0,0,14"/>
-            <Button x:Name="ResetFilters" Content="Сбросить фильтры" HorizontalAlignment="Center" Click="ResetFiltersButton_Click"/>
+            <Button x:Name="ApplyFilters" Content="Применить фильтры" HorizontalAlignment="Center" Click="ApplyFiltersButton_Click" Margin="0,0,0,5" Width="193"/>
+            <Button x:Name="ResetFilters" Content="Сбросить фильтры" HorizontalAlignment="Center" Click="ResetFiltersButton_Click" Width="195"/>
         </StackPanel>
-         
-        <Frame x:Name="frame" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" VerticalAlignment="Top"  Panel.ZIndex="0" Grid.ColumnSpan="2" Width="1000" Height="700" Grid.RowSpan="2"/>
     </Grid>    
 </Page>

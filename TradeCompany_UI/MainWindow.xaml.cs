@@ -42,7 +42,7 @@ namespace TradeCompany_UI
 
         private void ProductButton_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new ProductCatalog();
+            MainFrame.Content = new ProductCatalog(MainFrame);
         }
     }
 }

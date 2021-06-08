@@ -23,6 +23,7 @@ namespace TradeCompany_UI
     /// </summary>
     public partial class AddNewProduct : Page
     {
+        private Frame _frame;
         private ProductsDataAccess _productsData = new ProductsDataAccess();
         private ProductModel _product = new ProductModel();
         private ProductGroupModel _newGroup = new ProductGroupModel();
@@ -33,8 +34,9 @@ namespace TradeCompany_UI
         private int _currentProductID;
         private int _measureUnitID;
 
-        public AddNewProduct()
+        public AddNewProduct(Frame frame)
         {
+            _frame = frame;
             InitializeComponent();
             _currentProductID = GetCurrentProductID();
 
@@ -66,7 +68,7 @@ namespace TradeCompany_UI
                 _productsData.AddProductToProductGroup(_currentProductID, ID);
             }
 
-            frame.Content = new ProductCatalog();
+            _frame.Content = new ProductCatalog(_frame);
         }
 
         private void Name_Text_TextChanged(object sender, TextChangedEventArgs e)
@@ -106,12 +108,12 @@ namespace TradeCompany_UI
                 if (MessageBox.Show("Есть заполненные поля. Отменить?",
                         "Подтверждение", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
-                    frame.Content = new ProductCatalog();
+                    _frame.Content = new ProductCatalog(_frame);
                 }
             }
             else
             {
-                frame.Content = new ProductCatalog();
+                _frame.Content = new ProductCatalog(_frame);
             }
         }
 
@@ -257,8 +259,8 @@ namespace TradeCompany_UI
             {
                 if (ChosenCategories.Text.Contains(Category.Text))
                 {
+                    MessageBox.Show($"Категория \"{Category.Text}\" уже выбрана");
                     Category.Text = "";
-                    MessageBox.Show("Данная категория уже выбрана");
                     return;
                 }
                 if (ChosenCategories.Text == "Не выбрано")
@@ -275,7 +277,6 @@ namespace TradeCompany_UI
             }
         }
 
-        
 
     }
 }

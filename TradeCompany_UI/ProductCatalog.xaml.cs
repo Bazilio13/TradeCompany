@@ -23,6 +23,8 @@ namespace TradeCompany_UI
     /// </summary>
     public partial class ProductCatalog : Page
     {
+        private Frame _frame;
+        private int _id;
         private ProductsDataAccess _products;
         private string _filtrByText;
         private int? _filtrByGategory;
@@ -36,12 +38,25 @@ namespace TradeCompany_UI
         private DateTime? _filtrMaxDateTime;
         
 
-        public ProductCatalog()
+        public ProductCatalog(Frame frame)
         {
+            _frame = frame;
             InitializeComponent();
             _products = new ProductsDataAccess();
             dgProductCatalog.ItemsSource = _products.GetAllProducts();
+            List<ProductGroupModel> allGroups = _products.GetAllGroups();
+            ProductGroupSelect.ItemsSource = allGroups;
+            ProductGroupSelect.DisplayMemberPath = "Name";
+            ProductGroupSelect.Text = "";
+        }
 
+        public ProductCatalog(Frame frame, int id)
+        {
+            id = _id;
+            _frame = frame;
+            InitializeComponent();
+            _products = new ProductsDataAccess();
+            dgProductCatalog.ItemsSource = _products.GetAllProducts();
             List<ProductGroupModel> allGroups = _products.GetAllGroups();
             ProductGroupSelect.ItemsSource = allGroups;
             ProductGroupSelect.DisplayMemberPath = "Name";
@@ -180,7 +195,7 @@ namespace TradeCompany_UI
 
         private void AddProductButton_Click(object sender, RoutedEventArgs e)
         {
-            frame.Content = new AddNewProduct();
+            _frame.Content = new AddNewProduct(_frame);
         }
 
         private float? InputValidation(float? filtr, TextBox textbox)
@@ -279,7 +294,7 @@ namespace TradeCompany_UI
             if (item != null)
             {
                 int id = item.ID;
-                frame.Content = new SelectedProductPage();
+                _frame.Content = new SelectedProductPage();
                 MessageBox.Show("kjdfvh");
             }
         }

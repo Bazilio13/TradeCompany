@@ -5,21 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TradeCompany_UI"
         mc:Ignorable="d"
-        Title="" Height="195" Width="382" FontSize="14" ResizeMode="NoResize">
-    <Grid>
+        Title="" FontSize="14" ResizeMode="NoResize" Width="500" Height="250">
+    <Grid Margin="0,0,0,0">
         <Grid.RowDefinitions>
-            <RowDefinition Height="20" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="80" />
         </Grid.RowDefinitions>
 
-        <WrapPanel Grid.Row="3" HorizontalAlignment="Center" Margin="0,15,0,0">
-            <Button IsDefault="True" Click="Accept_Click" MinWidth="60" Margin="0,0,10,0" Height="32">Отмена</Button>
-            <Button x:Name="DeleteButton" IsCancel="True" MinWidth="60" Height="32" Width="143" Content="Удалить выбранные" Click="DeleteButton_Click"/>
+        <WrapPanel Grid.Row="2" HorizontalAlignment="Center" Margin="0,0,0,47" Width="324">
+            <Button IsDefault="True" Click="Accept_Click" MinWidth="60" Height="32" Margin="9,0,0,0" Width="101" Content="Отмена"/>
+            <Button x:Name="DeleteButton" IsCancel="True" MinWidth="60" Height="32" Margin="15,0,0,0" Width="189" Content="Удалить выбранные" Click="DeleteButton_Click"/>
         </WrapPanel>
 
-        <StackPanel x:Name="StackPanel" Height="Auto" Margin="46,0,38,0" Grid.Row="2"/>
+        <StackPanel x:Name="StackPanel" Height="Auto" Margin="20,20,38,0" Grid.Row="0"/>
 
     </Grid>
 </Window>
