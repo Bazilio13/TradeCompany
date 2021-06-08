@@ -203,24 +203,29 @@ namespace TradeCompany_UI
 
         private float? InputValidation(float? filtr, TextBox textbox)
         {
-            textbox.Text = Regex.Replace(textbox.Text, @"[.]+", ",");
-            textbox.Text = Regex.Replace(textbox.Text, @"[^0-9,.]+", "");
-            textbox.SelectionStart = textbox.Text.Length;
-            if (textbox.Text == "")
+            if(textbox != null)
             {
-                filtr = null;
-            }
-            else
-            {
-                try
+                textbox.Text = Regex.Replace(textbox.Text, @"[.]+", ",");
+                textbox.Text = Regex.Replace(textbox.Text, @"[^0-9,.]+", "");
+                textbox.SelectionStart = textbox.Text.Length;
+                if (textbox.Text == "")
                 {
-                    filtr = (float)Convert.ToDouble(textbox.Text);
+                    filtr = null;
                 }
-                catch (FormatException ex)
+                else
                 {
-                    textbox.Text = "";
-                    MessageBox.Show("Неверный ввод");
+                    try
+                    {
+                        filtr = (float)Convert.ToDouble(textbox.Text);
+                    }
+                    catch (FormatException ex)
+                    {
+                        textbox.Text = "";
+                        MessageBox.Show("Неверный ввод");
+                    }
                 }
+
+                return filtr;
             }
 
             return filtr;
@@ -231,7 +236,6 @@ namespace TradeCompany_UI
             _filtrToWholesalePrice = null;
             _filtrFromWholesalePrice = null;
         }
-
         private void NullifyRetailPrices()
         {
             _filtrToRetailPrice = null;
