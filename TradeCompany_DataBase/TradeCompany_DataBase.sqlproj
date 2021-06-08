@@ -136,6 +136,7 @@
     <Build Include="TradeCompany_DataBase\Stored Procedures\SearchOrders.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\GetProductsByAllParams.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\GetSypplysByParams.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\SearchSupplys.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="TradeCompany_DataBase.refactorlog" />

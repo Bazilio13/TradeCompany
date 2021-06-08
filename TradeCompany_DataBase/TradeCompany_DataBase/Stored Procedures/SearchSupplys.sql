@@ -1,5 +1,5 @@
-﻿CREATE PROCEDURE [TradeCompany_DataBase].[GetSupplyByID]
-	@ID int
+﻿CREATE PROCEDURE [TradeCompany_DataBase].[SearchSupplys]
+@str nvarchar(255)
 AS
 	SELECT s.ID, s.DateTime, s.Comment, sl.ID, sl.ProductID, sl.Amount, P.ID, p.Name, p.StockAmount, M.Name as MeasureUnitName, PG.ID, PG.Name
 	from TradeCompany_DataBase.Supplies as S
@@ -9,5 +9,8 @@ AS
 	left join TradeCompany_DataBase.Product_ProductGroups as PPG on P.ID = PPG.ProductID
 	left join TradeCompany_DataBase.ProductGroups as PG on PPG.ProductGroupID = PG.ID
 	Where 
-	s.ID = @ID
+	s.ID like '%' + @str + '%' OR
+	s.Comment like '%' + @str + '%' OR
+	p.Name like '%' + @str + '%' OR
+	PG.Name like '%' + @str + '%'
 	order by S.DateTime desc, S.ID desc

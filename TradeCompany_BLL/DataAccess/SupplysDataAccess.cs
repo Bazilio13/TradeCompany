@@ -22,13 +22,24 @@ namespace TradeCompany_BLL.DataAccess
             List<SupplyModel> orderModels = _map.MapSupplyDTOToSupplyModel(supplyDTOs);
             return orderModels;
         }
+        public SupplyModel GetSupplyModelByID(int id)
+        {
+            List<SupplyDTO> supplyDTOs;
+            supplyDTOs = _supplysData.GetSupplysByID(id);
+            List<SupplyModel> orderModels = _map.MapSupplyDTOToSupplyModel(supplyDTOs);
+            if (orderModels.Count > 0)
+            {
+                return orderModels[0];
+            }
+            return null;
+        }
 
-        //public List<OrderModel> SearchSupplyModels(string str)
-        //{
-        //    List<OrdersDTO> ordersDTOs;
-        //    ordersDTOs = _ordersData.SearchOrders(str);
-        //    List<OrderModel> orderModels = _map.MapOrdersDTOToOrderModel(ordersDTOs);
-        //    return orderModels;
-        //}
+        public List<SupplyModel> SearchSupplyModels(string str)
+        {
+            List<SupplyDTO> supplyDTOs;
+            supplyDTOs = _supplysData.SearchSupplys(str);
+            List<SupplyModel> supplyModels = _map.MapSupplyDTOToSupplyModel(supplyDTOs);
+            return supplyModels;
+        }
     }
 }

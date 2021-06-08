@@ -89,13 +89,13 @@ namespace TradeCompany_UI
 
         private void CreateSupply_Click(object sender, RoutedEventArgs e)
         {
-
+            _frame.Content = new CertainSupply(_frame);
         }
 
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //_supplyModels = _supplyDataAccess.Search(SearchBox.Text);
-            //dgOrders.ItemsSource = _supplyModels;
+            _supplyModels = _supplyDataAccess.SearchSupplyModels(SearchBox.Text);
+            dgSupplys.ItemsSource = _supplyModels;
         }
 
         private void dgSupplys_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -103,7 +103,7 @@ namespace TradeCompany_UI
             if (dgSupplys.CurrentItem != null)
             {
                 SupplyModel crntModel = (SupplyModel)dgSupplys.CurrentItem;
-                //_frame.Content = new SpecificSupply(crntModel.ID);
+                _frame.Content = new CertainSupply(_frame, crntModel.ID);
             }
         }
     }

@@ -51,7 +51,7 @@
         <DataGrid x:Name="dgSupplys" Grid.Row="1" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="True" MouseLeftButtonUp="dgSupplys_MouseLeftButtonUp">
             <DataGrid.Columns >
                 <DataGridTextColumn Binding="{Binding Path=ID}"  Header="№" Width="30" MinWidth="30"></DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding Path=DateTime}" Header="Дата заказа" Width="120" MinWidth="100"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=DateTime}" Header="Дата поставки" Width="120" MinWidth="100"></DataGridTextColumn>
                 <DataGridTextColumn Binding="{Binding Path=Comment}" Header="Комментарий" Width="*" MinWidth="150"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
