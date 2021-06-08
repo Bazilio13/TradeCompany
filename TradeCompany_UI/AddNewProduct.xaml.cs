@@ -40,7 +40,7 @@ namespace TradeCompany_UI
             _currentProductID = GetCurrentProductID();
 
             ID_Text.Text = _currentProductID.ToString();
-            
+
             RefreshGroupsCombobox();
 
             _allMeasureUnits = _productsData.GetAllMeasureUnits();
@@ -62,7 +62,7 @@ namespace TradeCompany_UI
             _product.Comments = Text_Comments.Text;
             _product.LastSupplyDate = DateTime.Now;
             _productsData.AddNewProduct(_product);
-            foreach(int ID in _chosenGroupsIDs)
+            foreach (int ID in _chosenGroupsIDs)
             {
                 _productsData.AddProductToProductGroup(_currentProductID, ID);
             }
@@ -72,6 +72,7 @@ namespace TradeCompany_UI
 
         private void Name_Text_TextChanged(object sender, TextChangedEventArgs e)
         {
+            TextBoxLengthCheck(NameLimit, Name_Text, e, 250);
             EnableSaveButton();
         }
 
@@ -99,7 +100,7 @@ namespace TradeCompany_UI
 
         private void Buton_Cancel_Click(object sender, RoutedEventArgs e)
         {
-            if(Name_Text.Text != "" || Text_RetailPrice.Text != "" || Text_WholesalePrice.Text != ""
+            if (Name_Text.Text != "" || Text_RetailPrice.Text != "" || Text_WholesalePrice.Text != ""
                 || Text_StockAmount.Text != "" || ChosenCategories.Text != "Не выбрано" || MeasureUnit.Text != ""
                 || Text_Description.Text != "" || Text_Comments.Text != "")
             {
@@ -112,32 +113,6 @@ namespace TradeCompany_UI
             else
             {
                 frame.Content = new ProductCatalog();
-            }
-        }
-
-        private void AddCategoryButton_Click(object sender, RoutedEventArgs e)
-        {
-            //формируем список ID категорий, которые надо присвоить нашему продукту
-            ProductGroupModel selectedItem = (ProductGroupModel)Category.SelectedItem;
-            if(!(selectedItem is null))
-            {
-                if (ChosenCategories.Text.Contains(Category.Text))
-                {
-                    Category.Text = "";
-                    MessageBox.Show("Данная категория уже выбрана");
-                    return;
-                }
-                if (ChosenCategories.Text == "Не выбрано")
-                {
-                    ChosenCategories.Text = "";
-                }
-                ChosenCategories.Text += Category.Text + " / ";
-                Category.Text = "";
-
-                _chosenGroups.Add(selectedItem);
-                _chosenGroupsIDs.Add(selectedItem.ID);
-
-                EnableSaveButton();
             }
         }
 
@@ -214,7 +189,6 @@ namespace TradeCompany_UI
 
         private int GetCurrentProductID()
         {
-            //переделать через GetProductByID
             int lastProductInDBCount = _productsData.GetAllProducts().Count - 1;
             ProductBaseModel lastProductInDB = _productsData.GetAllProducts()[lastProductInDBCount];
             int currentProductID = lastProductInDB.ID + 1;
@@ -223,7 +197,7 @@ namespace TradeCompany_UI
 
         private void ChangeCategoriesButton_Click(object sender, RoutedEventArgs e)
         {
-            if(_chosenGroups.Count > 0) 
+            if (_chosenGroups.Count > 0)
             {
                 ChangeSelectedCategories changeCtaegoriesWindow = new ChangeSelectedCategories(_chosenGroups, ChosenCategories);
 
@@ -257,5 +231,52 @@ namespace TradeCompany_UI
             Category.ItemsSource = _allGroups;
             Category.DisplayMemberPath = "Name";
         }
+
+        private void Text_Description_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBoxLengthCheck(DescriptionLimit, Text_Description, e, 500);
+        }
+
+        private void Text_Comments_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBoxLengthCheck(CommentsLimit, Text_Comments, e, 500);
+        }
+
+        private void TextBoxLengthCheck(TextBlock textBlock, TextBox textBox, TextChangedEventArgs e, int limit)
+        {
+            textBlock.Text = (limit - textBox.Text.Length).ToString();
+            if (textBox.Text.Length >= limit)
+            {
+                MessageBox.Show("Введено аксимальное число символов");
+            }
+        }
+
+        private void Category_DropDownClosed(object sender, EventArgs e)
+        {
+            ProductGroupModel selectedItem = (ProductGroupModel)Category.SelectedItem;
+            if (!(selectedItem is null))
+            {
+                if (ChosenCategories.Text.Contains(Category.Text))
+                {
+                    Category.Text = "";
+                    MessageBox.Show("Данная категория уже выбрана");
+                    return;
+                }
+                if (ChosenCategories.Text == "Не выбрано")
+                {
+                    ChosenCategories.Text = "";
+                }
+                ChosenCategories.Text += Category.Text + " / ";
+                Category.Text = "";
+
+                _chosenGroups.Add(selectedItem);
+                _chosenGroupsIDs.Add(selectedItem.ID);
+
+                EnableSaveButton();
+            }
+        }
+
+        
+
     }
 }

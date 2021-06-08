@@ -54,7 +54,7 @@
                 <TextBlock Margin="10,5,0,0" FontWeight="Bold" FontSize="14">Настройки</TextBlock>
             </StackPanel>
         </Button>
-        <DataGrid x:Name="dgProductCatalog" Width="784"  FontSize="16"  AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" Grid.Row="1" Grid.Column="1" Background="White" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,23,0,0">
+        <DataGrid x:Name="dgProductCatalog" Width="784"  FontSize="16"  AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" Grid.Row="1" Grid.Column="1" Background="White" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,23,0,0" MouseLeftButtonDown="dgProductCatalog_MouseLeftButtonDown">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding ="{Binding Path = ID}"  IsReadOnly="True" Header="ID" Width="30"/>
                 <DataGridTextColumn Binding ="{Binding Path = Name}"  IsReadOnly="True" Header="Наименование" Width="150"/>
@@ -75,14 +75,14 @@
         <TextBlock TextWrapping="Wrap" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="155,10,0,0"><Run Language="ru-ru" Text="до:"/></TextBlock>
         <TextBox x:Name="ToStockAmount" TextWrapping="Wrap" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="182,10,0,0" BorderBrush="Black" VerticalContentAlignment="Center" TextAlignment="Center" Width="57" Height="21" TextChanged="ToStockAmount_TextChange"/>
         <TextBlock TextWrapping="Wrap" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="14"><Run Language="ru-ru" Text="Цена от:"/></TextBlock>
-        <TextBox x:Name="FromPrice" TextWrapping="Wrap" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="84,0,0,0" Width="60" Height="20" BorderBrush="Black" VerticalContentAlignment="Center" Text="" TextAlignment="Center" TextChanged="FromPrice_TextChange"/>
+        <TextBox x:Name="FromPrice" TextWrapping="Wrap" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="84,0,0,0" Width="60" Height="20" BorderBrush="Black" VerticalContentAlignment="Center" Text="" TextAlignment="Center" TextChanged="FromPrice_TextChange" IsEnabled="False"/>
         <TextBlock TextWrapping="Wrap" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="155,0,0,0" FontSize="14"><Run Language="ru-ru" Text="до:"/></TextBlock>
-        <TextBox x:Name="ToPrice" TextWrapping="Wrap" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="182,0,0,0" BorderBrush="Black" VerticalContentAlignment="Center" TextAlignment="Center" Height="20" Width="60" TextChanged="ToPrice_TextChange"/>
-        <RadioButton x:Name="RadioButtonRetailPrice" Content="Розница" IsChecked="True" FontSize="14" Height="16" Width="82" Checked="RadioButtonRetailPrice_Checked" HorizontalAlignment="Left" Grid.Column="1" Margin="251,25,0,59"/>
+        <TextBox x:Name="ToPrice" TextWrapping="Wrap" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="182,0,0,0" BorderBrush="Black" VerticalContentAlignment="Center" TextAlignment="Center" Height="20" Width="60" TextChanged="ToPrice_TextChange" IsEnabled="False"/>
+        <RadioButton x:Name="RadioButtonRetailPrice" Content="Розница" FontSize="14" Height="16" Width="82" Checked="RadioButtonRetailPrice_Checked" HorizontalAlignment="Left" Grid.Column="1" Margin="251,25,0,59"/>
         <RadioButton x:Name="RadioButtonWholesalePrice" Content="Опт"  FontSize="14" Height="16" Width="50" Checked="RadioButtonWholesalePrice_Checked" HorizontalAlignment="Left" Grid.Column="1" Margin="251,50,0,34"/>
         <Button x:Name="ResetFilters" Content="Сбросить фильтры" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="669,46,0,0" Click="ResetFiltersButton_Click" Height="22" Width="120"/>
         <Button x:Name="AddProduct" Content="Добавить товар" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="669,73,0,0" Click="AddProductButton_Click" Height="22" Width="120"/>
         <TextBlock TextWrapping="Wrap" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="217,71,0,0" FontSize="14" Width="91"><Run Language="ru-ru" Text="Категории:"/></TextBlock>
-        <Frame x:Name="frame" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" VerticalAlignment="Top"  Panel.ZIndex="0" Grid.ColumnSpan="2" Width="1000" Height="700" Grid.RowSpan="2"/>
+        <Frame x:Name="frame" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" VerticalAlignment="Top"  Panel.ZIndex="2" Grid.ColumnSpan="2" Width="963" Height="714" Grid.RowSpan="2" Margin="0,-14,0,0"/>
     </Grid>
 </Page>

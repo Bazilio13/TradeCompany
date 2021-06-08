@@ -121,12 +121,14 @@ namespace TradeCompany_UI
 
         private void RadioButtonRetailPrice_Checked(object sender, RoutedEventArgs e)
         {
+            PricesTextBoxesEnabled(true);
             SetUpRetailPrice();
             NullifyWholesalePrices();
         }
 
         private void RadioButtonWholesalePrice_Checked(object sender, RoutedEventArgs e)
         {
+            PricesTextBoxesEnabled(true);
             SetUpWholesalePrice();
             NullifyRetailPrices();
         }
@@ -156,7 +158,9 @@ namespace TradeCompany_UI
             ToStockAmount.Text = "";
             FromPrice.Text = "";
             ToPrice.Text = "";
-            RadioButtonRetailPrice.IsChecked = true;
+            RadioButtonRetailPrice.IsChecked = false;
+            RadioButtonWholesalePrice.IsChecked = false;
+            PricesTextBoxesEnabled(false);
             ProductSearch.Text = "";
             ProductGroupSelect.Text = "";
             DateFrom.SelectedDate = null;
@@ -247,6 +251,32 @@ namespace TradeCompany_UI
                 DateFrom.SelectedDate = null;
                 DateUntil.SelectedDate = null;
                 MessageBox.Show("Неверный выбор даты");
+            }
+        }
+
+        private void PricesTextBoxesEnabled(bool isChecked)
+        {
+            if (isChecked)
+            {
+                FromPrice.IsEnabled = true;
+                ToPrice.IsEnabled = true;
+            }
+            else
+            {
+                FromPrice.IsEnabled = false;
+                ToPrice.IsEnabled = false;
+            }
+        }
+
+        private void dgProductCatalog_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DataGrid dg = (DataGrid)sender;
+            ProductBaseModel item = (ProductBaseModel)dg.CurrentItem;
+            if (item != null)
+            {
+                int id = item.ID;
+                frame.Content = new SelectedProductPage();
+                MessageBox.Show("kjdfvh");
             }
         }
     }
