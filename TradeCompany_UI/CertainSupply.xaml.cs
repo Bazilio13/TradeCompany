@@ -17,6 +17,7 @@ using TradeCompany_BLL.DataAccess;
 using TradeCompany_BLL.Models;
 using TradeCompany_UI.Interfaces;
 using System.Xml.Linq;
+using System.ComponentModel;
 
 namespace TradeCompany_UI
 {
@@ -29,7 +30,7 @@ namespace TradeCompany_UI
         private SupplysDataAccess _supplysDataAccess;
         public SupplyModel SupplyModel { get; set; }
 
-        ObservableCollection<SupplyListModel> _osSupplyListModels = new ObservableCollection<SupplyListModel>();
+        BindingList<SupplyListModel> _osSupplyListModels = new BindingList<SupplyListModel>();
         public CertainSupply(Frame frame)
         {
             _frame = frame;
@@ -52,7 +53,7 @@ namespace TradeCompany_UI
                 SupplyModel.SupplyListModel.ForEach(supplyListModel => _osSupplyListModels.Add(supplyListModel));
                 SupplysDate.SelectedDate = SupplyModel.DateTime;
                 dgSupplyList.ItemsSource = _osSupplyListModels;
-                _osSupplyListModels.CollectionChanged += _osSupplyListModels_CollectionChanged;
+                //_osSupplyListModels.CollectionChanged += _osSupplyListModels_CollectionChanged;
             }
         }
 
