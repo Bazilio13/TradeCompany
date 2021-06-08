@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace TradeCompany_BLL.Models
 {
-    class GrouppingModel
+    public class MeasureUnitsModel
     {
         public int ID { get; set; }
-        public int ProductID { get; set; }
-        public int ProductGroupID { get; set; }
+        public string Name { get; set; }
     }
 }

@@ -111,65 +111,45 @@ namespace TradeCompany_UI
 
         private void FromPrice_TextChange(object sender, TextChangedEventArgs e)
         {
-            if (RadioButtonRetailPrice.IsChecked == true)
-            {
-                SetUpRetailPrice();
-                NullifyWholesalePrices();
-            }
-            if (RadioButtonWholesalePrice.IsChecked == true)
-            {
-                SetUpWholesalePrice();
-                NullifyRetailPrices();
-            }
+            SetUpPriceFilters();
         }
 
         private void ToPrice_TextChange(object sender, TextChangedEventArgs e)
         {
-            if (RadioButtonRetailPrice.IsChecked == true)
-            {
-                SetUpRetailPrice();
-                NullifyWholesalePrices();
-            }
-            if (RadioButtonWholesalePrice.IsChecked == true)
-            {
-                SetUpWholesalePrice();
-                NullifyRetailPrices();
-            }
+            SetUpPriceFilters();
         }
 
         private void RadioButtonRetailPrice_Checked(object sender, RoutedEventArgs e)
         {
+            PricesTextBoxesEnabled(true);
             SetUpRetailPrice();
             NullifyWholesalePrices();
-
         }
 
         private void RadioButtonWholesalePrice_Checked(object sender, RoutedEventArgs e)
         {
+            PricesTextBoxesEnabled(true);
             SetUpWholesalePrice();
             NullifyRetailPrices();
         }
 
         private void DateFrom_SelectedDateChange(object sender, SelectionChangedEventArgs e)
         {
-            if (DateFrom.SelectedDate > DateUntil.SelectedDate)
-            {
-                DateFrom.SelectedDate = null;
-                DateUntil.SelectedDate = null;
-                MessageBox.Show("Неверный выбор даты");
-            }
+            CheckDates();
             _filtrMinDateTime = DateFrom.SelectedDate;
         }
 
         private void DateUntil_SelectedDateChange(object sender, SelectionChangedEventArgs e)
         {
-            if (DateFrom.SelectedDate > DateUntil.SelectedDate)
+            CheckDates();
+            if(!(DateUntil.SelectedDate is null))
             {
-                DateFrom.SelectedDate = null;
-                DateUntil.SelectedDate = null;
-                MessageBox.Show("Неверный выбор даты");
+                DateTime timeTmp = (DateTime)DateUntil.SelectedDate;
+                timeTmp = timeTmp.AddDays(1);
+                timeTmp = timeTmp.AddMilliseconds(-1);
+                _filtrMaxDateTime = (DateTime?)timeTmp;
             }
-            _filtrMaxDateTime = DateUntil.SelectedDate;
+            
         }
 
         private void ResetFiltersButton_Click(object sender, RoutedEventArgs e)
@@ -178,7 +158,9 @@ namespace TradeCompany_UI
             ToStockAmount.Text = "";
             FromPrice.Text = "";
             ToPrice.Text = "";
-            RadioButtonRetailPrice.IsChecked = true;
+            RadioButtonRetailPrice.IsChecked = false;
+            RadioButtonWholesalePrice.IsChecked = false;
+            PricesTextBoxesEnabled(false);
             ProductSearch.Text = "";
             ProductGroupSelect.Text = "";
             DateFrom.SelectedDate = null;
@@ -230,7 +212,19 @@ namespace TradeCompany_UI
 
             return filtr;
         }  
-        
+        private void SetUpPriceFilters()
+        {
+            if (RadioButtonRetailPrice.IsChecked == true)
+            {
+                SetUpRetailPrice();
+                NullifyWholesalePrices();
+            }
+            if (RadioButtonWholesalePrice.IsChecked == true)
+            {
+                SetUpWholesalePrice();
+                NullifyRetailPrices();
+            }
+        }
         private void NullifyWholesalePrices()
         {
             _filtrToWholesalePrice = null;
@@ -254,6 +248,40 @@ namespace TradeCompany_UI
             _filtrToRetailPrice = InputValidation(_filtrToRetailPrice, ToPrice);
         }
 
-        
+        private void CheckDates()
+        {
+            if (DateFrom.SelectedDate > DateUntil.SelectedDate)
+            {
+                DateFrom.SelectedDate = null;
+                DateUntil.SelectedDate = null;
+                MessageBox.Show("Неверный выбор даты");
+            }
+        }
+
+        private void PricesTextBoxesEnabled(bool isChecked)
+        {
+            if (isChecked)
+            {
+                FromPrice.IsEnabled = true;
+                ToPrice.IsEnabled = true;
+            }
+            else
+            {
+                FromPrice.IsEnabled = false;
+                ToPrice.IsEnabled = false;
+            }
+        }
+
+        private void dgProductCatalog_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DataGrid dg = (DataGrid)sender;
+            ProductBaseModel item = (ProductBaseModel)dg.CurrentItem;
+            if (item != null)
+            {
+                int id = item.ID;
+                frame.Content = new SelectedProductPage();
+                MessageBox.Show("kjdfvh");
+            }
+        }
     }
 }

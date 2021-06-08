@@ -18,5 +18,13 @@ namespace TradeCompany_BLL
             ProductDTO productDTO = mapper.Map<ProductDTO>(productModel);
             return productDTO;
         }
+
+        public ProductGroupDTO MapProductGroupModelToProductGroupDTO(ProductGroupModel productGroupModel)
+        {
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<ProductGroupModel, ProductGroupDTO>());
+            Mapper mapper = new Mapper(config);
+            ProductGroupDTO productGroupDTO = mapper.Map<ProductGroupDTO>(productGroupModel);
+            return productGroupDTO;
+        }
     }
 }

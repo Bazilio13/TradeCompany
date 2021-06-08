@@ -37,8 +37,16 @@ namespace TradeCompany_BLL
         public List<ProductGroupModel> GetAllGroups()
         {
             List<ProductGroupDTO> groupsDTO = _groupsData.GetProductGroups();
-            List<ProductGroupModel> groupsModel = _mapsDTOtoModel.MapProductGroupToProductGroupModel(groupsDTO);
+            List<ProductGroupModel> groupsModel = _mapsDTOtoModel.MapProductGroupDTOToProductGroupModel(groupsDTO);
             return groupsModel;
+        }
+
+        public ProductBaseModel GetProductByID(int id)
+        {
+            List<ProductDTO> productDTO = new List<ProductDTO>();
+            productDTO.Add(_productsData.GetProductByID(id));
+            List<ProductBaseModel> productsModel = _mapsDTOtoModel.MapProductDTOToProductBaseModel(productDTO);
+            return productsModel[0];
         }
 
         public void AddNewProduct(ProductModel productModel)
@@ -47,9 +55,22 @@ namespace TradeCompany_BLL
             _productsData.AddProduct(productDTO);
         }
 
+        public void AddNewProductGroup(ProductGroupModel groupModel)
+        {
+            ProductGroupDTO groupDTO = _mapsModelToDTO.MapProductGroupModelToProductGroupDTO(groupModel);
+            _groupsData.AddProductGroup(groupDTO);
+        }
+
         public void AddProductToProductGroup(int ProductID, int ProductGroupID)
         {
             _productsData.AddProductToProductGroup(ProductID, ProductGroupID);
+        }
+
+        public List<MeasureUnitsModel> GetAllMeasureUnits()
+        {
+            List<MeasureUnitsDTO> measureUnitsDTO = _productsData.GetAllMeasureUnits();
+            List<MeasureUnitsModel> measureUnitsModel = _mapsDTOtoModel.MapMeasureUnitDTOToMeasureUnitModel(measureUnitsDTO);
+            return measureUnitsModel;
         }
     }
 }
