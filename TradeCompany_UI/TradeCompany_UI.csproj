@@ -8,17 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Pictures\arrow-left.png" />
-    <None Remove="Pictures\check simple disable.png" />
-    <None Remove="Pictures\check simple.png" />
-    <None Remove="Pictures\Clients.png" />
-    <None Remove="Pictures\Orders.png" />
-    <None Remove="Pictures\plus.png" />
-    <None Remove="Pictures\Products.png" />
     <None Remove="Pictures\search.png" />
-    <None Remove="Pictures\settings.png" />
-    <None Remove="Pictures\Supplies.png" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Page Remove="Styles\ButtonStyle.xaml" />
+    <Page Remove="Styles\StyleDictionary.xaml" />
+    <Page Remove="Styles\Textbox.xaml" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <ProjectReference Include="..\TradeCompany_BLL\TradeCompany_BLL.csproj" />
@@ -68,6 +66,11 @@
     <Resource Include="Pictures\v_box.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Styles\ButtonStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Resource Include="Styles\StyleDictionary.xaml" />
+    <Resource Include="Styles\Textbox.xaml" />
   </ItemGroup>
 
 </Project>

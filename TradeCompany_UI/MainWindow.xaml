@@ -6,10 +6,8 @@
         xmlns:local="clr-namespace:TradeCompany_UI"
         mc:Ignorable="d"
         Title="MainWindow" Height="768" Width="1024">
-    <Window.Resources>
-        <ResourceDictionary Source="StyleDictionary.xaml"/>
-    </Window.Resources>
-    <Grid>
+
+    <Grid Background="#F9F9F9">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="155"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
