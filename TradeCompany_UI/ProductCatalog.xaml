@@ -23,7 +23,7 @@
                 <Button x:Name="AddProduct"  DockPanel.Dock="Right" Content="Добавить товар" Click="AddProductButton_Click" HorizontalAlignment="Right"/>
             </DockPanel>
             
-            <DataGrid x:Name="dgProductCatalog" Width="571" AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <DataGrid x:Name="dgProductCatalog" Width="571" AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" HorizontalAlignment="Left" VerticalAlignment="Top" MouseDoubleClick="dgProductCatalog_MouseDoubleClick">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding ="{Binding Path = ID}" IsReadOnly="True" Header="ID" Width="58"/>
                     <DataGridTextColumn Binding ="{Binding Path = Name}"  IsReadOnly="True" Header="Наименование" Width="103"/>

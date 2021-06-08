@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TradeCompany_BLL;
 using TradeCompany_BLL.Models;
+using TradeCompany_UI.Interfaces;
 
 namespace TradeCompany_UI
 {
@@ -36,13 +37,18 @@ namespace TradeCompany_UI
         private float? _filtrToRetailPrice;
         private DateTime? _filtrMinDateTime;
         private DateTime? _filtrMaxDateTime;
-        
+        Frame _frame;
+        Page _previosPage;
+        Window _mainWindow;
 
-        public ProductCatalog(Frame frame)
+        public ProductCatalog(Frame frame, Window mainWindow, Page previosPage = null)
         {
             _frame = frame;
             InitializeComponent();
             _products = new ProductsDataAccess();
+            _frame = frame;
+            _previosPage = previosPage;
+            _mainWindow = mainWindow;
             dgProductCatalog.ItemsSource = _products.GetAllProducts();
             List<ProductGroupModel> allGroups = _products.GetAllGroups();
             ProductGroupSelect.ItemsSource = allGroups;
@@ -65,7 +71,7 @@ namespace TradeCompany_UI
 
         private void ProductButton_Click(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
         private void OrdersButton_Click(object sender, RoutedEventArgs e)
@@ -116,7 +122,7 @@ namespace TradeCompany_UI
 
         private void FromStockAmount_TextChange(object sender, TextChangedEventArgs e)
         {
-            _filtrFromStockAmount = InputValidation(_filtrFromStockAmount, FromStockAmount);    
+            _filtrFromStockAmount = InputValidation(_filtrFromStockAmount, FromStockAmount);
         }
 
         private void ToStockAmount_TextChange(object sender, TextChangedEventArgs e)
@@ -195,7 +201,7 @@ namespace TradeCompany_UI
 
         private void AddProductButton_Click(object sender, RoutedEventArgs e)
         {
-            _frame.Content = new AddNewProduct(_frame);
+            frame.Content = new AddNewProduct(_frame, _previosPage, _mainWindow);
         }
 
         private float? InputValidation(float? filtr, TextBox textbox)
@@ -296,6 +302,17 @@ namespace TradeCompany_UI
                 int id = item.ID;
                 _frame.Content = new SelectedProductPage();
                 MessageBox.Show("kjdfvh");
+            }
+        }
+
+        private void dgProductCatalog_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (_previosPage is IProductAddable)
+            {
+                ProductBaseModel productBaseModel = (ProductBaseModel)dgProductCatalog.SelectedItem;
+                IProductAddable productAddable = (IProductAddable)_previosPage;
+                productAddable.AddProductToCollection(productBaseModel.ID, productBaseModel.Name, productBaseModel.MeasureUnitName, productBaseModel.Groups);
+                _frame.Content = _previosPage;
             }
         }
     }
