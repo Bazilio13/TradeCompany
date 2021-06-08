@@ -24,11 +24,9 @@ namespace TradeCompany_BLL
         } 
         
     
-        public ClientBaseModel MapLastClientDTOToLastClientBaseModel()
+        public ClientBaseModel MapLastClientDTOToLastClientBaseModel(ClientDTO clientDTO)
         {
             ClientsData clients = new ClientsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
-            ClientDTO clientDTO = clients.GetLastClient();
-
             var config = new MapperConfiguration(cfg => cfg.CreateMap<ClientDTO, ClientBaseModel>());
             Mapper mapper = new Mapper(config);
             ClientBaseModel clientBaseModel = mapper.Map<ClientBaseModel>(clientDTO);
@@ -46,15 +44,13 @@ namespace TradeCompany_BLL
             return clientBaseModel;
         }
 
-        public ClientModel MapClientDTOToClientModelByID(int id)
+        public ClientModel MapClientDTOToClientModelByID(ClientDTO clientDTO)
         {
             ClientsData clients = new ClientsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
-            ClientDTO clientDTO = clients.GetClientByID(id);
 
             var config = new MapperConfiguration(cfg => cfg.CreateMap<ClientDTO, ClientModel>());
             Mapper mapper = new Mapper(config);
             ClientModel clientModel = mapper.Map<ClientModel>(clientDTO);
-
             return clientModel;
         }
 
@@ -67,16 +63,14 @@ namespace TradeCompany_BLL
             return addressesList;
         }
 
-        public List<WishModel> MapWishesDTOToWishesModelListByID(int id)
-        {
+        public List<WishModel> MapWishesDTOToWishesModelListByID(List<WishDTO> wishListDTO) 
+        { 
             ClientsData client = new ClientsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
-            List<WishDTO> wishList = client.GetWishesListByClientID(id);
-
             var config = new MapperConfiguration(cfg => cfg.CreateMap<WishDTO, WishModel>());
             Mapper mapper = new Mapper(config);
-            List<WishModel> wishModel = mapper.Map<List<WishModel>>(wishList);
+            List<WishModel> wishModelList = mapper.Map<List<WishModel>>(wishListDTO);
 
-            return wishModel;
+            return wishModelList;
         }
 
         public List<OrderModel> MapOrdersDTOToOrderModel(List<OrdersDTO> ordersDTO)
