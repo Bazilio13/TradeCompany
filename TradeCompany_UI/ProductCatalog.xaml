@@ -54,7 +54,7 @@
                 <TextBlock Margin="10,5,0,0" FontWeight="Bold" FontSize="14">Настройки</TextBlock>
             </StackPanel>
         </Button>
-        <DataGrid x:Name="dgProductCatalog" Width="800"  FontSize="16"  AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" Grid.Row="1" Grid.Column="1" Background="White" HorizontalAlignment="Left">
+        <DataGrid x:Name="dgProductCatalog" Width="800"  FontSize="16"  AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" Grid.Row="1" Grid.Column="1" Background="White" HorizontalAlignment="Left" MouseLeftButtonUp="dgProductCatalog_MouseLeftButtonUp">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding ="{Binding Path = ID}"  IsReadOnly="True" Header="ID" Width="30"/>
                 <DataGridTextColumn Binding ="{Binding Path = Name}"  IsReadOnly="True" Header="Наименование" Width="150"/>

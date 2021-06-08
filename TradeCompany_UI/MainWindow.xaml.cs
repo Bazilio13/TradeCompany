@@ -20,6 +20,7 @@ namespace TradeCompany_UI
     /// </summary>
     public partial class MainWindow : Window
     {
+        public Page _previosPage;
         public MainWindow()
         {
             InitializeComponent();
@@ -42,7 +43,7 @@ namespace TradeCompany_UI
 
         private void ProductButton_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new ProductCatalog();
+            MainFrame.Content = new ProductCatalog(MainFrame);
         }
 
         private void SupplysButton_Click(object sender, RoutedEventArgs e)

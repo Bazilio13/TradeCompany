@@ -22,43 +22,52 @@ namespace TradeCompany_UI
     /// </summary>
     public partial class CertainSupply : Page
     {
-        private SupplyModel _supplyModel;
-        SupplysDataAccess _supplysDataAccess;
+        private Frame _frame;
+        private SupplysDataAccess _supplysDataAccess;
+        public SupplyModel SupplyModel { get; set; }
         public CertainSupply(Frame frame)
         {
+            _frame = frame;
             InitializeComponent();
             _supplysDataAccess = new SupplysDataAccess();
         }
 
         public CertainSupply(Frame frame, int id)
         {
+            _frame = frame;
             InitializeComponent();
             _supplysDataAccess = new SupplysDataAccess();
-            _supplyModel = _supplysDataAccess.GetSupplyModelByID(id);
-            if (_supplyModel is null)
+            SupplyModel = _supplysDataAccess.GetSupplyModelByID(id);
+            if (SupplyModel is null)
             {
 
             }
             else
             {
-                dgSupplyList.ItemsSource = _supplyModel.SupplyListModel;
-                SupplysDate.SelectedDate = _supplyModel.DateTime;
+                dgSupplyList.ItemsSource = SupplyModel.SupplyListModel;
+                SupplysDate.SelectedDate = SupplyModel.DateTime;
             }
+        }
+
+        public void RefreshDG()
+        {
+            dgSupplyList.ItemsSource = SupplyModel.SupplyListModel;
         }
 
         private void SupplysDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            _supplyModel.DateTime = (DateTime)SupplysDate.SelectedDate;
+            SupplyModel.DateTime = (DateTime)SupplysDate.SelectedDate;
         }
 
         private void AddProduct_Click(object sender, RoutedEventArgs e)
         {
-
+            SetPreviousPage();
+            //_frame.Content = new ProductCatalog(_frame);
         }
 
         private void PotentialClients_Click(object sender, RoutedEventArgs e)
         {
-
+            SetPreviousPage();
         }
 
         private void Save_Click(object sender, RoutedEventArgs e)
@@ -69,6 +78,17 @@ namespace TradeCompany_UI
         private void dgSupplys_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
 
+        }
+        private void SetPreviousPage()
+        {
+            Grid grid = (Grid)_frame.Parent;
+            MainWindow mainWindow = (MainWindow)grid.Parent;
+            mainWindow._previosPage = this;
+        }
+
+        private void AddNewProduct_Click(object sender, RoutedEventArgs e)
+        {
+            SetPreviousPage();
         }
     }
 }

@@ -35,11 +35,12 @@ namespace TradeCompany_UI
         private DateTime? _filtrMinDateTime;
         private DateTime? _filtrMaxDateTime;
         Regex _regexForNumbers = new Regex(@"[^0-9.]+");
-        
+        Frame _frame;
 
-        public ProductCatalog()
+        public ProductCatalog(Frame frame)
         {
             InitializeComponent();
+            _frame = frame;
             dgProductCatalog.ItemsSource = _products.GetAllProducts();
 
             List<ProductGroupModel> productGroupName = _products.GetAllGroups();
@@ -192,6 +193,23 @@ namespace TradeCompany_UI
             }
 
             return filtr;
-        }        
+        }
+
+        private void dgProductCatalog_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            Grid grid = (Grid)_frame.Parent;
+            MainWindow mainWindow = (MainWindow)grid.Parent;
+            CertainSupply certainSupply = (CertainSupply)mainWindow._previosPage;
+            SupplyListModel supplyListModel = new SupplyListModel();
+            ProductBaseModel productBaseModel = (ProductBaseModel)dgProductCatalog.SelectedItem;
+            supplyListModel.ProductID = productBaseModel.ID;
+            supplyListModel.ProductMeasureUnit = productBaseModel.MeasureUnitName;
+            supplyListModel.ProductName = productBaseModel.Name;
+            certainSupply.SupplyModel.SupplyListModel.Add(supplyListModel);
+            certainSupply.dgSupplyList.ItemsSource = certainSupply.SupplyModel.SupplyListModel;
+            _frame.Content = mainWindow._previosPage;
+            mainWindow._previosPage = this;
+            certainSupply.RefreshDG();
+        }
     }
 }

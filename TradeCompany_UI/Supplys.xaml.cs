@@ -22,16 +22,16 @@ namespace TradeCompany_UI
     /// </summary>
     public partial class Supplys : Page
     {
-        Frame _frame;
-        SupplysDataAccess _supplyDataAccess;
-        List<SupplyModel> _supplyModels;
+        private Frame _frame;
+        private SupplysDataAccess _supplyDataAccess;
+        public List<SupplyModel> SupplyModels { get; set; }
         public Supplys(Frame frame)
         {
             _frame = frame;
             InitializeComponent();
             _supplyDataAccess = new SupplysDataAccess();
-            _supplyModels = _supplyDataAccess.GetSupplyModelsByParams();
-            dgSupplys.ItemsSource = _supplyModels;
+            SupplyModels = _supplyDataAccess.GetSupplyModelsByParams();
+            dgSupplys.ItemsSource = SupplyModels;
         }
 
         private void ResetButton_Click(object sender, RoutedEventArgs e)
@@ -89,22 +89,30 @@ namespace TradeCompany_UI
 
         private void CreateSupply_Click(object sender, RoutedEventArgs e)
         {
+            SetPreviousPage();
             _frame.Content = new CertainSupply(_frame);
         }
 
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            _supplyModels = _supplyDataAccess.SearchSupplyModels(SearchBox.Text);
-            dgSupplys.ItemsSource = _supplyModels;
+            SupplyModels = _supplyDataAccess.SearchSupplyModels(SearchBox.Text);
+            dgSupplys.ItemsSource = SupplyModels;
         }
 
         private void dgSupplys_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             if (dgSupplys.CurrentItem != null)
             {
+                SetPreviousPage();
                 SupplyModel crntModel = (SupplyModel)dgSupplys.CurrentItem;
                 _frame.Content = new CertainSupply(_frame, crntModel.ID);
             }
+        }
+        private void SetPreviousPage()
+        {
+            Grid grid = (Grid)_frame.Parent;
+            MainWindow mainWindow = (MainWindow)grid.Parent;
+            mainWindow._previosPage = this;
         }
     }
 }

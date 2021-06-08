@@ -20,7 +20,7 @@
         </StackPanel>
         <Button Name="PotentialClients" Content="Список потенциальных клиентов" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Height="25" Width="190" Click="PotentialClients_Click"/>
         <Button x:Name="AddProduct" Content="Добавить существующий товар" HorizontalAlignment="Right" Margin="0,45,10,0" VerticalAlignment="Top" Height="25" Width="190" Click="AddProduct_Click"/>
-        <Button x:Name="AddNewProduct" Content="Добавить новый товар" Margin="0,45,210,0" VerticalAlignment="Top" Height="25" Click="AddProduct_Click" HorizontalAlignment="Right" Width="190"/>
+        <Button x:Name="AddNewProduct" Content="Добавить новый товар" Margin="0,45,210,0" VerticalAlignment="Top" Height="25" Click="AddNewProduct_Click" HorizontalAlignment="Right" Width="190"/>
         <Button x:Name="Save" Content="Сохранить" Margin="10,0,0,10" VerticalAlignment="Bottom" Height="25" Click="Save_Click" HorizontalAlignment="Left" Width="190"/>
         <DataGrid x:Name="dgSupplyList" Grid.Row="1" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="True" MouseLeftButtonUp="dgSupplys_MouseLeftButtonUp">
             <DataGrid.Columns >
