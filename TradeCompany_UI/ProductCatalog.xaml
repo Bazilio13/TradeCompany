@@ -23,7 +23,7 @@
                 <Button x:Name="AddProduct"  DockPanel.Dock="Right" Content="Добавить товар" Click="AddProductButton_Click" HorizontalAlignment="Right"/>
             </DockPanel>
             
-            <DataGrid x:Name="dgProductCatalog" Style="{StaticResource DataData}" Width="571"  FontSize="13" AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" Background="White" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0">
+            <DataGrid x:Name="dgProductCatalog" Width="571" AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding ="{Binding Path = ID}" IsReadOnly="True" Header="ID" Width="58"/>
                     <DataGridTextColumn Binding ="{Binding Path = Name}"  IsReadOnly="True" Header="Наименование" Width="103"/>
@@ -41,8 +41,8 @@
 
             <ComboBox x:Name="ProductGroupSelect" HorizontalAlignment="Center" Margin="0,0,0,33" SelectedIndex="0" Height="22" Width="150" DropDownClosed="ProductGroupSelect_DropDownClosed" Grid.RowSpan="2" IsEditable="True"/>
             <StackPanel Width="78" HorizontalAlignment="Left" Margin="24,0,0,30">
-                <RadioButton x:Name="RadioButtonRetailPrice" Content="Розница" IsChecked="True" FontSize="14" Height="16" Width="82" Checked="RadioButtonRetailPrice_Checked" HorizontalAlignment="Left" Grid.Column="1"/>
-                <RadioButton x:Name="RadioButtonWholesalePrice" Content="Опт"  FontSize="14" Height="16" Width="50" Checked="RadioButtonWholesalePrice_Checked" HorizontalAlignment="Left" Grid.Column="1"/>
+                <RadioButton x:Name="RadioButtonRetailPrice" Content="Розница" IsChecked="True" Height="16" Width="82" Checked="RadioButtonRetailPrice_Checked" HorizontalAlignment="Left"/>
+                <RadioButton x:Name="RadioButtonWholesalePrice" Content="Опт" Height="16" Width="50" Checked="RadioButtonWholesalePrice_Checked" HorizontalAlignment="Left"/>
             </StackPanel>
                         
             <DatePicker x:Name="DateFrom"  HorizontalAlignment="Center" Margin="0,0,0,17" RenderTransformOrigin="0.309,-0.578" Height="22" Width="100" SelectedDateChanged="DateFrom_SelectedDateChange"/>

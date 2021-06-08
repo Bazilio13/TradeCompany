@@ -13,8 +13,16 @@
 
   <ItemGroup>
     <Page Remove="Styles\ButtonStyle.xaml" />
+    <Page Remove="Styles\DataGridStyle.xaml" />
+    <Page Remove="Styles\RadioButtonStyle.xaml" />
     <Page Remove="Styles\StyleDictionary.xaml" />
-    <Page Remove="Styles\Textbox.xaml" />
+    <Page Remove="Styles\TextboxStyle.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Styles\RadioButtonStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
   </ItemGroup>
 
 
@@ -69,8 +77,9 @@
     <Resource Include="Styles\ButtonStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Resource>
+    <Resource Include="Styles\DataGridStyle.xaml" />
     <Resource Include="Styles\StyleDictionary.xaml" />
-    <Resource Include="Styles\Textbox.xaml" />
+    <Resource Include="Styles\TextboxStyle.xaml" />
   </ItemGroup>
 
 </Project>
