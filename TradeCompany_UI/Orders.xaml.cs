@@ -71,14 +71,6 @@ namespace TradeCompany_UI
             dgOrders.ItemsSource = orderModels;
         }
 
-        private void dgOrders_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            if (dgOrders.CurrentItem != null)
-            {
-                OrderModel crntModel = (OrderModel)dgOrders.CurrentItem;
-                _frame.Content = new SpecificOrder(crntModel.ID);
-            }
-        }
 
         private void CreateOrder_Click(object sender, RoutedEventArgs e)
         {
@@ -114,6 +106,16 @@ namespace TradeCompany_UI
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             _orderModels[0].Address = "hop hey la la ley";
+        }
+
+        private void dgOrders_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (dgOrders.CurrentItem != null)
+            {
+                TextBlock textBlock = (TextBlock)e.OriginalSource;
+                OrderModel crntModel = (OrderModel)textBlock.DataContext;
+                _frame.Content = new SpecificOrder(crntModel.ID);
+            }
         }
     }
 }

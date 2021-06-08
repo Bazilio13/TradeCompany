@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ using System.Windows.Shapes;
 using TradeCompany_BLL.DataAccess;
 using TradeCompany_BLL.Models;
 using TradeCompany_UI.Interfaces;
+using System.Xml.Linq;
 
 namespace TradeCompany_UI
 {
@@ -26,6 +28,8 @@ namespace TradeCompany_UI
         private Frame _frame;
         private SupplysDataAccess _supplysDataAccess;
         public SupplyModel SupplyModel { get; set; }
+
+        ObservableCollection<SupplyListModel> _osSupplyListModels = new ObservableCollection<SupplyListModel>();
         public CertainSupply(Frame frame)
         {
             _frame = frame;
@@ -45,9 +49,16 @@ namespace TradeCompany_UI
             }
             else
             {
-                dgSupplyList.ItemsSource = SupplyModel.SupplyListModel;
+                SupplyModel.SupplyListModel.ForEach(supplyListModel => _osSupplyListModels.Add(supplyListModel));
                 SupplysDate.SelectedDate = SupplyModel.DateTime;
+                dgSupplyList.ItemsSource = _osSupplyListModels;
+                _osSupplyListModels.CollectionChanged += _osSupplyListModels_CollectionChanged;
             }
+        }
+
+        private void _osSupplyListModels_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+
         }
 
         public void AddProductToCollection(int productID, string productName, string productMeasureUnit, List<ProductGroupModel> productGroupModels)
@@ -58,7 +69,8 @@ namespace TradeCompany_UI
             supplyListModel.ProductName = productName;
             supplyListModel.ProductGroups = productGroupModels;
             SupplyModel.SupplyListModel.Add(supplyListModel);
-            dgSupplyList.Items.Refresh();
+            //_osSupplyListModels.Add(supplyListModel);
+            //dgSupplyList.Items.Refresh();
         }
 
         private void SupplysDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
@@ -78,7 +90,6 @@ namespace TradeCompany_UI
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-
         }
 
         private void dgSupplys_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -91,6 +102,11 @@ namespace TradeCompany_UI
         }
 
         private void dgSupplyList_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
+        {
+
+        }
+
+        private void dgSupplyList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
 
         }

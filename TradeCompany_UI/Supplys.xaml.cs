@@ -102,9 +102,14 @@ namespace TradeCompany_UI
 
         private void dgSupplys_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+        }
+
+        private void dgSupplys_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
             if (dgSupplys.CurrentItem != null)
             {
-                SupplyModel crntModel = (SupplyModel)dgSupplys.CurrentItem;
+                TextBlock textBlock = (TextBlock)e.OriginalSource;
+                SupplyModel crntModel = (SupplyModel)textBlock.DataContext;
                 _frame.Content = new CertainSupply(_frame, crntModel.ID);
             }
         }

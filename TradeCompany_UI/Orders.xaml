@@ -50,7 +50,7 @@
         </TextBox>
         <TextBox x:Name="SearchBox" Margin="0,0,7,12" BorderThickness="0" TextWrapping="Wrap"   Height="21" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="174" TextChanged="SearchBox_TextChanged">
         </TextBox>
-        <DataGrid x:Name="dgOrders" Grid.Row="1" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="True" MouseLeftButtonUp="dgOrders_MouseLeftButtonUp">
+        <DataGrid x:Name="dgOrders" Grid.Row="1" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="True" MouseDoubleClick="dgOrders_MouseDoubleClick">
             <DataGrid.Columns >
                 <DataGridTextColumn Binding="{Binding Path=ID}"  Header="№" Width="30" MinWidth="30"></DataGridTextColumn>
                 <DataGridTextColumn Binding="{Binding Path=DateTime}" Header="Дата заказа" Width="135" MinWidth="100"></DataGridTextColumn>
