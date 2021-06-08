@@ -72,7 +72,7 @@ namespace TradeCompany_DAL
 
         public SupplyDTO MapsSupplyDTO(SupplyDTO supply, SupplyListDTO supplyList, ProductDTO product, ProductGroupDTO productGroup, List<SupplyDTO> result)
         {
-            
+
             SupplyDTO crntSupply = null;
             foreach (var s in result)
             {
@@ -107,5 +107,63 @@ namespace TradeCompany_DAL
             return supply;
         }
 
+        public int AddSupply(SupplyDTO supplyDTO)
+        {
+            int addedSupplysID;
+            string query;
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                query = "TradeCompany_DataBase.AddSupply";
+                addedSupplysID = dbConnection.QuerySingle<int>(query,
+                    new { supplyDTO.DateTime, supplyDTO.Comment }, commandType: CommandType.StoredProcedure);
+            }
+            return addedSupplysID;
+        }
+
+        public void AddSupplyLists(List<SupplyListDTO> supplyListDTOs)
+        {
+            string query;
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                foreach (SupplyListDTO slDTO in supplyListDTOs)
+                {
+                    query = "TradeCompany_DataBase.AddSupplyList";
+                    dbConnection.Query<int>(query,
+                        new { slDTO.SupplyID, slDTO.ProductID, slDTO.Amount }, commandType: CommandType.StoredProcedure);
+                }
+            }
+        }
+
+        public void UpdateSupplyByID(SupplyDTO supplyDTO)
+        {
+            string query;
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                query = "TradeCompany_DataBase.UpdateSupplyByID";
+                dbConnection.Query<int>(query,
+                    new { supplyDTO.ID, supplyDTO.DateTime, supplyDTO.Comment }, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public void DeleteSupplyListsBySupplyID(int supplyID)
+        {
+            string query;
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                query = "TradeCompany_DataBase.DeleteSupplyListsBySupplyID";
+                dbConnection.Query<int>(query,
+                    new { supplyID }, commandType: CommandType.StoredProcedure);
+            }
+        }
+        public void DeleteSupplyByID(int id)
+        {
+            string query;
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                query = "TradeCompany_DataBase.DeleteSupplyByID";
+                dbConnection.Query<int>(query,
+                    new { id }, commandType: CommandType.StoredProcedure);
+            }
+        }
     }
 }

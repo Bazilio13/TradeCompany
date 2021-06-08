@@ -41,5 +41,35 @@ namespace TradeCompany_BLL.DataAccess
             List<SupplyModel> supplyModels = _map.MapSupplyDTOToSupplyModel(supplyDTOs);
             return supplyModels;
         }
+
+        public void AddSupply(SupplyModel supplyModel)
+        {
+            SupplyDTO supplyDTO = new SupplyDTO();
+            supplyDTO = _map.MapsSupplyModelToSupplyDTO(supplyModel);
+            supplyModel.ID = _supplysData.AddSupply(supplyDTO);
+            foreach (SupplyListDTO slDTO in supplyDTO.SupplyLists)
+            {
+                slDTO.SupplyID = supplyModel.ID;
+            }
+            _supplysData.AddSupplyLists(supplyDTO.SupplyLists);
+        }
+        
+        public void UpdateSupply(SupplyModel supplyModel)
+        {
+            SupplyDTO supplyDTO = new SupplyDTO();
+            supplyDTO = _map.MapsSupplyModelToSupplyDTO(supplyModel);
+            foreach (SupplyListDTO slDTO in supplyDTO.SupplyLists)
+            {
+                slDTO.SupplyID = supplyModel.ID;
+            }
+            _supplysData.UpdateSupplyByID(supplyDTO);
+            _supplysData.DeleteSupplyListsBySupplyID(supplyDTO.ID);
+            _supplysData.AddSupplyLists(supplyDTO.SupplyLists);
+        }
+
+        public void DeleteSupply(int id)
+        {
+            _supplysData.DeleteSupplyByID(id);
+        }
     }
 }

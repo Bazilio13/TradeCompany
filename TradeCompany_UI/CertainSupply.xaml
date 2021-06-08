@@ -24,16 +24,16 @@
         <Button x:Name="Save" Content="Сохранить" Margin="10,0,0,10" VerticalAlignment="Bottom" Height="25" Click="Save_Click" HorizontalAlignment="Left" Width="190"/>
         <DataGrid x:Name="dgSupplyList" Grid.Row="1" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" MouseLeftButtonUp="dgSupplys_MouseLeftButtonUp" RowEditEnding="dgSupplyList_RowEditEnding" MouseDoubleClick="dgSupplyList_MouseDoubleClick">
             <DataGrid.Columns >
-                <DataGridTextColumn Binding="{Binding Path=ProductID, Mode=TwoWay}"  Header="ID" IsReadOnly="True" Width="30" MinWidth="30"></DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding Path=ProductName, Mode=TwoWay}" Header="Наименование" IsReadOnly="True" Width="*" MinWidth="100"></DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding Path=ProductGroup, Mode=TwoWay}" Header="Категория" IsReadOnly="True" Width="*" MinWidth="100"></DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding Path=Amount, Mode=TwoWay}" Header="Количество" IsReadOnly="False" Width="75" MinWidth="75"></DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding Path=ProductMeasureUnit, Mode=TwoWay}" Header="ед. изм." IsReadOnly="True" Width="52" MinWidth="52"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=ProductID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Header="ID" IsReadOnly="True" Width="30" MinWidth="30"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=ProductName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Наименование" IsReadOnly="True" Width="*" MinWidth="100"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=ProductGroup, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Категория" IsReadOnly="True" Width="*" MinWidth="100"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Amount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Количество" IsReadOnly="False" Width="75" MinWidth="75"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=ProductMeasureUnit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="ед. изм." IsReadOnly="True" Width="52" MinWidth="52"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Margin="10,10,10,10" Grid.Row="2" VerticalAlignment="Bottom" Height="100">
             <TextBlock Text="Комментарий"></TextBlock>
-            <TextBox Margin="0,0,0,0"  Text="" TextWrapping="Wrap" Height="84" ></TextBox>
+            <TextBox x:Name="SupplyComment" Margin="0,0,0,0"  Text="" TextWrapping="Wrap" Height="84" ></TextBox>
         </StackPanel>
     </Grid>
 </Page>

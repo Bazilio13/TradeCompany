@@ -34,5 +34,25 @@ namespace TradeCompany_BLL.SypplysMaps
             supplyListModel = mapper.Map<List<SupplyListModel>>(supplyListsDTO);
             return supplyListModel;
         }
+
+        public SupplyDTO MapsSupplyModelToSupplyDTO(SupplyModel supplyModel)
+        {
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<SupplyModel, SupplyDTO>()
+            .ForMember(dest => dest.SupplyLists, option => option.MapFrom(sorse => MapsSupplyListModelsToSupplyListDTOs(sorse.SupplyListModel, sorse.ID))));
+            Mapper mapper = new Mapper(config);
+            SupplyDTO supplyDTO;
+            supplyDTO = mapper.Map<SupplyDTO>(supplyModel);
+            return supplyDTO;
+        }
+
+        public List<SupplyListDTO> MapsSupplyListModelsToSupplyListDTOs(List<SupplyListModel> supplyModels, int supplyID)
+        {
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<SupplyListModel, SupplyListDTO>()
+            .ForMember(dest => dest.ID, option => option.MapFrom(sorse => supplyID)));
+            Mapper mapper = new Mapper(config);
+            List<SupplyListDTO> supplyDTOs;
+            supplyDTOs = mapper.Map<List<SupplyListDTO>>(supplyModels);
+            return supplyDTOs;
+        }
     }
 }
