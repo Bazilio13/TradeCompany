@@ -6,58 +6,64 @@
         xmlns:local="clr-namespace:TradeCompany_UI"
         mc:Ignorable="d"
         Title="MainWindow" Height="768" Width="1024">
-    <Window.Resources>
-        <ResourceDictionary Source="StyleDictionary.xaml"/>
-    </Window.Resources>
-    <Grid>
+
+    <Grid Background="#F9F9F9">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="155"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Frame Name="MainFrame" Background="#F9F9F9" NavigationUIVisibility="Hidden" Grid.Column="1" Source="StartPage.xaml"/>
-        <StackPanel Margin="0,136,0,0" Grid.Column="0" Orientation="Vertical">
-            <Button x:Name="ClientsButton1" Style="{StaticResource ButtonNavigation}" Click="ClientsButton_Click">
-                <StackPanel x:Name="ClientsButton" Height="75" Width="105" Orientation="Vertical">
-                    <Image Style="{StaticResource ButtonNavigationIcons}" Source="Pictures/clients.png"/>
-                    <TextBlock Style="{StaticResource ButtonNavigationText}">Клиенты</TextBlock>
-                </StackPanel>
-            </Button>
+        <DockPanel Margin="0,15,0,0">
+            <StackPanel Orientation="Vertical" DockPanel.Dock="Left" Width="150">
+                <Button Name="MainButton" Style="{StaticResource ButtonNavigation}" Margin="0,0,0,50" Height="68" Click="MainButton_Click">
+                    <Image Source="Pictures/Logo.png" Width="100"/>
+                </Button>
 
-            <Button x:Name="ProductButton" Style="{StaticResource ButtonNavigation}" Click="ProductButton_Click">
-                <StackPanel Height="75" Width="105" Orientation="Vertical">
-                    <Image Style="{StaticResource ButtonNavigationIcons}" Source="Pictures/products.png"/>
-                    <TextBlock Style="{StaticResource ButtonNavigationText}">Товары</TextBlock>
-                </StackPanel>
-            </Button>
+                <Button x:Name="ClientsButton1" Style="{StaticResource ButtonNavigation}" Click="ClientsButton_Click">
+                    <StackPanel x:Name="ClientsButton" Height="75" Width="105" Orientation="Vertical">
+                        <Image Style="{StaticResource ButtonNavigationIcons}" Source="Pictures/clients.png"/>
+                        <TextBlock Style="{StaticResource ButtonNavigationText}">Клиенты</TextBlock>
+                    </StackPanel>
+                </Button>
 
-            <Button Style="{StaticResource ButtonNavigation}">
-                <StackPanel Height="75" Width="105" Orientation="Vertical">
-                    <Image Style="{StaticResource ButtonNavigationIcons}" Source="Pictures/phone.png"/>
-                    <TextBlock Style="{StaticResource ButtonNavigationText}">Поставки</TextBlock>
-                </StackPanel>
-            </Button>
+                <Button x:Name="ProductButton" Style="{StaticResource ButtonNavigation}" Click="ProductButton_Click">
+                    <StackPanel Height="75" Width="105" Orientation="Vertical">
+                        <Image Style="{StaticResource ButtonNavigationIcons}" Source="Pictures/products.png"/>
+                        <TextBlock Style="{StaticResource ButtonNavigationText}">Товары</TextBlock>
+                    </StackPanel>
+                </Button>
 
-            <Button x:Name="OrdersButton" Style="{StaticResource ButtonNavigation}" Click="OrdersButton_Click">
-                <StackPanel Height="75" Width="105" Orientation="Vertical">
-                    <Image Style="{StaticResource ButtonNavigationIcons}" Source="Pictures/orders.png"/>
-                    <TextBlock Style="{StaticResource ButtonNavigationText}">Заказы</TextBlock>
-                </StackPanel>
-            </Button>
+                <Button Style="{StaticResource ButtonNavigation}">
+                    <StackPanel Height="75" Width="105" Orientation="Vertical">
+                        <Image Style="{StaticResource ButtonNavigationIcons}" Source="Pictures/phone.png"/>
+                        <TextBlock Style="{StaticResource ButtonNavigationText}">Поставки</TextBlock>
+                    </StackPanel>
+                </Button>
 
-            <Button Style="{StaticResource ButtonNavigation}">
-                <StackPanel Height="75" Width="105" Orientation="Vertical">
-                    <Image Style="{StaticResource ButtonNavigationIcons}" Source="Pictures/stats.png"/>
-                    <TextBlock Style="{StaticResource ButtonNavigationText}">Статистика</TextBlock>
-                </StackPanel>
-            </Button>
+                <Button x:Name="OrdersButton" Style="{StaticResource ButtonNavigation}" Click="OrdersButton_Click">
+                    <StackPanel Height="75" Width="105" Orientation="Vertical">
+                        <Image Style="{StaticResource ButtonNavigationIcons}" Source="Pictures/orders.png"/>
+                        <TextBlock Style="{StaticResource ButtonNavigationText}">Заказы</TextBlock>
+                    </StackPanel>
+                </Button>
 
-            <Button Style="{StaticResource ButtonNavigation}">
-                <StackPanel Height="75" Width="105" Orientation="Vertical">
-                    <Image Style="{StaticResource ButtonNavigationIcons}" Source="Pictures/settings.png"/>
-                    <TextBlock Style="{StaticResource ButtonNavigationText}">Настройки</TextBlock>
-                </StackPanel>
-            </Button>
-        </StackPanel>
-        <Button Name="MainButton" Content="Главная" Background="BlanchedAlmond" FontSize="25" FontWeight="Medium" HorizontalAlignment="Center" Margin="0,618,0,0" VerticalAlignment="Top" Height="55" Width="127" Click="MainButton_Click"/>
+                <Button Style="{StaticResource ButtonNavigation}">
+                    <StackPanel Height="75" Width="105" Orientation="Vertical">
+                        <Image Style="{StaticResource ButtonNavigationIcons}" Source="Pictures/stats.png"/>
+                        <TextBlock Style="{StaticResource ButtonNavigationText}">Статистика</TextBlock>
+                    </StackPanel>
+                </Button>
+
+                <Button Style="{StaticResource ButtonNavigation}">
+                    <StackPanel Height="75" Width="105" Orientation="Vertical">
+                        <Image Style="{StaticResource ButtonNavigationIcons}" Source="Pictures/settings.png"/>
+                        <TextBlock Style="{StaticResource ButtonNavigationText}">Настройки</TextBlock>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+            <StackPanel DockPanel.Dock="Right" Width="4">
+                <Line X1="0" Y1="80" X2="0" Y2="600" Stroke="#6E304B" StrokeThickness="2"/>
+            </StackPanel>
+        </DockPanel>
     </Grid>
 </Window>

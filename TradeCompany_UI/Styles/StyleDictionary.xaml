@@ -12,9 +12,11 @@
     </Style>
 
     <Style TargetType="Image" x:Key="ButtonNavigationIcons">
-        <Setter Property="Margin" Value="0,4,0,0"/>
-        <Setter Property="Width" Value="36"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Style.Setters>
+            <Setter Property="Margin" Value="0,4,0,0"/>
+            <Setter Property="Width" Value="36"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style.Setters>
     </Style>
 
     <Style TargetType="TextBlock" x:Key="ButtonNavigationText">
@@ -25,5 +27,4 @@
             <Setter Property="HorizontalAlignment" Value="Center"/>
         </Style.Setters>
     </Style>
-
 </ResourceDictionary>
