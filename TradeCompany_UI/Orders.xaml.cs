@@ -25,12 +25,14 @@ namespace TradeCompany_UI
     /// </summary>
     public partial class Orders : Page
     {
-        Frame _frame;
-        OrderDataAccess _orderDataAccess;
-        List<OrderModel> _orderModels;
-        public Orders(Frame frame)
+        private Frame _frame;
+        private OrderDataAccess _orderDataAccess;
+        private List<OrderModel> _orderModels;
+        private Window _mainWindow;
+        public Orders(Frame frame, Window mainWindow)
         {
             _frame = frame;
+            _mainWindow = mainWindow;
             InitializeComponent();
             _orderDataAccess = new OrderDataAccess();
             _orderModels = _orderDataAccess.GetOrderModelsByParams();

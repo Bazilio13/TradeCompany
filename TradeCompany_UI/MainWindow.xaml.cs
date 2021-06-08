@@ -27,7 +27,7 @@ namespace TradeCompany_UI
 
         private void OrdersButton_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new Orders(MainFrame);
+            MainFrame.Content = new Orders(MainFrame, this);
         }
 
         private void MainButton_Click(object sender, RoutedEventArgs e)
@@ -47,7 +47,7 @@ namespace TradeCompany_UI
 
         private void SupplysButton_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new Supplys(MainFrame);
+            MainFrame.Content = new Supplys(MainFrame, this);
         }
     }
 }

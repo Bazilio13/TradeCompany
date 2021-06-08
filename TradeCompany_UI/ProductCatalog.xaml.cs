@@ -198,15 +198,15 @@ namespace TradeCompany_UI
             return filtr;
         }
 
-        private void dgProductCatalog_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void dgProductCatalog_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (_previosPage is IProductAddable)
             {
                 ProductBaseModel productBaseModel = (ProductBaseModel)dgProductCatalog.SelectedItem;
                 IProductAddable productAddable = (IProductAddable)_previosPage;
                 productAddable.AddProductToCollection(productBaseModel.ID, productBaseModel.Name, productBaseModel.MeasureUnitName, productBaseModel.Groups);
+                _frame.Content = _previosPage;
             }
-            _frame.Content = _previosPage;
         }
     }
 }

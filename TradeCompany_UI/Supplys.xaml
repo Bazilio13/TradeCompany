@@ -30,11 +30,11 @@
         </StackPanel>
         <StackPanel Orientation="Vertical" Width="230" Height="45" Grid.Column="1" Grid.Row="1" Margin="0,60,0,0" HorizontalAlignment="Center" VerticalAlignment="Top">
 
-            <TextBlock Height="15" Margin="20,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Left" Width="50"><Run Language="ru-ru" Text="Продукт"/><LineBreak/><Run Language="ru-ru"/></TextBlock>
+            <TextBlock Height="15" Margin="20,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Left" Width="50"><Run Language="ru-ru" Text="Товары"/><LineBreak/><Run Language="ru-ru"/></TextBlock>
             <TextBox x:Name="ProductFiltr" TextWrapping="Wrap"  Height="25" VerticalAlignment="Top" HorizontalAlignment="Center" Width="200" TextChanged="ProductFiltr_TextChanged"/>
         </StackPanel>
         <StackPanel Orientation="Vertical" Width="230" Height="45" Grid.Column="1" Grid.Row="1" Margin="0,105,0,0" HorizontalAlignment="Center" VerticalAlignment="Top">
-            <TextBlock HorizontalAlignment="Left" Height="15" Margin="20,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100"><Run Language="ru-ru" Text="Группа продуктов"/></TextBlock>
+            <TextBlock HorizontalAlignment="Left" Height="15" Margin="20,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"><Run Language="ru-ru" Text="Категории продуктов"/></TextBlock>
             <TextBox x:Name="ProductGroupFiltr" Margin="0,0,0,0" TextWrapping="Wrap"  Height="25" VerticalAlignment="Top" HorizontalAlignment="Center" Width="200" TextChanged="ProductGroupFiltr_TextChanged"/>
         </StackPanel>
         <Button Content="Сбросить фильтр" HorizontalAlignment="Center" Margin="0,155,0,0" VerticalAlignment="Top" Height="25" Width="118" Click="ResetButton_Click" Grid.Column="1" Grid.Row="1"/>

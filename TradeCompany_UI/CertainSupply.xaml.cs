@@ -18,6 +18,7 @@ using TradeCompany_BLL.Models;
 using TradeCompany_UI.Interfaces;
 using System.Xml.Linq;
 using System.ComponentModel;
+using TradeCompany_UI.DialogWindows;
 
 namespace TradeCompany_UI
 {
@@ -26,14 +27,18 @@ namespace TradeCompany_UI
     /// </summary>
     public partial class CertainSupply : Page, IProductAddable
     {
+        private Window _mainWindow;
         private Frame _frame;
         private SupplysDataAccess _supplysDataAccess;
         public SupplyModel SupplyModel { get; set; }
+        private Page _priviosPage;
 
         ObservableCollection<SupplyListModel> _ocSupplyListModels = new ObservableCollection<SupplyListModel>();
-        public CertainSupply(Frame frame)
+        public CertainSupply(Frame frame, Window mainWindow, Page priviosPage)
         {
             _frame = frame;
+            _mainWindow = mainWindow;
+            _priviosPage = priviosPage;
             InitializeComponent();
             _supplysDataAccess = new SupplysDataAccess();
             SupplyModel = new SupplyModel();
@@ -41,9 +46,11 @@ namespace TradeCompany_UI
             dgSupplyList.ItemsSource = _ocSupplyListModels;
         }
 
-        public CertainSupply(Frame frame, int id)
+        public CertainSupply(Frame frame, Window mainWindow, Page priviosPage, int id)
         {
             _frame = frame;
+            _mainWindow = mainWindow;
+            _priviosPage = priviosPage;
             InitializeComponent();
             _supplysDataAccess = new SupplysDataAccess();
             SupplyModel = _supplysDataAccess.GetSupplyModelByID(id);
@@ -167,6 +174,21 @@ namespace TradeCompany_UI
 
         private void dgSupplyList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+
+        }
+
+        private void DeleteSupply_Click(object sender, RoutedEventArgs e)
+        {
+            ConfirmitionWindow confirmitionWindow = new ConfirmitionWindow();
+            confirmitionWindow.Owner = _mainWindow;
+            confirmitionWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            if (confirmitionWindow.ShowDialog() == true)
+            {
+                _supplysDataAccess.DeleteSupply(SupplyModel.ID);
+                Supplys supply = (Supplys)_priviosPage;
+                supply.FilterSupplys();
+                _frame.Content = _priviosPage;
+            }
 
         }
     }

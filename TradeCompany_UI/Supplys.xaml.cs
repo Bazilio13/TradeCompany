@@ -25,26 +25,19 @@ namespace TradeCompany_UI
         private Frame _frame;
         private SupplysDataAccess _supplyDataAccess;
         private Page _previosPage;
+        private Window _mainWindow;
         public List<SupplyModel> SupplyModels { get; set; }
-        public Supplys(Frame frame, Page previousPage = null)
+        public Supplys(Frame frame, Window mainWindow, Page previousPage = null)
         {
             _frame = frame;
             _previosPage = previousPage;
+            _mainWindow = mainWindow;
             InitializeComponent();
             _supplyDataAccess = new SupplysDataAccess();
             SupplyModels = _supplyDataAccess.GetSupplyModelsByParams();
             dgSupplys.ItemsSource = SupplyModels;
         }
-
-        private void ResetButton_Click(object sender, RoutedEventArgs e)
-        {
-            ProductFiltr.Text = null;
-            ProductGroupFiltr.Text = null;
-            MinDate.SelectedDate = null;
-            MaxDate.SelectedDate = null;
-            FilterSupplys();
-        }
-        private void FilterSupplys()
+        public void FilterSupplys()
         {
             string product = null;
             string productGroup = null;
@@ -69,6 +62,15 @@ namespace TradeCompany_UI
             dgSupplys.ItemsSource = orderModels;
         }
 
+        private void ResetButton_Click(object sender, RoutedEventArgs e)
+        {
+            ProductFiltr.Text = null;
+            ProductGroupFiltr.Text = null;
+            MinDate.SelectedDate = null;
+            MaxDate.SelectedDate = null;
+            FilterSupplys();
+        }
+
         private void ProductGroupFiltr_TextChanged(object sender, TextChangedEventArgs e)
         {
             FilterSupplys();
@@ -91,7 +93,7 @@ namespace TradeCompany_UI
 
         private void CreateSupply_Click(object sender, RoutedEventArgs e)
         {
-           _frame.Content = new CertainSupply(_frame);
+           _frame.Content = new CertainSupply(_frame, _mainWindow, this);
         }
 
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -110,7 +112,7 @@ namespace TradeCompany_UI
             {
                 TextBlock textBlock = (TextBlock)e.OriginalSource;
                 SupplyModel crntModel = (SupplyModel)textBlock.DataContext;
-                _frame.Content = new CertainSupply(_frame, crntModel.ID);
+                _frame.Content = new CertainSupply(_frame, _mainWindow, this, crntModel.ID);
             }
         }
     }
