@@ -35,17 +35,15 @@ namespace TradeCompany_UI
         private float? _filtrToRetailPrice;
         private DateTime? _filtrMinDateTime;
         private DateTime? _filtrMaxDateTime;
+        private UINavi _uiNavi;
         private Page _previosPage;
-        private Window _mainWindow;
-        private Frame _frame;
 
-        public ProductCatalog(Frame frame, Window mainWindow, Page previosPage = null)
+        public ProductCatalog(Page previosPage = null)
         {
             InitializeComponent();
+            _uiNavi = UINavi.GetUINavi();
             _products = new ProductsDataAccess();
-            _frame = frame;
             _previosPage = previosPage;
-            _mainWindow = mainWindow;
             dgProductCatalog.ItemsSource = _products.GetAllProducts();
             List<ProductGroupModel> allGroups = _products.GetAllGroups();
             ProductGroupSelect.ItemsSource = allGroups;
@@ -165,7 +163,7 @@ namespace TradeCompany_UI
 
         private void AddProductButton_Click(object sender, RoutedEventArgs e)
         {
-            _frame.Content = new AddNewProduct(_frame, this, _mainWindow);
+            _uiNavi.GoToThePage(new AddNewProduct(_previosPage));
         }
 
         public void ApplyFilters()
@@ -266,7 +264,7 @@ namespace TradeCompany_UI
             {
                 IProductAddable productAddable = (IProductAddable)_previosPage;
                 productAddable.AddProductToCollection(productBaseModel.ID, productBaseModel.Name, productBaseModel.MeasureUnitName, productBaseModel.Groups);
-                _frame.Content = _previosPage;
+                _uiNavi.GoToThePage(_previosPage);
             }
             else
             {

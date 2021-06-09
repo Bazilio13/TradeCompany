@@ -24,7 +24,9 @@ namespace TradeCompany_UI
     /// </summary>
     public partial class OneClient : Page
     {
+
         private int _id;
+        private ClientsDataAccess _clientsData = new ClientsDataAccess();
         private List<WishModel> _wishList = new List<WishModel>();
         private List<OrderModel> _orderList = new List<OrderModel>();
         private List<String> _oldAddresses = new List<String>();
@@ -37,7 +39,7 @@ namespace TradeCompany_UI
         {
             InitializeComponent();
             _id = id;
-            _wishList = _map.MapWishesDTOToWishesModelListByID(_id);
+            _wishList = _clientsData.GetWishListByClientID(_id);
             FeedbacksDataAccess fda = new FeedbacksDataAccess();
             OrderDataAccess dataAccess = new OrderDataAccess();
             _orderList = dataAccess.GetOrderModelsByClientID(_id);
@@ -64,7 +66,7 @@ namespace TradeCompany_UI
             if (_id != -1)
             {
                 dgOrdersTable.ItemsSource = _orderList;
-                ClientModel client = map.MapClientDTOToClientModelByID(_id);
+                ClientModel client = _clientsData.GetClientByClientID(_id);
                 textBoxName.Text = client.Name;
                 if (client.INN != null)
                 {
@@ -81,6 +83,10 @@ namespace TradeCompany_UI
                 if (client.ContactPerson != null)
                 {
                     textBoxContactPerson.Text = client.ContactPerson;
+                } 
+                if (client.Comment != null)
+                {
+                    textBoxComments.Text = client.Comment;
                 }
                 if (client.Type)
                 {
@@ -95,11 +101,10 @@ namespace TradeCompany_UI
                 else { RadioButtonTypeBayR.IsChecked = true; }
 
 
-                _oldAddresses = map.MapClientDTOToAddressesByID(_id);
+                _oldAddresses = map.MapClientDTOToAddressesByID(_id); //нужно исправить 
                 AddAddress();
                 LoadWishPanel();
                 LoadFeedback();
-                //List<WishModel> wishList = map.MapWishesDTOToWishesModelListByID(_id);
             }
             else
             {
@@ -111,7 +116,7 @@ namespace TradeCompany_UI
                 RadioButtonTypeBayR.IsChecked = true;
             }
             ProductsDataAccess product = new ProductsDataAccess();
-            List<ProductBaseModel> allProducts = product.GetAllProducts(); //Заменить на модель продуктов после мерджа
+            List<ProductBaseModel> allProducts = product.GetAllProducts(); 
             cbWish.ItemsSource = allProducts;
 
         }
@@ -130,27 +135,22 @@ namespace TradeCompany_UI
 
         {
             if (FieldValidation())
-
             {
-                ClientModel client = new ClientModel();
-                client = ToFormClientModel();
+                ClientModel client = ToFormClientModel();
                 MapsModelToDTO maps = new MapsModelToDTO();
-                maps.MapClientModelToClientDTO(client);
+                _clientsData.SaveClient(client);
                 if (_id == -1)
                 {
-                    _id = _map.MapLastClientDTOToLastClientBaseModel().ID;
+                    _id = _clientsData.GetLastClient().ID;
                 }
-                maps.MapWishListModelToWishListDTO(_wishList, _id);
-                maps.MapAddressesListModelToAddressesListDTO(_newAddresses, _id);
+                _clientsData.SaveWishListByClientID(_wishList, _id);
+                maps.MapAddressesListModelToAddressesListDTO(_newAddresses, _id); //нужно исправить
             }
         }
 
         private ClientModel ToFormClientModel()
-
         {
-
             ClientModel client = new ClientModel();
-
             client.ID = _id;
             client.Name = textBoxName.Text.Trim();
             client.INN = textBoxINN.Text.Trim();
@@ -182,15 +182,7 @@ namespace TradeCompany_UI
                 textBoxContactPerson.Background = Brushes.Pink;
                 validation = false;
             }
-            //int member;
-            //if(textBoxINN.Text.Trim(' ') != null)
-            //{
-            //    if (!Int32.TryParse(textBoxINN.Text, out member))
-            //    {
-            //        textBoxINN.Background = Brushes.Pink;
-            //        validation = false;
-            //    }
-            //}
+
             return validation;
         }
 
