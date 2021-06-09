@@ -137,8 +137,12 @@ namespace TradeCompany_BLL
         }
 
         public OrderListModel MapProductDTOToOrderListModel(ProductDTO productDTO)
-        {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<ProductDTO, OrderListModel>());
+        { //.ForMember(dest => dest.ProductName, option => option.MapFrom(sorse => sorse.productDTO.Name))
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<ProductDTO, OrderListModel>()
+            .ForMember(dest => dest.ProductName, option => option.MapFrom(sorse => sorse.Name))
+            .ForMember(dest => dest.ProductMeasureUnit, option => option.MapFrom(sorse => sorse.MeasureUnitName))
+            .ForMember(dest => dest.ProductID,option => option.MapFrom(sorse => sorse.ID))
+            .ForMember(dest => dest.Price, option => option.MapFrom(sorse => sorse.WholesalePrice)));
             Mapper mapper = new Mapper(config);
             OrderListModel orderListModel = mapper.Map<OrderListModel>(productDTO);
 

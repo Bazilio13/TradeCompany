@@ -38,12 +38,12 @@
 
         <DataGrid x:Name="dgSpecificOrder" FontSize="15" Margin="26,34,34,26" Loaded="dgSpecificOrder_Loaded" Grid.Row="1" AutoGenerateColumns="False" RowEditEnding="dgSpecificOrder_RowEditEnding"  >
             <DataGrid.Columns >
-               
+
                 <DataGridTextColumn Binding="{Binding Path= ProductID}" Header="ID Товара" Width="0.2*" />
                 <DataGridTextColumn x:Name="Product" Binding="{Binding Path= ProductName, UpdateSourceTrigger=PropertyChanged}" Header="Товар" Width="1*" />
                 <DataGridTextColumn  Header="Категория" Width="0.5*"/>
                 <DataGridTextColumn Binding="{Binding Path= Price}" Header="Цена" Width="0.5*"/>
-                <DataGridTextColumn x:Name="Amount" Binding="{Binding Path= Amount, UpdateSourceTrigger=PropertyChanged}" Header="Количество" Width="0.5*"/>
+                <DataGridTextColumn x:Name="Amount" Binding="{Binding Path = Amount, UpdateSourceTrigger=PropertyChanged}" Header="Количество" Width="0.5*"/>
                 <DataGridTextColumn x:Name="ProductMeasureUnit" Header="Единицы измерения" Binding="{Binding Path= ProductMeasureUnit}" Width="0.5*"/>
 
             </DataGrid.Columns>
@@ -55,8 +55,8 @@
                 <ColumnDefinition Width="172*"/>
                 <ColumnDefinition Width="37*"/>
             </Grid.ColumnDefinitions>
-            <Button Name="PlaceOrder" HorizontalAlignment="Left" Background="SteelBlue" Height="40" Width="300" Content="Сформировать" FontSize="15" Margin="248,12,0,12" Click="PlaceOrder_Click"></Button>
+            <Button Content="Добавить существующий товар" HorizontalAlignment="Left" Height="30" Margin="27,14,0,0" VerticalAlignment="Top" Width="222" Click="Button_Click"/>
         </Grid>
-        <Button x:Name="Refresh" Content="Обновить информацию" HorizontalAlignment="Left"  Height="26" Margin="29,10,0,0" Grid.Row="2" VerticalAlignment="Top" Width="140" Click="Refresh_Click"/>
+        <Button x:Name="Refresh" Content="Добавить продукты в заказ" HorizontalAlignment="Left"  Height="32" Margin="283,12,0,0" Grid.Row="2" VerticalAlignment="Top" Width="208" Click="Refresh_Click"/>
     </Grid>
 </Page>

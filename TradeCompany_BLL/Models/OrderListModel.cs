@@ -13,6 +13,7 @@ namespace TradeCompany_BLL.Models
         private string _ProductName;
         private int _Amount;
         public int ID { get; set; }
+        public int OrderID { get; set; }
         public int ProductID { get; set; }
         public string ProductName { get; set; }
         public string ProductMeasureUnit { get; set; }
