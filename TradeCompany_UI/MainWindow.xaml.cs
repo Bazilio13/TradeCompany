@@ -20,34 +20,37 @@ namespace TradeCompany_UI
     /// </summary>
     public partial class MainWindow : Window
     {
+        UINavi _uiNavi;
         public MainWindow()
         {
             InitializeComponent();
+            _uiNavi = UINavi.GetUINavi();
+            _uiNavi.MainWindow = this;
         }
 
         private void OrdersButton_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new Orders(MainFrame, this);
+            _uiNavi.GoToThePage(new Orders());
         }
 
         private void MainButton_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new StartPage();
+            _uiNavi.GoToThePage(new StartPage());
         }
 
         private void ClientsButton_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new Clients();
+            _uiNavi.GoToThePage(new Clients());
         }
 
         private void ProductButton_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new ProductCatalog(MainFrame, this);
+            _uiNavi.GoToThePage(new ProductCatalog());
         }
 
         private void SupplysButton_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new Supplys(MainFrame, this);
+            _uiNavi.GoToThePage(new Supplys());
         }
     }
 }

@@ -19,6 +19,7 @@ using TradeCompany_UI.Interfaces;
 using System.Xml.Linq;
 using System.ComponentModel;
 using TradeCompany_UI.DialogWindows;
+using TradeCompany_UI.Pop_ups;
 
 namespace TradeCompany_UI
 {
@@ -27,31 +28,28 @@ namespace TradeCompany_UI
     /// </summary>
     public partial class CertainSupply : Page, IProductAddable
     {
-        private Window _mainWindow;
-        private Frame _frame;
+        private UINavi _uiNavi;
         private SupplysDataAccess _supplysDataAccess;
         public SupplyModel SupplyModel { get; set; }
         private Page _priviosPage;
 
         ObservableCollection<SupplyListModel> _ocSupplyListModels = new ObservableCollection<SupplyListModel>();
-        public CertainSupply(Frame frame, Window mainWindow, Page priviosPage)
+        public CertainSupply(Page priviosPage)
         {
-            _frame = frame;
-            _mainWindow = mainWindow;
-            _priviosPage = priviosPage;
             InitializeComponent();
+            _uiNavi = UINavi.GetUINavi();
+            _priviosPage = priviosPage;
             _supplysDataAccess = new SupplysDataAccess();
             SupplyModel = new SupplyModel();
             _ocSupplyListModels = new ObservableCollection<SupplyListModel>();
             dgSupplyList.ItemsSource = _ocSupplyListModels;
         }
 
-        public CertainSupply(Frame frame, Window mainWindow, Page priviosPage, int id)
+        public CertainSupply(Page priviosPage, int id)
         {
-            _frame = frame;
-            _mainWindow = mainWindow;
-            _priviosPage = priviosPage;
             InitializeComponent();
+            _uiNavi = UINavi.GetUINavi();
+            _priviosPage = priviosPage;
             _supplysDataAccess = new SupplysDataAccess();
             SupplyModel = _supplysDataAccess.GetSupplyModelByID(id);
             SupplyComment.Text = SupplyModel.Comment;
@@ -95,13 +93,11 @@ namespace TradeCompany_UI
 
         private void SupplysDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            //SupplyModel.DateTime = (DateTime)SupplysDate.SelectedDate;
         }
 
         private void AddProduct_Click(object sender, RoutedEventArgs e)
         {
-            _frame.Content = new ProductCatalog(_frame, _mainWindow, this);
-
+            _uiNavi.GoToThePage(new ProductCatalog(this));
         }
 
         private void PotentialClients_Click(object sender, RoutedEventArgs e)
@@ -123,6 +119,9 @@ namespace TradeCompany_UI
                 {
                     _supplysDataAccess.UpdateSupply(SupplyModel);
                 }
+                Supplys supply = (Supplys)_priviosPage;
+                supply.FilterSupplys();
+                _uiNavi.GoToThePage(_priviosPage);
             }
         }
         private bool CheckTheFill()
@@ -153,7 +152,7 @@ namespace TradeCompany_UI
             }
             if (!checkResult)
             {
-                MessageBox.Show(message);
+                new MessageWindow(message).ShowDialog();
             }
             return checkResult;
         }
@@ -179,17 +178,36 @@ namespace TradeCompany_UI
 
         private void DeleteSupply_Click(object sender, RoutedEventArgs e)
         {
-            ConfirmitionWindow confirmitionWindow = new ConfirmitionWindow();
-            confirmitionWindow.Owner = _mainWindow;
-            confirmitionWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            ConfirmitionWindow confirmitionWindow = new ConfirmitionWindow("Вы уверены, что хотите удалить поставку?");     
             if (confirmitionWindow.ShowDialog() == true)
             {
                 _supplysDataAccess.DeleteSupply(SupplyModel.ID);
                 Supplys supply = (Supplys)_priviosPage;
                 supply.FilterSupplys();
-                _frame.Content = _priviosPage;
+                _uiNavi.GoToThePage(_priviosPage);
             }
 
+        }
+
+        private void dgSupplyList_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+            TextBox textBox = (TextBox)e.EditingElement;
+            if (textBox.Text == "")
+            {
+                textBox.Text = "0";
+            }
+            else
+            {
+                foreach(char ch in textBox.Text)
+                {
+                    if (!char.IsDigit(ch))
+                    {
+                        new MessageWindow("В поле количество можно вводить только числа").ShowDialog();
+                        textBox.Text = "0";
+                        break;
+                    }
+                }
+            }
         }
     }
 }

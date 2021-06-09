@@ -12,18 +12,22 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace TradeCompany_UI.DialogWindows
+namespace TradeCompany_UI.Pop_ups
 {
     /// <summary>
-    /// Interaction logic for ConfirmitionWindow.xaml
+    /// Interaction logic for MessageWindow.xaml
     /// </summary>
-    public partial class ConfirmitionWindow : Window
+    public partial class MessageWindow : Window
     {
-        public ConfirmitionWindow()
+        private UINavi _uiNavi;
+        public MessageWindow(string text)
         {
             InitializeComponent();
+            _uiNavi = UINavi.GetUINavi();
+            Text.Text = text;
+            Owner = _uiNavi.MainWindow;
+            WindowStartupLocation = WindowStartupLocation.CenterOwner;
         }
-
         private void Accept_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = true;

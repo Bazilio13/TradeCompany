@@ -32,15 +32,13 @@ namespace TradeCompany_UI
         private List<MeasureUnitsModel> _allMeasureUnits;
         private int _currentProductID;
         private int _measureUnitID;
-        private Window _mainWindow;
-        private Frame _frame;
+        private UINavi _uiNavi;
         private Page _priviosPage;
 
-        public AddNewProduct(Frame frame, Page priviosPage, Window mainWindow)
+        public AddNewProduct(Page priviosPage)
         {
             InitializeComponent();
-            _mainWindow = mainWindow;
-            _frame = frame;
+            _uiNavi = UINavi.GetUINavi();
             _priviosPage = priviosPage;
 
             _currentProductID = GetCurrentProductID();
