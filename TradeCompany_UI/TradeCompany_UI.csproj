@@ -22,7 +22,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TradeCompany_BLL\TradeCompany_BLL.csproj" />
-    <ProjectReference Include="..\TradeCompany_DAL\TradeCompany_DAL.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -25,65 +25,44 @@ namespace TradeCompany_UI
     /// </summary>
     public partial class SpecificOrder : Page
     {
-        
+        private int _orderId;
+        private static string ConnectionString = @"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16";
         private OrderModel _orderModel;
-        private int _orderId = 7 ;
-        private string nameOfAddedProduct;
-        private List<ProductDTO> newItem;
+        private OrderListModel specificProduct;
 
-        private SpecificProductDTO _specificProductDTO;
+        private List<OrderListModel> listOfProductForOrder = new List<OrderListModel>();
+        BindingList<OrderListModel> bgOrderListModels = new BindingList<OrderListModel>();
 
-        
+        ProductsData _productsData = new ProductsData(ConnectionString);
 
-        ContactInformation _clientInfo;
-        OrderDataAccess _orderDataAccess;
-        ProductsData _productsData = new ProductsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
-       BindingList<OrderListModel> _bdOrderListModel = new BindingList<OrderListModel>();
-        
-        OrdersData od;
+        MapsDTOtoModel _mapsDTOtoModel = new MapsDTOtoModel();
 
-        RoutedEventArgs ee;
 
 
 
         public SpecificOrder()
         {
 
-            _orderDataAccess = new OrderDataAccess();
-            _clientInfo = new ContactInformation();
-            _orderDataAccess = new OrderDataAccess();
-            _orderModel = _orderDataAccess.GetOrderById(7)[0];
-            SetContactInformation();
-            AddProductInTable();
         }
 
-        private void AddProductInTable()
-        {
-            foreach (var product in _orderModel.OrderListModel)
-            {
-                _bdOrderListModel.Add(product);
+       
 
-            }
-        }
 
         public SpecificOrder(int id)
         {
-            InitializeComponent();
             _orderId = id;
-
-            _orderDataAccess = new OrderDataAccess();
-            _orderModel = _orderDataAccess.GetOrderById(7)[0];
-            SetContactInformation();
+            InitializeComponent();
+           
            
 
         }
 
         private void dgSpecificOrder_Loaded(object sender, RoutedEventArgs e)
         {
-            ShowClientInformation();
-            dgSpecificOrder.ItemsSource = _orderModel.OrderListModel;
-            dgSpecificOrder.ItemsSource = _bdOrderListModel;
-            ee = e;
+            
+            //dgSpecificOrder.ItemsSource = _orderModel.OrderListModel;
+            //dgSpecificOrder.ItemsSource = _bdOrderListModel;
+            
             
         }
 
@@ -93,86 +72,87 @@ namespace TradeCompany_UI
         }
         private void SetContactInformation()
         {
-            _clientInfo.ID = _orderModel.ClientsID;
-            _clientInfo.Client = _orderModel.Client;
-            _clientInfo.ClientsPhone = _orderModel.ClientsPhone;
-            _clientInfo.dateTime = _orderModel.DateTime;
-            _clientInfo.Address = _orderModel.Address;
+            //_clientInfo.ID = _orderModel.ClientsID;
+            //_clientInfo.Client = _orderModel.Client;
+            //_clientInfo.ClientsPhone = _orderModel.ClientsPhone;
+            //_clientInfo.dateTime = _orderModel.DateTime;
+            //_clientInfo.Address = _orderModel.Address;
         }
         private void ShowClientInformation()
         {
-            Data.Text = _clientInfo.dateTime.ToString();
-            ID.Text = _clientInfo.ID.ToString();
-            ClientName.Text = _clientInfo.Client;
-            Phone.Text = _clientInfo.ClientsPhone;
-            Adress.Text = _clientInfo.Address;
+            //Data.Text = _clientInfo.dateTime.ToString();
+            //ID.Text = _clientInfo.ID.ToString();
+            //ClientName.Text = _clientInfo.Client;
+            //Phone.Text = _clientInfo.ClientsPhone;
+            //Adress.Text = _clientInfo.Address;
 
-        }
-
-        private void dgSpecificOrder_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-          
-
-        }
-
-        private void dgSpecificOrder_BeginningEdit(object sender, DataGridBeginningEditEventArgs e)
-        {
-            var x = e.Row;
-        }
-
-        private void dgSpecificOrder_KeyUp(object sender, KeyEventArgs e)
-        {
-            var x = e.OriginalSource.ToString();
         }
 
         
 
         private void dgSpecificOrder_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
         {
+
+            //OrderListModel i = (OrderListModel)e.Row.Item;
+            //_specificProductDTO = new SpecificProductDTO(); //передалать
+            //newItem = new List<ProductDTO>();
+
+            //nameOfAddedProduct = i.ProductName;
+
+            //var item = _productsData.GetProductsByLetter(nameOfAddedProduct);
+            //if (item.Count == 0)
+            //{
+            //    //return new window with information
+            //}
+
+            //newItem = item;
+
+            //FillInfoAboutAddedProduct(i);
+
+            //od = new OrdersData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
+            //od.AddSpecificProductInOrder(_specificProductDTO);
+
+            //_orderModel = new OrderModel();
+            //_orderModel = _orderDataAccess.GetOrderById(7)[0];
+            //AddProductInTable();
+
+            //dgSpecificOrder_Loaded(sender, ee);
+
+
+            OrderListModel productInOrder = (OrderListModel)e.Row.Item;
             
-            OrderListModel i = (OrderListModel)e.Row.Item;
-            _specificProductDTO = new SpecificProductDTO();
-            newItem = new List<ProductDTO>();
 
-            nameOfAddedProduct = i.ProductName;
+            string nameOfAddedProduct = productInOrder.ProductName;
+            var newItem = _productsData.GetProductsByLetter(nameOfAddedProduct);
 
-            var item = _productsData.GetProductsByLetter(nameOfAddedProduct);
-            if (item.Count == 0)
+            if (newItem.Count == 0)
             {
                 //return new window with information
             }
+            specificProduct = new OrderListModel();
+            var i = newItem.First();
 
-            newItem = item;
+            specificProduct = _mapsDTOtoModel.MapProductDTOToOrderListModel(i);
+            listOfProductForOrder.Add(specificProduct);
 
-            FillInfoAboutAddedProduct(i);
 
-            od = new OrdersData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
-            od.AddSpecificProductInOrder(_specificProductDTO);
 
-            _orderModel = new OrderModel();
-            _orderModel = _orderDataAccess.GetOrderById(7)[0];
-            AddProductInTable();
 
-            dgSpecificOrder_Loaded(sender, ee);
+
+
+
 
         }
 
         private void FillInfoAboutAddedProduct(OrderListModel i)
         {
-            _bdOrderListModel = new BindingList<OrderListModel>();
-            _specificProductDTO.ProductID = newItem.First().ID;
-            _specificProductDTO.Price = newItem.First().WholesalePrice;
-            _specificProductDTO.Amount = i.Amount;
-            _specificProductDTO.OrderID = _orderId;
-  
+           
         }
 
         private void Refresh_Click(object sender, RoutedEventArgs e)
         {
-            _orderModel = new OrderModel();
-            _orderModel = _orderDataAccess.GetOrderById(7)[0];
-            AddProductInTable();
-            dgSpecificOrder_Loaded(sender,e);
+           
         }
+
     }
 }
