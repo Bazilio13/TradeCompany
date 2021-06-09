@@ -26,10 +26,8 @@ namespace TradeCompany_UI
         private ProductsDataAccess _productsData = new ProductsDataAccess();
         private ProductModel _currentProduct = new ProductModel();
         private ProductGroupModel _newGroup = new ProductGroupModel();
-        //private List<int> _chosenGroupsIDs = new List<int>();
         private List<ProductGroupModel> _chosenGroups = new List<ProductGroupModel>();
         private List<ProductGroupModel> _allGroups;
-        private Frame _frame;
         private int _currentProductID;
         private int _measureUnitID;
         private UINavi _uiNavi;
@@ -46,12 +44,11 @@ namespace TradeCompany_UI
             Button_Save.IsEnabled = false;
         }
 
-        public AddNewProduct(int id, Frame frame, Page priviosPage, Window mainWindow)
+        public AddNewProduct(int id, Page priviosPage)
         {
             InitializeComponent();
             _id = id;
-            _frame = frame;
-            _mainWindow = mainWindow;
+            _uiNavi = UINavi.GetUINavi();
             _priviosPage = priviosPage;
             _currentProduct = _productsData.GetProductByID(_id);
             _currentProductID = _id;
@@ -61,6 +58,7 @@ namespace TradeCompany_UI
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+
             MeasureUnit.ItemsSource = _productsData.GetAllMeasureUnits();
             MeasureUnit.DisplayMemberPath = "Name";
             RefreshGroupsCombobox();
@@ -96,7 +94,12 @@ namespace TradeCompany_UI
         private void Button_Save_Click(object sender, RoutedEventArgs e)
         {
             MeasureUnitsModel selectedItem = (MeasureUnitsModel)MeasureUnit.SelectedItem;
-            _measureUnitID = selectedItem.ID;
+            if(!MeasureUnit.Items.Contains(selectedItem))
+            {
+                MessageBox.Show("Неверно выбрана единица измерения");
+                return;
+            }
+            _measureUnitID = selectedItem.ID; //падает на налл, если написать что-то а не выбрать категорию
             _currentProduct.Name = Name_Text.Text;
             _currentProduct.StockAmount = (float)Convert.ToDouble(Text_StockAmount.Text);
             _currentProduct.MeasureUnit = _measureUnitID;
@@ -124,9 +127,8 @@ namespace TradeCompany_UI
                 _productsData.AddProductToProductGroup(_currentProductID, group.ID);
             }
 
-
-            _frame.Content = _priviosPage;
             ProductCatalog prodCatalog = (ProductCatalog)_priviosPage;
+            _uiNavi.GoToThePage(_priviosPage);
             prodCatalog.ApplyFilters();
         }
 
@@ -161,7 +163,7 @@ namespace TradeCompany_UI
         {
             if(_id != 0)
             {
-                _frame.Content = _priviosPage;
+                _uiNavi.GoToThePage(_priviosPage);
                 return;
             }
             if (Name_Text.Text != "" || Text_RetailPrice.Text != "" || Text_WholesalePrice.Text != ""
@@ -171,12 +173,12 @@ namespace TradeCompany_UI
                 if (MessageBox.Show("Отменить изменения?",
                         "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
-                    _frame.Content = _priviosPage;
+                    _uiNavi.GoToThePage(_priviosPage);
                 }
             }
             else
             {
-                _frame.Content = _priviosPage;
+                _uiNavi.GoToThePage(_priviosPage);
             }
         }
 
@@ -196,7 +198,7 @@ namespace TradeCompany_UI
             {
                 ChangeSelectedCategories changeCtaegoriesWindow = new ChangeSelectedCategories(_chosenGroups, ChosenCategories);
                 //вынести в само окно 
-                changeCtaegoriesWindow.Owner = _mainWindow;
+                changeCtaegoriesWindow.Owner = _uiNavi.MainWindow;
                 changeCtaegoriesWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                 if (changeCtaegoriesWindow.ShowDialog() == true)
                 {
@@ -214,7 +216,7 @@ namespace TradeCompany_UI
         {
             AddNewCategoryWindow addNewCategoryWindow = new AddNewCategoryWindow();
             //вынести в само окно
-            addNewCategoryWindow.Owner = _mainWindow;
+            addNewCategoryWindow.Owner = _uiNavi.MainWindow;
             addNewCategoryWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
 
             if (addNewCategoryWindow.ShowDialog() == true)
@@ -256,7 +258,6 @@ namespace TradeCompany_UI
                 Category.Text = "";
 
                 _chosenGroups.Add(selectedItem);
-                //_chosenGroupsIDs.Add(selectedItem.ID);
                 EnableSaveButton();
             }
         }

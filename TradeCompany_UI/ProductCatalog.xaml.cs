@@ -163,7 +163,7 @@ namespace TradeCompany_UI
 
         private void AddProductButton_Click(object sender, RoutedEventArgs e)
         {
-            _uiNavi.GoToThePage(new AddNewProduct(_previosPage));
+            _uiNavi.GoToThePage(new AddNewProduct(this));
         }
 
         public void ApplyFilters()
@@ -268,7 +268,7 @@ namespace TradeCompany_UI
             }
             else
             {
-                _frame.Content = new AddNewProduct(productBaseModel.ID, _frame, this, _mainWindow);
+                _uiNavi.GoToThePage(new AddNewProduct(productBaseModel.ID, this));
             }
         }
     }
