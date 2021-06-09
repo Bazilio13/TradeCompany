@@ -48,7 +48,7 @@ namespace TradeCompany_DAL
             return addressesList;
         }
 
-        public void AddAddress(int clientId, String address)
+        public void AddAddress(int clientId, String address) // почему тут String, а не string и нужно вернуть индекс
         {
             string query = "exec TradeCompany_DataBase.AddAddress @ClientId, @Address";
             using (IDbConnection dbConnection = new SqlConnection(ConnectionString))

@@ -209,5 +209,10 @@ namespace TradeCompany_UI
                 }
             }
         }
+
+        public void AddProductToCollection(int productID, string productName, string productMeasureUnit, float pprice, List<ProductGroupModel> productGroupModels)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

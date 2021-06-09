@@ -294,7 +294,8 @@ namespace TradeCompany_UI
             {
                 ProductBaseModel productBaseModel = (ProductBaseModel)dgProductCatalog.SelectedItem;
                 IProductAddable productAddable = (IProductAddable)_previosPage;
-                productAddable.AddProductToCollection(productBaseModel.ID, productBaseModel.Name, productBaseModel.MeasureUnitName, productBaseModel.Groups);
+                //productAddable.AddProductToCollection(productBaseModel.ID, productBaseModel.Name, productBaseModel.MeasureUnitName, productBaseModel.Groups);
+                productAddable.AddProductToCollection(productBaseModel.ID, productBaseModel.Name, productBaseModel.MeasureUnitName, productBaseModel.WholesalePrice, productBaseModel.Groups);
                 _uiNavi.GoToThePage(_previosPage);
             }
         }

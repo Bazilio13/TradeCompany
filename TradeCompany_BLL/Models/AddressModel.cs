@@ -10,6 +10,6 @@ namespace TradeCompany_BLL.Models
     {
         public int ID { get; set; }
         public int ClientID { get; set; }
-        public String Address { get; set; }
+        public string Address { get; set; }
     }
 }

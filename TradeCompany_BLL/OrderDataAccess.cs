@@ -18,7 +18,7 @@ namespace TradeCompany_BLL
 
         private MapsDTOtoModel _map = new MapsDTOtoModel();
 
-        private MapsModelToDTO _mapsModelTo = new MapsModelToDTO();
+        private MapsModelToDTO _mapsModelToDTO = new MapsModelToDTO();
         public List<OrderModel> GetOrderModelsByParams(string client = null, DateTime? minDateTime = null, DateTime? maxDateTime = null, string address = null)
         {
             List<OrdersDTO> ordersDTOs;
@@ -65,8 +65,15 @@ namespace TradeCompany_BLL
         }
         public void AddOrderList(List<OrderListModel> orderListModels)
         {
-            List<OrderListsDTO> order = _mapsModelTo.MapOrderListModelToOrderDTO(orderListModels);
+            List<OrderListsDTO> order = _mapsModelToDTO.MapOrderListModelToOrderDTO(orderListModels);
             _ordersData.AddOrderList(order);
         }
+        public void AddOrder(OrderModel orderModel)
+        {
+            OrdersDTO ordersDTO= new OrdersDTO();
+            ordersDTO = _mapsModelToDTO.MapOrderModelToOrdersDTO(orderModel);
+            _ordersData.AddOrder(ordersDTO);
+        }
+
     }
 }
