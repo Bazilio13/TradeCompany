@@ -1,4 +1,4 @@
-﻿<Page x:Class="TradeCompany_UI.Clients"
+﻿ <Page x:Class="TradeCompany_UI.Clients"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -23,6 +23,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Binding ="{Binding Path = ID}"  IsReadOnly="True" Header="id" Width="30"/>
                 <DataGridTextColumn Binding ="{Binding Path = Name}"  IsReadOnly="True" Header="ФИО/Название" Width="200"/>
+                <DataGridTextColumn Binding ="{Binding Path = ContactPerson}"  IsReadOnly="True" Header="Контактное лицо" Width="200"/>
                 <DataGridTextColumn Binding ="{Binding Path = Phone}" IsReadOnly="True" Header="Телефон" Width="200"/>
                 <DataGridTextColumn Binding ="{Binding Path = E_mail}" IsReadOnly="True" Header="Email" Width="200" />
                 <DataGridTextColumn Binding ="{Binding Path = LastOrderDate}" IsReadOnly="True" Header="Дата последнего заказа" Width="*"/>

@@ -10,13 +10,13 @@ namespace TradeCompany_BLL.Models
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public int? INN { get; set; }
+        public string INN { get; set; }
         public string E_mail { get; set; }
         public string Phone { get; set; }
         public string ContactPerson { get; set; }
         public string Comment { get; set; }
         public bool Type { get; set; }
         public bool CorporateBody { get; set; }
-        public DateTime LastOrderDate { get; set; }
+        public DateTime? LastOrderDate { get; set; }
     }
 }

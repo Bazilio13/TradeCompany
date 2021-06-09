@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ namespace TradeCompany_BLL
         private ProductsData _productsData = new ProductsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
 
         private MapsDTOtoModel _map = new MapsDTOtoModel();
+
         private MapsModelToDTO _mapsModelTo = new MapsModelToDTO();
         public List<OrderModel> GetOrderModelsByParams(string client = null, DateTime? minDateTime = null, DateTime? maxDateTime = null, string address = null)
         {
@@ -32,6 +34,16 @@ namespace TradeCompany_BLL
             List<OrderModel> orderModels = _map.MapOrdersDTOToOrderModel(ordersDTOs);
             return orderModels;
         }
+
+
+        public List<OrderModel> GetOrderModelsByClientID(int id)
+        {
+            List<OrdersDTO> ordersDTOs;
+            ordersDTOs = _ordersData.GetOrdersByClientID(id);
+            List<OrderModel> orderModels = _map.MapOrdersDTOToOrderModel(ordersDTOs);
+            return orderModels;
+        }
+
 
         public List<OrderModel> GetOrderById(int id)
         {

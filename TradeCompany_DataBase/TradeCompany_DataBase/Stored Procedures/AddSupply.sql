@@ -1,5 +1,9 @@
 ﻿CREATE PROCEDURE [TradeCompany_DataBase].[AddSupply]
-	@Datetime datetime
+	@Datetime DateTime,
+	@Comment nvarchar(500)
+
 AS
-	insert into Supplies (Datetime)
-	values(@Datetime)
+	insert into Supplies (DateTime, Comment)
+	values(@Datetime, @Comment)
+
+	Select SCOPE_IDENTITY()

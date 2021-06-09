@@ -22,15 +22,19 @@ namespace TradeCompany_UI
     /// </summary>
     public partial class Clients : Page
     {
+
+        private ClientsDataAccess _clientsData;
+
         public Clients()
         {
             InitializeComponent();
+            _clientsData = new ClientsDataAccess();
         }
 
         private void Border_Loaded(object sender, RoutedEventArgs e)
         {
             MapsDTOtoModel map = new MapsDTOtoModel();
-            dgClientsTable.ItemsSource = map.MapClientDTOToClientBaseModelList();
+            dgClientsTable.ItemsSource = _clientsData.GetClients();
         }
 
         private void dgAllClientsTable_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
@@ -49,24 +53,18 @@ namespace TradeCompany_UI
             MapsDTOtoModel map = new MapsDTOtoModel();
             if (ClientFiltr.Text == "")
             {
-                dgClientsTable.ItemsSource = map.MapClientDTOToClientBaseModelList();
-
+                dgClientsTable.ItemsSource = _clientsData.GetClients();
             }
             else
             {
-                dgClientsTable.ItemsSource = map.MapClientDTOToClientBaseModelListByName(ClientFiltr.Text + e.Text);
+                dgClientsTable.ItemsSource = _clientsData.GetClientsBySearch(ClientFiltr.Text + e.Text);
             }
         }
-
-
-
-
 
         private void ClientsFiltr(object sender, RoutedEventArgs e)
         {
             int? person = null;
             int? sale = null;
-            MapsDTOtoModel map = new MapsDTOtoModel();
             if (CheckBoxF.IsChecked != CheckBoxU.IsChecked)
             {
                 if(CheckBoxF.IsChecked == true)
@@ -81,7 +79,6 @@ namespace TradeCompany_UI
             if (CheckBoxOpt.IsChecked != CheckBoxRetail.IsChecked)
             {
                 if (CheckBoxOpt.IsChecked == true)
-
                 {
                     sale = 1;
                 }
@@ -90,11 +87,16 @@ namespace TradeCompany_UI
                     sale = 0;
                 }
             }
-            dgClientsTable.ItemsSource = map.MapClientDTOToClientBaseModelListByParam(person, sale, MinDate.SelectedDate, MaxDate.SelectedDate);
+            DateTime? maxDate = null;
+            if (MaxDate.SelectedDate != null)
+            {
+                DateTime timeTmp = (DateTime)MaxDate.SelectedDate;
+                timeTmp = timeTmp.AddDays(1);
+                timeTmp = timeTmp.AddMilliseconds(-1);
+                maxDate = (DateTime?)timeTmp;
+            }
+            dgClientsTable.ItemsSource = _clientsData.GetClientsByParam(person, sale, MinDate.SelectedDate, maxDate);
         }
-
-
-
 
         private void ButtonFiltr_Click(object sender, RoutedEventArgs e)
         {
@@ -112,8 +114,11 @@ namespace TradeCompany_UI
         {
             DataGrid dg = (DataGrid)sender;
             ClientBaseModel item = (ClientBaseModel)dg.CurrentItem;
-            int id = item.ID;
-            frame.Content = new OneClient(id);
+            if(item != null)
+            {
+                int id = item.ID;
+                frame.Content = new OneClient(id);
+            }
         }
 
         private void AddNewClient(object sender, RoutedEventArgs e)

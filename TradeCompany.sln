@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TradeCompany_TMPForTests", 
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "TradeCompany_DataBase", "TradeCompany_DataBase\TradeCompany_DataBase.sqlproj", "{433E903B-E651-4EA9-B5F2-238437442A20}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradeCompany_BLL.Tests", "TradeCompany_BLL.Tests\TradeCompany_BLL.Tests.csproj", "{5F6D6EBF-1EB6-4586-AF25-082D4314207B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{433E903B-E651-4EA9-B5F2-238437442A20}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{433E903B-E651-4EA9-B5F2-238437442A20}.Release|Any CPU.Build.0 = Release|Any CPU
 		{433E903B-E651-4EA9-B5F2-238437442A20}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{5F6D6EBF-1EB6-4586-AF25-082D4314207B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F6D6EBF-1EB6-4586-AF25-082D4314207B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F6D6EBF-1EB6-4586-AF25-082D4314207B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F6D6EBF-1EB6-4586-AF25-082D4314207B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

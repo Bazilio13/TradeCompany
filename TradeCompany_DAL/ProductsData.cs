@@ -57,6 +57,58 @@ namespace TradeCompany_DAL
             return products;
         }
 
+        public List<ProductDTO> GetProductsByAllParams(string inputString, int? ProductGroupID, float? fromStockAmount, float? toStockAmount,
+            float? fromWholesalePrice, float? toWholesalePrice, float? fromRetailPrice, float? toRetailPrice,
+            DateTime? minDateTime, DateTime? maxDateTime)
+        {
+            List<ProductDTO> products = new List<ProductDTO>();
+            string query;
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                query = "exec TradeCompany_DataBase.GetProductsByAllParams @InputString, @ProductGroupID, " +
+                    "@FromStockAmount, @ToStockAmount, @FromWholesalePrice, @ToWholesalePrice, @FromRetailPrice, " +
+                    "@ToRetailPrice, @MinDateTime, @MaxDateTime";
+                dbConnection.Query<ProductDTO, ProductGroupDTO, ProductDTO>(query,
+                    (product, group) =>
+                    {
+                        ProductDTO crntProduct = null;
+                        foreach (var p in products)
+                        {
+                            if (p.ID == product.ID)
+                            {
+                                crntProduct = p;
+                                break;
+                            }
+                        }
+                        if (crntProduct is null)
+                        {
+                            crntProduct = product;
+                            products.Add(crntProduct);
+                        }
+                        if (!(group is null))
+                        {
+                            crntProduct.Group.Add(group);
+                        }
+                        return crntProduct;
+                    },
+                    new
+                    {
+                        inputString,
+                        ProductGroupID,
+                        fromStockAmount,
+                        toStockAmount,
+                        fromWholesalePrice,
+                        toWholesalePrice,
+                        fromRetailPrice,
+                        toRetailPrice,
+                        minDateTime,
+                        maxDateTime
+                    },
+                    splitOn: "ID");
+            }
+            return products;
+        }
+
         public ProductDTO GetProductByID(int id)
         {
             List<ProductDTO> products = new List<ProductDTO>();
@@ -85,40 +137,40 @@ namespace TradeCompany_DAL
         }
 
 
-        public List<ProductDTO> GetProductsByLetter(string inputString)
-        {
-            List<ProductDTO> products = new List<ProductDTO>();
-            string query;
-            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
-            {
-                query = "exec TradeCompany_DataBase.GetProductByLetter @InputString";
-                dbConnection.Query<ProductDTO, ProductGroupDTO, ProductDTO>(query,
-                    (product, group) =>
-                    {
-                        ProductDTO crntProduct = null;
-                        foreach (var p in products)
-                        {
-                            if (p.ID == product.ID)
-                            {
-                                crntProduct = p;
-                                break;
-                            }
-                        }
-                        if (crntProduct is null)
-                        {
-                            crntProduct = product;
-                            products.Add(crntProduct);
-                        }
-                        if (!(group is null))
-                        {
-                            crntProduct.Group.Add(group);
-                        }
-                        return crntProduct;
-                    }, new { inputString },
-                    splitOn: "ID");
-            }
-            return products;
-        }
+        //public List<ProductDTO> GetProductsByLetter(string inputString)
+        //{
+        //    List<ProductDTO> products = new List<ProductDTO>();
+        //    string query;
+        //    using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+        //    {
+        //        query = "exec TradeCompany_DataBase.GetProductByLetter @InputString";
+        //        dbConnection.Query<ProductDTO, ProductGroupDTO, ProductDTO>(query,
+        //            (product, group) =>
+        //            {
+        //                ProductDTO crntProduct = null;
+        //                foreach (var p in products)
+        //                {
+        //                    if (p.ID == product.ID)
+        //                    {
+        //                        crntProduct = p;
+        //                        break;
+        //                    }
+        //                }
+        //                if (crntProduct is null)
+        //                {
+        //                    crntProduct = product;
+        //                    products.Add(crntProduct);
+        //                }
+        //                if (!(group is null))
+        //                {
+        //                    crntProduct.Group.Add(group);
+        //                }
+        //                return crntProduct;
+        //            }, new { inputString },
+        //            splitOn: "ID");
+        //    }
+        //    return products;
+        //}
 
         public void DeleteProductByID(int id)
         {
@@ -160,13 +212,13 @@ namespace TradeCompany_DAL
             }
         }
 
-        public void AddProductToProductGroup(int productID, int productGroupID)
+        public void AddProductToProductGroup(int id, int productGroupID)
         {
             string query;
             using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
             {
-                query = "exec TradeCompany_DataBase.AddProductToProductGroup @productID, @ProductGroupID";
-                dbConnection.Query(query, new { productID, productGroupID});
+                query = "exec TradeCompany_DataBase.AddProductToProductGroup @ID, @ProductGroupID";
+                dbConnection.Query(query, new { id, productGroupID});
             }
         }
 
@@ -189,6 +241,17 @@ namespace TradeCompany_DAL
                     product.Comments
                 });
             }
+        }
+
+        public List<MeasureUnitsDTO> GetAllMeasureUnits()
+        {
+            List<MeasureUnitsDTO> measureUnits = new List<MeasureUnitsDTO>();
+            string query = "exec TradeCompany_DataBase.GetAllMeasureUnits";
+            using(IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                measureUnits = dbConnection.Query<MeasureUnitsDTO>(query).AsList<MeasureUnitsDTO>();
+            }
+            return measureUnits;
         }
     }
 }

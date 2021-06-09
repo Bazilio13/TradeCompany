@@ -3,5 +3,5 @@
 	@ProductID int,
 	@Amount int
 AS
-	insert into SupplyLists values
-	(@SupplyID, @ProductID, @Amount)
+	insert into SupplyLists  (SupplyID, ProductID, Amount)
+	values (@SupplyID, @ProductID, @Amount)
