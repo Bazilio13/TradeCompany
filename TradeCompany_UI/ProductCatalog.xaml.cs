@@ -45,44 +45,17 @@ namespace TradeCompany_UI
             _products = new ProductsDataAccess();
             _previosPage = previosPage;
             dgProductCatalog.ItemsSource = _products.GetAllProducts();
-
             List<ProductGroupModel> allGroups = _products.GetAllGroups();
             ProductGroupSelect.ItemsSource = allGroups;
             ProductGroupSelect.DisplayMemberPath = "Name";
             ProductGroupSelect.Text = "";
         }
 
-        private void ProductButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void OrdersButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void ProductSearch_TextChange(object sender, TextChangedEventArgs e)
         {
-            if (ProductSearch.Text == "")
-            {
-                _filtrByText = null;
-                dgProductCatalog.ItemsSource = _products.GetAllProductsByAllParams(_filtrByText, _filtrByGategory, _filtrFromStockAmount, _filtrToStockAmount, _filtrFromWholesalePrice, _filtrToWholesalePrice, _filtrFromRetailPrice, _filtrToRetailPrice, _filtrMinDateTime, _filtrMaxDateTime);
-            }
-            else
-            {
-                _filtrByText = ProductSearch.Text;
-                dgProductCatalog.ItemsSource = _products.GetAllProductsByAllParams(_filtrByText, _filtrByGategory, _filtrFromStockAmount, _filtrToStockAmount, _filtrFromWholesalePrice, _filtrToWholesalePrice, _filtrFromRetailPrice, _filtrToRetailPrice, _filtrMinDateTime, _filtrMaxDateTime);
-            }
+            _filtrByText = ProductSearch.Text;
+            ApplyFilters();
         }
-
-
-        private void ApplyFiltersButton_Click(object sender, RoutedEventArgs e)
-        {
-           
-            dgProductCatalog.ItemsSource = _products.GetAllProductsByAllParams(_filtrByText, _filtrByGategory, _filtrFromStockAmount, _filtrToStockAmount, _filtrFromWholesalePrice, _filtrToWholesalePrice, _filtrFromRetailPrice, _filtrToRetailPrice, _filtrMinDateTime, _filtrMaxDateTime);
-        }
-
 
         private void ProductGroupSelect_DropDownClosed(object sender, EventArgs e)
         {
@@ -101,26 +74,31 @@ namespace TradeCompany_UI
                     }
                 }
             }
+            ApplyFilters();
         }
 
         private void FromStockAmount_TextChange(object sender, TextChangedEventArgs e)
         {
             _filtrFromStockAmount = InputValidation(_filtrFromStockAmount, FromStockAmount);
+            ApplyFilters();
         }
 
         private void ToStockAmount_TextChange(object sender, TextChangedEventArgs e)
         {
             _filtrToStockAmount = InputValidation(_filtrToStockAmount, ToStockAmount);
+            ApplyFilters();
         }
 
         private void FromPrice_TextChange(object sender, TextChangedEventArgs e)
         {
             SetUpPriceFilters();
+            ApplyFilters();
         }
 
         private void ToPrice_TextChange(object sender, TextChangedEventArgs e)
         {
             SetUpPriceFilters();
+            ApplyFilters();
         }
 
         private void RadioButtonRetailPrice_Checked(object sender, RoutedEventArgs e)
@@ -141,6 +119,7 @@ namespace TradeCompany_UI
         {
             CheckDates();
             _filtrMinDateTime = DateFrom.SelectedDate;
+            ApplyFilters();
         }
 
         private void DateUntil_SelectedDateChange(object sender, SelectionChangedEventArgs e)
@@ -153,7 +132,7 @@ namespace TradeCompany_UI
                 timeTmp = timeTmp.AddMilliseconds(-1);
                 _filtrMaxDateTime = (DateTime?)timeTmp;
             }
-            
+            ApplyFilters();
         }
 
         private void ResetFiltersButton_Click(object sender, RoutedEventArgs e)
@@ -184,7 +163,12 @@ namespace TradeCompany_UI
 
         private void AddProductButton_Click(object sender, RoutedEventArgs e)
         {
-            _uiNavi.GoToThePage(new AddNewProduct(_previosPage));
+            _uiNavi.GoToThePage(new AddNewProduct(this));
+        }
+
+        public void ApplyFilters()
+        {
+            dgProductCatalog.ItemsSource = _products.GetAllProductsByAllParams(_filtrByText, _filtrByGategory, _filtrFromStockAmount, _filtrToStockAmount, _filtrFromWholesalePrice, _filtrToWholesalePrice, _filtrFromRetailPrice, _filtrToRetailPrice, _filtrMinDateTime, _filtrMaxDateTime);
         }
 
         private float? InputValidation(float? filtr, TextBox textbox)
@@ -204,18 +188,22 @@ namespace TradeCompany_UI
                     {
                         filtr = (float)Convert.ToDouble(textbox.Text);
                     }
-                    catch (FormatException ex)
+                    catch (Exception)
                     {
+                        filtr = null;
                         textbox.Text = "";
                         MessageBox.Show("Неверный ввод");
                     }
                 }
+                //float tmp = filtr;
+                //if(float.IsInfinity(filtr))
 
                 return filtr;
             }
 
             return filtr;
         }  
+
         private void SetUpPriceFilters()
         {
             if (RadioButtonRetailPrice.IsChecked == true)
@@ -264,38 +252,23 @@ namespace TradeCompany_UI
 
         private void PricesTextBoxesEnabled(bool isChecked)
         {
-            if (isChecked)
-            {
-                FromPrice.IsEnabled = true;
-                ToPrice.IsEnabled = true;
-            }
-            else
-            {
-                FromPrice.IsEnabled = false;
-                ToPrice.IsEnabled = false;
-            }
+            FromPrice.IsEnabled = isChecked;
+            ToPrice.IsEnabled = isChecked;
         }
 
-        private void dgProductCatalog_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            DataGrid dg = (DataGrid)sender;
-            ProductBaseModel item = (ProductBaseModel)dg.CurrentItem;
-            if (item != null)
-            {
-                int id = item.ID;
-                frame.Content = new SelectedProductPage();
-                MessageBox.Show("kjdfvh");
-            }
-        }
 
         private void dgProductCatalog_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            ProductBaseModel productBaseModel = (ProductBaseModel)dgProductCatalog.SelectedItem;
             if (_previosPage is IProductAddable)
             {
-                ProductBaseModel productBaseModel = (ProductBaseModel)dgProductCatalog.SelectedItem;
                 IProductAddable productAddable = (IProductAddable)_previosPage;
                 productAddable.AddProductToCollection(productBaseModel.ID, productBaseModel.Name, productBaseModel.MeasureUnitName, productBaseModel.Groups);
                 _uiNavi.GoToThePage(_previosPage);
+            }
+            else
+            {
+                _uiNavi.GoToThePage(new AddNewProduct(productBaseModel.ID, this));
             }
         }
     }

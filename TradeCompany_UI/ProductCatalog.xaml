@@ -4,12 +4,11 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TradeCompany_UI"
-      mc:Ignorable="d" 
-      d:DesignHeight="500"
-      Title="ProductCatalog" Width="869">
+      mc:Ignorable="d"
+      Title="ProductCatalog" Width="869" Height="602">
 
-    
-        <Grid Background="#F9F9F9">
+
+    <Grid Background="#F9F9F9">
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
@@ -25,7 +24,7 @@
                     <Button x:Name="AddProduct"  DockPanel.Dock="Right" Content="Добавить товар" Click="AddProductButton_Click" HorizontalAlignment="Right"/>
                 </DockPanel>
 
-                <DataGrid x:Name="dgProductCatalog" Width="571" AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <DataGrid x:Name="dgProductCatalog" Width="571" AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" HorizontalAlignment="Left" VerticalAlignment="Top" MouseDoubleClick="dgProductCatalog_MouseDoubleClick">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding ="{Binding Path = ID}" IsReadOnly="True" Header="ID" Width="58"/>
                         <DataGridTextColumn Binding ="{Binding Path = Name}"  IsReadOnly="True" Header="Наименование" Width="103"/>
@@ -79,13 +78,10 @@
                         <TextBox x:Name="FromPrice" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Width="80" Height="20" VerticalContentAlignment="Center" Text="" TextAlignment="Center" TextChanged="FromPrice_TextChange" IsEnabled="False"/>
                     </StackPanel>
                 </DockPanel>
-
-                <Button x:Name="ApplyFilters" Content="Применить фильтры" HorizontalAlignment="Center" Click="ApplyFiltersButton_Click" Margin="0,0,0,14"/>
                 <Button x:Name="ResetFilters" Content="Сбросить фильтры" HorizontalAlignment="Center" Click="ResetFiltersButton_Click"/>
             </StackPanel>
         </DockPanel>
 
-        <Frame x:Name="frame" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" VerticalAlignment="Top"  Panel.ZIndex="0" Grid.ColumnSpan="2" Width="1000" Height="700" Grid.RowSpan="2"/>
     </Grid>
-    
+
 </Page>
