@@ -9,40 +9,76 @@
       Title="Clients">
 
 
-    <Grid Background="WhiteSmoke" Margin="10px">
+    <Grid Background="#F9F9F9">
         <Grid.RowDefinitions>
-            <RowDefinition Height="100px"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBox   x:Name="ClientFiltr" Grid.Row="0" Margin="10,10,0,0"  TextWrapping="Wrap" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="464" TextInput="textInput" PreviewTextInput="textInput"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="250"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
 
-        <DatePicker Name="MinDate" Grid.Row="0" HorizontalAlignment="Left" Margin="10,65,0,0" VerticalAlignment="Top" Height="25" Width="100" Panel.ZIndex="1" CalendarClosed="ClientsFiltr"/>
-        <DatePicker Name="MaxDate" Grid.Row="0" HorizontalAlignment="Left" Margin="130,65,0,0" VerticalAlignment="Top" Height="25" Width="100" Panel.ZIndex="1" CalendarClosed="ClientsFiltr"/>
+        <ScrollViewer>
+            <StackPanel Grid.Column="0" Orientation="Vertical" Margin="20,70,20,0">
+                <DockPanel Margin="0,0,0,20">
+                    <Image Source="Pictures/search.png" Width="29" Height="29" Margin="0,5,0,0"></Image>
+                    <TextBox x:Name="ClientFiltr" DockPanel.Dock="Left" BorderBrush="#6E304B" Background="#F9F9F9" Width="191" Height="22" TextInput="textInput" PreviewTextInput="textInput" HorizontalContentAlignment="Left" BorderThickness="0,0,0,1"/>
+                    <Button x:Name="ButtonNewClient" DockPanel.Dock="Right" Content="Новый клиент" Click="AddNewClient" HorizontalAlignment="Right"/>                    
+                </DockPanel>
 
-        <DataGrid x:Name="dgClientsTable" FontSize="16"  AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" Grid.Row="1" SelectionMode="Single" MouseLeftButtonDown="dgClientsTable_MouseLeftButtonDown">
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding ="{Binding Path = ID}"  IsReadOnly="True" Header="id" Width="30"/>
-                <DataGridTextColumn Binding ="{Binding Path = Name}"  IsReadOnly="True" Header="ФИО/Название" Width="200"/>
-                <DataGridTextColumn Binding ="{Binding Path = ContactPerson}"  IsReadOnly="True" Header="Контактное лицо" Width="200"/>
-                <DataGridTextColumn Binding ="{Binding Path = Phone}" IsReadOnly="True" Header="Телефон" Width="200"/>
-                <DataGridTextColumn Binding ="{Binding Path = E_mail}" IsReadOnly="True" Header="Email" Width="200" />
-                <DataGridTextColumn Binding ="{Binding Path = LastOrderDate}" IsReadOnly="True" Header="Дата последнего заказа" Width="*"/>
-            </DataGrid.Columns>
-        </DataGrid>
-        <Button Content="Сбросить фильтр" Grid.Row="0" HorizontalAlignment="Left" Margin="531,54,0,0" VerticalAlignment="Top" Height="36" Width="117" Click="ButtonFiltr_Click" Panel.ZIndex="1"/>
+                <DataGrid x:Name="dgClientsTable" FontSize="16"  AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" Grid.Row="1" SelectionMode="Single" MouseLeftButtonDown="dgClientsTable_MouseLeftButtonDown">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding ="{Binding Path = ID}"  IsReadOnly="True" Header="id" Width="30"/>
+                        <DataGridTextColumn Binding ="{Binding Path = Name}"  IsReadOnly="True" Header="ФИО/Название" Width="200"/>
+                        <DataGridTextColumn Binding ="{Binding Path = ContactPerson}"  IsReadOnly="True" Header="Контактное лицо" Width="200"/>
+                        <DataGridTextColumn Binding ="{Binding Path = Phone}" IsReadOnly="True" Header="Телефон" Width="200"/>
+                        <DataGridTextColumn Binding ="{Binding Path = E_mail}" IsReadOnly="True" Header="Email" Width="200" />
+                        <DataGridTextColumn Binding ="{Binding Path = LastOrderDate}" IsReadOnly="True" Header="Дата последнего заказа" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </ScrollViewer>
 
-        <Border BorderThickness="1" BorderBrush="Black" Loaded="Border_Loaded"/>
-        <StackPanel Margin="254,56,390,10" Grid.Row="0">
-            <CheckBox x:Name="CheckBoxF" Content="Физическое лицо" Click="ClientsFiltr"/>
-            <CheckBox x:Name="CheckBoxU" Content="Юридическое лицо" Click="ClientsFiltr"/>
-        </StackPanel>
+        <DockPanel  Grid.Column="1" Margin="0,70,0,0" Width="221">
+            <StackPanel DockPanel.Dock="Left" Width="4">
+                <Line X1="0" Y1="20" X2="0" Y2="540" Stroke="#6E304B" StrokeThickness="2"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Width="188" DockPanel.Dock="Right" Margin="29,0,0,0">
+                <TextBlock HorizontalAlignment="Center" FontSize="18" FontWeight="Bold" Margin="0,0,0,35">Фильтр</TextBlock>
 
-        <StackPanel  Margin="420,56,224,10" Grid.Row="0" >
-            <CheckBox x:Name="CheckBoxOpt" Content="Оптовый" Click="ClientsFiltr"/>
-            <CheckBox x:Name="CheckBoxRetail" Content="Розничный" Click="ClientsFiltr"/>
-        </StackPanel>
+                <StackPanel Margin="0,0,0,24">
+                    <TextBlock Margin="0,0,0,6" HorizontalAlignment="Center">Тип клиента:</TextBlock>
+                    <StackPanel HorizontalAlignment="Center">
+                        <CheckBox x:Name="CheckBoxF" Content="Физическое лицо" Click="ClientsFiltr"/>
+                        <CheckBox x:Name="CheckBoxU" Content="Юридическое лицо" Click="ClientsFiltr"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Margin="0,0,0,33">
+                    <TextBlock Margin="0,0,0,6" HorizontalAlignment="Center">Тип заказа:</TextBlock>
+                    <StackPanel HorizontalAlignment="Center">
+                        <CheckBox x:Name="CheckBoxOpt" Content="Розница" Click="ClientsFiltr"/>
+                        <CheckBox x:Name="CheckBoxRetail" Content="Опт" Click="ClientsFiltr"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,0,0,100">
+                    <DockPanel>
+                        <TextBlock HorizontalAlignment="Center" Height="25" Margin="0,5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="10"><Run Language="ru-ru" Text="С"/></TextBlock>
+                        <DatePicker x:Name="MinDate" HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Top" Height="25" Width="100" SelectedDateChanged="ClientsFiltr"/>
+                    </DockPanel>
+                    <DockPanel>
+                        <TextBlock HorizontalAlignment="Left" Height="25" Margin="0,5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="20"><Run Language="ru-ru" Text="По"/></TextBlock>
+                        <DatePicker Name="MaxDate" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="25" Width="100" SelectedDateChanged="ClientsFiltr"/>
+                    </DockPanel>
+                </StackPanel>
+
+                <Button x:Name="ApplyFilters" Content="Применить фильтры" HorizontalAlignment="Center" Margin="0,0,0,14"/>
+                <Button x:Name="ResetFilters" Content="Сбросить фильтр" HorizontalAlignment="Center" Click="ButtonFiltr_Click"/>
+            </StackPanel>
+        </DockPanel>
         <Frame Name="frame" NavigationUIVisibility="Hidden" Grid.RowSpan="2" Panel.ZIndex="2"/>
-        <Button x:Name="ButtonNewClient" Content="Новый клиент" HorizontalAlignment="Left" Margin="531,10,0,0" VerticalAlignment="Top" Width="117" Height="32" Click="AddNewClient"/>
+        
     </Grid>
 
 </Page>
