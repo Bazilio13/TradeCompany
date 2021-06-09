@@ -31,7 +31,6 @@ namespace TradeCompany_UI
             {
                 StackPanel.Children.Add(new CheckBox {Name = @"i", Content = _chosenGroups[i].Name });;
             }
-            
         }
 
         private void Accept_Click(object sender, RoutedEventArgs e)

@@ -169,6 +169,16 @@ namespace TradeCompany_BLL
             return productBaseModel;
         }
 
+        public List<ProductModel> MapProductDTOToProductModel(List<ProductDTO> productDTO)
+        {
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<ProductDTO, ProductModel>()
+            .ForMember(dest => dest.Groups, option => option.MapFrom(sorse => MapProductGroupDTOToProductGroupModel(sorse.Group))));
+            Mapper mapper = new Mapper(config);
+            List<ProductModel> productModel = mapper.Map<List<ProductModel>>(productDTO);
+            return productModel;
+        }
+
+
         public List<ProductGroupModel> MapProductGroupDTOToProductGroupModel(List<ProductGroupDTO> groupDTO)
         {
             var config = new MapperConfiguration(cfg => cfg.CreateMap<ProductGroupDTO, ProductGroupModel>()
@@ -194,5 +204,7 @@ namespace TradeCompany_BLL
             List<MeasureUnitsModel> measureUnitsModels = mapper.Map<List<MeasureUnitsModel>>(measureUnits);
             return measureUnitsModels;
         }
+
+
     }
 }
