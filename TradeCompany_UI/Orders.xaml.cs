@@ -107,7 +107,7 @@ namespace TradeCompany_UI
         {
             if (dgOrders.CurrentItem != null)
             {
-                TextBlock textBlock = (TextBlock)e.OriginalSource;
+                TextBlock textBlock = (TextBlock)e.OriginalSource; //вылетает ошибка , когда не правильно кликается 
                 OrderModel crntModel = (OrderModel)textBlock.DataContext;
                 _uiNavi.GoToThePage(new SpecificOrder(crntModel.ID));
             }

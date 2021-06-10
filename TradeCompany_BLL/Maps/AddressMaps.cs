@@ -33,5 +33,13 @@ namespace TradeCompany_BLL.Maps
             return addressModel;
 
         }
+        public List<AddressModel> MapListAdressDTOTOListAdressModel(List<AddressDTO> addressDTO)
+        {
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<AddressDTO, AddressModel>());
+            Mapper mapper = new Mapper(config);
+            List<AddressModel> addressModels;
+            addressModels = mapper.Map<List<AddressModel>>(addressDTO);
+            return addressModels;
+        }
     }
 }

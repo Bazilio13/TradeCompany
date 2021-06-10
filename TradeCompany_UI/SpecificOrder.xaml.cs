@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TradeCompany_BLL;
+using TradeCompany_BLL.DataAccess;
 using TradeCompany_BLL.Models;
 using TradeCompany_DAL;
 using TradeCompany_DAL.DTOs;
@@ -40,15 +41,16 @@ namespace TradeCompany_UI
 
 
         private List<OrderListModel> listOfProductForOrder = new List<OrderListModel>();
-        private List<AddressModel> listOAddressModel = new List<AddressModel>();
+        public List<AddressModel> listOAddressModel = new List<AddressModel>();
+
         BindingList<OrderListModel> bgOrderListModels = new BindingList<OrderListModel>();
         BindingList<AddressModel> cbAddressModel = new BindingList<AddressModel>();
 
        
         OrderDataAccess _orderDataAccess = new OrderDataAccess();
         ClientsDataAccess _clientsDataAccess = new ClientsDataAccess();
+        AddressesDataAccess _addressesDataAccess = new AddressesDataAccess();
 
-       
 
         private UINavi _uinavi;
 
@@ -71,7 +73,11 @@ namespace TradeCompany_UI
 
             _orderId = id;
 
+
             _infoAboutOrder = _orderDataAccess.GetOrderById(id).First();
+
+            _clientId = _infoAboutOrder.ClientsID;
+
 
             foreach (var item in _infoAboutOrder.OrderListModel)
             {
@@ -79,7 +85,9 @@ namespace TradeCompany_UI
             }
             GetInfoAboutClient();
             ShowInfoAboutClient();
-            
+            FillComboBoxAdress();
+
+
 
         }
         private void ShowInfoAboutClient()
@@ -111,7 +119,10 @@ namespace TradeCompany_UI
         
         private void FillComboBoxAdress()
         {
-            
+            listOAddressModel = _addressesDataAccess.GetAdressByClientID(_clientId);
+            cbAdress.ItemsSource = listOAddressModel;
+            cbAdress.DisplayMemberPath = "Address";
+            cbAdress.Text = "Адрес";         
         }
 
 
@@ -156,7 +167,7 @@ namespace TradeCompany_UI
                 newOrder.Client = ClientName.Text; // тут поменяется
                 newOrder.ClientsID = _clientsDataAccess.GetClientsBySearch(ClientName.Text).First().ID; 
                 newOrder.ClientsPhone = Phone.Text;
-                newOrder.Address = Adress.Text;
+                newOrder.Address = cbAdress.Text;
                
                 newOrder.Summ = CountOrderSumm();
 
@@ -214,6 +225,18 @@ namespace TradeCompany_UI
         private void ChooseClient_Click(object sender, RoutedEventArgs e)
         {
             _uinavi.GoToThePage(new Clients(this));
+        }
+
+        private void cbAdress_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (_orderId != 0)
+            {
+                cbAdress.SelectedIndex = 0;
+            }
+            else
+            {
+                //cbAdress.Text = "Адрес";
+            }
         }
     }
 }

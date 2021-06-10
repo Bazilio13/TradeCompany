@@ -25,7 +25,7 @@
             <Label Grid.Column="1" x:Name="Data" HorizontalAlignment="Left" Margin="52,19,0,0" Content="Дата" VerticalAlignment="Top" FontSize="15"/>
             <TextBlock Grid.Column="2" x:Name="ID" HorizontalAlignment="Left" Margin="58,19,0,0" Text="ID" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="15"/>
             <TextBlock x:Name="ClientName" Grid.Column="3" HorizontalAlignment="Left" Margin="47,5,0,0" Text="Клиент" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="15"/>
-            <ComboBox  Grid.Column="4" x:Name="cbAdress" HorizontalAlignment="Left" Height="26" Margin="37,0,0,0" VerticalAlignment="Center" Width="94" />
+            <ComboBox  Grid.Column="4" x:Name="cbAdress"  HorizontalAlignment="Left" Height="26" Margin="14,28,0,0" VerticalAlignment="Top" Width="94" IsSynchronizedWithCurrentItem="True" SelectedIndex="0" Loaded="cbAdress_Loaded" />
 
 
             <Grid Grid.Column="3">
@@ -37,6 +37,7 @@
 " TextWrapping="Wrap" VerticalAlignment="Center" FontSize="15"/>
             </Grid>
             <Button x:Name="ChooseClient" Content="Выбрать клиента" Margin="10" FontSize="12" Click="ChooseClient_Click"/>
+            <Label Content="Адрес:" Grid.Column="4" HorizontalAlignment="Left" Height="25" Margin="9,4,0,0" VerticalAlignment="Top" Width="100"/>
         </Grid>
 
         <DataGrid x:Name="dgSpecificOrder" FontSize="15" Margin="26,34,34,26" Loaded="dgSpecificOrder_Loaded" Grid.Row="1" AutoGenerateColumns="False" RowEditEnding="dgSpecificOrder_RowEditEnding"  >
