@@ -139,6 +139,8 @@
     <Build Include="TradeCompany_DataBase\Stored Procedures\SearchSupplys.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\DeleteSupplyListsBySupplyID.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\GetAllMeasureUnits.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\SoftDeleteProductByID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetLastProductID.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="TradeCompany_DataBase.refactorlog" />

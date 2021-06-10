@@ -271,5 +271,7 @@ namespace TradeCompany_UI
                 _uiNavi.GoToThePage(new AddNewProduct(productBaseModel.ID, this));
             }
         }
+
+        
     }
 }

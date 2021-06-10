@@ -24,7 +24,8 @@
                     <Button x:Name="AddProduct"  DockPanel.Dock="Right" Content="Добавить товар" Click="AddProductButton_Click" HorizontalAlignment="Right"/>
                 </DockPanel>
 
-                <DataGrid x:Name="dgProductCatalog" Width="571" AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" HorizontalAlignment="Left" VerticalAlignment="Top" MouseDoubleClick="dgProductCatalog_MouseDoubleClick">
+                <DataGrid x:Name="dgProductCatalog" Width="571" AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" HorizontalAlignment="Left" VerticalAlignment="Top" MouseDoubleClick="dgProductCatalog_MouseDoubleClick" ScrollViewer.CanContentScroll="True">
+                    
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding ="{Binding Path = ID}" IsReadOnly="True" Header="ID" Width="58"/>
                         <DataGridTextColumn Binding ="{Binding Path = Name}"  IsReadOnly="True" Header="Наименование" Width="103"/>
@@ -43,19 +44,15 @@
                 <Line X1="0" Y1="20" X2="0" Y2="540" Stroke="#6E304B" StrokeThickness="2"/>
             </StackPanel>
 
-            <StackPanel Orientation="Vertical" Width="188" DockPanel.Dock="Right" Margin="29,0,0,0">
+            <StackPanel Orientation="Vertical" Width="173" DockPanel.Dock="Right" Margin="0,0,0,0" Height="467">
                 <TextBlock HorizontalAlignment="Center" FontSize="18" FontWeight="Bold" Margin="0,0,0,35">Фильтр</TextBlock>
+                <TextBlock Text="Выбор категории:" TextWrapping="Wrap" Width="149"/>
 
                 <ComboBox x:Name="ProductGroupSelect" HorizontalAlignment="Center" Margin="0,0,0,33" SelectedIndex="0" Height="22" Width="150" DropDownClosed="ProductGroupSelect_DropDownClosed" Grid.RowSpan="2" IsEditable="True"/>
-                <StackPanel Width="78" HorizontalAlignment="Left" Margin="24,0,0,30">
-                    <RadioButton x:Name="RadioButtonRetailPrice" Content="Розница" Height="16" Width="82" Checked="RadioButtonRetailPrice_Checked" HorizontalAlignment="Left"/>
-                    <RadioButton x:Name="RadioButtonWholesalePrice" Content="Опт" Height="16" Width="50" Checked="RadioButtonWholesalePrice_Checked" HorizontalAlignment="Left"/>
-                </StackPanel>
+                <DatePicker x:Name="DateFrom"  HorizontalAlignment="Center" Margin="0,0,0,17" RenderTransformOrigin="0.309,-0.578" Height="27" Width="114" SelectedDateChanged="DateFrom_SelectedDateChange"/>
+                <DatePicker x:Name="DateUntil"  HorizontalAlignment="Center" Margin="0,0,0,30" Height="27" Width="114" SelectedDateChanged="DateUntil_SelectedDateChange"/>
 
-                <DatePicker x:Name="DateFrom"  HorizontalAlignment="Center" Margin="0,0,0,17" RenderTransformOrigin="0.309,-0.578" Height="22" Width="100" SelectedDateChanged="DateFrom_SelectedDateChange"/>
-                <DatePicker x:Name="DateUntil"  HorizontalAlignment="Center" Margin="0,0,0,30" Height="22" Width="100" SelectedDateChanged="DateUntil_SelectedDateChange"/>
-
-                <DockPanel  Margin="0,0,0,31">
+                <DockPanel  Margin="0,0,0,30">
                     <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" FontSize="14">Остаток:</TextBlock>
                     <StackPanel DockPanel.Dock="Right">
                         <TextBlock Margin="30,0,0,0">до</TextBlock>
@@ -66,8 +63,16 @@
                         <TextBox x:Name="FromStockAmount" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" VerticalContentAlignment="Center" TextAlignment="Center" Height="20" RenderTransformOrigin="0.219,0.561" TextChanged="FromStockAmount_TextChange"/>
                     </StackPanel>
                 </DockPanel>
+                <DockPanel  Margin="0,0,0,0" Height="20">
+                    <StackPanel Width="46" DockPanel.Dock="Left" Margin="15,0,0,0">
+                        <RadioButton x:Name="RadioButtonWholesalePrice" Content="Опт" Height="16" Width="50" Checked="RadioButtonWholesalePrice_Checked" HorizontalAlignment="Left"/>
+                    </StackPanel>
+                    <StackPanel Width="78" DockPanel.Dock="Right" Margin="25,0,0,0">
+                        <RadioButton x:Name="RadioButtonRetailPrice"  Content="Розница" Height="16" Width="76" Checked="RadioButtonRetailPrice_Checked"/>
+                    </StackPanel>
+                </DockPanel>
 
-                <DockPanel Margin="0,0,0,27">
+                <DockPanel Margin="0,0,0,30" Height="59">
                     <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center">Цена:</TextBlock>
                     <StackPanel DockPanel.Dock="Right">
                         <TextBlock Margin="30,0,0,0">до</TextBlock>
@@ -77,7 +82,7 @@
                         <TextBlock Margin="30,0,0,0">от</TextBlock>
                         <TextBox x:Name="FromPrice" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Width="80" Height="20" VerticalContentAlignment="Center" Text="" TextAlignment="Center" TextChanged="FromPrice_TextChange" IsEnabled="False"/>
                     </StackPanel>
-                </DockPanel>                
+                </DockPanel>
                 <Button x:Name="ResetFilters" Content="Сбросить фильтр" HorizontalAlignment="Center" Click="ResetFiltersButton_Click"/>
             </StackPanel>
         </DockPanel>
