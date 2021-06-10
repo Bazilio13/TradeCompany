@@ -52,7 +52,7 @@
                     <TextBox x:Name="ClientFiltr" TextWrapping="Wrap"  Height="25" VerticalAlignment="Top" HorizontalAlignment="Center" Width="180" TextChanged="ClientFiltr_TextChanged"/>
                 </StackPanel>
                 <StackPanel Orientation="Vertical" Margin="0,0,0,10" HorizontalAlignment="Center">
-                    <TextBlock HorizontalAlignment="Center" Margin="0,0,0,9" TextWrapping="Wrap" VerticalAlignment="Top" Width="40"><Run Language="ru-ru" Text="Адрес:"/></TextBlock>
+                    <TextBlock HorizontalAlignment="Center" Margin="0,0,0,9" TextWrapping="Wrap" VerticalAlignment="Top" Width="45"><Run Language="ru-ru" Text="Адрес:"/></TextBlock>
                     <TextBox x:Name="AddressFiltr" Margin="0,0,0,0" TextWrapping="Wrap"  Height="25" VerticalAlignment="Top" HorizontalAlignment="Center" Width="180" TextChanged="AddressFiltr_TextChanged"/>
                 </StackPanel>
                 

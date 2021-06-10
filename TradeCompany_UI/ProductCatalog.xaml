@@ -48,11 +48,18 @@
                 <TextBlock HorizontalAlignment="Center" FontSize="18" FontWeight="Bold" Margin="0,0,0,35">Фильтр</TextBlock>
                 <TextBlock Text="Выбор категории:" TextWrapping="Wrap" Width="149"/>
 
-                <ComboBox x:Name="ProductGroupSelect" HorizontalAlignment="Center" Margin="0,0,0,33" SelectedIndex="0" Height="22" Width="150" DropDownClosed="ProductGroupSelect_DropDownClosed" Grid.RowSpan="2" IsEditable="True"/>
-                <DatePicker x:Name="DateFrom"  HorizontalAlignment="Center" Margin="0,0,0,17" RenderTransformOrigin="0.309,-0.578" Height="27" Width="114" SelectedDateChanged="DateFrom_SelectedDateChange"/>
-                <DatePicker x:Name="DateUntil"  HorizontalAlignment="Center" Margin="0,0,0,30" Height="27" Width="114" SelectedDateChanged="DateUntil_SelectedDateChange"/>
+                <ComboBox x:Name="ProductGroupSelect" HorizontalAlignment="Center" Margin="0,0,0,33" SelectedIndex="0" Height="22" Width="150" DropDownClosed="ProductGroupSelect_DropDownClosed" Grid.RowSpan="2" IsEditable="True" />
+                <StackPanel Width="78" HorizontalAlignment="Left" Margin="24,0,0,30">
+                    <RadioButton x:Name="RadioButtonRetailPrice" Content="Розница" Height="16" Width="82" Checked="RadioButtonRetailPrice_Checked" HorizontalAlignment="Left"/>
+                    <RadioButton x:Name="RadioButtonWholesalePrice" Content="Опт" Height="16" Width="50" Checked="RadioButtonWholesalePrice_Checked" HorizontalAlignment="Left"/>
+                </StackPanel>
 
-                <DockPanel  Margin="0,0,0,30">
+                <DatePicker x:Name="DateFrom" HorizontalAlignment="Center" Margin="0,0,0,17" RenderTransformOrigin="0.309,-0.578" Height="28" Width="114" SelectedDateChanged="DateFrom_SelectedDateChange" BorderBrush="#FFF3DFC4" Background="#FFF3DFC4" Focusable="False">
+                    
+                </DatePicker>
+                <DatePicker x:Name="DateUntil"  HorizontalAlignment="Center" Margin="0,0,0,30" Height="27" Width="112" SelectedDateChanged="DateUntil_SelectedDateChange" BorderBrush="#FFF3DFC4" Background="#FFF3DFC4"/>
+
+                <DockPanel  Margin="0,0,0,31">
                     <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" FontSize="14">Остаток:</TextBlock>
                     <StackPanel DockPanel.Dock="Right">
                         <TextBlock Margin="30,0,0,0">до</TextBlock>

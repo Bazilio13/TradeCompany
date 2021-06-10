@@ -13,8 +13,8 @@
 
         <TextBox Name="textBoxName" HorizontalAlignment="Left" Margin="191,73,0,0" Text="Название" TextWrapping="Wrap" VerticalAlignment="Top" Width="424" Height="21"/>
         <TextBox Name ="textBoxINN" HorizontalAlignment="Left" Margin="191,103,0,0" Text="ИНН" TextWrapping="Wrap" VerticalAlignment="Top" Width="424" Height="21"/>
-        <TextBox Name ="textBoxPhone" HorizontalAlignment="Left" Margin="173,133,0,0" Text="Номер телефона" TextWrapping="Wrap" VerticalAlignment="Top" Width="205" Height="21"/>
-        <TextBox Name ="textBoxE_mail" HorizontalAlignment="Left" Margin="392,133,0,0" Text="E_mail" TextWrapping="Wrap" VerticalAlignment="Top" Width="205" Height="21"/>
+        <TextBox Name ="textBoxPhone" HorizontalAlignment="Left" Margin="191,133,0,0" Text="Номер телефона" TextWrapping="Wrap" VerticalAlignment="Top" Width="205" Height="21"/>
+        <TextBox Name ="textBoxE_mail" HorizontalAlignment="Left" Margin="410,133,0,0" Text="E_mail" TextWrapping="Wrap" VerticalAlignment="Top" Width="205" Height="21"/>
         <TextBox Name ="textBoxAddress" HorizontalAlignment="Left" Margin="191,163,0,0" Text="Адрес" TextWrapping="Wrap" VerticalAlignment="Top" Width="424" Height="21"/>
         <TextBox Name ="textBoxContactPerson" HorizontalAlignment="Left" Margin="191,193,0,0" Text="Контактное лицо" TextWrapping="Wrap" VerticalAlignment="Top" Width="424" Height="21"/>
         <TextBox Name ="textBoxFeedBacks" HorizontalAlignment="Left" Margin="191,223,0,0" Text="Отзывы" TextWrapping="Wrap" VerticalAlignment="Top" Width="424" Height="21"/>
