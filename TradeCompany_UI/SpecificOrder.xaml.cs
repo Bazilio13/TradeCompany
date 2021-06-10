@@ -2,22 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using TradeCompany_BLL;
 using TradeCompany_BLL.DataAccess;
 using TradeCompany_BLL.Models;
-using TradeCompany_DAL;
-using TradeCompany_DAL.DTOs;
 using TradeCompany_UI.Interfaces;
 
 namespace TradeCompany_UI
@@ -29,6 +18,9 @@ namespace TradeCompany_UI
     {
         private int _orderId;
         private int _clientId;
+        private int _addresId; // можно в Модельку оформить
+        private string _adress;
+
         private OrderModel newOrder;
         private OrderModel _infoAboutOrder;
         private OrderListModel specificProduct;
@@ -67,55 +59,52 @@ namespace TradeCompany_UI
         }
         public SpecificOrder(int id )
         {
-
             InitializeComponent();
+
             _uinavi = UINavi.GetUINavi();
+            GetOrderById(id);
 
-            _orderId = id;
+            GetInfoAboutClient();
+            ShowInfoAboutClient();
+            FillComboBoxAdress();
 
-
+        }
+        private void GetOrderById(int id)
+        {
             _infoAboutOrder = _orderDataAccess.GetOrderById(id).First();
 
+            _orderId = id;
             _clientId = _infoAboutOrder.ClientsID;
-
 
             foreach (var item in _infoAboutOrder.OrderListModel)
             {
                 bgOrderListModels.Add(item);
             }
-            GetInfoAboutClient();
-            ShowInfoAboutClient();
-            FillComboBoxAdress();
-
-
-
         }
+
         private void ShowInfoAboutClient()
         {
             ID.Text = "ID: " + _clientFullInfo.ID;
             ClientName.Text = _clientFullInfo.Name;
             Phone.Text = _clientFullInfo.Phone;
-            cbAdress.Text = _infoAboutOrder.Address;
+            
 
         }
        
-
-
         private void GetInfoAboutClient()
         {
             _clientFullInfo = new ClientModel();
             _clientAdress = new AddressModel();
 
-            dgSpecificOrder.ItemsSource = _infoAboutOrder.OrderListModel;
-            dgSpecificOrder.ItemsSource = bgOrderListModels;
             _clientFullInfo.ID = _infoAboutOrder.ID;
             _clientFullInfo.Name = _infoAboutOrder.Client;
             _clientFullInfo.Phone = _infoAboutOrder.ClientsPhone;
 
             _clientAdress.Address = _infoAboutOrder.Address;
             _clientAdress.ID = _infoAboutOrder.ID;
-            //cbAddressModel.Add(_clientAdress.Address);
+            
         }
+
         
         private void FillComboBoxAdress()
         {
@@ -128,18 +117,9 @@ namespace TradeCompany_UI
 
         private void dgSpecificOrder_Loaded(object sender, RoutedEventArgs e)
         {
-
-            //dgSpecificOrder.ItemsSource = _infoAboutOrder.OrderListModel;
             dgSpecificOrder.ItemsSource = bgOrderListModels;
 
-
         }
-
-        private void PlaceOrder_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-       
 
         private void dgSpecificOrder_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
         {
@@ -157,20 +137,21 @@ namespace TradeCompany_UI
 
             //listOfProductForOrder.Add(addedProduct);
         }
-        private void Refresh_Click(object sender, RoutedEventArgs e)
+        private void AddProductInOrder_Click(object sender, RoutedEventArgs e)
         {
             //добавить проверку на одинаковость добавляемого списка
             if (_orderId == 0)
             {
-                newOrder.OrderListModel = listOfProductForOrder; // возможно стоит конкретно добавить в список, а не ссылку делать
-                newOrder.DateTime = DateTime.Now;
-                newOrder.Client = ClientName.Text; // тут поменяется
-                newOrder.ClientsID = _clientsDataAccess.GetClientsBySearch(ClientName.Text).First().ID; 
-                newOrder.ClientsPhone = Phone.Text;
-                newOrder.Address = cbAdress.Text;
-               
-                newOrder.Summ = CountOrderSumm();
+                //newOrder.OrderListModel = listOfProductForOrder; // возможно стоит конкретно добавить в список, а не ссылку делать
+                //newOrder.DateTime = DateTime.Now;
+                //newOrder.Client = ClientName.Text; // тут поменяется
+                //newOrder.ClientsID = _clientsDataAccess.GetClientsBySearch(ClientName.Text).First().ID; 
+                //newOrder.ClientsPhone = Phone.Text;
+                //newOrder.Address = cbAdress.Text;
 
+                //newOrder.Summ = CountOrderSumm();
+
+                FillInfoAboutNewOrder();
                 _orderDataAccess.AddOrder(newOrder);
                 
             }
@@ -195,7 +176,6 @@ namespace TradeCompany_UI
         {
             _uinavi.GoToThePage(new ProductCatalog(this));
 
-
         }
 
         public void AddProductToCollection(ProductBaseModel productBaseModel)
@@ -219,12 +199,27 @@ namespace TradeCompany_UI
         {
             _clientId = clientBaseModel.ID;
             _clientFullInfo = _clientsDataAccess.GetClientByClientID(_clientId);
+            FillComboBoxAdress();
+            ShowInfoAboutClient();
+
+        }
+        private void FillInfoAboutNewOrder()
+        {
+            newOrder.DateTime = DateTime.Now; // возможно стоит переделать на календарь
+            newOrder.ClientsID = _clientId;
+            newOrder.Client = _clientFullInfo.Name;
+            newOrder.ClientsPhone = _clientFullInfo.Phone;
+            newOrder.Summ = CountOrderSumm();
+            newOrder.OrderListModel = listOfProductForOrder;
+            newOrder.AddressID = _addresId;
+            newOrder.Address = _adress;
 
         }
 
         private void ChooseClient_Click(object sender, RoutedEventArgs e)
         {
             _uinavi.GoToThePage(new Clients(this));
+
         }
 
         private void cbAdress_Loaded(object sender, RoutedEventArgs e)
@@ -233,10 +228,14 @@ namespace TradeCompany_UI
             {
                 cbAdress.SelectedIndex = 0;
             }
-            else
-            {
-                //cbAdress.Text = "Адрес";
-            }
+            
+        }
+
+        private void cbAdress_DropDownClosed(object sender, EventArgs e)
+        {
+            var addresInfo = (AddressModel)cbAdress.SelectedItem;
+            _addresId = addresInfo.ID;
+            _adress = addresInfo.Address;
         }
     }
 }
