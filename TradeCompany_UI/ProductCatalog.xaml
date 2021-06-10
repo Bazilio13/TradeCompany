@@ -52,8 +52,10 @@
                     <RadioButton x:Name="RadioButtonWholesalePrice" Content="Опт" Height="16" Width="50" Checked="RadioButtonWholesalePrice_Checked" HorizontalAlignment="Left"/>
                 </StackPanel>
 
-                <DatePicker x:Name="DateFrom"  HorizontalAlignment="Center" Margin="0,0,0,17" RenderTransformOrigin="0.309,-0.578" Height="22" Width="100" SelectedDateChanged="DateFrom_SelectedDateChange"/>
-                <DatePicker x:Name="DateUntil"  HorizontalAlignment="Center" Margin="0,0,0,30" Height="22" Width="100" SelectedDateChanged="DateUntil_SelectedDateChange"/>
+                <DatePicker x:Name="DateFrom" HorizontalAlignment="Center" Margin="0,0,0,17" RenderTransformOrigin="0.309,-0.578" Height="28" Width="114" SelectedDateChanged="DateFrom_SelectedDateChange" BorderBrush="#FFF3DFC4" Background="#FFF3DFC4" Focusable="False">
+                    
+                </DatePicker>
+                <DatePicker x:Name="DateUntil"  HorizontalAlignment="Center" Margin="0,0,0,30" Height="27" Width="112" SelectedDateChanged="DateUntil_SelectedDateChange" BorderBrush="#FFF3DFC4" Background="#FFF3DFC4"/>
 
                 <DockPanel  Margin="0,0,0,31">
                     <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" FontSize="14">Остаток:</TextBlock>
@@ -77,7 +79,7 @@
                         <TextBlock Margin="30,0,0,0">от</TextBlock>
                         <TextBox x:Name="FromPrice" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Width="80" Height="20" VerticalContentAlignment="Center" Text="" TextAlignment="Center" TextChanged="FromPrice_TextChange" IsEnabled="False"/>
                     </StackPanel>
-                </DockPanel>                
+                </DockPanel>
                 <Button x:Name="ResetFilters" Content="Сбросить фильтр" HorizontalAlignment="Center" Click="ResetFiltersButton_Click"/>
             </StackPanel>
         </DockPanel>

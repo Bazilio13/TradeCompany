@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Pictures\details.png" />
     <None Remove="Pictures\search.png" />
   </ItemGroup>
 
@@ -16,16 +17,21 @@
     <Page Remove="Styles\CheckBoxStyle.xaml" />
     <Page Remove="Styles\ComboBoxStyle.xaml" />
     <Page Remove="Styles\DataGridStyle.xaml" />
+    <Page Remove="Styles\DatePickerStyle.xaml" />
     <Page Remove="Styles\RadioButtonStyle.xaml" />
     <Page Remove="Styles\StyleDictionary.xaml" />
     <Page Remove="Styles\TextboxStyle.xaml" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Pictures\details.png" />
     <Resource Include="Styles\CheckBoxStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Resource>
     <Resource Include="Styles\ComboBoxStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Resource Include="Styles\DatePickerStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Resource>
     <Resource Include="Styles\RadioButtonStyle.xaml">
