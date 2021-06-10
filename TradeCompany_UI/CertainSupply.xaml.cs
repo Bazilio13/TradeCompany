@@ -65,13 +65,13 @@ namespace TradeCompany_UI
             }
         }
 
-        public void AddProductToCollection(int productID, string productName, string productMeasureUnit, List<ProductGroupModel> productGroupModels)
+        public void AddProductToCollection(ProductBaseModel productBaseModel)
         {
             SupplyListModel supplyListModel = new SupplyListModel();
-            supplyListModel.ProductID = productID;
-            supplyListModel.ProductMeasureUnit = productMeasureUnit;
-            supplyListModel.ProductName = productName;
-            supplyListModel.ProductGroups = productGroupModels;
+            supplyListModel.ProductID = productBaseModel.ID;
+            supplyListModel.ProductMeasureUnit = productBaseModel.MeasureUnitName;
+            supplyListModel.ProductName = productBaseModel.Name;
+            supplyListModel.ProductGroups = productBaseModel.Groups;
             _ocSupplyListModels.Add(supplyListModel);
         }
 
@@ -102,6 +102,7 @@ namespace TradeCompany_UI
 
         private void PotentialClients_Click(object sender, RoutedEventArgs e)
         {
+            _uiNavi.GoToThePage(new PotentialClients());
         }
 
         private void Save_Click(object sender, RoutedEventArgs e)
@@ -131,7 +132,7 @@ namespace TradeCompany_UI
             if (SupplysDate.SelectedDate is null)
             {
                 checkResult = false;
-                message = "не заполнена дата документа";
+                message = "Не заполнена дата документа";
             }
             if (_ocSupplyListModels.Count == 0)
             {
@@ -146,7 +147,7 @@ namespace TradeCompany_UI
                     {
                         checkResult = false;
 
-                        message += $"\nу Товара {supplyListModel.ProductName} не заполнено количество";
+                        message += $"\nУ товара {supplyListModel.ProductName} не заполнено количество";
                     }
                 }
             }
