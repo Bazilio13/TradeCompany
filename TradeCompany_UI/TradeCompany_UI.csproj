@@ -14,6 +14,7 @@
   <ItemGroup>
     <Page Remove="Styles\ButtonStyle.xaml" />
     <Page Remove="Styles\CheckBoxStyle.xaml" />
+    <Page Remove="Styles\ComboBoxStyle.xaml" />
     <Page Remove="Styles\DataGridStyle.xaml" />
     <Page Remove="Styles\RadioButtonStyle.xaml" />
     <Page Remove="Styles\StyleDictionary.xaml" />
@@ -22,6 +23,9 @@
 
   <ItemGroup>
     <Resource Include="Styles\CheckBoxStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Resource Include="Styles\ComboBoxStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Resource>
     <Resource Include="Styles\RadioButtonStyle.xaml">
