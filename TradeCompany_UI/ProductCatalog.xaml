@@ -17,7 +17,7 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <ScrollViewer>
-            <StackPanel Grid.Column="0" Orientation="Vertical" Margin="20,70,20,0">
+            <StackPanel Grid.Column="0" Orientation="Vertical" Margin="0,70,20,0">
                 <DockPanel Margin="0,0,0,20">
                     <Image Source="Pictures/search.png" Width="29" Height="29" Margin="0,5,0,0"></Image>
                     <TextBox x:Name="ProductSearch" DockPanel.Dock="Left" BorderBrush="#6E304B" Background="#F9F9F9" Width="191" Height="22" TextChanged="ProductSearch_TextChange" HorizontalContentAlignment="Left" BorderThickness="0,0,0,1"/>
@@ -29,7 +29,7 @@
                         <DataGridTextColumn Binding ="{Binding Path = ID}" IsReadOnly="True" Header="ID" Width="58"/>
                         <DataGridTextColumn Binding ="{Binding Path = Name}"  IsReadOnly="True" Header="Наименование" Width="103"/>
                         <DataGridTextColumn Binding ="{Binding Path = StockAmount}" IsReadOnly="True" Header="Остаток" Width="82"/>
-                        <DataGridTextColumn Binding ="{Binding Path = MeasureUnitName}" IsReadOnly="True" Header="Единица измеререния" Width="82" />
+                        <DataGridTextColumn Binding ="{Binding Path = MeasureUnitName}" IsReadOnly="True" Header="Единица измерения" Width="82" />
                         <DataGridTextColumn Binding ="{Binding Path = WholesalePrice}" IsReadOnly="True" Header="Цена опт." Width="82"/>
                         <DataGridTextColumn Binding ="{Binding Path = RetailPrice}" IsReadOnly="True" Header="Цена розн." Width="82"/>
                         <DataGridTextColumn Binding ="{Binding Path = LastSupplyDate}" IsReadOnly="True" Header="Дата последней поставки" Width="82"/>
@@ -78,7 +78,9 @@
                         <TextBox x:Name="FromPrice" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Width="80" Height="20" VerticalContentAlignment="Center" Text="" TextAlignment="Center" TextChanged="FromPrice_TextChange" IsEnabled="False"/>
                     </StackPanel>
                 </DockPanel>
-                <Button x:Name="ResetFilters" Content="Сбросить фильтры" HorizontalAlignment="Center" Click="ResetFiltersButton_Click"/>
+
+                <Button x:Name="ApplyFilters" Content="Применить фильтр" HorizontalAlignment="Center" Click="ApplyFiltersButton_Click" Margin="0,0,0,14"/>
+                <Button x:Name="ResetFilters" Content="Сбросить фильтр" HorizontalAlignment="Center" Click="ResetFiltersButton_Click"/>
             </StackPanel>
         </DockPanel>
 
