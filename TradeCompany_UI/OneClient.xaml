@@ -43,7 +43,7 @@
             <Label Content="ИНН" FontSize="9" Margin="0,0,0,0"/>
             <TextBox Name ="textBoxINN" MaxLength="100" HorizontalAlignment="center" TextWrapping="Wrap" VerticalAlignment="Top" Width="500" Height="21" Margin="0,-5,0,0" PreviewTextInput="ValidationByINN"/>
             <Label Content="Номер телефона*" FontSize="9"/>
-            <Label Content="Email" FontSize="9"  Width="245" Height="21" VerticalAlignment="Stretch" Margin="0,-25,0,10" HorizontalAlignment="Right"/>
+            <Label Content="Email" FontSize="9" Margin="0,-28,200,10" HorizontalAlignment="Right"/>
             <TextBox x:Name ="textBoxPhone"  MaxLength="30" TextWrapping="Wrap" Width="245" Height="21" HorizontalAlignment="Left" PreviewMouseDown="Focus" PreviewTextInput="ValidationByNumber" Margin="0,-12,0,3" />
             <TextBox x:Name ="textBoxE_mail"  MaxLength="100" TextWrapping="Wrap" Width="245" Height="21" VerticalAlignment="Stretch" Margin="0,-29,0,-1" HorizontalAlignment="Right"/>
             <Label Content="Контактное лицо*" FontSize="9"/>
