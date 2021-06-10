@@ -27,6 +27,7 @@ namespace TradeCompany_UI
 
         private int _id;
         private ClientsDataAccess _clientsData = new ClientsDataAccess();
+        private AddressesDataAccess _addressesData = new AddressesDataAccess();
         private List<WishModel> _wishList = new List<WishModel>();
         private List<OrderModel> _orderList = new List<OrderModel>();
         private List<String> _oldAddresses = new List<String>();
@@ -101,7 +102,7 @@ namespace TradeCompany_UI
                 else { RadioButtonTypeBayR.IsChecked = true; }
 
 
-                _oldAddresses = map.MapClientDTOToAddressesByID(_id); //нужно исправить 
+                _oldAddresses = _addressesData.GetAddressesByID(_id); 
                 AddAddress();
                 LoadWishPanel();
                 LoadFeedback();
@@ -144,7 +145,7 @@ namespace TradeCompany_UI
                     _id = _clientsData.GetLastClient().ID;
                 }
                 _clientsData.SaveWishListByClientID(_wishList, _id);
-                maps.MapAddressesListModelToAddressesListDTO(_newAddresses, _id); //нужно исправить
+                _addressesData.AddAddressByID(_id, _newAddresses); 
             }
         }
 

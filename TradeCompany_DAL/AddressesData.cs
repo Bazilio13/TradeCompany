@@ -48,17 +48,19 @@ namespace TradeCompany_DAL
             return addressesList;
         }
 
-        public void AddAddress(int clientId, String address)
+        public int AddAddress(int clientId, String address)
         {
+            int id;
             string query = "exec TradeCompany_DataBase.AddAddress @ClientId, @Address";
             using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
             {
-                dbConnection.Query<AddressDTO>(query, new
+                id = dbConnection.Query<int>(query, new
                 {
                     clientId,
                     address
-                });
+                }).AsList<int>()[0];
             }
+            return id;
         }
 
         public void DeleteAddressByIDAndAddress(int clientId, String address)
