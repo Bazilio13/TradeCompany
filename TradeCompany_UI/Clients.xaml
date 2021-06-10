@@ -72,8 +72,7 @@
                         <DatePicker Name="MaxDate" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="25" Width="100" SelectedDateChanged="ClientsFiltr"/>
                     </DockPanel>
                 </StackPanel>
-
-                <Button x:Name="ApplyFilters" Content="Применить фильтры" HorizontalAlignment="Center" Margin="0,0,0,14"/>
+                
                 <Button x:Name="ResetFilters" Content="Сбросить фильтр" HorizontalAlignment="Center" Click="ButtonFiltr_Click"/>
             </StackPanel>
         </DockPanel>
