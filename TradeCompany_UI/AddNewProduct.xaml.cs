@@ -34,6 +34,7 @@ namespace TradeCompany_UI
         private UINavi _uiNavi;
         private Page _priviosPage;
         private int _id;
+        private ProductCatalog _prodCatalog;
 
         public AddNewProduct(Page priviosPage)
         {
@@ -61,7 +62,7 @@ namespace TradeCompany_UI
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-
+            _prodCatalog = (ProductCatalog)_priviosPage;
             MeasureUnit.ItemsSource = _productsData.GetAllMeasureUnits();
             MeasureUnit.DisplayMemberPath = "Name";
             RefreshGroupsCombobox();
@@ -112,7 +113,6 @@ namespace TradeCompany_UI
             _currentProduct.Comments = Text_Comments.Text;
             if (_id == 0)
             {
-                _currentProduct.LastSupplyDate = DateTime.Now;
                 _productsData.AddNewProduct(_currentProduct);
             }
             else
@@ -130,9 +130,9 @@ namespace TradeCompany_UI
                 _productsData.AddProductToProductGroup(_currentProductID, group.ID);
             }
 
-            ProductCatalog prodCatalog = (ProductCatalog)_priviosPage;
+
+            _prodCatalog.ApplyFilters();
             _uiNavi.GoToThePage(_priviosPage);
-            prodCatalog.ApplyFilters();
         }
 
 
@@ -336,15 +336,27 @@ namespace TradeCompany_UI
 
         private int GetCurrentProductID()
         {
-            int lastProductInDBCount = _allProducts.Count - 1;
-            ProductBaseModel lastProductInDB = _allProducts[lastProductInDBCount];
-            int currentProductID = lastProductInDB.ID + 1;
+            int currentProductID = _productsData.GetLastProductID() + 1;
             return currentProductID;
         }
 
         private void Button_Delete_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Функция удаления в разработке");
+            if (MessageBox.Show("Удалить из каталога?",
+                        "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    _productsData.HardDeleteProductByID(_currentProductID);
+                }
+                catch (Exception)
+                {
+                    _productsData.SoftDeleteProductByID(_currentProductID);
+                }
+                MessageBox.Show("Товар удален", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                _prodCatalog.ApplyFilters();
+                _uiNavi.GoToThePage(_priviosPage);
+            }
         }
     }
 }

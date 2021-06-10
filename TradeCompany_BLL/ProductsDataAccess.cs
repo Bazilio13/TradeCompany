@@ -49,6 +49,11 @@ namespace TradeCompany_BLL
             return productsModel[0];
         }
 
+        public int GetLastProductID()
+        {
+            return _productsData.GetLastProductID();
+        }
+
         public void AddNewProduct(ProductModel productModel)
         {
             ProductDTO productDTO = _mapsModelToDTO.MapProductModelToProductDTO(productModel);
@@ -59,6 +64,16 @@ namespace TradeCompany_BLL
         {
             ProductGroupDTO groupDTO = _mapsModelToDTO.MapProductGroupModelToProductGroupDTO(groupModel);
             _groupsData.AddProductGroup(groupDTO);
+        }
+
+        public void HardDeleteProductByID(int productID)
+        {
+            _productsData.DeleteProductByID(productID);
+        }
+
+        public void SoftDeleteProductByID(int productID)
+        {
+            _productsData.SoftDeleteProductByID(productID);
         }
 
         public void AddProductToProductGroup(int ProductID, int ProductGroupID)
