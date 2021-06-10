@@ -5,3 +5,4 @@ from [TradeCompany_DataBase].Products as P
 left join [TradeCompany_DataBase].[Product_ProductGroups] as P_PG on P.ID = P_PG.ProductID
 left join [TradeCompany_DataBase].[ProductGroups] as PG on PG.ID = P_PG.ProductGroupID
 left join [TradeCompany_DataBase].MeasureUnits as MU on MU.ID = P.MeasureUnit
+where P.IsDeleted = 0

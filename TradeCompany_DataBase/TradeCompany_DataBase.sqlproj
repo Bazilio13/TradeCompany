@@ -142,6 +142,8 @@
     <Build Include="TradeCompany_DataBase\Stored Procedures\GetOrderByClientID.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\GetFeedbacksByClientID.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\GetAllMeasureUnits.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetLastProductID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\SoftDeleteProductByID.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="TradeCompany_DataBase.refactorlog" />
