@@ -27,7 +27,7 @@
         <TextBlock HorizontalAlignment="Left" Margin="51,183,0,0" Text="Выбранные категории" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.541,0.711" FontSize="16" Height="21" Width="227"/>
         <Button x:Name="ChangeCategoriesButton" Content="..." ToolTip="Изменить" HorizontalAlignment="Left" Margin="593,205,0,0" VerticalAlignment="Top" Height="25" Width="21" FontWeight="Bold" Click="ChangeCategoriesButton_Click"/>
         <Button x:Name="CreateCategoryButton" Content="Создать" ToolTip="Создать новую категорию" HorizontalAlignment="Left" Margin="515,157,0,0" VerticalAlignment="Top" Height="26" Width="99" FontWeight="Bold" Background="#FFE8E4E4" RenderTransformOrigin="0.669,0.68" Click="CreateCategoryButton_Click" FontSize="10" VerticalContentAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="344,42,0,0" Text="Дата последней поставки" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Height="21" Width="198"/>
+        <TextBlock x:Name="DateText" HorizontalAlignment="Left" Margin="344,42,0,0" Text="Дата последней поставки" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Height="21" Width="198"/>
         <TextBox x:Name="CreationDate" HorizontalAlignment="Left" Margin="344,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="270" SelectionOpacity="1" FontSize="16" IsEnabled="False" Height="25"/>
         <TextBox x:Name="ChosenCategories" HorizontalAlignment="Left" Margin="51,205,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="537" SelectionOpacity="1" FontSize="16" Height="Auto" IsEnabled="False" Text="Не выбрано" FontStyle="Normal" FontWeight="Normal"/>
 

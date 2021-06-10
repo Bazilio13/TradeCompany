@@ -25,6 +25,7 @@ namespace TradeCompany_UI
     {
         private ProductsDataAccess _productsData = new ProductsDataAccess();
         private ProductModel _currentProduct = new ProductModel();
+        private List<ProductBaseModel> _allProducts = new List<ProductBaseModel>();
         private ProductGroupModel _newGroup = new ProductGroupModel();
         private List<ProductGroupModel> _chosenGroups = new List<ProductGroupModel>();
         private List<ProductGroupModel> _allGroups;
@@ -39,9 +40,11 @@ namespace TradeCompany_UI
             InitializeComponent();
             _uiNavi = UINavi.GetUINavi();
             _priviosPage = priviosPage;
+            _allProducts = _productsData.GetAllProducts();
             _currentProductID = GetCurrentProductID();
             Button_Delete.IsEnabled = false;
             Button_Save.IsEnabled = false;
+            DateText.Text = "Дата создания";
         }
 
         public AddNewProduct(int id, Page priviosPage)
@@ -99,7 +102,7 @@ namespace TradeCompany_UI
                 MessageBox.Show("Неверно выбрана единица измерения");
                 return;
             }
-            _measureUnitID = selectedItem.ID; //падает на налл, если написать что-то а не выбрать категорию
+            _measureUnitID = selectedItem.ID; 
             _currentProduct.Name = Name_Text.Text;
             _currentProduct.StockAmount = (float)Convert.ToDouble(Text_StockAmount.Text);
             _currentProduct.MeasureUnit = _measureUnitID;
@@ -114,7 +117,7 @@ namespace TradeCompany_UI
             }
             else
             {
-                //удалить все группы из товара
+                //удаление всех группы из товара
                 foreach(ProductGroupModel group in _currentProduct.Groups)
                 {
                     _productsData.DeleteGroupFromProduct(_currentProduct.ID, group.ID);
@@ -197,9 +200,7 @@ namespace TradeCompany_UI
             if (_chosenGroups.Count > 0)
             {
                 ChangeSelectedCategories changeCtaegoriesWindow = new ChangeSelectedCategories(_chosenGroups, ChosenCategories);
-                //вынести в само окно 
-                changeCtaegoriesWindow.Owner = _uiNavi.MainWindow;
-                changeCtaegoriesWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+
                 if (changeCtaegoriesWindow.ShowDialog() == true)
                 {
                     changeCtaegoriesWindow.Close();
@@ -335,8 +336,8 @@ namespace TradeCompany_UI
 
         private int GetCurrentProductID()
         {
-            int lastProductInDBCount = _productsData.GetAllProducts().Count - 1;
-            ProductBaseModel lastProductInDB = _productsData.GetAllProducts()[lastProductInDBCount];
+            int lastProductInDBCount = _allProducts.Count - 1;
+            ProductBaseModel lastProductInDB = _allProducts[lastProductInDBCount];
             int currentProductID = lastProductInDB.ID + 1;
             return currentProductID;
         }
