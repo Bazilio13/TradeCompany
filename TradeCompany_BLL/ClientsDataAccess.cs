@@ -34,21 +34,21 @@ namespace TradeCompany_BLL
         public List<ClientBaseModel> GetClientsByParam(int? person, int? sale, DateTime? minData, DateTime? maxData)
         {
             List<ClientDTO> clientDTOs = _clientData.GetClientsByParams(person, sale, minData, maxData);
-            List<ClientBaseModel> clinetsModel = _mapDTOtoModel.MapClientDTOToClientBaseModelListByParam(clientDTOs);
+            List<ClientBaseModel> clinetsModel = _mapDTOtoModel.MapClientDTOToClientsBaseModelList(clientDTOs);
             return clinetsModel;
         }
 
         public List<WishModel> GetWishListByClientID(int id)
         {
             List<WishDTO> wishDTOs = _clientData.GetWishesListByClientID(id);
-            List<WishModel> wishModelList = _mapDTOtoModel.MapWishesDTOToWishesModelListByID(wishDTOs);
+            List<WishModel> wishModelList = _mapDTOtoModel.MapWishesDTOToWishesModelList(wishDTOs);
             return wishModelList;
         }
 
         public ClientModel GetClientByClientID(int id)
         {
             ClientDTO clientDTO = _clientData.GetClientByID(id);
-            ClientModel clientModel = _mapDTOtoModel.MapClientDTOToClientModelByID(clientDTO);
+            ClientModel clientModel = _mapDTOtoModel.MapClientDTOToClientModel(clientDTO);
             return clientModel;
         }
 
@@ -68,7 +68,7 @@ namespace TradeCompany_BLL
         public ClientModel GetLastClient()
         {
             ClientDTO clientDTO = _clientData.GetLastClient();
-            ClientModel clientModel = _mapDTOtoModel.MapClientDTOToClientModelByID(clientDTO);
+            ClientModel clientModel = _mapDTOtoModel.MapClientDTOToClientModel(clientDTO);
             return clientModel;
         }
 
