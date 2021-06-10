@@ -54,15 +54,6 @@ namespace TradeCompany_BLL
             return clientModel;
         }
 
-
-        public List<String> MapClientDTOToAddressesByID(int id)
-        {
-            AddressesData addresses = new AddressesData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
-            List<String> addressesList = addresses.GetAddressesByID(id);
-
-            return addressesList;
-        }
-
         public List<WishModel> MapWishesDTOToWishesModelListByID(List<WishDTO> wishListDTO) 
         { 
             ClientsData client = new ClientsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
