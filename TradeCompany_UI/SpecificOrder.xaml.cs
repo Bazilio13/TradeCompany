@@ -24,21 +24,27 @@ namespace TradeCompany_UI
     /// <summary>
     /// Interaction logic for SpecificOrder.xaml
     /// </summary>
-    public partial class SpecificOrder : Page,  IProductAddable
+    public partial class SpecificOrder : Page,  IProductAddable , IClientAddable
     {
         private int _orderId;
-        private static string ConnectionString = @"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16";
-        private OrderModel _infoAboutOrder;
-       
-        private OrderListModel specificProduct;
-        private ClientBaseModel _clientInfo = new ClientBaseModel();
+        private int _clientId;
         private OrderModel newOrder;
+        private OrderModel _infoAboutOrder;
+        private OrderListModel specificProduct;
+
+       
+       
+        private ClientBaseModel _clientBaseInfo;
+        private ClientModel _clientFullInfo;
+        private AddressModel _clientAdress;
 
 
         private List<OrderListModel> listOfProductForOrder = new List<OrderListModel>();
+        private List<AddressModel> listOAddressModel = new List<AddressModel>();
         BindingList<OrderListModel> bgOrderListModels = new BindingList<OrderListModel>();
+        BindingList<AddressModel> cbAddressModel = new BindingList<AddressModel>();
 
-        ProductsData _productsData = new ProductsData(ConnectionString);
+       
         OrderDataAccess _orderDataAccess = new OrderDataAccess();
         ClientsDataAccess _clientsDataAccess = new ClientsDataAccess();
 
@@ -64,20 +70,51 @@ namespace TradeCompany_UI
             _uinavi = UINavi.GetUINavi();
 
             _orderId = id;
-            
+
             _infoAboutOrder = _orderDataAccess.GetOrderById(id).First();
 
             foreach (var item in _infoAboutOrder.OrderListModel)
             {
                 bgOrderListModels.Add(item);
             }
-            dgSpecificOrder.ItemsSource = _infoAboutOrder.OrderListModel;
-            dgSpecificOrder.ItemsSource = bgOrderListModels;
-            ShowClientInformation();//
-
-
+            GetInfoAboutClient();
+            ShowInfoAboutClient();
+            
 
         }
+        private void ShowInfoAboutClient()
+        {
+            ID.Text = "ID: " + _clientFullInfo.ID;
+            ClientName.Text = _clientFullInfo.Name;
+            Phone.Text = _clientFullInfo.Phone;
+            cbAdress.Text = _infoAboutOrder.Address;
+
+        }
+       
+
+
+        private void GetInfoAboutClient()
+        {
+            _clientFullInfo = new ClientModel();
+            _clientAdress = new AddressModel();
+
+            dgSpecificOrder.ItemsSource = _infoAboutOrder.OrderListModel;
+            dgSpecificOrder.ItemsSource = bgOrderListModels;
+            _clientFullInfo.ID = _infoAboutOrder.ID;
+            _clientFullInfo.Name = _infoAboutOrder.Client;
+            _clientFullInfo.Phone = _infoAboutOrder.ClientsPhone;
+
+            _clientAdress.Address = _infoAboutOrder.Address;
+            _clientAdress.ID = _infoAboutOrder.ID;
+            //cbAddressModel.Add(_clientAdress.Address);
+        }
+        
+        private void FillComboBoxAdress()
+        {
+            
+        }
+
+
         private void dgSpecificOrder_Loaded(object sender, RoutedEventArgs e)
         {
 
@@ -91,26 +128,7 @@ namespace TradeCompany_UI
         {
 
         }
-        private void SetContactInformation()
-        {
-            _clientInfo.ID = _infoAboutOrder.ClientsID;
-            _clientInfo.Name = _infoAboutOrder.Client;
-            _clientInfo.Phone = _infoAboutOrder.ClientsPhone;
-            //_clientInfo. = _infoAboutOrder.DateTime;
-            //_clientInfo.Address = _infoAboutOrder.Address;
-
-        }
-        private void ShowClientInformation()
-        {
-            Data.Text = _infoAboutOrder.DateTime.ToString();
-            ID.Text = _infoAboutOrder.ID.ToString();
-            ClientName.Text = _infoAboutOrder.Client;
-            Phone.Text = _infoAboutOrder.ClientsPhone;
-            Adress.Text = _infoAboutOrder.Address;
-
-        }
-
-        
+       
 
         private void dgSpecificOrder_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
         {
@@ -169,26 +187,33 @@ namespace TradeCompany_UI
 
         }
 
-        public void AddProductToCollection(int productID, string productName, string productMeasureUnit, List<ProductGroupModel> productGroupModels)
-        {
-            //specificProduct = new OrderListModel();
-            //specificProduct.ProductID = productID;
-            //specificProduct.ProductName = productName;
-            ////specificProduct.
-            //specificProduct.ProductMeasureUnit = productMeasureUnit;
-            //bgOrderListModels.Add(specificProduct);
-        }
-
-        public void AddProductToCollection(int productID, string productName, string productMeasureUnit, float pprice, List<ProductGroupModel> productGroupModels)
+        public void AddProductToCollection(ProductBaseModel productBaseModel)
         {
             specificProduct = new OrderListModel();
-            specificProduct.ProductID = productID;
-            specificProduct.ProductName = productName;
-            specificProduct.Price = pprice;
-            specificProduct.ProductMeasureUnit = productMeasureUnit;
+            specificProduct.ProductID = productBaseModel.ID;
+            specificProduct.ProductName = productBaseModel.Name;
+            specificProduct.Price = productBaseModel.WholesalePrice; // сделать обратку какой клиент
+            specificProduct.ProductMeasureUnit = productBaseModel.MeasureUnitName;
             specificProduct.OrderID = _orderId;
             bgOrderListModels.Add(specificProduct);
             listOfProductForOrder.Add(specificProduct);
+        }
+
+        public void AddProductToCollection(int productID, string productName, string productMeasureUnit, List<ProductGroupModel> productGroupModels)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddClientToOrder(ClientBaseModel clientBaseModel)
+        {
+            _clientId = clientBaseModel.ID;
+            _clientFullInfo = _clientsDataAccess.GetClientByClientID(_clientId);
+
+        }
+
+        private void ChooseClient_Click(object sender, RoutedEventArgs e)
+        {
+            _uinavi.GoToThePage(new Clients(this));
         }
     }
 }

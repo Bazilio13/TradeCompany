@@ -21,5 +21,17 @@ namespace TradeCompany_BLL.Maps
 
             return addressDTO;
         }
+        
+        public AddressModel MapAdressDTOTOAdressModel(AddressDTO addressDTO)
+        {
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<AddressDTO, AddressModel>());
+            
+            Mapper mapper = new Mapper(config);
+            AddressModel addressModel;
+            addressModel = mapper.Map<AddressModel>(addressDTO);
+
+            return addressModel;
+
+        }
     }
 }

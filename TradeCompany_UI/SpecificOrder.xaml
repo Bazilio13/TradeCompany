@@ -22,18 +22,21 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <TextBox Grid.Column="1" x:Name="Data" HorizontalAlignment="Left" Margin="52,19,0,0" Text="Дата" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="15"/>
-            <TextBox Grid.Column="2" x:Name="ID" HorizontalAlignment="Left" Margin="58,19,0,0" Text="ID" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="15"/>
-            <TextBox x:Name="ClientName" Grid.Column="3" HorizontalAlignment="Left" Margin="47,5,0,0" Text="Клиент" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="15"/>
-            <TextBox Grid.Column="4" x:Name="Adress" HorizontalAlignment="Left" Margin ="60,19,0,0"  Text="Адрес" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="15"/>
+            <Label Grid.Column="1" x:Name="Data" HorizontalAlignment="Left" Margin="52,19,0,0" Content="Дата" VerticalAlignment="Top" FontSize="15"/>
+            <TextBlock Grid.Column="2" x:Name="ID" HorizontalAlignment="Left" Margin="58,19,0,0" Text="ID" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="15"/>
+            <TextBlock x:Name="ClientName" Grid.Column="3" HorizontalAlignment="Left" Margin="47,5,0,0" Text="Клиент" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="15"/>
+            <ComboBox  Grid.Column="4" x:Name="cbAdress" HorizontalAlignment="Left" Height="26" Margin="37,0,0,0" VerticalAlignment="Center" Width="94" />
+
+
             <Grid Grid.Column="3">
                 <Grid.RowDefinitions>
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
-                <TextBox x:Name="Phone" Grid.Row="1"  HorizontalAlignment="Left" Margin="47,0,0,0" Text="Телефон
+                <TextBlock x:Name="Phone" Grid.Row="1"  HorizontalAlignment="Left" Margin="47,0,0,0" Text="Телефон
 " TextWrapping="Wrap" VerticalAlignment="Center" FontSize="15"/>
             </Grid>
+            <Button x:Name="ChooseClient" Content="Выбрать клиента" Margin="10" FontSize="12" Click="ChooseClient_Click"/>
         </Grid>
 
         <DataGrid x:Name="dgSpecificOrder" FontSize="15" Margin="26,34,34,26" Loaded="dgSpecificOrder_Loaded" Grid.Row="1" AutoGenerateColumns="False" RowEditEnding="dgSpecificOrder_RowEditEnding"  >

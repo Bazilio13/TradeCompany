@@ -36,13 +36,15 @@ namespace TradeCompany_DAL
             return addressesList;
         }
 
-        public List<String> GetAddressesByID(int clientId)
+        public List<AddressDTO> GetAddressesByID(int clientId)
         {
-            List<String> addressesList = new List<String>();
-            string query = "exec TradeCompany_DataBase.GetAddressesByClientID @ClientID";
+            string query;
+            List<AddressDTO> addressesList = new List<AddressDTO>();
+
             using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
             {
-                addressesList = dbConnection.Query<String>(query, new { clientId}).AsList<String>();
+                query = "exec TradeCompany_DataBase.GetAddressesByClientID @ClientID";
+                addressesList = dbConnection.Query<AddressDTO>(query, new { clientId}).AsList<AddressDTO>();
             }
 
             return addressesList;

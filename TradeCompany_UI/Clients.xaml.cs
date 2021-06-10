@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TradeCompany_BLL;
 using TradeCompany_BLL.Models;
+using TradeCompany_UI.Interfaces;
 
 namespace TradeCompany_UI
 {
@@ -22,13 +23,17 @@ namespace TradeCompany_UI
     /// </summary>
     public partial class Clients : Page
     {
+        private Page _previosPage;
+        private UINavi _uiNavi;
 
         private ClientsDataAccess _clientsData;
 
-        public Clients()
+        public Clients(Page previosPage = null)
         {
             InitializeComponent();
             _clientsData = new ClientsDataAccess();
+            _previosPage = previosPage;
+            _uiNavi = UINavi.GetUINavi();
         }
 
         private void Border_Loaded(object sender, RoutedEventArgs e)
@@ -124,6 +129,17 @@ namespace TradeCompany_UI
         private void AddNewClient(object sender, RoutedEventArgs e)
         {
             frame.Content = new OneClient();
+        }
+
+        private void dgClientsTable_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (_previosPage is IClientAddable)
+            {
+                ClientBaseModel clientBaseModel = (ClientBaseModel)dgClientsTable.SelectedItem;
+                IClientAddable clientAddable = (IClientAddable)_previosPage;
+                clientAddable.AddClientToOrder(clientBaseModel);
+                _uiNavi.GoToThePage(_previosPage);
+            }
         }
     }
 }

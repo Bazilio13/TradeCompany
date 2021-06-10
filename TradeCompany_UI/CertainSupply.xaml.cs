@@ -210,9 +210,10 @@ namespace TradeCompany_UI
             }
         }
 
-        public void AddProductToCollection(int productID, string productName, string productMeasureUnit, float pprice, List<ProductGroupModel> productGroupModels)
+        public void AddProductToCollection(ProductBaseModel productBaseModel)
         {
-            throw new NotImplementedException();
+            //SupplyListModel supplyListModel = new SupplyListModel();
+            //_ocSupplyListModels=
         }
     }
 }
