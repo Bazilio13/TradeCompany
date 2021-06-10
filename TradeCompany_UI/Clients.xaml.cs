@@ -29,6 +29,7 @@ namespace TradeCompany_UI
         {
             InitializeComponent();
             _clientsData = new ClientsDataAccess();
+            dgClientsTable.ItemsSource = _clientsData.GetClients();
         }
 
         private void Border_Loaded(object sender, RoutedEventArgs e)
@@ -47,8 +48,7 @@ namespace TradeCompany_UI
 
         }
 
-
-        private void textInput(object sender, TextCompositionEventArgs e)
+        private void textInput(object sender, TextChangedEventArgs e)
         {
             MapsDTOtoModel map = new MapsDTOtoModel();
             if (ClientFiltr.Text == "")
@@ -57,7 +57,7 @@ namespace TradeCompany_UI
             }
             else
             {
-                dgClientsTable.ItemsSource = _clientsData.GetClientsBySearch(ClientFiltr.Text + e.Text);
+                dgClientsTable.ItemsSource = _clientsData.GetClientsBySearch(ClientFiltr.Text);
             }
         }
 
@@ -124,6 +124,6 @@ namespace TradeCompany_UI
         private void AddNewClient(object sender, RoutedEventArgs e)
         {
             frame.Content = new OneClient();
-        }
+        }        
     }
 }

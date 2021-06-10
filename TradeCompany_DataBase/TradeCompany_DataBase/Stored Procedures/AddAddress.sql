@@ -4,3 +4,6 @@
 AS
 	insert into Addresses (ClientID, Address)
 	values(@ClientID, @Address)
+
+	Select SCOPE_IDENTITY()
+

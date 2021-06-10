@@ -54,15 +54,6 @@ namespace TradeCompany_BLL
             return clientModel;
         }
 
-
-        public List<String> MapClientDTOToAddressesByID(int id)
-        {
-            AddressesData addresses = new AddressesData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
-            List<String> addressesList = addresses.GetAddressesByID(id);
-
-            return addressesList;
-        }
-
         public List<WishModel> MapWishesDTOToWishesModelListByID(List<WishDTO> wishListDTO) 
         { 
             ClientsData client = new ClientsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
@@ -120,6 +111,16 @@ namespace TradeCompany_BLL
             return productBaseModel;
         }
 
+        public List<ProductModel> MapProductDTOToProductModel(List<ProductDTO> productDTO)
+        {
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<ProductDTO, ProductModel>()
+            .ForMember(dest => dest.Groups, option => option.MapFrom(sorse => MapProductGroupDTOToProductGroupModel(sorse.Group))));
+            Mapper mapper = new Mapper(config);
+            List<ProductModel> productModel = mapper.Map<List<ProductModel>>(productDTO);
+            return productModel;
+        }
+
+
         public List<ProductGroupModel> MapProductGroupDTOToProductGroupModel(List<ProductGroupDTO> groupDTO)
         {
             var config = new MapperConfiguration(cfg => cfg.CreateMap<ProductGroupDTO, ProductGroupModel>()
@@ -145,5 +146,7 @@ namespace TradeCompany_BLL
             List<MeasureUnitsModel> measureUnitsModels = mapper.Map<List<MeasureUnitsModel>>(measureUnits);
             return measureUnitsModels;
         }
+
+
     }
 }
