@@ -24,5 +24,10 @@ namespace TradeCompany_UI
         {
             InitializeComponent();
         }
+
+        private void DateFromForSupply_SelectedDateChange(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
