@@ -18,9 +18,5 @@ namespace TradeCompany_BLL.Models
         public float Price { get; set; }
         public string ProductMeasureUnit { get; set; }
     
-
-        //public decimal Sum { get; set; }
-
-        //public event PropertyChangedEventHandler PropertyChanged;
     }
 }

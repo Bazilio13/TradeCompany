@@ -8,6 +8,7 @@ using TradeCompany_BLL;
 using TradeCompany_BLL.DataAccess;
 using TradeCompany_BLL.Models;
 using TradeCompany_UI.Interfaces;
+using TradeCompany_UI.Pop_ups;
 
 namespace TradeCompany_UI
 {
@@ -24,15 +25,17 @@ namespace TradeCompany_UI
         private OrderModel newOrder;
         private OrderModel _infoAboutOrder;
         private OrderListModel specificProduct;
+        private MessageWindow _messageWindow;
 
-       
-       
+
+
         private ClientBaseModel _clientBaseInfo;
         private ClientModel _clientFullInfo;
         private AddressModel _clientAdress;
 
 
         private List<OrderListModel> listOfProductForOrder = new List<OrderListModel>();
+        private List<OrderListModel> listOfLastAddedProducts = new List<OrderListModel>();
         public List<AddressModel> listOAddressModel = new List<AddressModel>();
 
         BindingList<OrderListModel> bgOrderListModels = new BindingList<OrderListModel>();
@@ -139,25 +142,26 @@ namespace TradeCompany_UI
         }
         private void AddProductInOrder_Click(object sender, RoutedEventArgs e)
         {
-            //добавить проверку на одинаковость добавляемого списка
-            if (_orderId == 0)
+            
+            if (listOfProductForOrder.Equals(listOfLastAddedProducts))
             {
-                //newOrder.OrderListModel = listOfProductForOrder; // возможно стоит конкретно добавить в список, а не ссылку делать
-                //newOrder.DateTime = DateTime.Now;
-                //newOrder.Client = ClientName.Text; // тут поменяется
-                //newOrder.ClientsID = _clientsDataAccess.GetClientsBySearch(ClientName.Text).First().ID; 
-                //newOrder.ClientsPhone = Phone.Text;
-                //newOrder.Address = cbAdress.Text;
-
-                //newOrder.Summ = CountOrderSumm();
-
-                FillInfoAboutNewOrder();
-                _orderDataAccess.AddOrder(newOrder);
-                
+                return;
             }
             else
             {
-                _orderDataAccess.AddOrderList(listOfProductForOrder);
+
+                if (_orderId == 0)
+                {
+                    FillInfoAboutNewOrder();
+                    _orderDataAccess.AddOrder(newOrder);
+
+                }
+                else
+                {
+                    _orderDataAccess.AddOrderList(listOfProductForOrder);
+                    listOfLastAddedProducts = listOfProductForOrder;
+                }
+                //_messageWindow = new MessageWindow("Продукты добавлены в базу");
             }
            
         }
@@ -183,6 +187,7 @@ namespace TradeCompany_UI
             specificProduct = new OrderListModel();
             specificProduct.ProductID = productBaseModel.ID;
             specificProduct.ProductName = productBaseModel.Name;
+            //if(_clientFullInfo.Type == )
             specificProduct.Price = productBaseModel.WholesalePrice; // сделать обратку какой клиент
             specificProduct.ProductMeasureUnit = productBaseModel.MeasureUnitName;
             specificProduct.OrderID = _orderId;
@@ -190,10 +195,6 @@ namespace TradeCompany_UI
             listOfProductForOrder.Add(specificProduct);
         }
 
-        public void AddProductToCollection(int productID, string productName, string productMeasureUnit, List<ProductGroupModel> productGroupModels)
-        {
-            throw new NotImplementedException();
-        }
 
         public void AddClientToOrder(ClientBaseModel clientBaseModel)
         {
@@ -236,6 +237,10 @@ namespace TradeCompany_UI
             var addresInfo = (AddressModel)cbAdress.SelectedItem;
             _addresId = addresInfo.ID;
             _adress = addresInfo.Address;
+        }
+        public void AddProductToCollection(int productID, string productName, string productMeasureUnit, List<ProductGroupModel> productGroupModels)
+        {
+            throw new NotImplementedException();
         }
     }
 }
