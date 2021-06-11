@@ -21,12 +21,12 @@ namespace TradeCompany_UI
         private int _clientId;
         private int _addresId; // можно в Модельку оформить
         private string _adress;
-        private float _amount;
+        ProductBaseModel _productBaseModel;
 
         private OrderModel newOrder;
         private OrderModel _infoAboutOrder;
         private OrderListModel specificProduct;
-        private MessageWindow _messageWindow;
+       
 
         private ClientBaseModel _clientBaseInfo;
         private ClientModel _clientFullInfo;
@@ -148,21 +148,30 @@ namespace TradeCompany_UI
             }
             else
             {
-
                 if (_orderId == 0)
                 {
                     FillInfoAboutNewOrder();
                     _orderDataAccess.AddOrder(newOrder);
+                    ReduceProductsAmountInStock(newOrder.OrderListModel);
 
                 }
                 else
                 {
                     _orderDataAccess.AddOrderList(listOfProductForOrder);
                     listOfLastAddedProducts = listOfProductForOrder;
+                    ReduceProductsAmountInStock(listOfLastAddedProducts);
                 }
-                //_messageWindow = new MessageWindow("Продукты добавлены в базу");
+
+                new MessageWindow("Продукты добавлены в базу").ShowDialog();
             }
 
+        }
+        private void ReduceProductsAmountInStock(List<OrderListModel> orderListModels)
+        {
+            foreach (var product in orderListModels)
+            {
+                _ProductsDataAccess.ReduceProductAmountInStockByID(product.ID, (int)product.Amount); 
+            }
         }
 
         private float CountOrderSumm()
@@ -197,16 +206,10 @@ namespace TradeCompany_UI
 
             specificProduct.ProductMeasureUnit = productBaseModel.MeasureUnitName;
             specificProduct.OrderID = _orderId;
+            _productBaseModel = productBaseModel;
 
             bgOrderListModels.Add(specificProduct);
-            listOfProductForOrder.Add(specificProduct);
-
-
-        }
-
-        private void IsEnoughProductInStock(int amount)
-        {
-
+            
         }
 
 
@@ -261,7 +264,16 @@ namespace TradeCompany_UI
         private void dgSpecificOrder_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
             var i = (OrderListModel)e.Row.Item;
-            _amount = i.Amount;
+            
+            if (_productBaseModel.StockAmount - i.Amount >= 0)
+            {
+                listOfProductForOrder.Add(specificProduct);
+            }
+            else
+            {
+                bgOrderListModels.Remove(bgOrderListModels.Last());
+                new MessageWindow("На складе нет столько товара").ShowDialog();
+             }
         }
     }
 }
