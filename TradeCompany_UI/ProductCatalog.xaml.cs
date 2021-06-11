@@ -263,7 +263,7 @@ namespace TradeCompany_UI
             if (_previosPage is IProductAddable)
             {
                 IProductAddable productAddable = (IProductAddable)_previosPage;
-                productAddable.AddProductToCollection(productBaseModel.ID, productBaseModel.Name, productBaseModel.MeasureUnitName, productBaseModel.Groups);
+                productAddable.AddProductToCollection(productBaseModel);
                 _uiNavi.GoToThePage(_previosPage);
             }
             else
