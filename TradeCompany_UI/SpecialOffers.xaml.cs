@@ -10,23 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TradeCompany_UI.DialogWindows
+namespace TradeCompany_UI
 {
     /// <summary>
-    /// Interaction logic for ConfirmitionWindow.xaml
+    /// Interaction logic for SpecialOffers.xaml
     /// </summary>
-    public partial class ConfirmitionWindow : Window
+    public partial class SpecialOffers : Page
     {
-        public ConfirmitionWindow()
+        public SpecialOffers()
         {
             InitializeComponent();
-        }
-
-        private void Accept_Click(object sender, RoutedEventArgs e)
-        {
-            this.DialogResult = true;
         }
     }
 }

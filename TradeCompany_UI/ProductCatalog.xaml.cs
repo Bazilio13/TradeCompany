@@ -24,7 +24,7 @@ namespace TradeCompany_UI
     /// </summary>
     public partial class ProductCatalog : Page
     {
-        private ProductsDataAccess _products = new ProductsDataAccess();
+        private ProductsDataAccess _products;
         private string _filtrByText;
         private int? _filtrByGategory;
         private float? _filtrFromStockAmount;
@@ -35,61 +35,27 @@ namespace TradeCompany_UI
         private float? _filtrToRetailPrice;
         private DateTime? _filtrMinDateTime;
         private DateTime? _filtrMaxDateTime;
-        Regex _regexForNumbers = new Regex(@"[^0-9.]+");
-        Frame _frame;
-        Page _previosPage;
+        private UINavi _uiNavi;
+        private Page _previosPage;
 
-        public ProductCatalog(Frame frame, Page previosPage = null)
+        public ProductCatalog(Page previosPage = null)
         {
             InitializeComponent();
-            _frame = frame;
+            _uiNavi = UINavi.GetUINavi();
+            _products = new ProductsDataAccess();
             _previosPage = previosPage;
             dgProductCatalog.ItemsSource = _products.GetAllProducts();
-
-            List<ProductGroupModel> productGroupName = _products.GetAllGroups();
-            ProductGroupSelect.Items.Add("Категория");
-            for (int i = 0; i < productGroupName.Count; i++)
-            {
-                ProductGroupSelect.Items.Add(productGroupName[i].Name);
-            }
-
-
+            List<ProductGroupModel> allGroups = _products.GetAllGroups();
+            ProductGroupSelect.ItemsSource = allGroups;
+            ProductGroupSelect.DisplayMemberPath = "Name";
+            ProductGroupSelect.Text = "";
         }
 
-        private void ProductButton_Click(object sender, RoutedEventArgs e)
+        private void ProductSearch_TextChange(object sender, TextChangedEventArgs e)
         {
-
+            _filtrByText = ProductSearch.Text;
+            ApplyFilters();
         }
-
-        private void OrdersButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void textChange(object sender, TextChangedEventArgs e)
-        {
-            if (ProductSearch.Text == "")
-            {
-                _filtrByText = null;
-                dgProductCatalog.ItemsSource = _products.GetAllProductsByAllParams(_filtrByText, _filtrByGategory, _filtrFromStockAmount, _filtrToStockAmount, _filtrFromWholesalePrice, _filtrToWholesalePrice, _filtrFromRetailPrice, _filtrToRetailPrice, _filtrMinDateTime, _filtrMaxDateTime);
-            }
-            else
-            {
-                _filtrByText = ProductSearch.Text;
-                dgProductCatalog.ItemsSource = _products.GetAllProductsByAllParams(_filtrByText, _filtrByGategory, _filtrFromStockAmount, _filtrToStockAmount, _filtrFromWholesalePrice, _filtrToWholesalePrice, _filtrFromRetailPrice, _filtrToRetailPrice, _filtrMinDateTime, _filtrMaxDateTime);
-            }
-        }
-
-        //private void selectionChanged(object sender, RoutedEventArgs e)
-        //{
-
-        //}
-
-        private void ApplyFilters_Click(object sender, RoutedEventArgs e)
-        {
-            dgProductCatalog.ItemsSource = _products.GetAllProductsByAllParams(_filtrByText, _filtrByGategory, _filtrFromStockAmount, _filtrToStockAmount, _filtrFromWholesalePrice, _filtrToWholesalePrice, _filtrFromRetailPrice, _filtrToRetailPrice, _filtrMinDateTime, _filtrMaxDateTime);
-        }
-
 
         private void ProductGroupSelect_DropDownClosed(object sender, EventArgs e)
         {
@@ -108,105 +74,204 @@ namespace TradeCompany_UI
                     }
                 }
             }
+            ApplyFilters();
         }
 
         private void FromStockAmount_TextChange(object sender, TextChangedEventArgs e)
         {
             _filtrFromStockAmount = InputValidation(_filtrFromStockAmount, FromStockAmount);
+            ApplyFilters();
         }
 
         private void ToStockAmount_TextChange(object sender, TextChangedEventArgs e)
         {
             _filtrToStockAmount = InputValidation(_filtrToStockAmount, ToStockAmount);
+            ApplyFilters();
         }
 
         private void FromPrice_TextChange(object sender, TextChangedEventArgs e)
         {
-            if (RadioButtonRetailPrice.IsChecked == true)
-            {
-                _filtrFromRetailPrice = InputValidation(_filtrFromRetailPrice, FromPrice);
-                _filtrToRetailPrice = InputValidation(_filtrToRetailPrice, ToPrice);
-                _filtrToWholesalePrice = null;
-                _filtrFromWholesalePrice = null;
-            }
-            if (RadioButtonWholesalePrice.IsChecked == true)
-            {
-                _filtrFromWholesalePrice = InputValidation(_filtrFromWholesalePrice, FromPrice);
-                _filtrToWholesalePrice = InputValidation(_filtrToWholesalePrice, ToPrice);
-                _filtrToRetailPrice = null;
-                _filtrFromRetailPrice = null;
-            }
+            SetUpPriceFilters();
+            ApplyFilters();
         }
 
         private void ToPrice_TextChange(object sender, TextChangedEventArgs e)
         {
-            if (RadioButtonRetailPrice.IsChecked == true)
-            {
-                _filtrFromRetailPrice = InputValidation(_filtrFromRetailPrice, FromPrice);
-                _filtrToRetailPrice = InputValidation(_filtrToRetailPrice, ToPrice);
-                _filtrToWholesalePrice = null;
-                _filtrFromWholesalePrice = null;
-            }
-            if (RadioButtonWholesalePrice.IsChecked == true)
-            {
-                _filtrFromWholesalePrice = InputValidation(_filtrFromWholesalePrice, FromPrice);
-                _filtrToWholesalePrice = InputValidation(_filtrToWholesalePrice, ToPrice);
-                _filtrToRetailPrice = null;
-                _filtrFromRetailPrice = null;
-            }
+            SetUpPriceFilters();
+            ApplyFilters();
         }
 
         private void RadioButtonRetailPrice_Checked(object sender, RoutedEventArgs e)
         {
-            _filtrFromRetailPrice = InputValidation(_filtrFromRetailPrice, FromPrice);
-            _filtrToRetailPrice = InputValidation(_filtrToRetailPrice, ToPrice);
-            _filtrToWholesalePrice = null;
-            _filtrFromWholesalePrice = null;
-
+            PricesTextBoxesEnabled(true);
+            SetUpRetailPrice();
+            NullifyWholesalePrices();
         }
 
         private void RadioButtonWholesalePrice_Checked(object sender, RoutedEventArgs e)
         {
-            _filtrFromWholesalePrice = InputValidation(_filtrFromWholesalePrice, FromPrice);
-            _filtrToWholesalePrice = InputValidation(_filtrToWholesalePrice, ToPrice);
-            _filtrToRetailPrice = null;
+            PricesTextBoxesEnabled(true);
+            SetUpWholesalePrice();
+            NullifyRetailPrices();
+        }
+
+        private void DateFrom_SelectedDateChange(object sender, SelectionChangedEventArgs e)
+        {
+            CheckDates();
+            _filtrMinDateTime = DateFrom.SelectedDate;
+            ApplyFilters();
+        }
+
+        private void DateUntil_SelectedDateChange(object sender, SelectionChangedEventArgs e)
+        {
+            CheckDates();
+            if(!(DateUntil.SelectedDate is null))
+            {
+                DateTime timeTmp = (DateTime)DateUntil.SelectedDate;
+                timeTmp = timeTmp.AddDays(1);
+                timeTmp = timeTmp.AddMilliseconds(-1);
+                _filtrMaxDateTime = (DateTime?)timeTmp;
+            }
+            ApplyFilters();
+        }
+
+        private void ResetFiltersButton_Click(object sender, RoutedEventArgs e)
+        {
+            FromStockAmount.Text = "";
+            ToStockAmount.Text = "";
+            FromPrice.Text = "";
+            ToPrice.Text = "";
+            RadioButtonRetailPrice.IsChecked = false;
+            RadioButtonWholesalePrice.IsChecked = false;
+            PricesTextBoxesEnabled(false);
+            ProductSearch.Text = "";
+            ProductGroupSelect.Text = "";
+            DateFrom.SelectedDate = null;
+            DateUntil.SelectedDate = null;
+            _filtrByText = null;
+            _filtrByGategory = null;
+            _filtrFromStockAmount = null;
+            _filtrToStockAmount = null;
+            _filtrFromWholesalePrice = null;
+            _filtrToWholesalePrice = null;
             _filtrFromRetailPrice = null;
+            _filtrToRetailPrice = null;
+            _filtrMinDateTime = null;
+            _filtrMaxDateTime = null;
+            dgProductCatalog.ItemsSource = _products.GetAllProducts();
+        }
+
+        private void AddProductButton_Click(object sender, RoutedEventArgs e)
+        {
+            _uiNavi.GoToThePage(new AddNewProduct(this));
+        }
+
+        public void ApplyFilters()
+        {
+            dgProductCatalog.ItemsSource = _products.GetAllProductsByAllParams(_filtrByText, _filtrByGategory, _filtrFromStockAmount, _filtrToStockAmount, _filtrFromWholesalePrice, _filtrToWholesalePrice, _filtrFromRetailPrice, _filtrToRetailPrice, _filtrMinDateTime, _filtrMaxDateTime);
         }
 
         private float? InputValidation(float? filtr, TextBox textbox)
         {
-            textbox.Text = Regex.Replace(textbox.Text, @"[.]+", ",");
-            textbox.Text = Regex.Replace(textbox.Text, @"[^0-9,.]+", "");
-            textbox.SelectionStart = textbox.Text.Length;
-            if (textbox.Text == "")
+            if(textbox != null)
             {
-                filtr = null;
-            }
-            else
-            {
-                try
+                textbox.Text = Regex.Replace(textbox.Text, @"[.]+", ",");
+                textbox.Text = Regex.Replace(textbox.Text, @"[^0-9,.]+", "");
+                textbox.SelectionStart = textbox.Text.Length;
+                if (textbox.Text == "")
                 {
-                    filtr = (float)Convert.ToDouble(textbox.Text);
+                    filtr = null;
                 }
-                catch (FormatException ex)
+                else
                 {
-                    textbox.Text = "";
-                    MessageBox.Show("Неверный ввод");
+                    try
+                    {
+                        filtr = (float)Convert.ToDouble(textbox.Text);
+                    }
+                    catch (Exception)
+                    {
+                        filtr = null;
+                        textbox.Text = "";
+                        MessageBox.Show("Неверный ввод");
+                    }
                 }
+                //float tmp = filtr;
+                //if(float.IsInfinity(filtr))
+
+                return filtr;
             }
 
             return filtr;
+        }  
+
+        private void SetUpPriceFilters()
+        {
+            if (RadioButtonRetailPrice.IsChecked == true)
+            {
+                SetUpRetailPrice();
+                NullifyWholesalePrices();
+            }
+            if (RadioButtonWholesalePrice.IsChecked == true)
+            {
+                SetUpWholesalePrice();
+                NullifyRetailPrices();
+            }
         }
+        private void NullifyWholesalePrices()
+        {
+            _filtrToWholesalePrice = null;
+            _filtrFromWholesalePrice = null;
+        }
+        private void NullifyRetailPrices()
+        {
+            _filtrToRetailPrice = null;
+            _filtrFromRetailPrice = null;
+        }
+
+        private void SetUpWholesalePrice()
+        {
+            _filtrFromWholesalePrice = InputValidation(_filtrFromWholesalePrice, FromPrice);
+            _filtrToWholesalePrice = InputValidation(_filtrToWholesalePrice, ToPrice);
+        }
+
+        private void SetUpRetailPrice()
+        {
+            _filtrFromRetailPrice = InputValidation(_filtrFromRetailPrice, FromPrice);
+            _filtrToRetailPrice = InputValidation(_filtrToRetailPrice, ToPrice);
+        }
+
+        private void CheckDates()
+        {
+            if (DateFrom.SelectedDate > DateUntil.SelectedDate)
+            {
+                DateFrom.SelectedDate = null;
+                DateUntil.SelectedDate = null;
+                MessageBox.Show("Неверный выбор даты");
+            }
+        }
+
+        private void PricesTextBoxesEnabled(bool isChecked)
+        {
+            FromPrice.IsEnabled = isChecked;
+            ToPrice.IsEnabled = isChecked;
+        }
+
 
         private void dgProductCatalog_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            ProductBaseModel productBaseModel = (ProductBaseModel)dgProductCatalog.SelectedItem;
             if (_previosPage is IProductAddable)
             {
-                ProductBaseModel productBaseModel = (ProductBaseModel)dgProductCatalog.SelectedItem;
                 IProductAddable productAddable = (IProductAddable)_previosPage;
-                productAddable.AddProductToCollection(productBaseModel.ID, productBaseModel.Name, productBaseModel.MeasureUnitName, productBaseModel.Groups);
-                _frame.Content = _previosPage;
+                productAddable.AddProductToCollection(productBaseModel);
+                _uiNavi.GoToThePage(_previosPage);
+            }
+            else
+            {
+                _uiNavi.GoToThePage(new AddNewProduct(productBaseModel.ID, this));
             }
         }
+
+        
     }
 }

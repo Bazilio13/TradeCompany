@@ -8,17 +8,46 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Pictures\arrow-left.png" />
-    <None Remove="Pictures\check simple disable.png" />
-    <None Remove="Pictures\check simple.png" />
-    <None Remove="Pictures\Clients.png" />
-    <None Remove="Pictures\Orders.png" />
-    <None Remove="Pictures\plus.png" />
-    <None Remove="Pictures\Products.png" />
+    <None Remove="Pictures\details.png" />
     <None Remove="Pictures\search.png" />
-    <None Remove="Pictures\settings.png" />
-    <None Remove="Pictures\Supplies.png" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Page Remove="Styles\ButtonStyle.xaml" />
+    <Page Remove="Styles\CheckBoxStyle.xaml" />
+    <Page Remove="Styles\ComboBoxStyle.xaml" />
+    <Page Remove="Styles\DataGridStyle.xaml" />
+    <Page Remove="Styles\DatePickerStyle.xaml" />
+    <Page Remove="Styles\HeaderButton.xaml" />
+    <Page Remove="Styles\InnerButtonStyle.xaml" />
+    <Page Remove="Styles\RadioButtonStyle.xaml" />
+    <Page Remove="Styles\RowButtonStyle.xaml" />
+    <Page Remove="Styles\StyleDictionary.xaml" />
+    <Page Remove="Styles\TextboxStyle.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Styles\HeaderButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Resource Include="Styles\InnerButtonStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Resource Include="Pictures\details.png" />
+    <Resource Include="Styles\CheckBoxStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Resource Include="Styles\ComboBoxStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Resource Include="Styles\DatePickerStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Resource Include="Styles\RadioButtonStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+  </ItemGroup>
+
 
   <ItemGroup>
     <ProjectReference Include="..\TradeCompany_BLL\TradeCompany_BLL.csproj" />
@@ -26,16 +55,57 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Pictures\arrow-left.png" />
-    <Resource Include="Pictures\check simple disable.png" />
-    <Resource Include="Pictures\check simple.png" />
-    <Resource Include="Pictures\Clients.png" />
-    <Resource Include="Pictures\Orders.png" />
-    <Resource Include="Pictures\plus.png" />
-    <Resource Include="Pictures\Products.png" />
-    <Resource Include="Pictures\search.png" />
-    <Resource Include="Pictures\settings.png" />
-    <Resource Include="Pictures\Supplies.png" />
+    <Resource Include="Pictures\checkbox.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Pictures\clients.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Pictures\current menu.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Pictures\home.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Pictures\Logo.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Pictures\orders.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Pictures\phone.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Pictures\plus.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Pictures\products.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Pictures\search.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Pictures\settings.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Pictures\stats.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Pictures\v-check.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Pictures\v_box.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Styles\ButtonStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Resource Include="Styles\DataGridStyle.xaml" />
+    <Resource Include="Styles\RowButtonStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Resource Include="Styles\StyleDictionary.xaml" />
+    <Resource Include="Styles\TextboxStyle.xaml" />
   </ItemGroup>
 
 </Project>

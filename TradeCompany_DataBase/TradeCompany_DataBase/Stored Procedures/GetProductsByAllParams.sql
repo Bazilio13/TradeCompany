@@ -16,7 +16,7 @@ AS
   left join [TradeCompany_DataBase].[ProductGroups] as PG on PG.ID = P_PG.ProductGroupID
   left join [TradeCompany_DataBase].MeasureUnits as MU on MU.ID = P.MeasureUnit
 where
-  (@InputString IS NULL OR P.Name like '%' + @InputString + '%') AND
+  (@InputString IS NULL OR P.Name like '%' + @InputString + '%' OR P.ID like '%' + CONVERT(nvarchar (255), @InputString) + '%') AND
   (@ProductGroupID IS NULL OR PG.ID = @ProductGroupID) AND
   (@FromStockAmount IS NULL OR P.StockAmount >= @FromStockAmount) AND
   (@ToStockAmount IS NULL OR P.StockAmount <= @ToStockAmount) AND
@@ -25,4 +25,5 @@ where
   (@FromRetailPrice IS NULL OR P.RetailPrice >= @FromRetailPrice) AND
   (@ToRetailPrice IS NULL OR P.RetailPrice <= @ToRetailPrice) AND
   (@MinDateTime IS NULL OR P.LastSupplyDate >= @MinDateTime) AND
-  (@MaxDateTime IS NULL OR P.LastSupplyDate <= @MaxDateTime)
+  (@MaxDateTime IS NULL OR P.LastSupplyDate <= @MaxDateTime) AND
+  P.IsDeleted = 0

@@ -22,17 +22,15 @@ namespace TradeCompany_UI
     /// </summary>
     public partial class Supplys : Page
     {
-        private Frame _frame;
         private SupplysDataAccess _supplyDataAccess;
         private Page _previosPage;
-        private Window _mainWindow;
+        private UINavi _uiNavi;
         public List<SupplyModel> SupplyModels { get; set; }
-        public Supplys(Frame frame, Window mainWindow, Page previousPage = null)
+        public Supplys(Page previousPage = null)
         {
-            _frame = frame;
-            _previosPage = previousPage;
-            _mainWindow = mainWindow;
             InitializeComponent();
+            _previosPage = previousPage;
+            _uiNavi = UINavi.GetUINavi();
             _supplyDataAccess = new SupplysDataAccess();
             SupplyModels = _supplyDataAccess.GetSupplyModelsByParams();
             dgSupplys.ItemsSource = SupplyModels;
@@ -93,7 +91,7 @@ namespace TradeCompany_UI
 
         private void CreateSupply_Click(object sender, RoutedEventArgs e)
         {
-           _frame.Content = new CertainSupply(_frame, _mainWindow, this);
+           _uiNavi.GoToThePage(new CertainSupply(this));
         }
 
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -102,17 +100,12 @@ namespace TradeCompany_UI
             dgSupplys.ItemsSource = SupplyModels;
         }
 
-        private void dgSupplys_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-        }
-
         private void dgSupplys_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (dgSupplys.CurrentItem != null)
             {
-                TextBlock textBlock = (TextBlock)e.OriginalSource;
-                SupplyModel crntModel = (SupplyModel)textBlock.DataContext;
-                _frame.Content = new CertainSupply(_frame, _mainWindow, this, crntModel.ID);
+                SupplyModel crntModel = (SupplyModel)dgSupplys.CurrentItem;
+                _uiNavi.GoToThePage(new CertainSupply(this, crntModel.ID));
             }
         }
     }

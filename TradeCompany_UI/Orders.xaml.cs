@@ -25,15 +25,13 @@ namespace TradeCompany_UI
     /// </summary>
     public partial class Orders : Page
     {
-        private Frame _frame;
+        private UINavi _uiNavi;
         private OrderDataAccess _orderDataAccess;
         private List<OrderModel> _orderModels;
-        private Window _mainWindow;
-        public Orders(Frame frame, Window mainWindow)
+        public Orders(Page previousPage = null)
         {
-            _frame = frame;
-            _mainWindow = mainWindow;
             InitializeComponent();
+            _uiNavi = UINavi.GetUINavi();
             _orderDataAccess = new OrderDataAccess();
             _orderModels = _orderDataAccess.GetOrderModelsByParams();
             dgOrders.ItemsSource = _orderModels;
@@ -76,7 +74,7 @@ namespace TradeCompany_UI
 
         private void CreateOrder_Click(object sender, RoutedEventArgs e)
         {
-            _frame.Content = new SpecificOrder();
+            _uiNavi.GoToThePage(new SpecificOrder());
         }
 
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -105,18 +103,13 @@ namespace TradeCompany_UI
             FilterOrders();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            _orderModels[0].Address = "hop hey la la ley";
-        }
-
         private void dgOrders_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (dgOrders.CurrentItem != null)
             {
                 TextBlock textBlock = (TextBlock)e.OriginalSource;
                 OrderModel crntModel = (OrderModel)textBlock.DataContext;
-                _frame.Content = new SpecificOrder(crntModel.ID);
+                _uiNavi.GoToThePage(new SpecificOrder(crntModel.ID));
             }
         }
     }

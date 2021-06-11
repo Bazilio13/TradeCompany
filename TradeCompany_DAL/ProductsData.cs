@@ -136,40 +136,18 @@ namespace TradeCompany_DAL
             return crntProduct;
         }
 
-
-        public List<ProductDTO> GetProductsByLetter(string inputString)
+        public int GetLastProductID()
         {
-            List<ProductDTO> products = new List<ProductDTO>();
-            string query;
+            int output;
+            var p = new DynamicParameters();
+            p.Add("Output", dbType: DbType.Int32, direction: ParameterDirection.Output);
+            string query = "TradeCompany_DataBase.GetLastProductID";
             using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
             {
-                query = "exec TradeCompany_DataBase.GetProductByLetter @InputString";
-                dbConnection.Query<ProductDTO, ProductGroupDTO, ProductDTO>(query,
-                    (product, group) =>
-                    {
-                        ProductDTO crntProduct = null;
-                        foreach (var p in products)
-                        {
-                            if (p.ID == product.ID)
-                            {
-                                crntProduct = p;
-                                break;
-                            }
-                        }
-                        if (crntProduct is null)
-                        {
-                            crntProduct = product;
-                            products.Add(crntProduct);
-                        }
-                        if (!(group is null))
-                        {
-                            crntProduct.Group.Add(group);
-                        }
-                        return crntProduct;
-                    }, new { inputString },
-                    splitOn: "ID");
+                dbConnection.Query<int>(query, p, commandType: CommandType.StoredProcedure);
+                output = p.Get<int>("Output");
             }
-            return products;
+            return output;
         }
 
         public void DeleteProductByID(int id)
@@ -182,13 +160,23 @@ namespace TradeCompany_DAL
             }
         }
 
-        public void DeleteGroupFromProduct(int productID, int productGroupID)
+        public void SoftDeleteProductByID(int id)
         {
             string query;
             using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
             {
-                query = "exec TradeCompany_DataBase.DeleteGroupFromProduct @ProductID, @ProductGroupID";
-                dbConnection.Query(query, new { productID, productGroupID });
+                query = "exec TradeCompany_DataBase.SoftDeleteProductByID @ID";
+                dbConnection.Query(query, new { id });
+            }
+        }
+
+        public void DeleteGroupFromProduct(int id, int productGroupID)
+        {
+            string query;
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                query = "exec TradeCompany_DataBase.DeleteGroupFromProduct @ID, @ProductGroupID";
+                dbConnection.Query(query, new { id, productGroupID });
             }
         }
 
@@ -212,13 +200,13 @@ namespace TradeCompany_DAL
             }
         }
 
-        public void AddProductToProductGroup(int productID, int productGroupID)
+        public void AddProductToProductGroup(int id, int productGroupID)
         {
             string query;
             using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
             {
-                query = "exec TradeCompany_DataBase.AddProductToProductGroup @productID, @ProductGroupID";
-                dbConnection.Query(query, new { productID, productGroupID});
+                query = "exec TradeCompany_DataBase.AddProductToProductGroup @ID, @ProductGroupID";
+                dbConnection.Query(query, new { id, productGroupID});
             }
         }
 
@@ -241,6 +229,17 @@ namespace TradeCompany_DAL
                     product.Comments
                 });
             }
+        }
+
+        public List<MeasureUnitsDTO> GetAllMeasureUnits()
+        {
+            List<MeasureUnitsDTO> measureUnits = new List<MeasureUnitsDTO>();
+            string query = "exec TradeCompany_DataBase.GetAllMeasureUnits";
+            using(IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                measureUnits = dbConnection.Query<MeasureUnitsDTO>(query).AsList<MeasureUnitsDTO>();
+            }
+            return measureUnits;
         }
     }
 }

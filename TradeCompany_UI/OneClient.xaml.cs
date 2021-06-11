@@ -24,20 +24,26 @@ namespace TradeCompany_UI
     /// </summary>
     public partial class OneClient : Page
     {
+
         private int _id;
+        private ClientsDataAccess _clientsData = new ClientsDataAccess();
         private List<WishModel> _wishList = new List<WishModel>();
         private List<OrderModel> _orderList = new List<OrderModel>();
         private List<String> _oldAddresses = new List<String>();
         private List<String> _newAddresses = new List<String>();
         private MapsDTOtoModel _map = new MapsDTOtoModel();
+        private List<FeedbackModel> _feedback = new List<FeedbackModel>();
 
 
         public OneClient(int id)
         {
             InitializeComponent();
             _id = id;
-            _wishList = _map.MapWishesDTOToWishesModelListByID(_id);
-            _orderList = _map.MapOrdersDTOToOrdersModelByClientID(_id);
+            _wishList = _clientsData.GetWishListByClientID(_id);
+            FeedbacksDataAccess fda = new FeedbacksDataAccess();
+            OrderDataAccess dataAccess = new OrderDataAccess();
+            _orderList = dataAccess.GetOrderModelsByClientID(_id);
+            _feedback = fda.GetFeedbacksByClientID(_id);
         }
 
 
@@ -45,8 +51,10 @@ namespace TradeCompany_UI
         public OneClient()
         {
             InitializeComponent();
-            dgOrdersTable.Visibility = Visibility.Hidden;
-            LabelStori.Visibility = Visibility.Hidden;
+            dgOrdersTable.Visibility = Visibility.Collapsed;
+            SPFeedbackPanel.Visibility = Visibility.Collapsed;
+            ButtonFeedback.Visibility = Visibility.Collapsed;
+            ButtonStory.Visibility = Visibility.Collapsed;
             _id = -1;
         }
 
@@ -58,7 +66,7 @@ namespace TradeCompany_UI
             if (_id != -1)
             {
                 dgOrdersTable.ItemsSource = _orderList;
-                ClientModel client = map.MapClientDTOToClientModelByID(_id);
+                ClientModel client = _clientsData.GetClientByClientID(_id);
                 textBoxName.Text = client.Name;
                 if (client.INN != null)
                 {
@@ -75,13 +83,17 @@ namespace TradeCompany_UI
                 if (client.ContactPerson != null)
                 {
                     textBoxContactPerson.Text = client.ContactPerson;
+                } 
+                if (client.Comment != null)
+                {
+                    textBoxComments.Text = client.Comment;
                 }
                 if (client.Type)
                 {
                     RadioButtonTypePersonF.IsChecked = true;
                 }
-                else { RadioButtonTypePersonU.IsChecked = true; } 
-                
+                else { RadioButtonTypePersonU.IsChecked = true; }
+
                 if (client.CorporateBody)
                 {
                     RadioButtonTypeBayO.IsChecked = true;
@@ -89,14 +101,10 @@ namespace TradeCompany_UI
                 else { RadioButtonTypeBayR.IsChecked = true; }
 
 
-                _oldAddresses = map.MapClientDTOToAddressesByID(_id);
-
+                _oldAddresses = map.MapClientDTOToAddressesByID(_id); //нужно исправить 
                 AddAddress();
-
                 LoadWishPanel();
-
-                //List<WishModel> wishList = map.MapWishesDTOToWishesModelListByID(_id);
-
+                LoadFeedback();
             }
             else
             {
@@ -108,7 +116,7 @@ namespace TradeCompany_UI
                 RadioButtonTypeBayR.IsChecked = true;
             }
             ProductsDataAccess product = new ProductsDataAccess();
-            List<ProductBaseModel> allProducts = product.GetAllProducts(); //Заменить на модель продуктов после мерджа
+            List<ProductBaseModel> allProducts = product.GetAllProducts(); 
             cbWish.ItemsSource = allProducts;
 
         }
@@ -127,27 +135,22 @@ namespace TradeCompany_UI
 
         {
             if (FieldValidation())
-
             {
-                ClientModel client = new ClientModel();
-                client = ToFormClientModel();
+                ClientModel client = ToFormClientModel();
                 MapsModelToDTO maps = new MapsModelToDTO();
-                maps.MapClientModelToClientDTO(client);
+                _clientsData.SaveClient(client);
                 if (_id == -1)
                 {
-                    _id = _map.MapLastClientDTOToLastClientBaseModel().ID;
+                    _id = _clientsData.GetLastClient().ID;
                 }
-                maps.MapWishListModelToWishListDTO(_wishList, _id);
-                maps.MapAddressesListModelToAddressesListDTO(_newAddresses, _id);
+                _clientsData.SaveWishListByClientID(_wishList, _id);
+                maps.MapAddressesListModelToAddressesListDTO(_newAddresses, _id); //нужно исправить
             }
         }
 
         private ClientModel ToFormClientModel()
-
         {
-
             ClientModel client = new ClientModel();
-
             client.ID = _id;
             client.Name = textBoxName.Text.Trim();
             client.INN = textBoxINN.Text.Trim();
@@ -179,15 +182,7 @@ namespace TradeCompany_UI
                 textBoxContactPerson.Background = Brushes.Pink;
                 validation = false;
             }
-            //int member;
-            //if(textBoxINN.Text.Trim(' ') != null)
-            //{
-            //    if (!Int32.TryParse(textBoxINN.Text, out member))
-            //    {
-            //        textBoxINN.Background = Brushes.Pink;
-            //        validation = false;
-            //    }
-            //}
+
             return validation;
         }
 
@@ -223,7 +218,6 @@ namespace TradeCompany_UI
                 LoadWishPanel();
             }
 
-            //MessageBox.Show(selectedItem.Name.ToString()); 
         }
 
         private void LoadWishPanel()
@@ -263,7 +257,7 @@ namespace TradeCompany_UI
 
         private void AddAddress()
         {
-           foreach (String address in _oldAddresses)
+            foreach (String address in _oldAddresses)
             {
                 stackPanelAddresses.Children.Add(new TextBox
                 {
@@ -274,7 +268,7 @@ namespace TradeCompany_UI
                     Height = 21,
                     Margin = new Thickness(0, 5, 0, 0),
                     IsEnabled = false
-                });          
+                });
             }
         }
 
@@ -296,6 +290,45 @@ namespace TradeCompany_UI
                 ((TextBox)stackPanelAddresses.Children[0]).Text = "";
                 _newAddresses.Add(addedAddress);
             }
+        }
+
+        public void LoadFeedback()
+        {
+            foreach (FeedbackModel feedback in _feedback)
+            {
+                TextBlock fb = new TextBlock();
+                fb.TextWrapping = TextWrapping.Wrap;
+                fb.Text = feedback.DateTime + "    " + "Заказ №  " + feedback.OrderID + "\n" +feedback.Text;
+                fb.Margin = new Thickness(5, 5, 5, 5);
+                fb.Padding = new Thickness(5, 3, 5, 3);
+                fb.Background = new SolidColorBrush(Color.FromRgb(243, 223, 196));
+                SPFeedbackPanel.Children.Add(fb);
+            }
+        }
+
+        private void VisibilityStory(object sender, RoutedEventArgs e)
+        {
+            if(dgOrdersTable.Visibility == Visibility.Visible)
+            {
+                dgOrdersTable.Visibility = Visibility.Collapsed;
+            }
+            else 
+            {
+                dgOrdersTable.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void VisibilityFeedback(object sender, RoutedEventArgs e)
+        {
+            if (SPFeedbackPanel.Visibility == Visibility.Visible)
+            {
+                SPFeedbackPanel.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                SPFeedbackPanel.Visibility = Visibility.Visible;
+            }
+
         }
     }
 }

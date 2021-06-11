@@ -1,0 +1,26 @@
+﻿<Window x:Class="TradeCompany_UI.ChangeSelectedCategories"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TradeCompany_UI"
+        mc:Ignorable="d"
+        Title="" FontSize="14" ResizeMode="NoResize" Width="383" Height="200">
+    <Grid Height="Auto">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="1" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" >
+            
+            <StackPanel x:Name="StackPanel" Height="Auto" Margin="20,10,38,5" Grid.Row="0" Width="Auto"/>
+        </ScrollViewer>
+        <WrapPanel Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,10,0,0" Width="324">
+            <Button IsDefault="True"  Click="Accept_Click" MinWidth="60" Height="32" Margin="9,0,0,0" Width="101" Content="Отмена"/>
+            <Button x:Name="DeleteButton" IsCancel="True" MinWidth="60" Height="32" Margin="15,0,0,0" Width="189" Content="Удалить выбранные" Click="DeleteButton_Click"/>
+        </WrapPanel>
+
+
+    </Grid>
+</Window>

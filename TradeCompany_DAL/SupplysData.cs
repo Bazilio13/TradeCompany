@@ -44,7 +44,6 @@ namespace TradeCompany_DAL
         public List<SupplyDTO> GetSupplysByID(int id)
         {
             List<SupplyDTO> resultList = new List<SupplyDTO>();
-            SupplyDTO result = null;
             string query;
             using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
             {
