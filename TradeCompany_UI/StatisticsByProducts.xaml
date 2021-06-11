@@ -113,7 +113,7 @@
                 </DockPanel>
                               
                 <Button x:Name="ApplyFilters" Content="Применить фильтр" HorizontalAlignment="Center" Margin="0,0,0,10"/>
-                <Button x:Name="ResetFilters" Content="Сбросить фильтр" HorizontalAlignment="Center"/>
+                <Button x:Name="ResetFilters" Content="Сбросить фильтр" HorizontalAlignment="Center" Click="clearFilter"/>
             </StackPanel>
         </DockPanel>
     </Grid>

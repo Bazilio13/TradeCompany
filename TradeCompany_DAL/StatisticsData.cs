@@ -25,13 +25,24 @@ namespace TradeCompany_DAL
         }
 
 
-        public List<StatisticsGroupsDTO> GetStatisticsProducts()
+        public List<StatisticsGroupsDTO> GetStatisticsProducts(DateTime? minDateSupply, DateTime? maxDateSupply, DateTime? minDateOrder, DateTime? maxDateOrder, float? minAmount, float? maxAmount, float? minSum, float? maxSum)
         {
             List<StatisticsGroupsDTO> statisticsList = new List<StatisticsGroupsDTO>();
-            string query = "exec TradeCompany_DataBase.GetStatisticsProducts";
+            string query = "exec TradeCompany_DataBase.GetStatisticsProducts @MinDateSupply, @MaxDateSupply, @MinDateOrder, @MaxDateOrder, @MinAmount, @MaxAmount, @MinSum, @MaxSum";
+
             using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
             {
-                statisticsList = dbConnection.Query<StatisticsGroupsDTO>(query).AsList<StatisticsGroupsDTO>();
+                statisticsList = dbConnection.Query<StatisticsGroupsDTO>(query, new {
+                minDateSupply,
+                maxDateSupply,
+                minDateOrder,
+                maxDateOrder,
+                minAmount,
+                maxAmount,
+                minSum,
+                maxSum
+                }
+                    ).AsList<StatisticsGroupsDTO>();
             }
 
             return statisticsList;

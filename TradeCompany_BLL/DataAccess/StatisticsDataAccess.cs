@@ -16,9 +16,9 @@ namespace TradeCompany_BLL.DataAccess
         private MapsDTOtoModel _mapDTOtoModel = new MapsDTOtoModel();
 
 
-        public List<StatisticsGroupsModel> GetStatisticsProducts()
+        public List<StatisticsGroupsModel> GetStatisticsProducts(FilterGroupModel filter)
         {
-            List<StatisticsGroupsDTO> statisticsProductsDTOs = _statistecsData.GetStatisticsProducts();
+            List<StatisticsGroupsDTO> statisticsProductsDTOs = _statistecsData.GetStatisticsProducts(filter.MinDateSupply, filter.MaxDateSupply, filter.MinDateOrder, filter.MaxDateOrder, filter.MinAmount, filter.MaxAmount, filter.MinSum, filter.MaxSum);
             List<StatisticsGroupsModel> clinetsModel = _mapDTOtoModel.MapStatisticsGroursDTOToStatisticsGroursModel(statisticsProductsDTOs);
             return clinetsModel;
         }

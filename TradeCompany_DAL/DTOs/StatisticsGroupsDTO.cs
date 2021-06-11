@@ -11,8 +11,8 @@ namespace TradeCompany_DAL.DTOs
         public int ID { get; set; }
         public string CategoryName { get; set; }
         public float Summ { get; set; }
-        public DateTime LastSupplyDate { get; set; }
-        public DateTime LastOrderDate { get; set; }
+        public DateTime? LastSupplyDate { get; set; }
+        public DateTime? LastOrderDate { get; set; }
         public float Amount { get; set; }
 
     }

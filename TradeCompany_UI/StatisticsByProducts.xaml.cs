@@ -25,13 +25,14 @@ namespace TradeCompany_UI
     {
         private StatisticsDataAccess _dataAccess = new StatisticsDataAccess();
         private ProductsDataAccess _products;
+        private FilterGroupModel _filter = new FilterGroupModel();
 
         UINavi _uiNavi;
         public StatisticsByProducts()
         {
             InitializeComponent();
             _uiNavi = UINavi.GetUINavi();
-            DGAllGroups.ItemsSource = _dataAccess.GetStatisticsProducts();
+            DGAllGroups.ItemsSource = _dataAccess.GetStatisticsProducts(_filter);
             DGProducts.Visibility = Visibility.Collapsed;
             ButtonExit.Visibility = Visibility.Collapsed;
             textBlockLabel.Visibility = Visibility.Collapsed;
@@ -40,8 +41,6 @@ namespace TradeCompany_UI
             ProductGroupSelect.ItemsSource = allGroups;
             ProductGroupSelect.DisplayMemberPath = "Name";
             ProductGroupSelect.Text = "";
-
-
         }
 
         private void DateFromForSupply_SelectedDateChange(object sender, SelectionChangedEventArgs e)
@@ -94,6 +93,12 @@ namespace TradeCompany_UI
             {
                 SetCategory(item.ID, item.Name);
             }
+        }
+
+        private void clearFilter(object sender, RoutedEventArgs e)
+        {
+            _filter = null;
+            DGAllGroups.ItemsSource = _dataAccess.GetStatisticsProducts(_filter);
         }
     }
 }
