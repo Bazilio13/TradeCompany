@@ -17,6 +17,7 @@ namespace TradeCompany_BLL.Models
         public float Amount { get; set; }
         public float Price { get; set; }
         public string ProductMeasureUnit { get; set; }
+
     
     }
 }

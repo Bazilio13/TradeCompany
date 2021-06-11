@@ -75,7 +75,9 @@ namespace TradeCompany_UI
         private void GetOrderById(int id)
         {
             _infoAboutOrder = _orderDataAccess.GetOrderById(id).First();
-
+            //Sum.Text = _infoAboutOrder.Summ.ToString();
+            Sum.Text = "Сумма заказа: " + _infoAboutOrder.Summ.ToString();
+            Comment.Text = _infoAboutOrder.Comment;
             _orderId = id;
             _clientId = _infoAboutOrder.ClientsID;
 
@@ -87,7 +89,7 @@ namespace TradeCompany_UI
 
         private void ShowInfoAboutClient()
         {
-            ID.Text = "ID: " + _clientFullInfo.ID;
+            ID.Text = "ID заказа : " + _orderId; 
             ClientName.Text = _clientFullInfo.Name;
             Phone.Text = _clientFullInfo.Phone;
             
@@ -187,8 +189,15 @@ namespace TradeCompany_UI
             specificProduct = new OrderListModel();
             specificProduct.ProductID = productBaseModel.ID;
             specificProduct.ProductName = productBaseModel.Name;
-            //if(_clientFullInfo.Type == )
-            specificProduct.Price = productBaseModel.WholesalePrice; // сделать обратку какой клиент
+            if(_clientFullInfo.Type == true)
+            {
+                specificProduct.Price = productBaseModel.WholesalePrice;
+            }
+            else
+            {
+                specificProduct.Price = productBaseModel.RetailPrice;
+            }
+           
             specificProduct.ProductMeasureUnit = productBaseModel.MeasureUnitName;
             specificProduct.OrderID = _orderId;
             bgOrderListModels.Add(specificProduct);
@@ -206,7 +215,7 @@ namespace TradeCompany_UI
         }
         private void FillInfoAboutNewOrder()
         {
-            newOrder.DateTime = DateTime.Now; // возможно стоит переделать на календарь
+            newOrder.DateTime = (DateTime) DataPicker.SelectedDate; 
             newOrder.ClientsID = _clientId;
             newOrder.Client = _clientFullInfo.Name;
             newOrder.ClientsPhone = _clientFullInfo.Phone;
@@ -214,6 +223,7 @@ namespace TradeCompany_UI
             newOrder.OrderListModel = listOfProductForOrder;
             newOrder.AddressID = _addresId;
             newOrder.Address = _adress;
+            newOrder.Comment = Comment.Text;
 
         }
 
