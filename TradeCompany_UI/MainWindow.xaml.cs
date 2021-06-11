@@ -52,5 +52,10 @@ namespace TradeCompany_UI
         {
             _uiNavi.GoToThePage(new Supplys());
         }
+
+        private void StatisticsButton_Click(object sender, RoutedEventArgs e)
+        {
+            _uiNavi.GoToThePage(new StatisticsByProducts());
+        }
     }
 }
