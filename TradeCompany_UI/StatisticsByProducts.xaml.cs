@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TradeCompany_BLL;
 using TradeCompany_BLL.DataAccess;
 using TradeCompany_BLL.Models;
 
@@ -23,6 +24,7 @@ namespace TradeCompany_UI
     public partial class StatisticsByProducts : Page
     {
         private StatisticsDataAccess _dataAccess = new StatisticsDataAccess();
+        private ProductsDataAccess _products;
 
         UINavi _uiNavi;
         public StatisticsByProducts()
@@ -33,7 +35,11 @@ namespace TradeCompany_UI
             DGProducts.Visibility = Visibility.Collapsed;
             ButtonExit.Visibility = Visibility.Collapsed;
             textBlockLabel.Visibility = Visibility.Collapsed;
-
+            _products = new ProductsDataAccess();
+            List<ProductGroupModel> allGroups = _products.GetAllGroups();
+            ProductGroupSelect.ItemsSource = allGroups;
+            ProductGroupSelect.DisplayMemberPath = "Name";
+            ProductGroupSelect.Text = "";
 
 
         }
@@ -52,19 +58,24 @@ namespace TradeCompany_UI
         {
             DataGrid dg = (DataGrid)sender;
             StatisticsGroupsModel item = (StatisticsGroupsModel)dg.CurrentItem;
-            if (item != null)
+            if(item != null)
             {
-                int id = item.ID;
-                DGProducts.ItemsSource = _dataAccess.GetStatisticsProductsByGroupID(id);
-                DGAllGroups.Visibility = Visibility.Collapsed;
-                DGProducts.Visibility = Visibility.Visible;
-                ButtonExit.Visibility = Visibility.Visible;
-                textBlockLabel.Visibility = Visibility.Visible;
-                textBlockLabel.Text = item.CategoryName;
-
+                SetCategory(item.ID, item.CategoryName);
             }
 
         }
+        public void SetCategory(int id, string name)
+        {
+
+            DGProducts.ItemsSource = _dataAccess.GetStatisticsProductsByGroupID(id);
+            DGAllGroups.Visibility = Visibility.Collapsed;
+            DGProducts.Visibility = Visibility.Visible;
+            ButtonExit.Visibility = Visibility.Visible;
+            textBlockLabel.Visibility = Visibility.Visible;
+            textBlockLabel.Text = name;
+
+        }
+
 
         private void ClickExit(object sender, RoutedEventArgs e)
         {
@@ -72,6 +83,17 @@ namespace TradeCompany_UI
             DGProducts.Visibility = Visibility.Collapsed;
             ButtonExit.Visibility = Visibility.Collapsed;
             textBlockLabel.Visibility = Visibility.Collapsed;
+            ProductGroupSelect.Text = "";
+        }
+
+        private void ProductGroupSelect_DropDownClosed(object sender, EventArgs e)
+        {
+            ComboBox dg = (ComboBox)sender;
+            ProductGroupModel item = (ProductGroupModel)dg.SelectedItem;
+            if(item != null)
+            {
+                SetCategory(item.ID, item.Name);
+            }
         }
     }
 }
