@@ -30,13 +30,13 @@ namespace TradeCompany_UI.TableElements
             _stackPanel = new StackPanel();
             _border.Child = _stackPanel;
             _stackPanel.Orientation = Orientation.Horizontal;
+            Width = 0;
             for (int i = 0; i < HeadersText.Count; i++)
             {
                 _stackPanel.Children.Add(new Cell(HeadersText[i], ColumnSizes[i]));
                 Width += ColumnSizes[i];
             }
-
-            //< Border BorderBrush = "Black" BorderThickness = "0,1,1,0"  Height = "23" >
+            Width += 1;
         }
     }
 }

@@ -25,35 +25,41 @@ namespace TradeCompany_UI
     public partial class PotentialClients : Page
     {
         PotentialClientsDataAccess _dataAcces = new PotentialClientsDataAccess();
-        public PotentialClients()
+        Page _priviosPage;
+        UINavi _uiNavi;
+        public PotentialClients(List<int> ids, Page priviosPage)
         {
             InitializeComponent();
+            _priviosPage = priviosPage;
+            _uiNavi = UINavi.GetUINavi();
+            List<PotentialClientModel> clients = _dataAcces.GetPotentialClientsByProductsIDs(ids);
+            if (clients.Count > 0)
+            {
+                List<IRowItem> items = new List<IRowItem>();
+                foreach (PotentialClientModel model in clients)
+                {
+                    items.Add(model);
+                }
+                Panel.Children.Add(new CustomTable(items));
+            }
+            else
+            {
+                TextBlock textBlock = new TextBlock();
+                textBlock.Text = "Не удалось подобрать потенциальных клиентов";
+                Panel.Children.Add(textBlock);
+            }
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            List<int> ids = new List<int> { 2, 3, 6, 10 };
-            List<PotentialClientModel> clients = _dataAcces.GetPotentialClientsByProductsIDs(ids);
-        }
 
         private void ViewPotentialClients(List<PotentialClientModel> pClients)
         {
-            //mainPanel.Children.
             Button but = new Button();
-            
+
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            List<int> ids = new List<int> { 2, 3, 6, 10 };
-            List<PotentialClientModel> clients = _dataAcces.GetPotentialClientsByProductsIDs(ids);
-            List<IRowItem> items = new List<IRowItem>();
-            foreach (PotentialClientModel model in clients)
-            {
-                items.Add(model);
-            }
-
-            MainGrid.Children.Add(new CustomTable(items));
+            _uiNavi.GoToThePage(_priviosPage);
         }
     }
 }

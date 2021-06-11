@@ -35,15 +35,14 @@ namespace TradeCompany_UI.TableElements
             _stackPanel.Orientation = Orientation.Horizontal;
             List<string> content = Item.GetTextView();
             List<int> cSizes = Item.GetColomnSizes();
-            
+            Width = 0;
             for (int i = 0; i < content.Count; i++)
             {
              _stackPanel.Children.Add(new Cell(content[i], cSizes[i]));
                 Width += cSizes[i];                
             }
+            Width += 1;
             Click += (sender, e) => ShowDeatils();
-            
-            //< Border BorderBrush = "Black" BorderThickness = "0,1,1,0"  Height = "23" >
         }
         public void ShowDeatils()
         {

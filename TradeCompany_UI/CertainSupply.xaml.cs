@@ -102,7 +102,12 @@ namespace TradeCompany_UI
 
         private void PotentialClients_Click(object sender, RoutedEventArgs e)
         {
-            _uiNavi.GoToThePage(new PotentialClients());
+            List<int> ids = new List<int>();
+            foreach (SupplyListModel model in _ocSupplyListModels)
+            {
+                ids.Add(model.ProductID);
+            }
+            _uiNavi.GoToThePage(new PotentialClients(ids, this));
         }
 
         private void Save_Click(object sender, RoutedEventArgs e)
