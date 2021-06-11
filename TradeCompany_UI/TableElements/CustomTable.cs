@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using TradeCompany_BLL.Interfaces;
 
 namespace TradeCompany_UI.TableElements
@@ -26,6 +27,7 @@ namespace TradeCompany_UI.TableElements
             _items = items;
             _rows = new List<Row>();
             _details = new CustomTable();
+            
             if (_items.Count > 0)
             {
                 Children.Add(new Headers(_items[0].GetHeaders(), _items[0].GetColomnSizes(), this));
@@ -38,6 +40,10 @@ namespace TradeCompany_UI.TableElements
                     index++;
                 }
             }
+            Border border = new Border();
+            border.BorderThickness = new Thickness(0,0,0,1);
+            border.BorderBrush = Brushes.Black;
+            Children.Add(border);
         }
 
         public void ChangeDetailsVisibility(CustomTable details, int rowIndex)
