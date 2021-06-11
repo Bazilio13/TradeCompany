@@ -27,38 +27,30 @@ namespace TradeCompany_UI
         private OrderListModel specificProduct;
         private MessageWindow _messageWindow;
 
-
-
         private ClientBaseModel _clientBaseInfo;
         private ClientModel _clientFullInfo;
         private AddressModel _clientAdress;
 
-
         private List<OrderListModel> listOfProductForOrder = new List<OrderListModel>();
         private List<OrderListModel> listOfLastAddedProducts = new List<OrderListModel>();
         public List<AddressModel> listOAddressModel = new List<AddressModel>();
+        public List<ProductModel> _productModel = new List<ProductModel>();
 
         BindingList<OrderListModel> bgOrderListModels = new BindingList<OrderListModel>();
         BindingList<AddressModel> cbAddressModel = new BindingList<AddressModel>();
 
-       
         OrderDataAccess _orderDataAccess = new OrderDataAccess();
         ClientsDataAccess _clientsDataAccess = new ClientsDataAccess();
         AddressesDataAccess _addressesDataAccess = new AddressesDataAccess();
         ProductsDataAccess _ProductsDataAccess = new ProductsDataAccess();
 
-
         private UINavi _uinavi;
-
-
-
 
         public SpecificOrder()
         {
             InitializeComponent();
             _uinavi = UINavi.GetUINavi();
             newOrder = new OrderModel();
-            
             
         }
         public SpecificOrder(int id )
@@ -192,7 +184,7 @@ namespace TradeCompany_UI
             specificProduct.ProductName = productBaseModel.Name;
             if(_clientFullInfo.Type == true)
             {
-                specificProduct.Price = productBaseModel.WholesalePrice;
+                specificProduct.Price = productBaseModel.WholesalePrice; // переписать 
             }
             else
             {
@@ -203,6 +195,14 @@ namespace TradeCompany_UI
             specificProduct.OrderID = _orderId;
             bgOrderListModels.Add(specificProduct);
             listOfProductForOrder.Add(specificProduct);
+
+            foreach (var item in listOfProductForOrder)
+            {
+                ProductModel model = new ProductModel();
+               // model = item.Pro;
+
+                //_ProductsDataAccess.UpdateProductByID(i)
+            }
         }
 
 

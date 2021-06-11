@@ -275,5 +275,15 @@ namespace TradeCompany_DAL
             }
             return measureUnits;
         }
+        public void ReduceProductAmountInStockByID(int id , int amount)
+        {
+            string query;
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                query = "exec [TradeCompany_DataBase].[ReduceProductAmountInStockByID] @id , @amout";
+                dbConnection.Query(query, new { id, amount });
+            }
+
+        }
     }
 }
