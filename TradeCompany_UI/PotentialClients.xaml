@@ -9,6 +9,17 @@
       Title="PotentialClients">
 
     <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="235,264,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
+        <StackPanel x:Name="mainPanel"/>
+        <Button MinWidth="300">
+            <StackPanel Orientation="Horizontal">
+                <Border BorderBrush="Beige" >
+                    <TextBlock Margin="5, 5">Статистика</TextBlock>
+                </Border>
+                <Border BorderBrush="AliceBlue" >
+                    <TextBlock Margin="5, 5">Статистика</TextBlock>
+                </Border>
+
+            </StackPanel>
+        </Button>
     </Grid>
 </Page>

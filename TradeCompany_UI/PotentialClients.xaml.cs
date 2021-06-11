@@ -34,5 +34,10 @@ namespace TradeCompany_UI
             List<int> ids = new List<int> { 2, 3, 6, 10 };
             List<PotentialClientModel> clients = _dataAcces.GetPotentialClientsByProductsIDs(ids);
         }
+
+        private void ViewPotentialClients(List<PotentialClientModel> pClients)
+        {
+            //mainPanel.Children.
+        }
     }
 }
