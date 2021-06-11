@@ -19,9 +19,9 @@ namespace TradeCompany_UI.TableElements
         
         public IRowItem Item { get; set; }
         int Index { get; set; }
-        public Row(IRowItem item, CustomTable parent, int index)
+        public Row(IRowItem item, CustomTable parent, int index, string style)
         {
-            Style = FindResource("RowButton") as Style;
+            Style = FindResource(style) as Style;
             Index = index;
             _parentTable = parent;
             Item = item;
@@ -47,7 +47,7 @@ namespace TradeCompany_UI.TableElements
         }
         public void ShowDeatils()
         {
-            CustomTable details = new CustomTable(Item.GetDetalization());
+            CustomTable details = new CustomTable(Item.GetDetalization(), "InnerButton");
             _parentTable.ChangeDetailsVisibility(details, Index);
         }
 
