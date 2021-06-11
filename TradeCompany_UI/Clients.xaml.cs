@@ -34,6 +34,7 @@ namespace TradeCompany_UI
             _clientsData = new ClientsDataAccess();
             dgClientsTable.ItemsSource = _clientsData.GetClients();
             _uiNavi = UINavi.GetUINavi();
+            _previosPage = previosPage;
         }
 
         private void Border_Loaded(object sender, RoutedEventArgs e)
@@ -112,19 +113,6 @@ namespace TradeCompany_UI
             MinDate.SelectedDate = null;
             ClientsFiltr(sender, e);
         }
-
-
-        private void dgClientsTable_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            DataGrid dg = (DataGrid)sender;
-            ClientBaseModel item = (ClientBaseModel)dg.CurrentItem;
-            if(item != null)
-            {
-                int id = item.ID;
-                frame.Content = new OneClient(id);
-            }
-        }
-
         private void AddNewClient(object sender, RoutedEventArgs e)
         {
             frame.Content = new OneClient();
@@ -139,6 +127,16 @@ namespace TradeCompany_UI
                 clientAddable.AddClientToOrder(clientBaseModel);
                 _uiNavi.GoToThePage(_previosPage);
             }
-        }        
+            else
+            {
+                DataGrid dg = (DataGrid)sender;
+                ClientBaseModel item = (ClientBaseModel)dg.CurrentItem;
+                if (item != null)
+                {
+                    int id = item.ID;
+                    frame.Content = new OneClient(id);
+                }
+            }
+        }
     }
 }

@@ -15,12 +15,13 @@ namespace TradeCompany_UI
     /// <summary>
     /// Interaction logic for SpecificOrder.xaml
     /// </summary>
-    public partial class SpecificOrder : Page,  IProductAddable , IClientAddable
+    public partial class SpecificOrder : Page, IProductAddable, IClientAddable
     {
         private int _orderId;
         private int _clientId;
         private int _addresId; // можно в Модельку оформить
         private string _adress;
+        private float _amount;
 
         private OrderModel newOrder;
         private OrderModel _infoAboutOrder;
@@ -51,9 +52,9 @@ namespace TradeCompany_UI
             InitializeComponent();
             _uinavi = UINavi.GetUINavi();
             newOrder = new OrderModel();
-            
+
         }
-        public SpecificOrder(int id )
+        public SpecificOrder(int id)
         {
             InitializeComponent();
 
@@ -82,13 +83,13 @@ namespace TradeCompany_UI
 
         private void ShowInfoAboutClient()
         {
-            ID.Text = "ID заказа : " + _orderId; 
+            ID.Text = "ID заказа : " + _orderId;
             ClientName.Text = _clientFullInfo.Name;
             Phone.Text = _clientFullInfo.Phone;
-            
+
 
         }
-       
+
         private void GetInfoAboutClient()
         {
             _clientFullInfo = new ClientModel();
@@ -100,16 +101,16 @@ namespace TradeCompany_UI
 
             _clientAdress.Address = _infoAboutOrder.Address;
             _clientAdress.ID = _infoAboutOrder.ID;
-            
+
         }
 
-        
+
         private void FillComboBoxAdress()
         {
             listOAddressModel = _addressesDataAccess.GetAdressByClientID(_clientId);
             cbAdress.ItemsSource = listOAddressModel;
             cbAdress.DisplayMemberPath = "Address";
-            cbAdress.Text = "Адрес";         
+            cbAdress.Text = "Адрес";
         }
 
 
@@ -134,10 +135,13 @@ namespace TradeCompany_UI
             //addedProduct.OrderID = _orderId;
 
             //listOfProductForOrder.Add(addedProduct);
+
+
+
         }
         private void AddProductInOrder_Click(object sender, RoutedEventArgs e)
         {
-            
+
             if (listOfProductForOrder.Equals(listOfLastAddedProducts))
             {
                 return;
@@ -158,7 +162,7 @@ namespace TradeCompany_UI
                 }
                 //_messageWindow = new MessageWindow("Продукты добавлены в базу");
             }
-           
+
         }
 
         private float CountOrderSumm()
@@ -182,7 +186,7 @@ namespace TradeCompany_UI
             specificProduct = new OrderListModel();
             specificProduct.ProductID = productBaseModel.ID;
             specificProduct.ProductName = productBaseModel.Name;
-            if(_clientFullInfo.Type == true)
+            if (_clientFullInfo.Type == true)
             {
                 specificProduct.Price = productBaseModel.WholesalePrice; // переписать 
             }
@@ -190,19 +194,19 @@ namespace TradeCompany_UI
             {
                 specificProduct.Price = productBaseModel.RetailPrice;
             }
-           
+
             specificProduct.ProductMeasureUnit = productBaseModel.MeasureUnitName;
             specificProduct.OrderID = _orderId;
+
             bgOrderListModels.Add(specificProduct);
             listOfProductForOrder.Add(specificProduct);
 
-            foreach (var item in listOfProductForOrder)
-            {
-                ProductModel model = new ProductModel();
-               // model = item.Pro;
 
-                //_ProductsDataAccess.UpdateProductByID(i)
-            }
+        }
+
+        private void IsEnoughProductInStock(int amount)
+        {
+
         }
 
 
@@ -216,7 +220,7 @@ namespace TradeCompany_UI
         }
         private void FillInfoAboutNewOrder()
         {
-            newOrder.DateTime = (DateTime) DataPicker.SelectedDate; 
+            newOrder.DateTime = (DateTime)DataPicker.SelectedDate;
             newOrder.ClientsID = _clientId;
             newOrder.Client = _clientFullInfo.Name;
             newOrder.ClientsPhone = _clientFullInfo.Phone;
@@ -240,7 +244,7 @@ namespace TradeCompany_UI
             {
                 cbAdress.SelectedIndex = 0;
             }
-            
+
         }
 
         private void cbAdress_DropDownClosed(object sender, EventArgs e)
@@ -252,6 +256,12 @@ namespace TradeCompany_UI
         public void AddProductToCollection(int productID, string productName, string productMeasureUnit, List<ProductGroupModel> productGroupModels)
         {
             throw new NotImplementedException();
+        }
+
+        private void dgSpecificOrder_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+            var i = (OrderListModel)e.Row.Item;
+            _amount = i.Amount;
         }
     }
 }
