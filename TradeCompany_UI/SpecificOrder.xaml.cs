@@ -45,6 +45,7 @@ namespace TradeCompany_UI
         OrderDataAccess _orderDataAccess = new OrderDataAccess();
         ClientsDataAccess _clientsDataAccess = new ClientsDataAccess();
         AddressesDataAccess _addressesDataAccess = new AddressesDataAccess();
+        ProductsDataAccess _ProductsDataAccess = new ProductsDataAccess();
 
 
         private UINavi _uinavi;
