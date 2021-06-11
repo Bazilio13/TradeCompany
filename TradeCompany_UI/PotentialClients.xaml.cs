@@ -26,7 +26,6 @@ namespace TradeCompany_UI
         public PotentialClients()
         {
             InitializeComponent();
-
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

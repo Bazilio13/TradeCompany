@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using TradeCompany_BLL.Models;
 
-namespace TradeCompany_UI.PotentialClients
+namespace TradeCompany_UI.TableElements
 {
     public class Row: StackPanel
     {
