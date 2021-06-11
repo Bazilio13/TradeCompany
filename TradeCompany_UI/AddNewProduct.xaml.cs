@@ -25,6 +25,7 @@ namespace TradeCompany_UI
     {
         private ProductsDataAccess _productsData = new ProductsDataAccess();
         private ProductModel _currentProduct = new ProductModel();
+        private List<ProductBaseModel> _allProducts = new List<ProductBaseModel>();
         private ProductGroupModel _newGroup = new ProductGroupModel();
         private List<ProductGroupModel> _chosenGroups = new List<ProductGroupModel>();
         private List<ProductGroupModel> _allGroups;
@@ -33,15 +34,18 @@ namespace TradeCompany_UI
         private UINavi _uiNavi;
         private Page _priviosPage;
         private int _id;
+        private ProductCatalog _prodCatalog;
 
         public AddNewProduct(Page priviosPage)
         {
             InitializeComponent();
             _uiNavi = UINavi.GetUINavi();
             _priviosPage = priviosPage;
+            _allProducts = _productsData.GetAllProducts();
             _currentProductID = GetCurrentProductID();
             Button_Delete.IsEnabled = false;
             Button_Save.IsEnabled = false;
+            DateText.Text = "Дата создания";
         }
 
         public AddNewProduct(int id, Page priviosPage)
@@ -58,7 +62,7 @@ namespace TradeCompany_UI
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-
+            _prodCatalog = (ProductCatalog)_priviosPage;
             MeasureUnit.ItemsSource = _productsData.GetAllMeasureUnits();
             MeasureUnit.DisplayMemberPath = "Name";
             RefreshGroupsCombobox();
@@ -99,7 +103,7 @@ namespace TradeCompany_UI
                 MessageBox.Show("Неверно выбрана единица измерения");
                 return;
             }
-            _measureUnitID = selectedItem.ID; //падает на налл, если написать что-то а не выбрать категорию
+            _measureUnitID = selectedItem.ID; 
             _currentProduct.Name = Name_Text.Text;
             _currentProduct.StockAmount = (float)Convert.ToDouble(Text_StockAmount.Text);
             _currentProduct.MeasureUnit = _measureUnitID;
@@ -109,12 +113,11 @@ namespace TradeCompany_UI
             _currentProduct.Comments = Text_Comments.Text;
             if (_id == 0)
             {
-                _currentProduct.LastSupplyDate = DateTime.Now;
                 _productsData.AddNewProduct(_currentProduct);
             }
             else
             {
-                //удалить все группы из товара
+                //удаление всех группы из товара
                 foreach(ProductGroupModel group in _currentProduct.Groups)
                 {
                     _productsData.DeleteGroupFromProduct(_currentProduct.ID, group.ID);
@@ -127,9 +130,9 @@ namespace TradeCompany_UI
                 _productsData.AddProductToProductGroup(_currentProductID, group.ID);
             }
 
-            ProductCatalog prodCatalog = (ProductCatalog)_priviosPage;
+
+            _prodCatalog.ApplyFilters();
             _uiNavi.GoToThePage(_priviosPage);
-            prodCatalog.ApplyFilters();
         }
 
 
@@ -197,9 +200,7 @@ namespace TradeCompany_UI
             if (_chosenGroups.Count > 0)
             {
                 ChangeSelectedCategories changeCtaegoriesWindow = new ChangeSelectedCategories(_chosenGroups, ChosenCategories);
-                //вынести в само окно 
-                changeCtaegoriesWindow.Owner = _uiNavi.MainWindow;
-                changeCtaegoriesWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+
                 if (changeCtaegoriesWindow.ShowDialog() == true)
                 {
                     changeCtaegoriesWindow.Close();
@@ -335,15 +336,27 @@ namespace TradeCompany_UI
 
         private int GetCurrentProductID()
         {
-            int lastProductInDBCount = _productsData.GetAllProducts().Count - 1;
-            ProductBaseModel lastProductInDB = _productsData.GetAllProducts()[lastProductInDBCount];
-            int currentProductID = lastProductInDB.ID + 1;
+            int currentProductID = _productsData.GetLastProductID() + 1;
             return currentProductID;
         }
 
         private void Button_Delete_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Функция удаления в разработке");
+            if (MessageBox.Show("Удалить из каталога?",
+                        "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    _productsData.HardDeleteProductByID(_currentProductID);
+                }
+                catch (Exception)
+                {
+                    _productsData.SoftDeleteProductByID(_currentProductID);
+                }
+                MessageBox.Show("Товар удален", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                _prodCatalog.ApplyFilters();
+                _uiNavi.GoToThePage(_priviosPage);
+            }
         }
     }
 }

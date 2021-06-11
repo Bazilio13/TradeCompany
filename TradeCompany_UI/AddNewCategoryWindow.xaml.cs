@@ -19,10 +19,14 @@ namespace TradeCompany_UI
     /// </summary>
     public partial class AddNewCategoryWindow : Window
     {
+        private UINavi _uiNavi;
         public AddNewCategoryWindow()
         {
             InitializeComponent();
-            if(NewCategory.Text == "")
+            _uiNavi = UINavi.GetUINavi();
+            Owner = _uiNavi.MainWindow;
+            WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            if (NewCategory.Text == "")
             {
                 SaveButton.IsEnabled = false;
             }

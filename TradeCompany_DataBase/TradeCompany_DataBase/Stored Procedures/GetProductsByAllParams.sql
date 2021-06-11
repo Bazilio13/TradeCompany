@@ -25,4 +25,5 @@ where
   (@FromRetailPrice IS NULL OR P.RetailPrice >= @FromRetailPrice) AND
   (@ToRetailPrice IS NULL OR P.RetailPrice <= @ToRetailPrice) AND
   (@MinDateTime IS NULL OR P.LastSupplyDate >= @MinDateTime) AND
-  (@MaxDateTime IS NULL OR P.LastSupplyDate <= @MaxDateTime)
+  (@MaxDateTime IS NULL OR P.LastSupplyDate <= @MaxDateTime) AND
+  P.IsDeleted = 0
