@@ -33,7 +33,7 @@
                     </StackPanel>
                 </Button>
 
-                <Button Style="{StaticResource ButtonNavigation}" Click="SupplysButton_Click">
+                <Button x:Name="SupplysButton" Style="{StaticResource ButtonNavigation}" Click="SupplysButton_Click">
                     <StackPanel Height="75" Width="105" Orientation="Vertical">
                         <Image Style="{StaticResource ButtonNavigationIcons}" Source="Pictures/phone.png"/>
                         <TextBlock Style="{StaticResource ButtonNavigationText}">Поставки</TextBlock>
