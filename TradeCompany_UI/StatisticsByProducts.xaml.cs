@@ -57,7 +57,7 @@ namespace TradeCompany_UI
         {
             DataGrid dg = (DataGrid)sender;
             StatisticsGroupsModel item = (StatisticsGroupsModel)dg.CurrentItem;
-            if(item != null)
+            if (item != null)
             {
                 SetCategory(item.ID, item.CategoryName);
             }
@@ -89,7 +89,7 @@ namespace TradeCompany_UI
         {
             ComboBox dg = (ComboBox)sender;
             ProductGroupModel item = (ProductGroupModel)dg.SelectedItem;
-            if(item != null)
+            if (item != null)
             {
                 SetCategory(item.ID, item.Name);
             }
@@ -100,5 +100,41 @@ namespace TradeCompany_UI
             _filter = null;
             DGAllGroups.ItemsSource = _dataAccess.GetStatisticsProducts(_filter);
         }
+
+        private void GroupFilter(object sender, RoutedEventArgs e)
+        {
+            _filter.MinDateSupply = DateFromForSupply.SelectedDate;
+            _filter.MaxDateSupply = DateUntilForSupply.SelectedDate; 
+            _filter.MinDateOrder = DateFromForOrder.SelectedDate;
+            _filter.MaxDateOrder = DateUntilForOrder.SelectedDate;
+            _filter.MinAmount = ConvertStringToFloat(FromOrdersAmount.Text);
+            _filter.MaxAmount = ConvertStringToFloat(ToOrdersAmount.Text);     
+            _filter.MinSum = ConvertStringToFloat(FromPrice.Text);
+            _filter.MaxSum = ConvertStringToFloat(ToPrice.Text);
+            DGAllGroups.ItemsSource = _dataAccess.GetStatisticsProducts(_filter);
+        }
+
+        private float? ConvertStringToFloat(string str)
+        {
+            if(str == "" || str == null)
+            {
+                return null;
+            }
+            else
+            {
+                return (float?)Convert.ToDouble(str);
+            }
+        }
+        private void ValidationByNumber(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !(Char.IsDigit(e.Text, 0));
+        }
+
+
+        private void GroupFiltr(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
+
 }
