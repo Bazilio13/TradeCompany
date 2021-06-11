@@ -31,19 +31,34 @@
                     <Button Content="Вчера" Margin="0,0,10,0"/>
                     <Button Content="Сегодня"/>
                 </DockPanel>
+                <DockPanel HorizontalAlignment="Left" Margin="0,0,0,12">
+                    <Button x:Name ="ButtonExit" Content="Назад" Width="100" HorizontalAlignment="Left" Margin="0,2,0,10" Click="ClickExit" />
+                    <TextBlock x:Name="textBlockLabel" Text="Текст"  Margin="15,15,0,0"/>
+                </DockPanel>
 
-                <DataGrid Grid.Row="1" AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" ScrollViewer.CanContentScroll="True">
+                <DataGrid x:Name ="DGAllGroups" Grid.Row="1" AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" ScrollViewer.CanContentScroll="True" MouseLeftButtonDown="DGCategory_MouseLeftButtonDown">
 
-                    <!--<DataGrid.Columns>
-                        <DataGridTextColumn Binding ="{Binding Path = }" IsReadOnly="True" Header="Наименование товара" Width="125" MinWidth="125"/>
-                        <DataGridTextColumn Binding ="{Binding Path = }" IsReadOnly="True" Header="Количество (продаж)" Width="103" MinWidth="103"/>
-                        <DataGridTextColumn Binding ="{Binding Path = }" IsReadOnly="True" Header="Цена за одну единицу" Width="82" MinWidth="82"/>
-                        <DataGridTextColumn Binding ="{Binding Path = }" IsReadOnly="True" Header="Сумма" Width="82" MinWidth="82" />
-                        <DataGridTextColumn Binding ="{Binding Path = }" IsReadOnly="True" Header="Остаток" Width="82" MinWidth="82"/>
-                        <DataGridTextColumn Binding ="{Binding Path = }" IsReadOnly="True" Header="Дата последней поставки" Width="82" MinWidth="82"/>
-                        <DataGridTextColumn Binding ="{Binding Path = }" IsReadOnly="True" Header="Дата последнего заказ" Width="*" MinWidth="82"/>
-                    </DataGrid.Columns>-->
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding ="{Binding Path = CategoryName}" IsReadOnly="True" Header="Категория" Width="125" MinWidth="125"/>
+                        <DataGridTextColumn Binding ="{Binding Path = Amount}" IsReadOnly="True" Header="Количество (продаж)" Width="103" MinWidth="103"/>
+                        <DataGridTextColumn Binding ="{Binding Path = Summ }" IsReadOnly="True" Header="Сумма" Width="82" MinWidth="82" />
+                        <!--<DataGridTextColumn Binding ="{Binding Path = }" IsReadOnly="True" Header="Остаток" Width="82" MinWidth="82"/>-->
+                        <DataGridTextColumn Binding ="{Binding Path = LastSupplyDate}" IsReadOnly="True" Header="Дата последней поставки" Width="82" MinWidth="82"/>
+                        <DataGridTextColumn Binding ="{Binding Path = LastOrderDate}" IsReadOnly="True" Header="Дата последнего заказ" Width="*" MinWidth="82"/>
+                    </DataGrid.Columns>
                 </DataGrid>
+
+                <DataGrid x:Name ="DGProducts" Grid.Row="1" AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" ScrollViewer.CanContentScroll="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding ="{Binding Path = Name}" IsReadOnly="True" Header="Продукт" Width="125" MinWidth="125"/>
+                        <DataGridTextColumn Binding ="{Binding Path = Amount}" IsReadOnly="True" Header="Количество (продаж)" Width="103" MinWidth="103"/>
+                        <DataGridTextColumn Binding ="{Binding Path = Summ }" IsReadOnly="True" Header="Сумма" Width="82" MinWidth="82" />
+                        <!--<DataGridTextColumn Binding ="{Binding Path = }" IsReadOnly="True" Header="Остаток" Width="82" MinWidth="82"/>-->
+                        <DataGridTextColumn Binding ="{Binding Path = LastSupplyDate}" IsReadOnly="True" Header="Дата последней поставки" Width="82" MinWidth="82"/>
+                        <DataGridTextColumn Binding ="{Binding Path = LastOrderDate}" IsReadOnly="True" Header="Дата последнего заказ" Width="*" MinWidth="82"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                
             </StackPanel>
         </ScrollViewer>
 

@@ -25,16 +25,29 @@ namespace TradeCompany_DAL
         }
 
 
-        public List<StatisticsProductsDTO> GetStatisticsProducts()
+        public List<StatisticsGroupsDTO> GetStatisticsProducts()
         {
-            List<StatisticsProductsDTO> statisticsList = new List<StatisticsProductsDTO>();
+            List<StatisticsGroupsDTO> statisticsList = new List<StatisticsGroupsDTO>();
             string query = "exec TradeCompany_DataBase.GetStatisticsProducts";
             using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
             {
-                statisticsList = dbConnection.Query<StatisticsProductsDTO>(query).AsList<StatisticsProductsDTO>();
+                statisticsList = dbConnection.Query<StatisticsGroupsDTO>(query).AsList<StatisticsGroupsDTO>();
             }
 
             return statisticsList;
         }
+
+        public List<StatisticsProductDTO> GetStatisticsProductsByGroupID(int id)
+        {
+            List<StatisticsProductDTO> statisticsList = new List<StatisticsProductDTO>();
+            string query = "exec TradeCompany_DataBase.GetStatisticsProductsByGroupID @id";
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                statisticsList = dbConnection.Query<StatisticsProductDTO>(query, new { id}).AsList<StatisticsProductDTO>();
+            }
+
+            return statisticsList;
+        }
+
     }
 }
