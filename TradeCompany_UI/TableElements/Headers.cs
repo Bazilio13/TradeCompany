@@ -19,11 +19,12 @@ namespace TradeCompany_UI.TableElements
         public List<int> ColumnSizes { get; set; }
         public Headers(List<string> headers, List<int> columnSizes, CustomTable parent)
         {
+            Style = FindResource("HeaderButton") as Style;
             _parentTable = parent;
             HeadersText = headers;
             ColumnSizes = columnSizes;
             BorderThickness = new Thickness(0);
-            Height = 23;
+            Height = 23;            
             _border = new Border() { BorderThickness = new Thickness(1, 2, 0, 4), Height = 23, BorderBrush = Brushes.Black };
             AddChild(_border);
             _stackPanel = new StackPanel();

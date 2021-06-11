@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using TradeCompany_BLL.Interfaces;
 
@@ -31,7 +32,7 @@ namespace TradeCompany_UI.TableElements
                 int index = 1;
                 foreach(IRowItem item in _items)
                 {
-                    Row row = new Row(item, this, index);
+                    Row row = new Row(item, this, index);                    
                     _rows.Add(row);
                     Children.Add(row);
                     index++;

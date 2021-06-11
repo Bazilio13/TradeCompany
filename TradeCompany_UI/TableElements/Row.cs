@@ -16,6 +16,7 @@ namespace TradeCompany_UI.TableElements
         private CustomTable _parentTable;
         private Border _border;
         private StackPanel _stackPanel;
+        
         public IRowItem Item { get; set; }
         int Index { get; set; }
         public Row(IRowItem item, CustomTable parent, int index)
@@ -34,14 +35,14 @@ namespace TradeCompany_UI.TableElements
             _stackPanel.Orientation = Orientation.Horizontal;
             List<string> content = Item.GetTextView();
             List<int> cSizes = Item.GetColomnSizes();
-
+            
             for (int i = 0; i < content.Count; i++)
             {
              _stackPanel.Children.Add(new Cell(content[i], cSizes[i]));
-                Width += cSizes[i];
+                Width += cSizes[i];                
             }
             Click += (sender, e) => ShowDeatils();
-
+            
             //< Border BorderBrush = "Black" BorderThickness = "0,1,1,0"  Height = "23" >
         }
         public void ShowDeatils()
