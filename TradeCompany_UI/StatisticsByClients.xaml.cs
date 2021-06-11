@@ -16,25 +16,21 @@ using System.Windows.Shapes;
 namespace TradeCompany_UI
 {
     /// <summary>
-    /// Interaction logic for StatisticsByProducts.xaml
+    /// Interaction logic for StatisticsByClients.xaml
     /// </summary>
-    public partial class StatisticsByProducts : Page
+    public partial class StatisticsByClients : Page
     {
         UINavi _uiNavi;
-        public StatisticsByProducts()
+
+        public StatisticsByClients()
         {
             InitializeComponent();
             _uiNavi = UINavi.GetUINavi();
         }
 
-        private void DateFromForSupply_SelectedDateChange(object sender, SelectionChangedEventArgs e)
+        private void StatisticsByProductsButton_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void StatisticsByClientsButton_Click(object sender, RoutedEventArgs e)
-        {
-            _uiNavi.GoToThePage(new StatisticsByClients());
+            _uiNavi.GoToThePage(new StatisticsByProducts());
         }
     }
 }
