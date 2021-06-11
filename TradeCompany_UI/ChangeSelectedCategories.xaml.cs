@@ -20,18 +20,21 @@ namespace TradeCompany_UI
     /// </summary>
     public partial class ChangeSelectedCategories : Window
     {
+        private UINavi _uiNavi;
         private List<ProductGroupModel> _chosenGroups;
         private TextBox _textBox;
         public ChangeSelectedCategories(List<ProductGroupModel> chosenGroups, TextBox textBox)
         {
             InitializeComponent();
+            _uiNavi = UINavi.GetUINavi();
+            Owner = _uiNavi.MainWindow;
+            WindowStartupLocation = WindowStartupLocation.CenterOwner;
             _chosenGroups = chosenGroups;
             _textBox = textBox;
             for (int i = 0; i < _chosenGroups.Count; i++)
             {
                 StackPanel.Children.Add(new CheckBox {Name = @"i", Content = _chosenGroups[i].Name });;
             }
-            
         }
 
         private void Accept_Click(object sender, RoutedEventArgs e)

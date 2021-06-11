@@ -32,7 +32,7 @@ namespace TradeCompany_UI
         {
             InitializeComponent();
             _clientsData = new ClientsDataAccess();
-            _previosPage = previosPage;
+            dgClientsTable.ItemsSource = _clientsData.GetClients();
             _uiNavi = UINavi.GetUINavi();
         }
 
@@ -52,8 +52,7 @@ namespace TradeCompany_UI
 
         }
 
-
-        private void textInput(object sender, TextCompositionEventArgs e)
+        private void textInput(object sender, TextChangedEventArgs e)
         {
             MapsDTOtoModel map = new MapsDTOtoModel();
             if (ClientFiltr.Text == "")
@@ -62,7 +61,7 @@ namespace TradeCompany_UI
             }
             else
             {
-                dgClientsTable.ItemsSource = _clientsData.GetClientsBySearch(ClientFiltr.Text + e.Text);
+                dgClientsTable.ItemsSource = _clientsData.GetClientsBySearch(ClientFiltr.Text);
             }
         }
 
@@ -140,6 +139,6 @@ namespace TradeCompany_UI
                 clientAddable.AddClientToOrder(clientBaseModel);
                 _uiNavi.GoToThePage(_previosPage);
             }
-        }
+        }        
     }
 }
