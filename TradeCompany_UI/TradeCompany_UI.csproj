@@ -15,6 +15,7 @@
     <Page Remove="Styles\ButtonStyle.xaml" />
     <Page Remove="Styles\DataGridStyle.xaml" />
     <Page Remove="Styles\RadioButtonStyle.xaml" />
+    <Page Remove="Styles\RowButtonStyle.xaml" />
     <Page Remove="Styles\StyleDictionary.xaml" />
   </ItemGroup>
 
@@ -77,6 +78,9 @@
       <Generator>MSBuild:Compile</Generator>
     </Resource>
     <Resource Include="Styles\DataGridStyle.xaml" />
+    <Resource Include="Styles\RowButtonStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
     <Resource Include="Styles\StyleDictionary.xaml" />
   </ItemGroup>
 
