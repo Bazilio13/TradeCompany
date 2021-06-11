@@ -13,13 +13,15 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" TargetName="border" Value="#B6AB9C"/>
+                            <Setter Property="Background" TargetName="border" Value="#6E304B"/>
+                            <Setter Property="Foreground" Value="#F3DFC4"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" TargetName="border" Value="#9E7640"/>
+                            <Setter Property="Background" TargetName="border" Value="#6E304B"/>
+                            <Setter Property="Foreground" Value="#F3DFC4"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Opacity" TargetName="grid" Value="0.80"/>
+                            <Setter Property="Opacity" TargetName="grid" Value="0.75"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

@@ -8,6 +8,7 @@
     [LastSupplyDate] DATETIME       NULL,
     [Description]    NVARCHAR (500) NULL,
     [Comments]       NVARCHAR (500) NULL,
+    [IsDeleted]      BIT            NOT NULL,
     CONSTRAINT [PK_PRODUCTS] PRIMARY KEY CLUSTERED ([ID] ASC),
     CONSTRAINT [Products_fk0] FOREIGN KEY ([MeasureUnit]) REFERENCES [TradeCompany_DataBase].[MeasureUnits] ([ID])
 );

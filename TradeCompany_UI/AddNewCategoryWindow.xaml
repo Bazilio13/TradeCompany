@@ -16,8 +16,8 @@
         <TextBlock Margin="10,0,0,0" Text="Создать новую категорию" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         <TextBox x:Name="NewCategory" HorizontalAlignment="Left" Margin="85,0,0,0" Grid.Row="1" Text="" TextWrapping="Wrap" VerticalAlignment="Center" Width="268" TextChanged="NewCategory_TextChanged"/>
         <TextBlock HorizontalAlignment="Left" Margin="16,0,0,0" Grid.Row="1" Text="Название" TextWrapping="Wrap" VerticalAlignment="Center" Width="64"/>
-        <Button x:Name="Cancel" IsDefault="True" HorizontalAlignment="Left" Click="Cancel_Click" Height="32" Margin="94,6,0,12" Grid.Row="2" Width="90">Отмена</Button>
-        <Button x:Name="SaveButton" IsCancel="True" HorizontalAlignment="Left" Height="32" Grid.Row="2" Content="Сохранить" Click="SaveButton_Click" Margin="199,6,0,12" Width="90"/>
+        <Button x:Name="Cancel" IsDefault="True" HorizontalAlignment="Left" Click="Cancel_Click" Height="32" Margin="85,6,0,12" Grid.Row="2" Width="99">Отмена</Button>
+        <Button x:Name="SaveButton" IsCancel="True" HorizontalAlignment="Left" Height="32" Grid.Row="2" Content="Сохранить" Click="SaveButton_Click" Margin="199,6,0,12" Width="125"/>
 
     </Grid>
 </Window>

@@ -143,6 +143,8 @@
     <Build Include="TradeCompany_DataBase\Stored Procedures\GetAllMeasureUnits.sql" />
     <Build Include="TradeCompany_DataBase\Functions\Table-valued Functions\Iter_intlist_to_table.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\GetPotentialClientsByProductsIDs.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\SoftDeleteProductByID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetLastProductID.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="TradeCompany_DataBase.refactorlog" />

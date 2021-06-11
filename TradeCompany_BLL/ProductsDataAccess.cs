@@ -41,12 +41,17 @@ namespace TradeCompany_BLL
             return groupsModel;
         }
 
-        public ProductBaseModel GetProductByID(int id)
+        public ProductModel GetProductByID(int id)
         {
             List<ProductDTO> productDTO = new List<ProductDTO>();
             productDTO.Add(_productsData.GetProductByID(id));
-            List<ProductBaseModel> productsModel = _mapsDTOtoModel.MapProductDTOToProductBaseModel(productDTO);
+            List<ProductModel> productsModel = _mapsDTOtoModel.MapProductDTOToProductModel(productDTO);
             return productsModel[0];
+        }
+
+        public int GetLastProductID()
+        {
+            return _productsData.GetLastProductID();
         }
 
         public void AddNewProduct(ProductModel productModel)
@@ -61,9 +66,24 @@ namespace TradeCompany_BLL
             _groupsData.AddProductGroup(groupDTO);
         }
 
+        public void HardDeleteProductByID(int productID)
+        {
+            _productsData.DeleteProductByID(productID);
+        }
+
+        public void SoftDeleteProductByID(int productID)
+        {
+            _productsData.SoftDeleteProductByID(productID);
+        }
+
         public void AddProductToProductGroup(int ProductID, int ProductGroupID)
         {
             _productsData.AddProductToProductGroup(ProductID, ProductGroupID);
+        }
+
+        public void DeleteGroupFromProduct(int ProductID, int ProductGroupID)
+        {
+            _productsData.DeleteGroupFromProduct(ProductID, ProductGroupID);
         }
 
         public List<MeasureUnitsModel> GetAllMeasureUnits()
@@ -71,6 +91,12 @@ namespace TradeCompany_BLL
             List<MeasureUnitsDTO> measureUnitsDTO = _productsData.GetAllMeasureUnits();
             List<MeasureUnitsModel> measureUnitsModel = _mapsDTOtoModel.MapMeasureUnitDTOToMeasureUnitModel(measureUnitsDTO);
             return measureUnitsModel;
+        }
+
+        public void UpdateProductByID(ProductModel productModel)
+        {
+            ProductDTO productDTO = _mapsModelToDTO.MapProductModelToProductDTO(productModel);
+            _productsData.UpdateProductByID(productDTO);
         }
     }
 }
