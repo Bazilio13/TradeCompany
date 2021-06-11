@@ -2,5 +2,6 @@
 	@ClientID int,
 	@Address nvarchar(250)
 AS
-	delete [Addresses]
+	update [Addresses] set isDeleted = 1
 	where Addresses.ClientID = @ClientID and Addresses.Address = @Address
+	 

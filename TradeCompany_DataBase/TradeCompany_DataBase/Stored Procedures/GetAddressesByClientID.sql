@@ -2,4 +2,4 @@
 	@ClientID int
 	as
 	select Address from Addresses
-	where Addresses.ClientID = @ClientID
+	where Addresses.ClientID = @ClientID and (isDeleted = 0 or isDeleted = null)

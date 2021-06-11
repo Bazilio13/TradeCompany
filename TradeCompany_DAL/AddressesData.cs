@@ -87,5 +87,45 @@ namespace TradeCompany_DAL
             }
         }
 
+        public int SetIsDeleted(int clientId, String address, byte isDeleted)
+        {
+            int id;
+            string query = "exec TradeCompany_DataBase.SetAddressIsDeleted @ClientId, @Address, @isDeleted";
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                id = dbConnection.Query<int>(query, new
+                {
+                    clientId,
+                    address,
+                    isDeleted
+                }).AsList<int>()[0];
+            }
+
+            return id;
+        }
+
+        public bool IsDeletedAddress(int clientId, String address)
+        {
+            bool isDeleted;
+            byte flag;
+            string query = "exec TradeCompany_DataBase.GetAddressIsDeleted @ClientId, @Address";
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                flag = dbConnection.Query<byte>(query, new
+                {
+                    clientId,
+                    address
+                }).AsList<byte>()[0];
+            }
+            if(flag == 1)
+            {
+                isDeleted = true;
+            }
+            else
+            {
+                isDeleted = false;
+            }
+            return isDeleted;
+        }
     }
 }

@@ -12,8 +12,7 @@ namespace TradeCompany_BLL
     public class AddressesDataAccess
     {
         private  AddressesData _addressesData = new AddressesData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
-        private MapsDTOtoModel _mapDTOtoModel = new MapsDTOtoModel();
-        private MapsModelToDTO _mapModelToDTO = new MapsModelToDTO();
+
 
         public List<String> GetAddressesByID (int id)
         {
@@ -24,7 +23,16 @@ namespace TradeCompany_BLL
 
         public int AddAddressByID(int clientID, String address)
         {
-            int setID = _addressesData.AddAddress(clientID, address);
+            int setID = 1;
+            List<String> oldAddresses = _addressesData.GetAddressesByID(clientID);
+            if (oldAddresses.Contains(address) && _addressesData.IsDeletedAddress(clientID, address))
+            {
+                setID = _addressesData.SetIsDeleted(clientID, address, 0);
+            }
+            else if (!oldAddresses.Contains(address))
+            {
+                setID = _addressesData.AddAddress(clientID, address);
+            }
 
             return setID;
         }
@@ -32,11 +40,34 @@ namespace TradeCompany_BLL
         public int AddAddressByID(int clientID, List<String> addressesList)
         {
             int setID = -1;
+            List<String> oldAddresses = _addressesData.GetAddressesByID(clientID);
             foreach (String address in addressesList)
             {
-                setID =_addressesData.AddAddress(clientID, address);
+                if (oldAddresses.Contains(address) && _addressesData.IsDeletedAddress(clientID, address))
+                {
+                    setID = _addressesData.SetIsDeleted(clientID, address, 0);
+                }
+                else if (!oldAddresses.Contains(address))
+                {
+                    setID = _addressesData.AddAddress(clientID, address);
+                }
+
             }
+
+            foreach(String address in oldAddresses)
+            {
+                if (!addressesList.Contains(address))
+                {
+                    _addressesData.SetIsDeleted(clientID, address, 1);
+                }
+            }
+
             return setID;
+        }
+
+        public void DeleteAddressByClintID(int clientID, String address)
+        {
+            _addressesData.DeleteAddressByIDAndAddress(clientID, address);
         }
     }
 }
