@@ -31,10 +31,12 @@
                     <Button Content="Вчера" Margin="0,0,10,0"/>
                     <Button Content="Сегодня"/>
                 </DockPanel>
-                <DockPanel HorizontalAlignment="Left" Margin="0,0,0,12">
+                <DockPanel HorizontalAlignment="Left" Width="520" Margin="0,0,0,0">
                     <Button x:Name ="ButtonExit" Content="Назад" Width="100" HorizontalAlignment="Left" Margin="0,2,0,10" Click="ClickExit" />
-                    <TextBlock x:Name="textBlockLabel" Text="Текст"  Margin="15,15,0,0"/>
                 </DockPanel>
+
+                <TextBlock x:Name="textBlockLabel" Foreground="#6E304B" Margin="0,-37,0,10" HorizontalAlignment="Center" TextAlignment="Center" FontWeight="Bold" Text="Текст" Width="132" Height="25"/>
+
 
                 <DataGrid x:Name ="DGAllGroups" Grid.Row="1" AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" ScrollViewer.CanContentScroll="True" MouseLeftButtonDown="DGCategory_MouseLeftButtonDown">
 
