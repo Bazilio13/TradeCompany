@@ -32,7 +32,7 @@ namespace TradeCompany_UI.TableElements
                 int index = 1;
                 foreach(IRowItem item in _items)
                 {
-                    Row row = new Row(item, this, index);                    
+                    Row row = new Row(item, this, index, rowStyle);                    
                     _rows.Add(row);
                     Children.Add(row);
                     index++;
