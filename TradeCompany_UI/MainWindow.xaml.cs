@@ -31,8 +31,6 @@ namespace TradeCompany_UI
         private void OrdersButton_Click(object sender, RoutedEventArgs e)
         {
             _uiNavi.GoToThePage(new Orders());
-            this.Title = "Заказы";
-            ButtonPicked(sender);
         }
 
         private void MainButton_Click(object sender, RoutedEventArgs e)
@@ -43,50 +41,16 @@ namespace TradeCompany_UI
         private void ClientsButton_Click(object sender, RoutedEventArgs e)
         {
             _uiNavi.GoToThePage(new Clients());
-            this.Title = "Клиенты";
-            ButtonPicked(sender);
         }
 
         private void ProductButton_Click(object sender, RoutedEventArgs e)
         {
             _uiNavi.GoToThePage(new ProductCatalog());
-            this.Title = "Продукты";
-            ButtonPicked(sender);
         }
 
         private void SupplysButton_Click(object sender, RoutedEventArgs e)
         {
             _uiNavi.GoToThePage(new Supplys());
-            this.Title = "Поставки";
-            ButtonPicked(sender);
-        }
-
-        private void ButtonPicked(object sender)
-        {
-            Brush brushPicked = new SolidColorBrush(Color.FromRgb(249, 240, 200));
-            Brush brushReset = new SolidColorBrush(Color.FromRgb(249, 249, 249));
-
-            OrdersButton.Background = brushReset;
-            ClientsButton1.Background = brushReset;
-            ProductButton.Background = brushReset;
-            SupplysButton.Background = brushReset;
-
-            if (sender == OrdersButton)
-            {
-                OrdersButton.Background = brushPicked;
-            }
-            if (sender == ClientsButton1)
-            {
-                ClientsButton1.Background = brushPicked;
-            }
-            if (sender == ProductButton)
-            {
-                ProductButton.Background = brushPicked;
-            }
-            if (sender == SupplysButton)
-            {
-                SupplysButton.Background = brushPicked;
-            }
         }
     }
 }
