@@ -144,6 +144,7 @@
     <Build Include="TradeCompany_DataBase\Stored Procedures\GetAllMeasureUnits.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\GetLastProductID.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\SoftDeleteProductByID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetStatisticsProducts.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="TradeCompany_DataBase.refactorlog" />
