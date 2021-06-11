@@ -13,7 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TradeCompany_BLL.DataAccess;
+using TradeCompany_BLL.Interfaces;
 using TradeCompany_BLL.Models;
+using TradeCompany_UI.TableElements;
 
 namespace TradeCompany_UI
 {
@@ -37,6 +39,21 @@ namespace TradeCompany_UI
         private void ViewPotentialClients(List<PotentialClientModel> pClients)
         {
             //mainPanel.Children.
+            Button but = new Button();
+            
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            List<int> ids = new List<int> { 2, 3, 6, 10 };
+            List<PotentialClientModel> clients = _dataAcces.GetPotentialClientsByProductsIDs(ids);
+            List<IRowItem> items = new List<IRowItem>();
+            foreach (PotentialClientModel model in clients)
+            {
+                items.Add(model);
+            }
+
+            MainGrid.Children.Add(new CustomTable(items));
         }
     }
 }

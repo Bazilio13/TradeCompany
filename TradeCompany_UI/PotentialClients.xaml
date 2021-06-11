@@ -6,19 +6,68 @@
       xmlns:local="clr-namespace:TradeCompany_UI"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="PotentialClients">    
-    <Grid>
-        <Button MinWidth="300" Height="50" Margin="0,200,0,200" Style="{StaticResource RowButton}">
-            <Border BorderBrush="Black" BorderThickness="0,1,1,0">
-                <StackPanel Orientation="Horizontal" >
-                    <Border BorderBrush="Black" BorderThickness="1,0,0,1">
-                        <TextBlock>клиент</TextBlock>
+      Title="PotentialClients">
+    <Grid x:Name="MainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <!--ID");-->
+            <!--headers.Add("Клиент");
+            headers.Add("Контактное лицо");
+            headers.Add("Телефон");
+            headers.Add("E-mail");
+            headers.Add("Опт/розница")-->
+        <StackPanel>
+        <Button MinWidth="300" Height="23" Style="{StaticResource RowButton}">
+            <Border BorderBrush="Black" BorderThickness="0,0,1,1"  Height="23">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="730" >
+                    <Border BorderBrush="Black" BorderThickness="1,0,0,0">
+                        <TextBlock FontSize="13" TextAlignment="Center" Height="21" Width="20" Margin="5,0,5,0">ID</TextBlock>
                     </Border>
-                    <Border BorderBrush="Black" BorderThickness="1,0,0,1">
-                        <TextBlock>контактное лицо</TextBlock>
+                    <Border BorderBrush="Black" BorderThickness="1,0,0,0">
+                        <TextBlock FontSize="13" TextAlignment="Center" Height="21" Width="150" Margin="5,0,5,0">Клиент</TextBlock>
+                    </Border>
+                    <Border BorderBrush="Black" BorderThickness="1,0,0,0">
+                        <TextBlock FontSize="13" TextAlignment="Center" Height="21" Width="150" Margin="5,0,5,0">Контактное лицо</TextBlock>
+                    </Border>
+                    <Border BorderBrush="Black" BorderThickness="1,0,0,0">
+                        <TextBlock FontSize="13" TextAlignment="Center" Height="21" Width="100"  Margin="5,0,5,0">Телефон</TextBlock>
+                    </Border>
+                    <Border BorderBrush="Black" BorderThickness="1,0,0,0">
+                        <TextBlock FontSize="13" Height="21" Width="150" Margin="5,0,5,0">E-mail</TextBlock>
+                    </Border>
+                    <Border BorderBrush="Black" BorderThickness="1,0,0,0">
+                        <TextBlock FontSize="13" Height="21" Width="100" Margin="5,0,5,0">Опт/розница</TextBlock>
                     </Border>
                 </StackPanel>
             </Border>
         </Button>
+        <Button MinWidth="300" Height="23" Style="{StaticResource RowButton}">
+            <Border BorderBrush="Black" BorderThickness="0,0,0,1"  Height="23">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="730">
+                        <Border BorderBrush="Black" BorderThickness="1,0,0,0">
+                        <TextBlock FontSize="13" TextAlignment="Center" Height="21" Width="20" Margin="5,0,5,0">ID</TextBlock>
+                    </Border>
+                        <Border BorderBrush="Black" BorderThickness="1,0,0,0">
+                        <TextBlock FontSize="13" TextAlignment="Center" Height="21" Width="150" Margin="5,0,5,0">Клиент</TextBlock>
+                    </Border>
+                        <Border BorderBrush="Black" BorderThickness="1,0,0,0">
+                        <TextBlock FontSize="13" TextAlignment="Center" Height="21" Width="150" Margin="5,0,5,0">Контактное лицо</TextBlock>
+                    </Border>
+                        <Border BorderBrush="Black" BorderThickness="1,0,0,0">
+                        <TextBlock FontSize="13" TextAlignment="Center" Height="21" Width="100"  Margin="5,0,5,0">Телефон</TextBlock>
+                    </Border>
+                        <Border BorderBrush="Black" BorderThickness="1,0,0,0">
+                        <TextBlock FontSize="13" Height="21" Width="150" Margin="5,0,5,0">E-mail</TextBlock>
+                    </Border>
+                        <Border BorderBrush="Black" BorderThickness="1,0,0,0">
+                        <TextBlock FontSize="13" Height="21" Width="100" Margin="5,0,5,0">Опт/розница</TextBlock>
+                    </Border>
+                </StackPanel>
+            </Border>
+        </Button>
+        </StackPanel>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="273,32,0,0" VerticalAlignment="Top" Click="Button_Click"/>
     </Grid>
 </Page>
