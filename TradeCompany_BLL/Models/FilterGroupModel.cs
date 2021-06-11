@@ -21,5 +21,17 @@ namespace TradeCompany_BLL.Models
         public FilterGroupModel()
         {
         }
+
+        public void Null()
+        {
+            MinDateSupply = null;
+            MaxDateSupply = null;
+            MinDateOrder = null;
+            MaxDateOrder = null;
+            MinAmount = null;
+            MaxAmount = null;
+            MinSum = null;
+            MaxSum = null;
+        }
     }
 }

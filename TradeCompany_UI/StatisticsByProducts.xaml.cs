@@ -97,16 +97,24 @@ namespace TradeCompany_UI
 
         private void clearFilter(object sender, RoutedEventArgs e)
         {
-            _filter = null;
+            _filter.Null();
             DGAllGroups.ItemsSource = _dataAccess.GetStatisticsProducts(_filter);
+            DateFromForSupply.SelectedDate = null;
+            DateUntilForSupply.SelectedDate = null;
+            DateFromForOrder.SelectedDate = null;
+            DateUntilForOrder.SelectedDate = null;
+            FromOrdersAmount.Text = "";
+            ToOrdersAmount.Text = "";
+            FromPrice.Text = "";
+            ToPrice.Text = "";
         }
 
         private void GroupFilter(object sender, RoutedEventArgs e)
         {
             _filter.MinDateSupply = DateFromForSupply.SelectedDate;
-            _filter.MaxDateSupply = DateUntilForSupply.SelectedDate; 
+            _filter.MaxDateSupply = CorrectMaxDate(DateUntilForSupply.SelectedDate); 
             _filter.MinDateOrder = DateFromForOrder.SelectedDate;
-            _filter.MaxDateOrder = DateUntilForOrder.SelectedDate;
+            _filter.MaxDateOrder = CorrectMaxDate(DateUntilForOrder.SelectedDate);
             _filter.MinAmount = ConvertStringToFloat(FromOrdersAmount.Text);
             _filter.MaxAmount = ConvertStringToFloat(ToOrdersAmount.Text);     
             _filter.MinSum = ConvertStringToFloat(FromPrice.Text);
@@ -130,11 +138,20 @@ namespace TradeCompany_UI
             e.Handled = !(Char.IsDigit(e.Text, 0));
         }
 
-
-        private void GroupFiltr(object sender, TextChangedEventArgs e)
+        private DateTime? CorrectMaxDate(DateTime? date)
         {
-
+            DateTime? correctDate = null;
+            if (date != null)
+            {
+                DateTime timeTmp = (DateTime)date;
+                timeTmp = timeTmp.AddDays(1);
+                timeTmp = timeTmp.AddMilliseconds(-1);
+                correctDate = (DateTime?)timeTmp;
+            }
+            return correctDate;
         }
+
+
     }
 
 }
