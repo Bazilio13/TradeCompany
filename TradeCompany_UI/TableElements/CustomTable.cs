@@ -21,7 +21,7 @@ namespace TradeCompany_UI.TableElements
         {
 
         }
-        public CustomTable(List<IRowItem> items, string rowStyle)
+        public CustomTable(List<IRowItem> items, string rowStyle = "RowButton")
         {
             _items = items;
             _rows = new List<Row>();

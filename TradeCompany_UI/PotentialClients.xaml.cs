@@ -53,7 +53,7 @@ namespace TradeCompany_UI
                 items.Add(model);
             }
 
-            MainGrid.Children.Add(new CustomTable(items, "RowButton"));
+            MainGrid.Children.Add(new CustomTable(items));
         }
     }
 }
