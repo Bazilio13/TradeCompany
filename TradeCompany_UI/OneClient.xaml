@@ -9,6 +9,7 @@
       Title="OneClient" Loaded="Page_Loaded">
 
     <Grid Background="#F9F9F9" Margin="0,0,0,-227" >
+        <ScrollViewer VerticalScrollBarVisibility="Hidden" Margin="0,0,0,300">
         <StackPanel x:Name="Panel" Width="500" Margin="0,52,0,0" >
             <TextBlock Text="Карточка клиента" HorizontalAlignment="Center"/>
             <TextBlock x:Name="TBRegistrarionDate" Text="Дата регистрации" HorizontalAlignment="Center"/>
@@ -43,10 +44,10 @@
             <Label Content="ФИО/Название*" FontSize="9" Margin="0,4,0,0"/>
             <TextBox Name="textBoxName" MaxLength="255" HorizontalAlignment="center"  TextWrapping="Wrap" VerticalAlignment="Top" Width="500" Height="21" AutomationProperties.HelpText="ФИО/Название*" Margin="0,-5,0,3" PreviewMouseDown="Focus" />
             <Label Content="ИНН" FontSize="9" Margin="0,0,0,0"/>
-            <TextBox Name ="textBoxINN" MaxLength="100" HorizontalAlignment="center" TextWrapping="Wrap" VerticalAlignment="Top" Width="500" Height="21" Margin="0,-5,0,0" PreviewTextInput="ValidationByINN"/>
+            <TextBox Name ="textBoxINN" MaxLength="20" HorizontalAlignment="center" TextWrapping="Wrap" VerticalAlignment="Top" Width="500" Height="21" Margin="0,-5,0,0" PreviewTextInput="ValidationByINN"/>
             <Label Content="Номер телефона*" FontSize="9"/>
             <Label Content="Email" FontSize="9" Margin="0,-28,200,10" HorizontalAlignment="Right"/>
-            <TextBox x:Name ="textBoxPhone"  MaxLength="30" TextWrapping="Wrap" Width="245" Height="21" HorizontalAlignment="Left" PreviewMouseDown="Focus" PreviewTextInput="ValidationByNumber" Margin="0,-12,0,3" />
+            <TextBox x:Name ="textBoxPhone"  MaxLength="50" TextWrapping="Wrap" Width="245" Height="21" HorizontalAlignment="Left" PreviewMouseDown="Focus" PreviewTextInput="ValidationByNumber" Margin="0,-12,0,3" />
             <TextBox x:Name ="textBoxE_mail"  MaxLength="100" TextWrapping="Wrap" Width="245" Height="21" VerticalAlignment="Stretch" Margin="0,-29,0,-1" HorizontalAlignment="Right"/>
             <Label Content="Контактное лицо*" FontSize="9"/>
             <TextBox Name ="textBoxContactPerson" MaxLength="255" HorizontalAlignment="center"  TextWrapping="Wrap" VerticalAlignment="Top" Width="500" Height="30" Margin="0,-5,0,3" PreviewMouseDown="Focus"/>
@@ -56,7 +57,7 @@
                 <Button x:Name="buttonAddAddress" HorizontalAlignment="Right" Content="Добавить адрес" Width="118" Height="32" Margin="0,-27,0,5" Click="buttonAddAddress_Click" VerticalContentAlignment="Bottom"/>
             </StackPanel>
             <Label Content="Комментарий" FontSize="9" Margin="0,0,0,0"/>
-            <TextBox Name ="textBoxComments" HorizontalAlignment="center" MaxLength="1500" TextWrapping="Wrap" VerticalAlignment="Top" Width="500" MinHeight="21" Margin="0,-5,0,3"/>
+            <TextBox Name ="textBoxComments" HorizontalAlignment="center" MaxLength="500" TextWrapping="Wrap" VerticalAlignment="Top" Width="500" MinHeight="21" Margin="0,-5,0,3"/>
 
             <Button x:Name="ButtonFeedback" Content="Отзывы" Click="VisibilityFeedback" Margin="0,10,0,0" />
 
@@ -76,12 +77,13 @@
             <ComboBox x:Name="cbWish" Text="Интересующие товары"  StaysOpenOnEdit="True"  IsEditable="True" SelectionChanged="clicNewWishProduct" DisplayMemberPath="Name" Margin="0,10,0,10" />
 
             <WrapPanel x:Name ="WPWish"/>
-            <WrapPanel HorizontalAlignment="Right">
-            <Button x:Name="ButtonExit" Content="Назад" VerticalAlignment="Top" Height="33" IsCancel="True" Click="Exit" HorizontalAlignment="Right" Width="128"/>
-            <Button x:Name="ButtonSave" Content="Сохранить" VerticalAlignment="Top" Height="33" IsCancel="True" Click="SaveClient" HorizontalAlignment="Right" Width="128"/>
-            <Button x:Name="ButtonDelete" Content="Удалить"  VerticalAlignment="Top" Height="33" IsCancel="True" Click="DeleteClients" HorizontalAlignment="Left" Width="128"/>
+            <WrapPanel HorizontalAlignment="Stretch" Margin="0,15,0,0">
+            <Button x:Name="ButtonExit" Content="Назад" VerticalAlignment="Top" Height="33" IsCancel="True" Click="Exit" HorizontalAlignment="Left" Width="128"/>
+            <Button x:Name="ButtonSave" Content="Сохранить" VerticalAlignment="Top" Height="33" IsCancel="True" Click="SaveClient" HorizontalAlignment="Left" Width="128"/>
+            <Button x:Name="ButtonDelete" Content="Удалить"  VerticalAlignment="Top" Height="33" IsCancel="True" Click="DeleteClients" HorizontalAlignment="Right" Width="128"/>
             </WrapPanel>
         </StackPanel>
+        </ScrollViewer>
 
 
 
