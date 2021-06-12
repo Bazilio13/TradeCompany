@@ -10,10 +10,10 @@
 
     <Grid Background="WhiteSmoke">
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.6*"></RowDefinition>
+            <RowDefinition Height="0.8*"></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>
             <RowDefinition Height="3*"></RowDefinition>
-            <RowDefinition Height="0.1*"></RowDefinition>
+            <RowDefinition Height="1.2*"></RowDefinition>
 
         </Grid.RowDefinitions>
         <Grid Grid.Row="1">
@@ -40,7 +40,7 @@
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
                 <TextBlock x:Name="Phone" Grid.Row="1"  HorizontalAlignment="Right" Margin="0,10,37,0" Text="Телефон
-" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="15" Width="97"/>
+                    " TextWrapping="Wrap" VerticalAlignment="Top" FontSize="15" Width="97"/>
             </Grid>
 
             <Label Content="Адрес:" Grid.Column="4" HorizontalAlignment="Right" Height="25" Margin="0,4,56,0" VerticalAlignment="Top" Width="100"/>
@@ -48,7 +48,7 @@
             <Label Content="Коментарий" Grid.Column="5" HorizontalAlignment="Left" Height="40" Margin="9,1,0,0" VerticalAlignment="Top" Width="146"/>
         </Grid>
 
-        <DataGrid x:Name="dgSpecificOrder" FontSize="15" Margin="26,34,34,26" Loaded="dgSpecificOrder_Loaded" Grid.Row="2" AutoGenerateColumns="False" RowEditEnding="dgSpecificOrder_RowEditEnding" CellEditEnding="dgSpecificOrder_CellEditEnding" CanUserAddRows="False" >
+        <DataGrid x:Name="dgSpecificOrder" FontSize="15" Margin="10,10,10,10" Loaded="dgSpecificOrder_Loaded" Grid.Row="2" AutoGenerateColumns="False" RowEditEnding="dgSpecificOrder_RowEditEnding" CellEditEnding="dgSpecificOrder_CellEditEnding" CanUserAddRows="False" >
             <DataGrid.Columns >
 
                 <DataGridTextColumn Binding="{Binding Path= ProductID}" Header="ID Товара" Width="0.2*" IsReadOnly="True" />
@@ -78,9 +78,29 @@
                 <ColumnDefinition Width="347*"></ColumnDefinition>
                 <ColumnDefinition Width="267*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button x:Name="ChooseClient" Content="Выбрать клиента" Margin="21,12,16,10" FontSize="12" Click="ChooseClient_Click" />
+            <Button x:Name="ChooseClient" Content="Выбрать клиента" Margin="17,10,20,12" FontSize="12" Click="ChooseClient_Click" />
             <Button x:Name="Button_AddExistingProduct" Content="Добавить товар" HorizontalAlignment="Left" FontSize="12" Height="33" VerticalAlignment="Center" Width="278" Click="AddProduct_ButtonClick" Grid.Column="1" Margin="22,0,0,0" IsEnabled ="False"/>
             <Button x:Name="AddProductInOrder" Content="Сохранить" HorizontalAlignment="Left"  Height="35" Margin="19,0,0,0" VerticalAlignment="Center" Width="243" Click="SaveProductInOrder_ButtonClick" Grid.Column="2"  FontSize="12" IsEnabled="False" />
         </Grid>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="0.5*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBox x:Name="FeedbackTextBox"></TextBox>
+                <Button x:Name="SendFeedback_Button" Content="Отправить отзыв" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Width="399" Click="SendFeedback_Button_Click" IsEnabled="False"/>
+
+            </Grid>
+
+
+
+
+        </Grid>
+
     </Grid>
 </Page>

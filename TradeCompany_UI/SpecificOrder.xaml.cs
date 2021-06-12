@@ -22,11 +22,13 @@ namespace TradeCompany_UI
         private int _addresId; 
         private string _adress;
         private float _sum = 0;
-        ProductBaseModel _productBaseModel;
+        
 
         private OrderModel newOrder;
         private OrderModel _infoAboutOrder;
         private OrderListModel specificProduct;
+        private ProductBaseModel _productBaseModel;
+        private FeedbackModel _feedbackModel;
 
         private ClientModel _clientFullInfo;
         private AddressModel _clientAdress;
@@ -42,6 +44,7 @@ namespace TradeCompany_UI
         ClientsDataAccess _clientsDataAccess = new ClientsDataAccess();
         AddressesDataAccess _addressesDataAccess = new AddressesDataAccess();
         ProductsDataAccess _productsDataAccess = new ProductsDataAccess();
+        FeedbacksDataAccess _FeedbacksDataAccess = new FeedbacksDataAccess();
 
         private UINavi _uinavi;
 
@@ -332,5 +335,38 @@ namespace TradeCompany_UI
 
             return _addresId != 0 && DataPicker.SelectedDate != null;
         }
+
+        private void FillFeedback()
+        {
+            if(FeedbackTextBox.Text is null || _orderId == 0)
+            {
+                return;
+            }
+            if (FeedbackTextBox.Text.Length > 1500)
+            {
+                new MessageWindow("Привышен лимит символов. Максимальное значение 1500 символов").ShowDialog();
+                return;
+            }
+
+            _feedbackModel = new FeedbackModel()
+            {
+                OrderID = _infoAboutOrder.ID,
+                ClientID = _clientId,
+                DateTime = DateTime.Now,
+                Text = FeedbackTextBox.Text
+
+            };
+
+            FeedbackTextBox.IsEnabled = true;
+        }
+
+        private void SendFeedback_Button_Click(object sender, RoutedEventArgs e)
+        {
+            FillFeedback();
+           _FeedbacksDataAccess.AddFeedbackByOrderId(_orderId, _feedbackModel);
+            new MessageWindow("Отзыв отправлен").ShowDialog();
+
+        }
     }
 }
+
