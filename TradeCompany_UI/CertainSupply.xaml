@@ -34,7 +34,7 @@
         </DataGrid>
         <StackPanel Margin="20,10,20,10" Grid.Row="2" VerticalAlignment="Bottom" Height="100">
             <TextBlock Text="Комментарий"></TextBlock>
-            <TextBox x:Name="SupplyComment" Margin="0,0,0,0"  Text="" TextWrapping="Wrap" Height="84" HorizontalContentAlignment="Left" VerticalContentAlignment="Top"></TextBox>
+            <TextBox x:Name="SupplyComment" Margin="0,0,0,0"  Text="" TextWrapping="Wrap" Height="80" HorizontalContentAlignment="Left" VerticalContentAlignment="Top"></TextBox>
         </StackPanel>
     </Grid>
 </Page>
