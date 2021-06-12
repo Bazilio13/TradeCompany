@@ -21,9 +21,13 @@ namespace TradeCompany_BLL
             List<ClientBaseModel> clientBaseModel = mapper.Map<List<ClientBaseModel>>(clientsDTO);
 
             return clientBaseModel;
-        } 
-        
-    
+        }
+
+        public ClientModel MapClientDTOToClientModel(ClientDTO clientDTO)
+        {
+            throw new NotImplementedException();
+        }
+
         public ClientBaseModel MapLastClientDTOToLastClientBaseModel(ClientDTO clientDTO)
         {
             ClientsData clients = new ClientsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
