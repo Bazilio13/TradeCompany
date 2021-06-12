@@ -8,6 +8,7 @@
 
     <Color x:Key="ControlBackground">#FFFFFF</Color>
     <Color x:Key="ControlHoveredBackground">#FFFFFF</Color>
+    <SolidColorBrush x:Key="ButtonBackground2" Color="#FFA28989"/>
     <Color x:Key="ControlFocusedBackground">#FFFFFF</Color>
     <Color x:Key="ControlReadOnlyBackground">#FFFFFF</Color>
     <Color x:Key="ControlDisabledBackground">#FFFFFF</Color>
