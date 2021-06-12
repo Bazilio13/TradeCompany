@@ -17,6 +17,15 @@ namespace TradeCompany_BLL.Models
             ID = id;
             ClientID = clientID;
             Address = address;
+
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is AddressModel model &&
+                   ID == model.ID &&
+                   ClientID == model.ClientID &&
+                   Address == model.Address;
         }
     }
 }
