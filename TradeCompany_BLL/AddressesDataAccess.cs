@@ -24,16 +24,16 @@ namespace TradeCompany_BLL
             _addressesData = new AddressesData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
         }
 
-        public List<AddressModel> GetAddressesByID (int id)
+        public List<AddressModel> GetAddressesByID (int clientid)
         {
-            List<AddressDTO> addressesDTO = _addressesData.GetAddressesByID(id);
+            List<AddressDTO> addressesDTO = _addressesData.GetAddressesByID(clientid);
             List<AddressModel> addressModels = _mapDTOtoModel.MapAddressDTOToAddressModel(addressesDTO);
             return addressModels;
         }
 
-        public List<String> GetListAddressesByID(int id)
+        public List<String> GetListAddressesByID(int clientid)
         {
-            List<AddressDTO> addressesDTO = _addressesData.GetAddressesByID(id);
+            List<AddressDTO> addressesDTO = _addressesData.GetAddressesByID(clientid);
             List<String> addressesList = _mapDTOtoModel.MapAddressDTOToAddressString(addressesDTO);
             return addressesList;
         }
