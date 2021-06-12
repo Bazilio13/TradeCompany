@@ -15,11 +15,11 @@ namespace TradeCompany_BLL.DataAccess
 
         private PotentialClientMaps _map = new PotentialClientMaps();
 
-        public List<PotentialClientModel> GetPotentialClientsByProductsIDs(List<int> ids)
+        public List<PotentialClientModel> GetPotentialClientsByProductsIDs(List<int> ids, string clientSearch = null)
         {
             DateTime clientsActivityStart = DateTime.Now;
             clientsActivityStart = clientsActivityStart.AddMonths(-3);
-            return _map.MapPotentialClientDTOsToPotentialClientModels(_data.GetPotentialClientDTOs(ids, clientsActivityStart, 2));
+            return _map.MapPotentialClientDTOsToPotentialClientModels(_data.GetPotentialClientDTOs(ids, clientsActivityStart, 2, clientSearch));
         }
         public List<PotentialClientModel> GetPotentialClientsByProductsIDs(int id)
         {

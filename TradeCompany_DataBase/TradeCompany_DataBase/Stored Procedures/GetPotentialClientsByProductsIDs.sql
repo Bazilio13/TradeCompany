@@ -1,7 +1,8 @@
 ﻿CREATE PROCEDURE [TradeCompany_DataBase].[GetPotentialClientsByProductsIDs]
 	@IDs ntext,
 	@DateTime DateTime,
-	@GroupMatchNumber int
+	@GroupMatchNumber int,
+	@ClientSearch nvarchar(255)
 AS
 select t1.ID, t1.ClientName, t1.ContactPerson, t1.Phone, t1.E_Mail, t1.Type, t1.LastOrderDate,
 t1.ProductID, t1.Name, t1.StockAmount, t1.MeasureUnitName as MeasureUnitName, t1.LastSupplyDate, t1.RetailPrice, t1.WholesalePrice
@@ -13,7 +14,11 @@ join [TradeCompany_DataBase].Wishes as W on C.ID = W.ClientsID
 join [TradeCompany_DataBase].Products as P on P.ID = W.ProductsID
 left join [TradeCompany_DataBase].MeasureUnits as M on M.ID = P.MeasureUnit
 where
-c.IsDeleted = 0
+c.IsDeleted = 0 and
+(@ClientSearch is null or C.Name like '%' + @ClientSearch + '%') or
+(@ClientSearch is null or C.ContactPerson like '%' + @ClientSearch + '%') or
+(@ClientSearch is null or C.E_Mail like '%' + @ClientSearch + '%') or
+(@ClientSearch is null or C.Phone like '%' + @ClientSearch + '%')
 group by C.ID, C.Name, C.ContactPerson, C.Phone, C.E_Mail, C.Type, C.LastOrderDate,
 P.ID, P.Name, P.StockAmount, M.Name, P.LastSupplyDate, P.RetailPrice, P.WholesalePrice
 union
@@ -29,7 +34,11 @@ left join [TradeCompany_DataBase].Product_ProductGroups as PPG on PPG.ProductID 
 where O.DateTime > @DateTime and
 O.IsDeleted = 0 and
 P.IsDeleted = 0 and
-C.IsDeleted = 0
+C.IsDeleted = 0 and
+(@ClientSearch is null or C.Name like '%' + @ClientSearch + '%') or
+(@ClientSearch is null or C.ContactPerson like '%' + @ClientSearch + '%') or
+(@ClientSearch is null or C.E_Mail like '%' + @ClientSearch + '%') or
+(@ClientSearch is null or C.Phone like '%' + @ClientSearch + '%')
 group by C.ID,C.Name, C.ContactPerson, C.Phone, C.E_Mail, C.Type, C.LastOrderDate, PPG.ProductGroupID
 having COUNT (*) > @GroupMatchNumber) Gr
 left join 

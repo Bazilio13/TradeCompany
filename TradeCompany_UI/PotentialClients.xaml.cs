@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TradeCompany_BLL;
 using TradeCompany_BLL.DataAccess;
 using TradeCompany_BLL.Interfaces;
 using TradeCompany_BLL.Models;
@@ -24,15 +25,40 @@ namespace TradeCompany_UI
     /// </summary>
     public partial class PotentialClients : Page
     {
-        PotentialClientsDataAccess _dataAcces = new PotentialClientsDataAccess();
-        Page _priviosPage;
-        UINavi _uiNavi;
+        private PotentialClientsDataAccess _dataAcces = new PotentialClientsDataAccess();
+        private ClientsDataAccess _clientsDataAccess = new ClientsDataAccess();
+        private Page _priviosPage;
+        private UINavi _uiNavi;
+        private List<int> _ids;
         public PotentialClients(List<int> ids, Page priviosPage)
         {
             InitializeComponent();
             _priviosPage = priviosPage;
             _uiNavi = UINavi.GetUINavi();
-            List<PotentialClientModel> clients = _dataAcces.GetPotentialClientsByProductsIDs(ids);
+            _ids = ids;
+            ShowPotentialClients();
+        }
+        public PotentialClients(int id, Page priviosPage)
+        {
+            InitializeComponent();
+            _priviosPage = priviosPage;
+            _uiNavi = UINavi.GetUINavi();
+            _ids = new List<int> { id };
+            ShowPotentialClients();
+        }
+
+        private void ShowPotentialClients()
+        {
+            string clientSearch;
+            if (ClientSearch.Text == "")
+            {
+                clientSearch = null;
+            }
+            else
+            {
+                clientSearch = ClientSearch.Text;
+            }
+            List<PotentialClientModel> clients = _dataAcces.GetPotentialClientsByProductsIDs(_ids, clientSearch);
             if (clients.Count > 0)
             {
                 List<IRowItem> items = new List<IRowItem>();
@@ -50,7 +76,6 @@ namespace TradeCompany_UI
             }
         }
 
-
         private void ViewPotentialClients(List<PotentialClientModel> pClients)
         {
             Button but = new Button();
@@ -60,6 +85,12 @@ namespace TradeCompany_UI
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             _uiNavi.GoToThePage(_priviosPage);
+        }
+
+        private void ClientSearch_TextChange(object sender, TextChangedEventArgs e)
+        {
+            Panel.Children.Clear();
+            ShowPotentialClients();
         }
     }
 }

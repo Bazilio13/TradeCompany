@@ -18,7 +18,7 @@ namespace TradeCompany_DAL
             _connectionString = connectionString;
         }
 
-        public List<PotentialClientDTO> GetPotentialClientDTOs(List<int> idsList, DateTime dateTime, int groupMatchNumber)
+        public List<PotentialClientDTO> GetPotentialClientDTOs(List<int> idsList, DateTime dateTime, int groupMatchNumber, string clientSearch = null)
         {
             string ids = "";
             foreach (int i in idsList)
@@ -49,7 +49,7 @@ namespace TradeCompany_DAL
                         crntClient.Products.Add(product);
                         return crntClient;
                     },
-                    new { ids, dateTime, groupMatchNumber },
+                    new { ids, dateTime, groupMatchNumber, clientSearch },
                     splitOn: "id, ProductID",
                     commandType: CommandType.StoredProcedure);
             }

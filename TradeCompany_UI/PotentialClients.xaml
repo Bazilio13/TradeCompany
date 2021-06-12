@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="851"
       Title="PotentialClients">
-    <Grid x:Name="MainGrid">
+    <Grid x:Name="MainGrid" Background="WhiteSmoke">
         <Grid.RowDefinitions>
             <RowDefinition Height="100"></RowDefinition>
             <RowDefinition></RowDefinition>
@@ -19,5 +19,9 @@
         </Grid.ColumnDefinitions>
         <Button Content="Назад" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Click="BackButton_Click" Width="100" Grid.Column="1"/>
         <StackPanel  x:Name="Panel" Grid.Row="1" Grid.Column="1"  HorizontalAlignment="Center"></StackPanel>
+        <DockPanel Grid.Column="1" Margin="10,0,0,10" Width="221" Height="34" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+            <Image Source="Pictures/search.png" Width="29" Height="29" Margin="0,5,0,0"></Image>
+            <TextBox x:Name="ClientSearch" DockPanel.Dock="Left" BorderBrush="#6E304B" Background="#F9F9F9" Width="191" Height="22" TextChanged="ClientSearch_TextChange" HorizontalContentAlignment="Left" BorderThickness="0,0,0,1"/>
+        </DockPanel>
     </Grid>
 </Page>
