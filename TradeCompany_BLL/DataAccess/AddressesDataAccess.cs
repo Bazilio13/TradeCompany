@@ -16,7 +16,7 @@ namespace TradeCompany_BLL.DataAccess
 
         private AddressMaps _map = new AddressMaps();
 
-        public List<AddressModel> GetAdressByClientID(int id)
+        public List<AddressModel> GetAddressByClientID(int id)
         {
             List<AddressDTO> addressDTO = new List<AddressDTO>();
             List<AddressModel> addressModels = new List<AddressModel>();

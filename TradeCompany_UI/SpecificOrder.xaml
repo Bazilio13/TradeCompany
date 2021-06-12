@@ -79,8 +79,8 @@
                 <ColumnDefinition Width="267*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Button x:Name="ChooseClient" Content="Выбрать клиента" Margin="21,12,16,10" FontSize="12" Click="ChooseClient_Click" />
-            <Button x:Name="Button_AddExistingProduct" Content="Добавить товар" HorizontalAlignment="Left" FontSize="12" Height="33" VerticalAlignment="Center" Width="278" Click="Button_Click" Grid.Column="1" Margin="22,0,0,0" IsEnabled ="False"/>
-            <Button x:Name="AddProductInOrder" Content="Сохранить" HorizontalAlignment="Left"  Height="35" Margin="19,0,0,0" VerticalAlignment="Center" Width="243" Click="AddProductInOrder_Click" Grid.Column="2"  FontSize="12" IsEnabled="False" />
+            <Button x:Name="Button_AddExistingProduct" Content="Добавить товар" HorizontalAlignment="Left" FontSize="12" Height="33" VerticalAlignment="Center" Width="278" Click="AddProduct_ButtonClick" Grid.Column="1" Margin="22,0,0,0" IsEnabled ="False"/>
+            <Button x:Name="AddProductInOrder" Content="Сохранить" HorizontalAlignment="Left"  Height="35" Margin="19,0,0,0" VerticalAlignment="Center" Width="243" Click="SaveProductInOrder_ButtonClick" Grid.Column="2"  FontSize="12" IsEnabled="False" />
         </Grid>
     </Grid>
 </Page>

@@ -19,7 +19,7 @@ namespace TradeCompany_UI
     {
         private int _orderId;
         private int _clientId;
-        private int _addresId; // можно в Модельку оформить
+        private int _addresId; 
         private string _adress;
         private float _sum = 0;
         ProductBaseModel _productBaseModel;
@@ -28,7 +28,6 @@ namespace TradeCompany_UI
         private OrderModel _infoAboutOrder;
         private OrderListModel specificProduct;
 
-        private ClientBaseModel _clientBaseInfo;
         private ClientModel _clientFullInfo;
         private AddressModel _clientAdress;
 
@@ -38,12 +37,11 @@ namespace TradeCompany_UI
         public List<ProductModel> _productModel = new List<ProductModel>();
 
         BindingList<OrderListModel> bgOrderListModels = new BindingList<OrderListModel>();
-        BindingList<AddressModel> cbAddressModel = new BindingList<AddressModel>();
-
+       
         OrderDataAccess _orderDataAccess = new OrderDataAccess();
         ClientsDataAccess _clientsDataAccess = new ClientsDataAccess();
         AddressesDataAccess _addressesDataAccess = new AddressesDataAccess();
-        ProductsDataAccess _ProductsDataAccess = new ProductsDataAccess();
+        ProductsDataAccess _productsDataAccess = new ProductsDataAccess();
 
         private UINavi _uinavi;
 
@@ -60,12 +58,16 @@ namespace TradeCompany_UI
 
             _uinavi = UINavi.GetUINavi();
             GetOrderById(id);
-
-            GetInfoAboutClient();
-            ShowInfoAboutClient();
-            FillComboBoxAdress();
-
+            SetInfoAboutClient();
+            ShowAllInfoAboutOrder();
         }
+
+        private void ShowAllInfoAboutOrder()
+        {
+            ShowInfoAboutClient();
+            FillComboBoxAddress();
+        }
+
         private void GetOrderById(int id)
         {
             _infoAboutOrder = _orderDataAccess.GetOrderById(id).First();
@@ -88,32 +90,31 @@ namespace TradeCompany_UI
             ClientName.Text = _clientFullInfo.Name;
             Phone.Text = _clientFullInfo.Phone;
             Button_AddExistingProduct.IsEnabled = true;
-
         }
 
-        private void GetInfoAboutClient()
+        private void SetInfoAboutClient() 
         {
-            _clientFullInfo = new ClientModel();
-            _clientAdress = new AddressModel();
+            _clientFullInfo = new ClientModel()
+            {
+                ID = _infoAboutOrder.ID,
+                Name = _infoAboutOrder.Client,
+                Phone = _infoAboutOrder.ClientsPhone
+            };
 
-            _clientFullInfo.ID = _infoAboutOrder.ID;
-            _clientFullInfo.Name = _infoAboutOrder.Client;
-            _clientFullInfo.Phone = _infoAboutOrder.ClientsPhone;
-
-            _clientAdress.Address = _infoAboutOrder.Address;
-            _clientAdress.ID = _infoAboutOrder.ID;
-
+            _clientAdress = new AddressModel()
+            {
+                Address = _infoAboutOrder.Address,
+                ID = _infoAboutOrder.ID
+            };
         }
 
-
-        private void FillComboBoxAdress()
+        private void FillComboBoxAddress()
         {
-            listOAddressModel = _addressesDataAccess.GetAdressByClientID(_clientId);
+            listOAddressModel = _addressesDataAccess.GetAddressByClientID(_clientId);
             cbAdress.ItemsSource = listOAddressModel;
             cbAdress.DisplayMemberPath = "Address";
             cbAdress.Text = "Адрес";
         }
-
 
         private void dgSpecificOrder_Loaded(object sender, RoutedEventArgs e)
         {
@@ -137,69 +138,64 @@ namespace TradeCompany_UI
             //listOfProductForOrder.Add(addedProduct);
 
         }
-        private void AddProductInOrder_Click(object sender, RoutedEventArgs e)
+
+        private void SaveProductInOrder_ButtonClick(object sender, RoutedEventArgs e)
         {
             if (listOfProductForOrder.Equals(listOfLastAddedProducts))
             {
-                return;
+                return; // после сохранения отчистить список
+            }
+
+            if (_orderId == 0)
+            {
+                bool check = VerifyWhetherDateAndAddress(); 
+                if (!check)
+                {
+                    new MessageWindow("Заполните все поля").ShowDialog();
+                    return;
+                }
+
+                FillInfoAboutNewOrder();
+                _orderDataAccess.AddOrder(newOrder);
             }
             else
             {
-                if (_orderId == 0)
-                {
-                    bool check = TurnOnAddProductInOrderButton();
-                    if (check == true)
-                    {
-
-                        FillInfoAboutNewOrder();
-
-                        _orderDataAccess.AddOrder(newOrder);
-                    }
-                    else
-                    {
-                       new MessageWindow("Заполните все поля").ShowDialog();
-                        return;
-                    }
-                   
-                }
-                else
-                {
-                    _orderDataAccess.AddOrderList(listOfProductForOrder);
-                    listOfLastAddedProducts = listOfProductForOrder;
-                    ReduceProductsAmountInStock(listOfLastAddedProducts);
-                }
-
-                new MessageWindow("Продукты добавлены в базу").ShowDialog();
+                _orderDataAccess.AddOrderList(listOfProductForOrder);
+                listOfLastAddedProducts = listOfProductForOrder;
+                ReduceProductsAmountInStock(listOfLastAddedProducts);
+               // listOfProductForOrder.Clear(); 
             }
 
+            new MessageWindow("Продукты добавлены в базу").ShowDialog();
         }
 
         private void ReduceProductsAmountInStock(List<OrderListModel> orderListModels)
         {
             foreach (var product in orderListModels)
             {
-                _ProductsDataAccess.ReduceProductAmountInStockByID(product.ProductID, (int)product.Amount);
+                _productsDataAccess.ReduceProductAmountInStockByID(product.ProductID, (int)product.Amount);
             }
         }
 
         private float CountOrderSumm(List<OrderListModel> orderListModels)
         {
-            float summ = 0;
-            foreach (var item in orderListModels)
-            {
-                summ += (item.Price * item.Amount);
-            }
-            return summ;
+            return orderListModels.Sum(s => s.Price * s.Amount); //вариант суммы
+            //float summ = 0;
+            //foreach (var item in orderListModels)
+            //{
+            //    summ += (item.Price * item.Amount);
+            //}
+            //return summ;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void AddProduct_ButtonClick(object sender, RoutedEventArgs e) 
         {
-
-            if (bgOrderListModels.Count != 0)
+            if (bgOrderListModels.Count > 0)
             {
                 if (bgOrderListModels.Last().Amount == 0 && bgOrderListModels.Count >= 1)
                 {
                     Button_AddExistingProduct.IsEnabled = false;
+                    new MessageWindow("Введите количество товара").ShowDialog();
                 }
                 else
                 {
@@ -216,33 +212,27 @@ namespace TradeCompany_UI
 
         public void AddProductToCollection(ProductBaseModel productBaseModel)
         {
-
             specificProduct = new OrderListModel();
             specificProduct.ProductID = productBaseModel.ID;
             specificProduct.ProductName = productBaseModel.Name;
-            specificProduct.Price = _clientFullInfo.Type == true ? productBaseModel.WholesalePrice : productBaseModel.RetailPrice;
+            specificProduct.Price = _clientFullInfo.Type ? productBaseModel.WholesalePrice : productBaseModel.RetailPrice; //почему не использовали enum, _clientFullInfo.Type переименовать Type
             specificProduct.ProductMeasureUnit = productBaseModel.MeasureUnitName;
             specificProduct.OrderID = _orderId;
             _productBaseModel = productBaseModel;
 
             bgOrderListModels.Add(specificProduct);
-
         }
-
 
         public void AddClientToOrder(ClientBaseModel clientBaseModel)
         {
             _clientId = clientBaseModel.ID;
             _clientFullInfo = _clientsDataAccess.GetClientByClientID(_clientId);
-            FillComboBoxAdress();
-            ShowInfoAboutClient();
-
-
+            ShowAllInfoAboutOrder();
         }
+
         private void FillInfoAboutNewOrder()
         {
             newOrder.DateTime = (DateTime)DataPicker.SelectedDate;
-
             newOrder.ClientsID = _clientId;
             newOrder.Client = _clientFullInfo.Name;
             newOrder.ClientsPhone = _clientFullInfo.Phone;
@@ -251,7 +241,6 @@ namespace TradeCompany_UI
             newOrder.AddressID = _addresId;
             newOrder.Address = _adress;
             newOrder.Comment = Comment.Text;
-
         }
 
         private void ChooseClient_Click(object sender, RoutedEventArgs e)
@@ -265,35 +254,33 @@ namespace TradeCompany_UI
             {
                 cbAdress.SelectedIndex = 0;
             }
-
         }
 
         private void cbAdress_DropDownClosed(object sender, EventArgs e)
         {
             var addresInfo = (AddressModel)cbAdress.SelectedItem;
-            if ((addresInfo == null) && (_clientFullInfo == null))
-            {
-                new MessageWindow("Выберите клиента").ShowDialog();
-                return;
-            }
-            else if (listOAddressModel.Count == 0)
-            {
-                new MessageWindow("У клиента нет адресов").ShowDialog();
-                return;
-            }
+
             if (addresInfo == null)
             {
                 return;
             }
-            else
+
+            if (_clientFullInfo == null) //перенести в open event
             {
-                _addresId = addresInfo.ID;
-                _adress = addresInfo.Address;
+                new MessageWindow("Выберите клиента").ShowDialog();
+                return;
             }
 
+            if (listOAddressModel.Count == 0) //перенести в open event
+            {
+                new MessageWindow("У клиента нет адресов").ShowDialog();
+                return;
+            }
 
-
+            _addresId = addresInfo.ID;
+            _adress = addresInfo.Address;
         }
+
         public void AddProductToCollection(int productID, string productName, string productMeasureUnit, List<ProductGroupModel> productGroupModels)
         {
             throw new NotImplementedException();
@@ -301,63 +288,49 @@ namespace TradeCompany_UI
 
         private void dgSpecificOrder_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
-            СheckInputData(e);
-            var i = (OrderListModel)e.Row.Item;
-            if (i.Amount == 0) return;
-            if (_productBaseModel.StockAmount - i.Amount >= 0)
-            {
-                listOfProductForOrder.Add(specificProduct);
-                _sum += specificProduct.Price * i.Amount;
-                Sum.Text = "Сумма заказа: " + _sum;
-                Button_AddExistingProduct.IsEnabled = true;
+            VerifyWhetherInputHasDigits(e);
+            var product = (OrderListModel)e.Row.Item; 
 
-                AddProductInOrder.IsEnabled = true;
-            }
-            else
+            if (product.Amount == 0) return;
+
+            if(_productBaseModel.StockAmount - product.Amount < 0)
             {
                 bgOrderListModels.Remove(bgOrderListModels.Last());
                 new MessageWindow("На складе нет столько товара").ShowDialog();
+                return;
             }
+            
+            listOfProductForOrder.Add(specificProduct);
+            _sum += specificProduct.Price * product.Amount;
+            Sum.Text = "Сумма заказа: " + _sum;
+            Button_AddExistingProduct.IsEnabled = true;
+            AddProductInOrder.IsEnabled = true;
         }
 
-        private static void СheckInputData(DataGridCellEditEndingEventArgs e)
+        private void VerifyWhetherInputHasDigits(DataGridCellEditEndingEventArgs e)
         {
             TextBox textBox = (TextBox)e.EditingElement;
-            if (textBox.Text == "")
+            if (string.IsNullOrEmpty(textBox.Text))
             {
                 textBox.Text = "0";
+                return;
             }
-            else
+
+            if (!int.TryParse(textBox.Text, out var inputText))
             {
-                foreach (char ch in textBox.Text)
-                {
-                    if (!char.IsDigit(ch))
-                    {
-                        new MessageWindow("В поле количество можно вводить только числа").ShowDialog();
-                        textBox.Text = "0";
-                        break;
-                    }
-                }
+                new MessageWindow("В поле количество можно вводить только числа").ShowDialog();
+                textBox.Text = "0";
             }
         }
 
-        private bool TurnOnAddProductInOrderButton()
+        private bool VerifyWhetherDateAndAddress() 
         {
-            bool result = false;
-            bool isOrderHaveAdress = _addresId != 0 ? true : false;
-            bool isOrderHaveDataTime = DataPicker.SelectedDate != null ? true : false;
-
             if (_orderId != 0)
             {
-                result = true;
+                return true;
             }
-            else
-            {
-                if (isOrderHaveAdress && isOrderHaveDataTime == true) result = true;
-            }
-            return result;
-        }
 
-        
+            return _addresId != 0 && DataPicker.SelectedDate != null;
+        }
     }
 }
