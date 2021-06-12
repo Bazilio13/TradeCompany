@@ -151,11 +151,9 @@ namespace TradeCompany_UI
                 _clientsData.SaveWishListByClientID(_wishList, _id);
                 maps.MapAddressesListModelToAddressesListDTO(_newAddresses, _id); //нужно исправить
 
-                if (MessageBox.Show("Клиент сохранен", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
-                {
-                    _clientsPage.UpdateDG();
-                    _uiNavi.GoToThePage(_previosPage);
-                }
+                MessageBox.Show("Клиент сохранен", "Подтверждение", MessageBoxButton.OK, MessageBoxImage.Question);
+                _clientsPage.UpdateDG();
+                _uiNavi.GoToThePage(_previosPage);
             }
         }
 
