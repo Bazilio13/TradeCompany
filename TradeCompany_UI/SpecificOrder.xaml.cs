@@ -119,7 +119,6 @@ namespace TradeCompany_UI
         private void dgSpecificOrder_Loaded(object sender, RoutedEventArgs e)
         {
             dgSpecificOrder.ItemsSource = bgOrderListModels;
-
         }
 
         private void dgSpecificOrder_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
@@ -143,26 +142,18 @@ namespace TradeCompany_UI
         }
         private void AddProductInOrder_Click(object sender, RoutedEventArgs e)
         {
-
             if (listOfProductForOrder.Equals(listOfLastAddedProducts))
             {
                 return;
             }
-           
             else
             {
                 if (_orderId == 0)
                 {
-                    
-                    
                     FillInfoAboutNewOrder();
                    
                     _orderDataAccess.AddOrder(newOrder);
-                    ReduceProductsAmountInStock(newOrder.OrderListModel);
-                    
-                    //_orderDataAccess.AddOrder(newOrder);
-                    //ReduceProductsAmountInStock(newOrder.OrderListModel);
-
+                   
                 }
                 else
                 {
@@ -175,20 +166,7 @@ namespace TradeCompany_UI
             }
 
         }
-        private bool IsOrerHaveAdress(OrderModel orderModel)
-        {
-            bool answer;
-            if((orderModel.Address == null ) || (orderModel.AddressID == 0)) // править
-            {
-                new MessageWindow("Заполните адрес").ShowDialog();
-                answer = false; 
-            }
-            else
-            {
-                answer = true;
-            }
-            return answer;
-        }
+
         private void ReduceProductsAmountInStock(List<OrderListModel> orderListModels)
         {
             foreach (var product in orderListModels)
@@ -294,6 +272,16 @@ namespace TradeCompany_UI
         private void cbAdress_DropDownClosed(object sender, EventArgs e)
         {
             var addresInfo = (AddressModel)cbAdress.SelectedItem;
+            if((addresInfo == null) && (_clientFullInfo == null))
+            {
+                new MessageWindow("Выберите клиента").ShowDialog();
+                return;
+            }
+            else if (listOAddressModel.Count == 0)
+            {
+                new MessageWindow("У клиента нет адресов").ShowDialog();
+                return;
+            }
             _addresId = addresInfo.ID;
             _adress = addresInfo.Address;
         }

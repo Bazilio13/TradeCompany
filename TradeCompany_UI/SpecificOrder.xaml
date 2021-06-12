@@ -51,12 +51,12 @@
         <DataGrid x:Name="dgSpecificOrder" FontSize="15" Margin="26,34,34,26" Loaded="dgSpecificOrder_Loaded" Grid.Row="2" AutoGenerateColumns="False" RowEditEnding="dgSpecificOrder_RowEditEnding" CellEditEnding="dgSpecificOrder_CellEditEnding" CanUserAddRows="False" >
             <DataGrid.Columns >
 
-                <DataGridTextColumn Binding="{Binding Path= ProductID}" Header="ID Товара" Width="0.2*" />
-                <DataGridTextColumn x:Name="Product" Binding="{Binding Path= ProductName, UpdateSourceTrigger=PropertyChanged}" Header="Товар" Width="1*" />
-                <DataGridTextColumn x:Name="Grops"  Header="Категория" Width="0.5*" Binding="{Binding Path= Groups, UpdateSourceTrigger=PropertyChanged}"/>
-                <DataGridTextColumn Binding="{Binding Path= Price}" Header="Цена" Width="0.5*"/>
+                <DataGridTextColumn Binding="{Binding Path= ProductID}" Header="ID Товара" Width="0.2*" IsReadOnly="True" />
+                <DataGridTextColumn x:Name="Product" Binding="{Binding Path= ProductName, UpdateSourceTrigger=PropertyChanged}" Header="Товар" Width="1*" IsReadOnly="True" />
+                <DataGridTextColumn x:Name="Grops"  Header="Категория" Width="0.5*" Binding="{Binding Path= Groups, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Path= Price}" Header="Цена" Width="0.5*" IsReadOnly="True"/>
                 <DataGridTextColumn x:Name="Amount" Binding="{Binding Path = Amount, UpdateSourceTrigger=PropertyChanged}" Header="Количество" Width="0.5*" />
-                <DataGridTextColumn x:Name="ProductMeasureUnit" Header="Единицы измерения" Binding="{Binding Path= ProductMeasureUnit}" Width="0.5*"/>
+                <DataGridTextColumn x:Name="ProductMeasureUnit" Header="Единицы измерения" Binding="{Binding Path= ProductMeasureUnit}" Width="0.5*" IsReadOnly="True"/>
 
             </DataGrid.Columns>
         </DataGrid>
