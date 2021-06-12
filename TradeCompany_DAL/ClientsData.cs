@@ -173,5 +173,7 @@ namespace TradeCompany_DAL
 
 
 
+
+
     }
 }

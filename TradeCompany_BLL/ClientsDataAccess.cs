@@ -83,5 +83,10 @@ namespace TradeCompany_BLL
             }
         }
 
+        public void SoftDeleteClientByID(int id)
+        {
+            _clientData.DeleteClientByID(id);
+        }
+
     }
 }
