@@ -10,6 +10,9 @@
 
     <Grid Background="#F9F9F9" Margin="0,0,0,-227" >
         <StackPanel x:Name="Panel" Width="500" Margin="0,52,0,0" >
+            <TextBlock Text="Карточка клиента" HorizontalAlignment="Center"/>
+            <TextBlock x:Name="TBRegistrarionDate" Text="Дата регистрации" HorizontalAlignment="Center"/>
+
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition ></RowDefinition>
@@ -20,7 +23,6 @@
                     <ColumnDefinition Width="100"></ColumnDefinition>
                     <ColumnDefinition Width="100"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-
                 <WrapPanel Grid.Row="0" Grid.Column="1" Margin="0,7,-300,0" Grid.RowSpan="2">
                     <RadioButton x:Name="RadioButtonTypePersonF" Content="Физическое лицо" Margin="0,0,30,0"/>
                     <RadioButton x:Name="RadioButtonTypePersonU" Content="Юридическое лицо"/>

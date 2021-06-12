@@ -4,6 +4,7 @@
 	@Amount int,
 	@Price float
 AS
-	insert into OrderLists values
+	insert into OrderLists (OrderID, ProductID, Amount, Price)
+	values
 	(@OrderID, @ProductID, @Amount, @Price)
 	Select SCOPE_IDENTITY()

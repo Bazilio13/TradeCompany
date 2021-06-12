@@ -3,7 +3,8 @@
     [ClientsID] INT            NOT NULL,
     [DateTime]  DATETIME       NOT NULL,
     [AddressID] INT            NOT NULL,
-    [Comment]   NVARCHAR (500) NOT NULL,
+    [Comment]   NVARCHAR (500) NULL,
+    [IsDeleted] BIT NOT NULL CONSTRAINT [DF_Orders_IsDeleted] DEFAULT 0, 
     CONSTRAINT [PK_Orders] PRIMARY KEY CLUSTERED ([ID] ASC),
     CONSTRAINT [Orders_fk0] FOREIGN KEY ([ClientsID]) REFERENCES [TradeCompany_DataBase].[Clients] ([ID]),
     CONSTRAINT [Orders_fk1] FOREIGN KEY ([AddressID]) REFERENCES [TradeCompany_DataBase].[Addresses] ([ID])

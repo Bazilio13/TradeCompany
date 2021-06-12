@@ -164,5 +164,47 @@ namespace TradeCompany_DAL
                     new { id }, commandType: CommandType.StoredProcedure);
             }
         }
+
+        public void UpdateProductStockBySupplyID_Plus(int SupplyID)
+        {
+            string query;
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                query = "TradeCompany_DataBase.UpdateProductStockBySupplyID_Plus";
+                dbConnection.Query<int>(query,
+                    new { SupplyID }, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public void UpdateProductStockBySupplyID_Minus(int SupplyID)
+        {
+            string query;
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                query = "TradeCompany_DataBase.UpdateProductStockBySupplyID_Minus";
+                dbConnection.Query<int>(query,
+                    new { SupplyID }, commandType: CommandType.StoredProcedure);
+            }
+        }
+        public void UpdateProductLastSupplyDate(int SupplyID)
+        {
+            string query;
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                query = "TradeCompany_DataBase.UpdateProductLastSupplyDate";
+                dbConnection.Query<int>(query,
+                    new { SupplyID }, commandType: CommandType.StoredProcedure);
+            }
+        }
+        public void UpdateProductLastSupplyDateWhenDeleteSupply (int SupplyID)
+        {
+            string query;
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                query = "[TradeCompany_DataBase].[UpdateProductLastSupplyDateWhenDeleteSupply]";
+                dbConnection.Query<int>(query,
+                    new { SupplyID }, commandType: CommandType.StoredProcedure);
+            }
+        }
     }
 }

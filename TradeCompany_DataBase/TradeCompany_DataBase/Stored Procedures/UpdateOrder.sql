@@ -11,6 +11,6 @@ AS
 	DateTime = @Datetime,
 	AddressID = @AddressID,
 	Comment = @Comment
-	from Orders as O
+	from [TradeCompany_DataBase].Orders as O
 
 where o.ID = @ID

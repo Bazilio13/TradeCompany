@@ -186,8 +186,11 @@ namespace TradeCompany_UI
         {
             ConfirmitionWindow confirmitionWindow = new ConfirmitionWindow("Вы уверены, что хотите удалить поставку?");     
             if (confirmitionWindow.ShowDialog() == true)
-            {
-                _supplysDataAccess.DeleteSupply(SupplyModel.ID);
+            {  
+                if (SupplyModel.ID != 0)
+                {
+                    _supplysDataAccess.DeleteSupply(SupplyModel.ID);
+                }
                 Supplys supply = (Supplys)_priviosPage;
                 supply.FilterSupplys();
                 _uiNavi.GoToThePage(_priviosPage);
@@ -214,6 +217,11 @@ namespace TradeCompany_UI
                     }
                 }
             }
+        }
+
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            _uiNavi.GoToThePage(_priviosPage);
         }
     }
 }

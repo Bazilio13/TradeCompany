@@ -61,6 +61,7 @@ namespace TradeCompany_BLL
             }
             else
             {
+                clientDTO.RegistrationDate = DateTime.Now;
                 _clientData.AddClient(clientDTO);
             }
         }
