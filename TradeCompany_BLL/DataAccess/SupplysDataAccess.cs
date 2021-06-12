@@ -52,6 +52,7 @@ namespace TradeCompany_BLL.DataAccess
                 slDTO.SupplyID = supplyModel.ID;
             }
             _supplysData.AddSupplyLists(supplyDTO.SupplyLists);
+            _supplysData.UpdateProductStockBySupplyID_Plus(supplyModel.ID);
         }
         
         public void UpdateSupply(SupplyModel supplyModel)
@@ -65,10 +66,13 @@ namespace TradeCompany_BLL.DataAccess
             _supplysData.UpdateSupplyByID(supplyDTO);
             _supplysData.DeleteSupplyListsBySupplyID(supplyDTO.ID);
             _supplysData.AddSupplyLists(supplyDTO.SupplyLists);
+            _supplysData.UpdateProductStockBySupplyID_Minus(supplyModel.ID);
+            _supplysData.UpdateProductStockBySupplyID_Plus(supplyModel.ID);
         }
 
         public void DeleteSupply(int id)
         {
+            _supplysData.UpdateProductStockBySupplyID_Minus(id);
             _supplysData.DeleteSupplyByID(id);
         }
     }

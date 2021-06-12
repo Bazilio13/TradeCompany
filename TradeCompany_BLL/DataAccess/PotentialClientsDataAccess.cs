@@ -21,5 +21,10 @@ namespace TradeCompany_BLL.DataAccess
             clientsActivityStart = clientsActivityStart.AddMonths(-3);
             return _map.MapPotentialClientDTOsToPotentialClientModels(_data.GetPotentialClientDTOs(ids, clientsActivityStart, 2));
         }
+        public List<PotentialClientModel> GetPotentialClientsByProductsIDs(int id)
+        {
+            List<int> ids = new List<int> { id };
+            return GetPotentialClientsByProductsIDs(ids);
+        }
     }
 }

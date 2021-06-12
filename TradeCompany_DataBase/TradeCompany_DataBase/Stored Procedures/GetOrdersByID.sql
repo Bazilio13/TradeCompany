@@ -10,5 +10,6 @@ AS
 	left join [TradeCompany_DataBase].Products as P on ol.ProductID = P.ID
 	left join [TradeCompany_DataBase].MeasureUnits as M on m.ID = P.MeasureUnit
 	left join [TradeCompany_DataBase].Addresses as A on o.AddressID = A.ID
-	Where O.ID = @ID
+	Where O.ID = @ID and
+	O.IsDeleted = 0 
 	order by o.DateTime desc, o.ID desc

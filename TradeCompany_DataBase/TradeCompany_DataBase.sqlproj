@@ -145,6 +145,9 @@
     <Build Include="TradeCompany_DataBase\Stored Procedures\GetPotentialClientsByProductsIDs.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\SoftDeleteProductByID.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\GetLastProductID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\SoftDeleteOrderByID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\UpdateProductStockBySupplyID_Plus.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\UpdateProductStockBySupplyID_Minus.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="TradeCompany_DataBase.refactorlog" />
