@@ -204,7 +204,7 @@ namespace TradeCompany_UI
             {
                 _uinavi.GoToThePage(new ProductCatalog(this));
             }
-            //_uinavi.GoToThePage(new ProductCatalog(this));
+           
         }
 
         public void AddProductToCollection(ProductBaseModel productBaseModel)
@@ -213,15 +213,7 @@ namespace TradeCompany_UI
             specificProduct = new OrderListModel();
             specificProduct.ProductID = productBaseModel.ID;
             specificProduct.ProductName = productBaseModel.Name;
-            if (_clientFullInfo.Type == true)
-            {
-                specificProduct.Price = productBaseModel.WholesalePrice; // переписать 
-            }
-            else
-            {
-                specificProduct.Price = productBaseModel.RetailPrice;
-            }
-
+            specificProduct.Price = _clientFullInfo.Type == true ? productBaseModel.WholesalePrice : productBaseModel.RetailPrice;
             specificProduct.ProductMeasureUnit = productBaseModel.MeasureUnitName;
             specificProduct.OrderID = _orderId;
             _productBaseModel = productBaseModel;
