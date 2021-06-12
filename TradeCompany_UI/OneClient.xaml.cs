@@ -334,5 +334,15 @@ namespace TradeCompany_UI
             }
 
         }
+
+        private void Exit(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DeleteClients(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
