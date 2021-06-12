@@ -27,7 +27,6 @@ namespace TradeCompany_UI
         private OrderModel newOrder;
         private OrderModel _infoAboutOrder;
         private OrderListModel specificProduct;
-       
 
         private ClientBaseModel _clientBaseInfo;
         private ClientModel _clientFullInfo;
@@ -137,8 +136,6 @@ namespace TradeCompany_UI
 
             //listOfProductForOrder.Add(addedProduct);
 
-
-
         }
         private void AddProductInOrder_Click(object sender, RoutedEventArgs e)
         {
@@ -150,9 +147,19 @@ namespace TradeCompany_UI
             {
                 if (_orderId == 0)
                 {
-                    FillInfoAboutNewOrder();
-                   
-                    _orderDataAccess.AddOrder(newOrder);
+                    bool check = TurnOnAddProductInOrderButton();
+                    if (check == true)
+                    {
+
+                        FillInfoAboutNewOrder();
+
+                        _orderDataAccess.AddOrder(newOrder);
+                    }
+                    else
+                    {
+                       new MessageWindow("Заполните все поля").ShowDialog();
+                        return;
+                    }
                    
                 }
                 else
@@ -171,7 +178,7 @@ namespace TradeCompany_UI
         {
             foreach (var product in orderListModels)
             {
-                _ProductsDataAccess.ReduceProductAmountInStockByID(product.ProductID, (int)product.Amount); 
+                _ProductsDataAccess.ReduceProductAmountInStockByID(product.ProductID, (int)product.Amount);
             }
         }
 
@@ -190,7 +197,7 @@ namespace TradeCompany_UI
 
             if (bgOrderListModels.Count != 0)
             {
-                if (bgOrderListModels.Last().Amount == 0 && bgOrderListModels.Count >=1)
+                if (bgOrderListModels.Last().Amount == 0 && bgOrderListModels.Count >= 1)
                 {
                     Button_AddExistingProduct.IsEnabled = false;
                 }
@@ -198,13 +205,13 @@ namespace TradeCompany_UI
                 {
                     _uinavi.GoToThePage(new ProductCatalog(this));
                 }
-               
+
             }
             else
             {
                 _uinavi.GoToThePage(new ProductCatalog(this));
             }
-           
+
         }
 
         public void AddProductToCollection(ProductBaseModel productBaseModel)
@@ -219,7 +226,7 @@ namespace TradeCompany_UI
             _productBaseModel = productBaseModel;
 
             bgOrderListModels.Add(specificProduct);
-            
+
         }
 
 
@@ -229,13 +236,13 @@ namespace TradeCompany_UI
             _clientFullInfo = _clientsDataAccess.GetClientByClientID(_clientId);
             FillComboBoxAdress();
             ShowInfoAboutClient();
-           
+
 
         }
         private void FillInfoAboutNewOrder()
         {
             newOrder.DateTime = (DateTime)DataPicker.SelectedDate;
-           
+
             newOrder.ClientsID = _clientId;
             newOrder.Client = _clientFullInfo.Name;
             newOrder.ClientsPhone = _clientFullInfo.Phone;
@@ -264,7 +271,7 @@ namespace TradeCompany_UI
         private void cbAdress_DropDownClosed(object sender, EventArgs e)
         {
             var addresInfo = (AddressModel)cbAdress.SelectedItem;
-            if((addresInfo == null) && (_clientFullInfo == null))
+            if ((addresInfo == null) && (_clientFullInfo == null))
             {
                 new MessageWindow("Выберите клиента").ShowDialog();
                 return;
@@ -274,8 +281,18 @@ namespace TradeCompany_UI
                 new MessageWindow("У клиента нет адресов").ShowDialog();
                 return;
             }
-            _addresId = addresInfo.ID;
-            _adress = addresInfo.Address;
+            if (addresInfo == null)
+            {
+                return;
+            }
+            else
+            {
+                _addresId = addresInfo.ID;
+                _adress = addresInfo.Address;
+            }
+
+
+
         }
         public void AddProductToCollection(int productID, string productName, string productMeasureUnit, List<ProductGroupModel> productGroupModels)
         {
@@ -289,14 +306,15 @@ namespace TradeCompany_UI
             {
                 listOfProductForOrder.Add(specificProduct);
                 _sum += specificProduct.Price * i.Amount;
-                Sum.Text ="Сумма заказа: " + _sum;
+                Sum.Text = "Сумма заказа: " + _sum;
                 Button_AddExistingProduct.IsEnabled = true;
-                bool check = TurnOnAddProductInOrderButton();
-                if (check == true)
-                {
+                //bool check = TurnOnAddProductInOrderButton();
+                //if (check == true)
+                //{
 
-                    AddProductInOrder.IsEnabled = true;
-                }
+                //    AddProductInOrder.IsEnabled = true;
+                //}
+                AddProductInOrder.IsEnabled = true;
             }
             else
             {
@@ -307,10 +325,10 @@ namespace TradeCompany_UI
         private bool TurnOnAddProductInOrderButton()
         {
             bool result = false;
-            bool isOrderHaveAdress = _addresId != 0 ? true : false; 
-            bool isOrderHaveDataTime = DataPicker.SelectedDate != null? true : false;
-           
-            if(_orderId != 0)
+            bool isOrderHaveAdress = _addresId != 0 ? true : false;
+            bool isOrderHaveDataTime = DataPicker.SelectedDate != null ? true : false;
+
+            if (_orderId != 0)
             {
                 result = true;
             }
@@ -320,5 +338,7 @@ namespace TradeCompany_UI
             }
             return result;
         }
+
+        
     }
 }
