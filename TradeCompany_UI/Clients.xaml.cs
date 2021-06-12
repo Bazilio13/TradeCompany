@@ -105,7 +105,7 @@ namespace TradeCompany_UI
             CheckBoxOpt.IsChecked = false;
             CheckBoxRetail.IsChecked = false;
             MinDate.SelectedDate = null;
-            MinDate.SelectedDate = null;
+            MaxDate.SelectedDate = null;
             ClientsFiltr(sender, e);
         }
 

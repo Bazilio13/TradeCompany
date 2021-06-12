@@ -16,6 +16,7 @@ using TradeCompany_BLL;
 using TradeCompany_BLL.Models;
 using System.Runtime;
 using TradeCompany_DAL.DTOs;
+using System.Globalization;
 
 namespace TradeCompany_UI
 {
@@ -33,6 +34,8 @@ namespace TradeCompany_UI
         private List<String> _newAddresses = new List<String>();
         private MapsDTOtoModel _map = new MapsDTOtoModel();
         private List<FeedbackModel> _feedback = new List<FeedbackModel>();
+        public ClientModel client = new ClientModel();
+
 
 
         public OneClient(int id)
@@ -43,7 +46,7 @@ namespace TradeCompany_UI
             FeedbacksDataAccess fda = new FeedbacksDataAccess();
             OrderDataAccess dataAccess = new OrderDataAccess();
             _orderList = dataAccess.GetOrderModelsByClientID(_id);
-            _feedback = fda.GetFeedbacksByClientID(_id);
+            _feedback = fda.GetFeedbacksByClientID(_id); 
         }
 
 
@@ -56,6 +59,7 @@ namespace TradeCompany_UI
             ButtonFeedback.Visibility = Visibility.Collapsed;
             ButtonStory.Visibility = Visibility.Collapsed;
             _id = -1;
+
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -67,6 +71,7 @@ namespace TradeCompany_UI
             {
                 dgOrdersTable.ItemsSource = _orderList;
                 ClientModel client = _clientsData.GetClientByClientID(_id);
+                TBRegistrarionDate.Text = "Дата регистраци: " + client.RegistrationDate.ToString("dd.MM.yyyy",CultureInfo.InvariantCulture);
                 textBoxName.Text = client.Name;
                 if (client.INN != null)
                 {
@@ -110,7 +115,7 @@ namespace TradeCompany_UI
             {
                 RadioButtonTypePersonF.IsChecked = true;
                 RadioButtonTypeBayR.IsChecked = true;
-
+                TBRegistrarionDate.Visibility = Visibility.Collapsed;
                 ButtonChange.IsEnabled = false;
                 RadioButtonTypeBayO.IsChecked = true;
                 RadioButtonTypeBayR.IsChecked = true;
@@ -150,7 +155,6 @@ namespace TradeCompany_UI
 
         private ClientModel ToFormClientModel()
         {
-            ClientModel client = new ClientModel();
             client.ID = _id;
             client.Name = textBoxName.Text.Trim();
             client.INN = textBoxINN.Text.Trim();
