@@ -20,5 +20,29 @@ namespace TradeCompany_BLL.Models
         public DateTime? LastOrderDate { get; set; }
         public DateTime RegistrationDate { get; set; }
 
+        public override bool Equals(object obj)
+        {
+
+            return obj is ClientModel model &&
+                   ID == model.ID &&
+                   Name == model.Name &&
+                   INN == model.INN &&
+                   E_mail == model.E_mail &&
+                   Phone == model.Phone &&
+                   ContactPerson == model.ContactPerson &&
+                   Comment == model.Comment &&
+                   Type == model.Type &&
+                   CorporateBody == model.CorporateBody &&
+                   LastOrderDate == model.LastOrderDate &&
+                   RegistrationDate == model.RegistrationDate;
+        }
+
+
+
+        //public override bool Equals(object obj)
+        //{
+        //    return base.Equals(obj);
+        //}
     }
+
 }

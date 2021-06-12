@@ -16,5 +16,30 @@ namespace TradeCompany_DAL.DTOs
         public string Address { get; set; }
         public ClientDTO ClientDTO { get; set; }
         public List<OrderListsDTO> OrderLists { get; set; } = new List<OrderListsDTO>();
+
+        public override bool Equals(object obj)
+        {
+            bool result = true;
+            if (obj is OrdersDTO dTO && OrderLists.Count == dTO.OrderLists.Count)
+            {
+                for (int i = 0; i < OrderLists.Count; i++)
+                {
+                    if (OrderLists[i] != dTO.OrderLists[i])
+                    {
+                        result = false;
+                    }
+                }
+
+                return result &&
+                       ID == dTO.ID &&
+                       ClientsID == dTO.ClientsID &&
+                       DateTime == dTO.DateTime &&
+                       AddressID == dTO.AddressID &&
+                       Comment == dTO.Comment &&
+                       Address == dTO.Address &&
+                       ClientDTO == dTO.ClientDTO;
+            }
+            return false;
+        }
     }
 }
