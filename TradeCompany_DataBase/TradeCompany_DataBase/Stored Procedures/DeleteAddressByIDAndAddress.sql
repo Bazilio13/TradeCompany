@@ -4,3 +4,4 @@
 AS
 	update [Addresses] set isDeleted = 1
 	where Addresses.ClientID = @ClientID and Addresses.Address = @Address
+	 

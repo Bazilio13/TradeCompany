@@ -54,7 +54,7 @@
             <StackPanel Name="stackPanelAddresses" VerticalAlignment="Top" Margin="0,-5,0,3">
                 <TextBox HorizontalAlignment="Left" MaxLength="255" TextWrapping="Wrap" Width="371" Height="21" Margin="0,0,0,0" />
                 <Button x:Name="buttonAddAddress" HorizontalAlignment="Right" Content="Добавить адрес" Width="118" Height="32" Margin="0,-27,0,5" Click="buttonAddAddress_Click" VerticalContentAlignment="Bottom"/>
-            </StackPanel >
+            </StackPanel>
             <Label Content="Комментарий" FontSize="9" Margin="0,0,0,0"/>
             <TextBox Name ="textBoxComments" HorizontalAlignment="center" MaxLength="1500" TextWrapping="Wrap" VerticalAlignment="Top" Width="500" MinHeight="21" Margin="0,-5,0,3"/>
 

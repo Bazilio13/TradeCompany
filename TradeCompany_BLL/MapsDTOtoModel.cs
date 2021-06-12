@@ -54,15 +54,6 @@ namespace TradeCompany_BLL
             return clientModel;
         }
 
-
-        public List<String> MapClientDTOToAddressesByID(int id)
-        {
-            AddressesData addresses = new AddressesData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
-            List<String> addressesList = addresses.GetAddressesByID(id);
-
-            return addressesList;
-        }
-
         public List<WishModel> MapWishesDTOToWishesModelListByID(List<WishDTO> wishListDTO) 
         { 
             ClientsData client = new ClientsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
@@ -162,6 +153,23 @@ namespace TradeCompany_BLL
             Mapper mapper = new Mapper(config);
             List<ClientsStatisticsModel> clientsStatModel = mapper.Map<List<ClientsStatisticsModel>>(clientsStatDTO);
             return clientsStatModel;
+        }
+        public List<String> MapAddressDTOToAddressString(List<AddressDTO> addressesDTO)
+        {
+            List<String> addressesList = new List<string>();
+            foreach (AddressDTO address in addressesDTO)
+            {
+                addressesList.Add(address.Address);
+            }
+            return addressesList;
+        }
+
+        public List<AddressModel> MapAddressDTOToAddressModel(List<AddressDTO> addressesDTO)
+        {
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<AddressDTO, AddressModel>());
+            Mapper mapper = new Mapper(config);
+            List<AddressModel> addressModels = mapper.Map<List<AddressModel>>(addressesDTO);
+            return addressModels;
         }
     }
 }

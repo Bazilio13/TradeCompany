@@ -116,7 +116,7 @@
     <Build Include="TradeCompany_DataBase\Stored Procedures\GetSupplyByID.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\UpdateSupplyByID.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\AddSupplyList.sql" />
-    <Build Include="TradeCompany_DataBase\Stored Procedures\GetAddresses.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetAllAddresses.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\AddAddress.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\DeleteAddressByIDAndAddress.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\GetAddressesByClientID.sql" />
@@ -145,6 +145,11 @@
     <Build Include="TradeCompany_DataBase\Stored Procedures\GetPotentialClientsByProductsIDs.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\SoftDeleteProductByID.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\GetLastProductID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\SetAddressIsDeleted.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetAddressIsDeleted.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetAddresses.sql" />
+    <Build Include="TradeCompany_DataBase\UpdateAddressByIsDeleted.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetAllAddressesByClientID.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\SoftDeleteOrderByID.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\UpdateProductStockBySupplyID_Plus.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\UpdateProductStockBySupplyID_Minus.sql" />
