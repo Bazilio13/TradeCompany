@@ -164,5 +164,27 @@ namespace TradeCompany_DAL
                     new { id }, commandType: CommandType.StoredProcedure);
             }
         }
+
+        public void UpdateProductStockBySupplyID_Plus(int id)
+        {
+            string query;
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                query = "UpdateProductStockBySupplyID_Plus";
+                dbConnection.Query<int>(query,
+                    new { id }, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public void UpdateProductStockBySupplyID_Minus(int id)
+        {
+            string query;
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                query = "UpdateProductStockBySupplyID_Minus";
+                dbConnection.Query<int>(query,
+                    new { id }, commandType: CommandType.StoredProcedure);
+            }
+        }
     }
 }

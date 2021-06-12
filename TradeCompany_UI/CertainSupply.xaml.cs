@@ -215,5 +215,10 @@ namespace TradeCompany_UI
                 }
             }
         }
+
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            _uiNavi.GoToThePage(_priviosPage);
+        }
     }
 }
