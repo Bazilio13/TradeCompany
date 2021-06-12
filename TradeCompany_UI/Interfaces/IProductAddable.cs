@@ -9,6 +9,6 @@ namespace TradeCompany_UI.Interfaces
 {
     interface IProductAddable
     {
-        void AddProductToCollection(int productID, string productName, string productMeasureUnit, List<ProductGroupModel> productGroupModels);
+        void AddProductToCollection(ProductBaseModel productBaseModel);
     }
 }

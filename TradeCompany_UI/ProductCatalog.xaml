@@ -34,7 +34,7 @@
                         <DataGridTextColumn Binding ="{Binding Path = MeasureUnitName}" IsReadOnly="True" Header="Единица измерения" Width="82" MinWidth="82" />
                         <DataGridTextColumn Binding ="{Binding Path = WholesalePrice}" IsReadOnly="True" Header="Цена опт." Width="82" MinWidth="82"/>
                         <DataGridTextColumn Binding ="{Binding Path = RetailPrice}" IsReadOnly="True" Header="Цена розн." Width="82" MinWidth="82"/>
-                        <DataGridTextColumn Binding ="{Binding StringFormat = dd MMMM yyyy, ConverterCulture=ru,  Path = LastSupplyDate}" IsReadOnly="True" Header="Дата последней поставки " Width="82" MinWidth="82"/> 
+                        <DataGridTextColumn Binding ="{Binding StringFormat = dd MMMM yyyy, ConverterCulture=ru, Path = LastSupplyDate}" IsReadOnly="True" Header="Дата последней поставки" Width="*" MinWidth="82"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
