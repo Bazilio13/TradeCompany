@@ -62,6 +62,8 @@
     <Folder Include="TradeCompany_DataBase\Tables\" />
     <Folder Include="TradeCompany_DataBase\Stored Procedures\" />
     <Folder Include="Security\" />
+    <Folder Include="TradeCompany_DataBase\Functions" />
+    <Folder Include="TradeCompany_DataBase\Functions\Table-valued Functions" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="TradeCompany_DataBase\Tables\Addresses.sql" />
@@ -139,6 +141,8 @@
     <Build Include="TradeCompany_DataBase\Stored Procedures\SearchSupplys.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\DeleteSupplyListsBySupplyID.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\GetAllMeasureUnits.sql" />
+    <Build Include="TradeCompany_DataBase\Functions\Table-valued Functions\Iter_intlist_to_table.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetPotentialClientsByProductsIDs.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\SoftDeleteProductByID.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\GetLastProductID.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\SetAddressIsDeleted.sql" />
