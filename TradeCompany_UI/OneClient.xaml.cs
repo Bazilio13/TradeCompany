@@ -25,7 +25,8 @@ namespace TradeCompany_UI
     /// </summary>
     public partial class OneClient : Page
     {
-
+        private Page _previosPage;
+        private UINavi _uiNavi;
         private int _id;
         private ClientsDataAccess _clientsData = new ClientsDataAccess();
         private AddressesDataAccess _addressesData = new AddressesDataAccess();
@@ -34,13 +35,19 @@ namespace TradeCompany_UI
         private List<String> _addressesList = new List<String>();
         private MapsDTOtoModel _map = new MapsDTOtoModel();
         private List<FeedbackModel> _feedback = new List<FeedbackModel>();
-        public ClientModel client = new ClientModel();
+        private ClientModel client = new ClientModel();
+        private Clients _clientsPage;
+        
 
 
 
-        public OneClient(int id)
+        public OneClient(int id, Page previosPage = null)
         {
+            _clientsPage = (Clients)_previosPage;
+
             InitializeComponent();
+            _uiNavi = UINavi.GetUINavi();
+            _previosPage = previosPage;
             _id = id;
             _wishList = _clientsData.GetWishListByClientID(_id);
             FeedbacksDataAccess fda = new FeedbacksDataAccess();
@@ -51,9 +58,12 @@ namespace TradeCompany_UI
 
 
 
-        public OneClient()
+        public OneClient(Page previosPage = null)
         {
+            _clientsPage = (Clients)_previosPage;
             InitializeComponent();
+            _uiNavi = UINavi.GetUINavi();
+            _previosPage = previosPage;
             dgOrdersTable.Visibility = Visibility.Collapsed;
             SPFeedbackPanel.Visibility = Visibility.Collapsed;
             ButtonFeedback.Visibility = Visibility.Collapsed;
@@ -64,14 +74,14 @@ namespace TradeCompany_UI
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-
+            _clientsPage = (Clients)_previosPage;
             MapsDTOtoModel map = new MapsDTOtoModel();
 
             if (_id != -1)
             {
                 dgOrdersTable.ItemsSource = _orderList;
                 ClientModel client = _clientsData.GetClientByClientID(_id);
-                TBRegistrarionDate.Text = "Дата регистраци: " + client.RegistrationDate.ToString("dd.MM.yyyy",CultureInfo.InvariantCulture);
+                TBRegistrarionDate.Text = "Дата регистрации: " + client.RegistrationDate.ToString("dd.MM.yyyy",CultureInfo.InvariantCulture);
                 textBoxName.Text = client.Name;
                 if (client.INN != null)
                 {
@@ -116,7 +126,6 @@ namespace TradeCompany_UI
                 RadioButtonTypePersonF.IsChecked = true;
                 RadioButtonTypeBayR.IsChecked = true;
                 TBRegistrarionDate.Visibility = Visibility.Collapsed;
-                ButtonChange.IsEnabled = false;
                 RadioButtonTypeBayO.IsChecked = true;
                 RadioButtonTypeBayR.IsChecked = true;
             }
@@ -125,15 +134,6 @@ namespace TradeCompany_UI
             cbWish.ItemsSource = allProducts;
 
         }
-
-
-
-        private void ChangeClient(object sender, RoutedEventArgs e)
-
-        {
-            ButtonChange.IsEnabled = false;
-        }
-
 
 
         private void SaveClient(object sender, RoutedEventArgs e)
@@ -150,6 +150,10 @@ namespace TradeCompany_UI
                 _clientsData.SaveWishListByClientID(_wishList, _id);
                 ReloadAddressesFromPanel();
                 _addressesData.AddAddressByID(_id, _addressesList); 
+
+                MessageBox.Show("Клиент сохранен", "Подтверждение", MessageBoxButton.OK, MessageBoxImage.Question);
+                _clientsPage.UpdateDG();
+                _uiNavi.GoToThePage(_previosPage);
             }
         }
 
@@ -372,5 +376,34 @@ namespace TradeCompany_UI
             stackPanelAddresses.Children.RemoveAt(index - 1);
         }
 
+
+        private void Exit(object sender, RoutedEventArgs e)
+        {
+            _uiNavi.GoToThePage(_previosPage);
+        }
+
+        private void DeleteClients(object sender, RoutedEventArgs e)
+        {
+            if(_id != -1)
+            {
+                if (MessageBox.Show("Удалить из каталога?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    _clientsData.SoftDeleteClientByID(_id);
+                }                   
+                MessageBox.Show("Клиент удален", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                _clientsPage.UpdateDG();
+                _uiNavi.GoToThePage(_previosPage);
+
+            }
+            else
+            {
+                if (MessageBox.Show("Клиент не сохранен", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    _clientsData.SoftDeleteClientByID(_id);
+                }
+            }
+
+        }
+       
     }
 }
