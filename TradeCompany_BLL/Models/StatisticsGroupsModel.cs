@@ -14,5 +14,6 @@ namespace TradeCompany_BLL.Models
         public DateTime LastSupplyDate { get; set; }
         public DateTime LastOrderDate { get; set; }
         public float Amount { get; set; }
+        public int StockAmount { get; set; }
     }
 }

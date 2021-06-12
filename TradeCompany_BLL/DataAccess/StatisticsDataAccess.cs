@@ -18,7 +18,7 @@ namespace TradeCompany_BLL.DataAccess
 
         public List<StatisticsGroupsModel> GetStatisticsProducts(FilterGroupModel filter)
         {
-            List<StatisticsGroupsDTO> statisticsProductsDTOs = _statistecsData.GetStatisticsProducts(filter.MinDateSupply, filter.MaxDateSupply, filter.MinDateOrder, filter.MaxDateOrder, filter.MinAmount, filter.MaxAmount, filter.MinSum, filter.MaxSum);
+            List<StatisticsGroupsDTO> statisticsProductsDTOs = _statistecsData.GetStatisticsProducts(filter.MinDateSupply, filter.MaxDateSupply, filter.MinDateOrder, filter.MaxDateOrder, filter.MinAmount, filter.MaxAmount, filter.MinSum, filter.MaxSum, filter.PeriodFor, filter.PeriodUntil);
             List<StatisticsGroupsModel> clinetsModel = _mapDTOtoModel.MapStatisticsGroursDTOToStatisticsGroursModel(statisticsProductsDTOs);
             return clinetsModel;
         }

@@ -103,6 +103,8 @@ namespace TradeCompany_UI
             DateUntilForSupply.SelectedDate = null;
             DateFromForOrder.SelectedDate = null;
             DateUntilForOrder.SelectedDate = null;
+            PeriodFor.SelectedDate = null;
+            PeriodUntil.SelectedDate = null;
             FromOrdersAmount.Text = "";
             ToOrdersAmount.Text = "";
             FromPrice.Text = "";
@@ -115,6 +117,9 @@ namespace TradeCompany_UI
             _filter.MaxDateSupply = CorrectMaxDate(DateUntilForSupply.SelectedDate); 
             _filter.MinDateOrder = DateFromForOrder.SelectedDate;
             _filter.MaxDateOrder = CorrectMaxDate(DateUntilForOrder.SelectedDate);
+            _filter.PeriodFor = PeriodFor.SelectedDate;
+            _filter.PeriodUntil = CorrectMaxDate(PeriodUntil.SelectedDate);
+
             _filter.MinAmount = ConvertStringToFloat(FromOrdersAmount.Text);
             _filter.MaxAmount = ConvertStringToFloat(ToOrdersAmount.Text);     
             _filter.MinSum = ConvertStringToFloat(FromPrice.Text);
@@ -178,15 +183,26 @@ namespace TradeCompany_UI
             return correctDate;
         }
 
-        private void ButtonHalfAYear(object sender, RoutedEventArgs e)
-        {
-            ButtonDate(182);
-
-        }
 
         private void ButtonMonth(object sender, RoutedEventArgs e)
         {
             ButtonDate(31);
+        }
+
+        private void GroupFilter(object sender, SelectionChangedEventArgs e)
+        {
+            _filter.MinDateSupply = DateFromForSupply.SelectedDate;
+            _filter.MaxDateSupply = CorrectMaxDate(DateUntilForSupply.SelectedDate);
+            _filter.MinDateOrder = DateFromForOrder.SelectedDate;
+            _filter.MaxDateOrder = CorrectMaxDate(DateUntilForOrder.SelectedDate);
+            _filter.PeriodFor = PeriodFor.SelectedDate;
+            _filter.PeriodUntil = CorrectMaxDate(PeriodUntil.SelectedDate);
+
+            _filter.MinAmount = ConvertStringToFloat(FromOrdersAmount.Text);
+            _filter.MaxAmount = ConvertStringToFloat(ToOrdersAmount.Text);
+            _filter.MinSum = ConvertStringToFloat(FromPrice.Text);
+            _filter.MaxSum = ConvertStringToFloat(ToPrice.Text);
+            DGAllGroups.ItemsSource = _dataAccess.GetStatisticsProducts(_filter);
         }
     }
 

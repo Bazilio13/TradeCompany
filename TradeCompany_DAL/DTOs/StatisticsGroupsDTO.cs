@@ -14,6 +14,7 @@ namespace TradeCompany_DAL.DTOs
         public DateTime? LastSupplyDate { get; set; }
         public DateTime? LastOrderDate { get; set; }
         public float Amount { get; set; }
+        public int StockAmount { get; set; }
 
     }
 }

@@ -12,6 +12,8 @@ namespace TradeCompany_BLL.Models
         public DateTime? MaxDateSupply { get; set; }
         public DateTime? MinDateOrder { get; set; }
         public DateTime? MaxDateOrder { get; set; }
+        public DateTime? PeriodFor { get; set; }
+        public DateTime? PeriodUntil { get; set; }
 
         public float? MinAmount { get; set; }
         public float? MaxAmount { get; set; } 
@@ -32,6 +34,8 @@ namespace TradeCompany_BLL.Models
             MaxAmount = null;
             MinSum = null;
             MaxSum = null;
+            PeriodFor = null;
+            PeriodUntil = null;
         }
     }
 }
