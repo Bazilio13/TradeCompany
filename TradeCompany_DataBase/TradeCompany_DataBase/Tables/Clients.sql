@@ -10,6 +10,7 @@
     [Type]          BIT            NOT NULL,
     [LastOrderDate] DATETIME       NULL,
     [IsDeleted] BIT NOT NULL, 
+    [RegistrationDate] DATETIME     NULL,
     CONSTRAINT [PK_Clients] PRIMARY KEY CLUSTERED ([ID] ASC)
 );
 

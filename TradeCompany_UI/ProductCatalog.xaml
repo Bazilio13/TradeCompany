@@ -25,8 +25,8 @@
                     <Button x:Name="AddProduct"  DockPanel.Dock="Right" Content="Добавить товар" Click="AddProductButton_Click" HorizontalAlignment="Right"/>
                 </DockPanel>
 
-                <DataGrid x:Name="dgProductCatalog" Grid.Row="1" AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" MouseDoubleClick="dgProductCatalog_MouseDoubleClick" ScrollViewer.CanContentScroll="True">
-                    
+                <DataGrid x:Name="dgProductCatalog" Grid.Row="1" AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" SelectionMode="Single" MouseDoubleClick="dgProductCatalog_MouseDoubleClick" ScrollViewer.CanContentScroll="True" FontSize="12">
+
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding ="{Binding Path = ID}" IsReadOnly="True" Header="ID" Width="58" MinWidth="58"/>
                         <DataGridTextColumn Binding ="{Binding Path = Name}"  IsReadOnly="True" Header="Наименование" Width="103" MinWidth="103"/>
@@ -34,7 +34,7 @@
                         <DataGridTextColumn Binding ="{Binding Path = MeasureUnitName}" IsReadOnly="True" Header="Единица измерения" Width="82" MinWidth="82" />
                         <DataGridTextColumn Binding ="{Binding Path = WholesalePrice}" IsReadOnly="True" Header="Цена опт." Width="82" MinWidth="82"/>
                         <DataGridTextColumn Binding ="{Binding Path = RetailPrice}" IsReadOnly="True" Header="Цена розн." Width="82" MinWidth="82"/>
-                        <DataGridTextColumn Binding ="{Binding Path = LastSupplyDate}" IsReadOnly="True" Header="Дата последней поставки" Width="*" MinWidth="82"/>
+                        <DataGridTextColumn Binding ="{Binding StringFormat = dd MMMM yyyy, ConverterCulture=ru, Path = LastSupplyDate}" IsReadOnly="True" Header="Дата последней поставки" Width="*" MinWidth="82"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
@@ -45,18 +45,23 @@
                 <Line X1="0" Y1="20" X2="0" Y2="540" Stroke="#6E304B" StrokeThickness="2"/>
             </StackPanel>
 
-            <StackPanel Orientation="Vertical" Width="188" DockPanel.Dock="Right" Margin="29,0,0,0">
+            <StackPanel Orientation="Vertical" Width="188" DockPanel.Dock="Right" Margin="0,20,0,0">
                 <TextBlock HorizontalAlignment="Center" FontSize="18" FontWeight="Bold" Margin="0,0,0,35">Фильтр</TextBlock>
-                <TextBlock Text="Выбор категории:" TextWrapping="Wrap" Width="149"/>
 
                 <ComboBox x:Name="ProductGroupSelect" HorizontalAlignment="Center" Margin="0,0,0,33" SelectedIndex="0" Height="22" Width="150" DropDownClosed="ProductGroupSelect_DropDownClosed" Grid.RowSpan="2" IsEditable="True" />
-                
 
-                <DatePicker x:Name="DateFrom" HorizontalAlignment="Center" Margin="0,0,0,17" RenderTransformOrigin="0.309,-0.578" Height="28" Width="114" SelectedDateChanged="DateFrom_SelectedDateChange" BorderBrush="#FFF3DFC4" Background="#FFF3DFC4" Focusable="False">
-                    
-                </DatePicker>
-                <DatePicker x:Name="DateUntil"  HorizontalAlignment="Center" Margin="0,0,0,30" Height="27" Width="112" SelectedDateChanged="DateUntil_SelectedDateChange" BorderBrush="#FFF3DFC4" Background="#FFF3DFC4"/>
+                <TextBlock TextWrapping="Wrap" Width="170"><Run Language="ru-ru" Text="Дата последней поставки:"/></TextBlock>
+                <DockPanel Height="44">
+                    <TextBlock DockPanel.Dock="Left" TextWrapping="Wrap" Margin="15,0,-15,0" Width="17" Height="18"><Run Language="ru-ru" Text="От"/></TextBlock>
+                    <DatePicker x:Name="DateFrom" DockPanel.Dock="Right" HorizontalAlignment="Center" Margin="0,0,0,0" RenderTransformOrigin="0.309,-0.578" Height="28" Width="114" SelectedDateChanged="DateFrom_SelectedDateChange" BorderBrush="#FFF3DFC4" Background="#FFF3DFC4" Focusable="False">
 
+                    </DatePicker>
+                </DockPanel>
+
+                <DockPanel Height="44" Margin="0,0,0,31">
+                    <TextBlock DockPanel.Dock="Left" TextWrapping="Wrap" Margin="15,0,-15,0" Width="19" Height="18"><Run Language="ru-ru" Text="До"/></TextBlock>
+                    <DatePicker x:Name="DateUntil"  HorizontalAlignment="Center" Margin="0,0,0,0" Height="27" Width="112" SelectedDateChanged="DateUntil_SelectedDateChange" BorderBrush="#FFF3DFC4" Background="#FFF3DFC4"/>
+                </DockPanel>
                 <DockPanel  Margin="0,0,0,31">
                     <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" FontSize="14">Остаток:</TextBlock>
                     <StackPanel DockPanel.Dock="Right">
@@ -67,12 +72,12 @@
                         <TextBlock Margin="30,0,0,0">от</TextBlock>
                         <TextBox x:Name="FromStockAmount" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" VerticalContentAlignment="Center" TextAlignment="Center" Height="20" RenderTransformOrigin="0.219,0.561" TextChanged="FromStockAmount_TextChange"/>
                     </StackPanel>
-                </DockPanel>                
+                </DockPanel>
 
                 <DockPanel  Margin="0,0,0,0" Height="20">
                     <RadioButton x:Name="RadioButtonWholesalePrice" DockPanel.Dock="Left" Margin="20,0,0,0" Content="Опт" Height="16" Width="50" Checked="RadioButtonWholesalePrice_Checked"/>
                     <RadioButton x:Name="RadioButtonRetailPrice" DockPanel.Dock="Right" Margin="20,0,0,0" Content="Розница" Height="16" Width="76" Checked="RadioButtonRetailPrice_Checked"/>
-                    
+
                 </DockPanel>
 
                 <DockPanel Margin="0,0,0,30" Height="59">
