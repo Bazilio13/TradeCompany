@@ -156,6 +156,12 @@ namespace TradeCompany_BLL
             return measureUnitsModels;
         }
 
-
+        public List<ClientsStatisticsModel> MapClientsStatDTOToClientsStatModel(List<ClientsStatisticsDTO> clientsStatDTO)
+        {
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<ClientsStatisticsDTO, ClientsStatisticsModel>());
+            Mapper mapper = new Mapper(config);
+            List<ClientsStatisticsModel> clientsStatModel = mapper.Map<List<ClientsStatisticsModel>>(clientsStatDTO);
+            return clientsStatModel;
+        }
     }
 }

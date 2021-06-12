@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TradeCompany_BLL;
 
 namespace TradeCompany_UI
 {
@@ -20,12 +21,18 @@ namespace TradeCompany_UI
     /// </summary>
     public partial class StatisticsByClients : Page
     {
-        UINavi _uiNavi;
+        private UINavi _uiNavi;
+        private ClientsDataAccess _clientsData;
+        private Page _priviosPage;
 
-        public StatisticsByClients()
+        public StatisticsByClients(Page priviosPage)
         {
             InitializeComponent();
+            _priviosPage = priviosPage;
             _uiNavi = UINavi.GetUINavi();
+            _clientsData = new ClientsDataAccess();
+            dgClientsStat.ItemsSource = _clientsData.GetClientsStatistics();
+            ProductGroupSelect.Text = "Выбор категории";
         }
 
         private void StatisticsByProductsButton_Click(object sender, RoutedEventArgs e)

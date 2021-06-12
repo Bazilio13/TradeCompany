@@ -57,7 +57,6 @@ namespace TradeCompany_UI
             _currentProduct = _productsData.GetProductByID(_id);
             _currentProductID = _id;
             PageTitle.Text = "Информация о товаре";
-            Button_Save.Content = "Изменить";
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -247,7 +246,7 @@ namespace TradeCompany_UI
             {
                 if (ChosenCategories.Text.Contains(selectedItem.Name))
                 {
-                    MessageBox.Show($"Категория \"{selectedItem.Name}\" уже выбрана", "", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show($"Категория \"{selectedItem.Name}\" уже выбрана", "", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.None, MessageBoxOptions.DefaultDesktopOnly);
                     Category.Text = "";
                     return;
                 }

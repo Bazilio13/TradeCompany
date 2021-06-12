@@ -34,7 +34,7 @@ namespace TradeCompany_UI
 
         private void StatisticsByClientsButton_Click(object sender, RoutedEventArgs e)
         {
-            _uiNavi.GoToThePage(new StatisticsByClients());
+            _uiNavi.GoToThePage(new StatisticsByClients(this));
         }
     }
 }

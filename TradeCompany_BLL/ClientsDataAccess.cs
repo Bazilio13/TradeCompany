@@ -82,5 +82,29 @@ namespace TradeCompany_BLL
             }
         }
 
+        public List<ClientsStatisticsModel> GetClientsStatistics()
+        {
+            List<ClientsStatisticsDTO> clientsStatDTO = _clientData.GetClientsStatistics();
+            List<ClientsStatisticsModel> clientsStatModel = _mapDTOtoModel.MapClientsStatDTOToClientsStatModel(clientsStatDTO);
+            
+            double? totalSum = 0;
+            foreach (ClientsStatisticsModel model in clientsStatModel)
+            {
+                if (!(model.TotalAmount is null))
+                {
+                    totalSum += model.TotalAmount;
+                }
+            }
+
+            foreach (ClientsStatisticsModel model in clientsStatModel)
+            {
+                if(!(model.TotalAmount is null))
+                {
+                    model.AverageCheck = model.TotalAmount / model.OrdersСount;
+                    model.Percentage = (model.TotalAmount / totalSum) * 100;
+                }
+            }
+            return clientsStatModel;
+        }
     }
 }
