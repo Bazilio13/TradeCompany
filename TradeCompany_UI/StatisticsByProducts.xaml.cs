@@ -151,7 +151,43 @@ namespace TradeCompany_UI
             return correctDate;
         }
 
+        private void ButtonYear(object sender, RoutedEventArgs e)
+        {
+            ButtonDate(365);
+        }
 
+        private void ButtonDate(int date)
+        {
+            _filter.MinDateSupply = ChangeDateTime(date);
+            _filter.MaxDateSupply = CorrectMaxDate(DateTime.Now);
+            _filter.MinDateOrder = ChangeDateTime(date);
+            _filter.MaxDateOrder = CorrectMaxDate(DateTime.Now);
+            DGAllGroups.ItemsSource = _dataAccess.GetStatisticsProducts(_filter);
+
+            DateUntilForSupply.SelectedDate = _filter.MaxDateSupply;
+            DateFromForSupply.SelectedDate = _filter.MinDateSupply;
+            DateFromForOrder.SelectedDate = _filter.MinDateOrder;
+            DateUntilForOrder.SelectedDate = _filter.MaxDateOrder;
+        }
+
+        private DateTime? ChangeDateTime(int time)
+        {
+            DateTime timeTmp = DateTime.Now;
+            timeTmp = timeTmp.AddDays(-time);
+            DateTime? correctDate = (DateTime?)timeTmp;
+            return correctDate;
+        }
+
+        private void ButtonHalfAYear(object sender, RoutedEventArgs e)
+        {
+            ButtonDate(182);
+
+        }
+
+        private void ButtonMonth(object sender, RoutedEventArgs e)
+        {
+            ButtonDate(31);
+        }
     }
 
 }
