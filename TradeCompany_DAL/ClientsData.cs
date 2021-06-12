@@ -171,7 +171,16 @@ namespace TradeCompany_DAL
             }
         }
 
-
+        public List<ClientsStatisticsDTO> GetClientsStatistics()
+        {
+            List<ClientsStatisticsDTO> clientsStat = new List<ClientsStatisticsDTO>();
+            string query = "exec TradeCompany_DataBase.GetClientsStatistics";
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                clientsStat = dbConnection.Query<ClientsStatisticsDTO>(query).AsList<ClientsStatisticsDTO>();
+            }
+            return clientsStat;
+        }
 
 
 

@@ -155,6 +155,9 @@
     <Build Include="TradeCompany_DataBase\Stored Procedures\UpdateProductStockBySupplyID_Minus.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\UpdateProductLastSupplyDate.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\UpdateProductLastSupplyDateWhenDeleteSupply.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetClientsStatistics.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetClientsStatisticsByAllParams.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetClientsStatisticsByParams.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="TradeCompany_DataBase.refactorlog" />
