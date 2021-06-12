@@ -165,25 +165,45 @@ namespace TradeCompany_DAL
             }
         }
 
-        public void UpdateProductStockBySupplyID_Plus(int id)
+        public void UpdateProductStockBySupplyID_Plus(int SupplyID)
         {
             string query;
             using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
             {
-                query = "UpdateProductStockBySupplyID_Plus";
+                query = "TradeCompany_DataBase.UpdateProductStockBySupplyID_Plus";
                 dbConnection.Query<int>(query,
-                    new { id }, commandType: CommandType.StoredProcedure);
+                    new { SupplyID }, commandType: CommandType.StoredProcedure);
             }
         }
 
-        public void UpdateProductStockBySupplyID_Minus(int id)
+        public void UpdateProductStockBySupplyID_Minus(int SupplyID)
         {
             string query;
             using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
             {
-                query = "UpdateProductStockBySupplyID_Minus";
+                query = "TradeCompany_DataBase.UpdateProductStockBySupplyID_Minus";
                 dbConnection.Query<int>(query,
-                    new { id }, commandType: CommandType.StoredProcedure);
+                    new { SupplyID }, commandType: CommandType.StoredProcedure);
+            }
+        }
+        public void UpdateProductLastSupplyDate(int SupplyID)
+        {
+            string query;
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                query = "TradeCompany_DataBase.UpdateProductLastSupplyDate";
+                dbConnection.Query<int>(query,
+                    new { SupplyID }, commandType: CommandType.StoredProcedure);
+            }
+        }
+        public void UpdateProductLastSupplyDateWhenDeleteSupply (int SupplyID)
+        {
+            string query;
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                query = "[TradeCompany_DataBase].[UpdateProductLastSupplyDateWhenDeleteSupply]";
+                dbConnection.Query<int>(query,
+                    new { SupplyID }, commandType: CommandType.StoredProcedure);
             }
         }
     }
