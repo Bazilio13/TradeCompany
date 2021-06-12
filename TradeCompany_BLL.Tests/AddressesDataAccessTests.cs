@@ -82,11 +82,11 @@ namespace TradeCompany_BLL.Tests
             };
 
             yield return new object[]
-{
+            {
                 8,
                 new List<AddressDTO>(){ new AddressDTO(1, 8, "Lenina 1" ), new AddressDTO(2, 8, "Москва, ул. Советская 3/1")},
                 new List<AddressModel>(){ new AddressModel(1, 8, "Lenina 1"), new AddressModel(1, 8, "Москва, ул. Советская 3/1")}
-};
+            };
         }
     }
 
