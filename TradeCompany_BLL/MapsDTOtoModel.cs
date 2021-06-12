@@ -147,6 +147,13 @@ namespace TradeCompany_BLL
             return measureUnitsModels;
         }
 
+        public List<ClientsStatisticsModel> MapClientsStatDTOToClientsStatModel(List<ClientsStatisticsDTO> clientsStatDTO)
+        {
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<ClientsStatisticsDTO, ClientsStatisticsModel>());
+            Mapper mapper = new Mapper(config);
+            List<ClientsStatisticsModel> clientsStatModel = mapper.Map<List<ClientsStatisticsModel>>(clientsStatDTO);
+            return clientsStatModel;
+        }
         public List<String> MapAddressDTOToAddressString(List<AddressDTO> addressesDTO)
         {
             List<String> addressesList = new List<string>();
@@ -164,5 +171,24 @@ namespace TradeCompany_BLL
             List<AddressModel> addressModels = mapper.Map<List<AddressModel>>(addressesDTO);
             return addressModels;
         }
+        public List<StatisticsGroupsModel> MapStatisticsGroursDTOToStatisticsGroursModel(List<StatisticsGroupsDTO> statisticsDTO)
+        {
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<StatisticsGroupsDTO, StatisticsGroupsModel>());
+            Mapper mapper = new Mapper(config);
+            List<StatisticsGroupsModel> statisticsProductsModel = mapper.Map<List<StatisticsGroupsModel>>(statisticsDTO);
+            return statisticsProductsModel;
+
+        }
+        
+        public List<StatisticsProductModel> MapStatisticsProductsDTOToStatisticsProductsModel(List<StatisticsProductDTO> statisticsDTO)
+        {
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<StatisticsProductDTO, StatisticsProductModel>());
+            Mapper mapper = new Mapper(config);
+            List<StatisticsProductModel> statisticsProductsModel = mapper.Map<List<StatisticsProductModel>>(statisticsDTO);
+            return statisticsProductsModel;
+
+        }
+
+
     }
 }

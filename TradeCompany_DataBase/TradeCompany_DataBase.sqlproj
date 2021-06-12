@@ -150,6 +150,14 @@
     <Build Include="TradeCompany_DataBase\Stored Procedures\GetAddresses.sql" />
     <Build Include="TradeCompany_DataBase\UpdateAddressByIsDeleted.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\GetAllAddressesByClientID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\SoftDeleteOrderByID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\UpdateProductStockBySupplyID_Plus.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\UpdateProductStockBySupplyID_Minus.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\UpdateProductLastSupplyDate.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\UpdateProductLastSupplyDateWhenDeleteSupply.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetClientsStatistics.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetClientsStatisticsByAllParams.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetClientsStatisticsByParams.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="TradeCompany_DataBase.refactorlog" />
