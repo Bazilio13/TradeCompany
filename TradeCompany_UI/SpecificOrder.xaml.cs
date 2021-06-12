@@ -303,6 +303,7 @@ namespace TradeCompany_UI
         {
             СheckInputData(e);
             var i = (OrderListModel)e.Row.Item;
+            if (i.Amount == 0) return;
             if (_productBaseModel.StockAmount - i.Amount >= 0)
             {
                 listOfProductForOrder.Add(specificProduct);
