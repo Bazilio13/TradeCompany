@@ -13,7 +13,6 @@ namespace TradeCompany_BLL.Models
         public string E_mail { get; set; }
         public string Phone { get; set; }
         public string ContactPerson { get; set; }
-
         public DateTime? LastOrderDate { get; set; }
     }
 }

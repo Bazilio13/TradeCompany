@@ -12,5 +12,25 @@ namespace TradeCompany_DAL.DTOs
         public DateTime DateTime { get; set; }
         public string Comment { get; set; }
         public List<SupplyListDTO> SupplyLists { get; set; } = new List<SupplyListDTO>();
+
+        public override bool Equals(object obj)
+        {
+            bool result = true;
+            if (obj is SupplyDTO dTO && SupplyLists.Count == dTO.SupplyLists.Count)
+            {
+                for (int i = 0; i < SupplyLists.Count; i++)
+                {
+                    if (SupplyLists[i] != dTO.SupplyLists[i])
+                    {
+                        result = false;
+                    }
+                }
+                return result &&
+                   ID == dTO.ID &&
+                   DateTime == dTO.DateTime &&
+                   Comment == dTO.Comment;
+            }
+            return false;
+        }
     }
 }

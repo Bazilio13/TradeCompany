@@ -23,5 +23,31 @@ namespace TradeCompany_BLL.Models
         {
             OrderListModel = new List<OrderListModel>();
         }
+
+        public override bool Equals(object obj)
+        {
+            bool result = true;
+            if (obj is OrderModel model && OrderListModel.Count == model.OrderListModel.Count)
+            {
+                for (int i = 0; i < OrderListModel.Count; i++)
+                {
+                    if (OrderListModel[i] != model.OrderListModel[i])
+                    {
+                        result = false;
+                    }
+                }
+                return result &&
+                   ID == model.ID &&
+                   DateTime == model.DateTime &&
+                   ClientsID == model.ClientsID &&
+                   Client == model.Client &&
+                   ClientsPhone == model.ClientsPhone &&
+                   AddressID == model.AddressID &&
+                   Address == model.Address &&
+                   Summ == model.Summ &&
+                   Comment == model.Comment;
+            }
+            return false;
+        }
     }
 }

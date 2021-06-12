@@ -17,4 +17,8 @@
     <ProjectReference Include="..\TradeCompany_BLL\TradeCompany_BLL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="SupplysMapsSourse\" />
+  </ItemGroup>
+
 </Project>

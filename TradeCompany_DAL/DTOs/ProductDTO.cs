@@ -19,5 +19,32 @@ namespace TradeCompany_DAL.DTOs
         public string Description { get; set; }
         public string Comments { get; set; }
         public List<ProductGroupDTO> Group { get; set; } = new List<ProductGroupDTO>();
+
+        public override bool Equals(object obj)
+        {
+            bool result = true;
+            if (obj is ProductDTO dTO && Group.Count == dTO.Group.Count)
+            {
+                for (int i = 0; i < Group.Count; i++)
+                {
+                    if (Group[i] != dTO.Group[i])
+                    {
+                        result = false;
+                    }
+                }
+                return result &&
+                   ID == dTO.ID &&
+                   Name == dTO.Name &&
+                   StockAmount == dTO.StockAmount &&
+                   MeasureUnit == dTO.MeasureUnit &&
+                   MeasureUnitName == dTO.MeasureUnitName &&
+                   WholesalePrice == dTO.WholesalePrice &&
+                   RetailPrice == dTO.RetailPrice &&
+                   LastSupplyDate == dTO.LastSupplyDate &&
+                   Description == dTO.Description &&
+                   Comments == dTO.Comments;
+            }
+            return false;;
+        }
     }
 }
