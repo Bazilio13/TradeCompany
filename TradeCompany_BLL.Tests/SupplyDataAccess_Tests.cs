@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TradeCompany_BLL.Tests
 {
-    class SupplyDataAccess_Tests
+    public class SupplyDataAccess_Tests
     {
     }
 }
