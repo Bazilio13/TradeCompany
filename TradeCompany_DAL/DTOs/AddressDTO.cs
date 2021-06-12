@@ -11,5 +11,12 @@ namespace TradeCompany_DAL.DTOs
         public int ID { get; set; }
         public int ClientID { get; set; }
         public string Address { get; set; }
+
+        public AddressDTO(int id, int clientID, String address)
+        {
+            ID = id;
+            ClientID = clientID;
+            Address = address;
+        }
     }
 }
