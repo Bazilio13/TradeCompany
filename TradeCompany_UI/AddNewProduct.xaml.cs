@@ -215,9 +215,6 @@ namespace TradeCompany_UI
         private void CreateCategoryButton_Click(object sender, RoutedEventArgs e)
         {
             AddNewCategoryWindow addNewCategoryWindow = new AddNewCategoryWindow();
-            //вынести в само окно
-            addNewCategoryWindow.Owner = _uiNavi.MainWindow;
-            addNewCategoryWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
 
             if (addNewCategoryWindow.ShowDialog() == true)
             {
@@ -308,7 +305,7 @@ namespace TradeCompany_UI
             }
         }
 
-        //рефактор вместе с cancel button
+
         private bool CheckingFieldsForData()
         {
             bool IsValid = true;
