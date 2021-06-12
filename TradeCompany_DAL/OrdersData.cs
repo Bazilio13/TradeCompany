@@ -192,7 +192,7 @@ namespace TradeCompany_DAL
             }
         }
         public OrdersDTO MapsOrdersDTO(OrdersDTO order, OrderListsDTO orderList, ClientDTO client, ProductDTO product, List<OrdersDTO> result)
-        {            
+        {
             OrdersDTO crntOrder = null;
             foreach (var o in result)
             {

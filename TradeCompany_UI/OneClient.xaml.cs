@@ -224,6 +224,7 @@ namespace TradeCompany_UI
 
         }
 
+
         private void LoadWishPanel()
         {
             int i = 0;
