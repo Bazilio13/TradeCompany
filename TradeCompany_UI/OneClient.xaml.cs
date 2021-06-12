@@ -101,7 +101,7 @@ namespace TradeCompany_UI
                 else { RadioButtonTypeBayR.IsChecked = true; }
 
 
-                _addressesList = _addressesData.GetAddressesByID(_id); 
+                _addressesList = _addressesData.GetListAddressesByID(_id); 
                 AddAddress();
                 LoadWishPanel();
                 LoadFeedback();

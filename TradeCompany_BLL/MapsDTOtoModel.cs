@@ -147,6 +147,22 @@ namespace TradeCompany_BLL
             return measureUnitsModels;
         }
 
+        public List<String> MapAddressDTOToAddressString(List<AddressDTO> addressesDTO)
+        {
+            List<String> addressesList = new List<string>();
+            foreach (AddressDTO address in addressesDTO)
+            {
+                addressesList.Add(address.Address);
+            }
+            return addressesList;
+        }
 
+        public List<AddressModel> MapAddressDTOToAddressModel(List<AddressDTO> addressesDTO)
+        {
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<AddressDTO, AddressModel>());
+            Mapper mapper = new Mapper(config);
+            List<AddressModel> addressModels = mapper.Map<List<AddressModel>>(addressesDTO);
+            return addressModels;
+        }
     }
 }

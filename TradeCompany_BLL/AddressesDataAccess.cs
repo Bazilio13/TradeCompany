@@ -12,19 +12,28 @@ namespace TradeCompany_BLL
     public class AddressesDataAccess
     {
         private  AddressesData _addressesData = new AddressesData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
+        private MapsDTOtoModel _mapDTOtoModel = new MapsDTOtoModel();
+        private MapsModelToDTO _mapModelToDTO = new MapsModelToDTO();
 
-
-        public List<String> GetAddressesByID (int id)
+        public List<AddressModel> GetAddressesByID (int id)
         {
-            List<String> addressesList = _addressesData.GetAddressesByID(id);
+            List<AddressDTO> addressesDTO = _addressesData.GetAddressesByID(id);
+            List<AddressModel> addressModels = _mapDTOtoModel.MapAddressDTOToAddressModel(addressesDTO);
+            return addressModels;
+        }
 
+        public List<String> GetListAddressesByID(int id)
+        {
+            List<AddressDTO> addressesDTO = _addressesData.GetAddressesByID(id);
+            List<String> addressesList = _mapDTOtoModel.MapAddressDTOToAddressString(addressesDTO);
             return addressesList;
         }
 
         public int AddAddressByID(int clientID, String address)
         {
             int setID = 1;
-            List<String> oldAddresses = _addressesData.GetAddressesByID(clientID);
+            List<AddressDTO> addressesDTO = _addressesData.GetAddressesByID(clientID);
+            List<String> oldAddresses = _mapDTOtoModel.MapAddressDTOToAddressString(addressesDTO);
             if (oldAddresses.Contains(address) && _addressesData.IsDeletedAddress(clientID, address))
             {
                 setID = _addressesData.SetIsDeleted(clientID, address, 0);
@@ -40,7 +49,8 @@ namespace TradeCompany_BLL
         public int AddAddressByID(int clientID, List<String> addressesList)
         {
             int setID = -1;
-            List<String> oldAddresses = _addressesData.GetAddressesByID(clientID);
+            List<AddressDTO> addressesDTO = _addressesData.GetAddressesByID(clientID);
+            List<String> oldAddresses = _mapDTOtoModel.MapAddressDTOToAddressString(addressesDTO);
             foreach (String address in addressesList)
             {
                 if (oldAddresses.Contains(address) && _addressesData.IsDeletedAddress(clientID, address))
