@@ -189,7 +189,7 @@ namespace TradeCompany_UI
             }
 
             return filtr;
-        }  
+        }
 
         private void SetUpPriceFilters()
         {

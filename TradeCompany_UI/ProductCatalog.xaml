@@ -40,7 +40,10 @@
             </StackPanel>
         </ScrollViewer>
 
-        <DockPanel  Grid.Column="1" Margin="0,70,0,0" Width="221">
+       
+
+        <DockPanel  Grid.Column="1" Margin="0,15,0,0" Width="221">
+            <Button Margin="10,14,10,0" Style="{StaticResource ButtonPotentialClients}" Width="191" DockPanel.Dock="Top" Content="Список потенцеальных&#xA;            клиентов" Height="55" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
             <StackPanel DockPanel.Dock="Left" Width="4">
                 <Line X1="0" Y1="20" X2="0" Y2="540" Stroke="#6E304B" StrokeThickness="2"/>
             </StackPanel>
