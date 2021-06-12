@@ -75,6 +75,7 @@ namespace TradeCompany_UI
             Comment.Text = _infoAboutOrder.Comment;
             _orderId = id;
             _clientId = _infoAboutOrder.ClientsID;
+            DataPicker.SelectedDate = _infoAboutOrder.DateTime;
 
             foreach (var item in _infoAboutOrder.OrderListModel)
             {
@@ -87,7 +88,7 @@ namespace TradeCompany_UI
             ID.Text = "ID заказа : " + _orderId;
             ClientName.Text = _clientFullInfo.Name;
             Phone.Text = _clientFullInfo.Phone;
-
+            Button_AddExistingProduct.IsEnabled = true;
 
         }
 
@@ -147,13 +148,20 @@ namespace TradeCompany_UI
             {
                 return;
             }
+           
             else
             {
                 if (_orderId == 0)
                 {
+                    
+                    
                     FillInfoAboutNewOrder();
+                   
                     _orderDataAccess.AddOrder(newOrder);
                     ReduceProductsAmountInStock(newOrder.OrderListModel);
+                    
+                    //_orderDataAccess.AddOrder(newOrder);
+                    //ReduceProductsAmountInStock(newOrder.OrderListModel);
 
                 }
                 else
@@ -166,6 +174,20 @@ namespace TradeCompany_UI
                 new MessageWindow("Продукты добавлены в базу").ShowDialog();
             }
 
+        }
+        private bool IsOrerHaveAdress(OrderModel orderModel)
+        {
+            bool answer;
+            if((orderModel.Address == null ) || (orderModel.AddressID == 0)) // править
+            {
+                new MessageWindow("Заполните адрес").ShowDialog();
+                answer = false; 
+            }
+            else
+            {
+                answer = true;
+            }
+            return answer;
         }
         private void ReduceProductsAmountInStock(List<OrderListModel> orderListModels)
         {
@@ -198,6 +220,7 @@ namespace TradeCompany_UI
                 {
                     _uinavi.GoToThePage(new ProductCatalog(this));
                 }
+               
             }
             else
             {
@@ -236,11 +259,13 @@ namespace TradeCompany_UI
             _clientFullInfo = _clientsDataAccess.GetClientByClientID(_clientId);
             FillComboBoxAdress();
             ShowInfoAboutClient();
+           
 
         }
         private void FillInfoAboutNewOrder()
         {
             newOrder.DateTime = (DateTime)DataPicker.SelectedDate;
+           
             newOrder.ClientsID = _clientId;
             newOrder.Client = _clientFullInfo.Name;
             newOrder.ClientsPhone = _clientFullInfo.Phone;
@@ -286,15 +311,34 @@ namespace TradeCompany_UI
                 _sum += specificProduct.Price * i.Amount;
                 Sum.Text ="Сумма заказа: " + _sum;
                 Button_AddExistingProduct.IsEnabled = true;
+                bool check = TurnOnAddProductInOrderButton();
+                if (check == true)
+                {
+
+                    AddProductInOrder.IsEnabled = true;
+                }
             }
             else
             {
                 bgOrderListModels.Remove(bgOrderListModels.Last());
                 new MessageWindow("На складе нет столько товара").ShowDialog();
             }
+        }
+        private bool TurnOnAddProductInOrderButton()
+        {
+            bool result = false;
+            bool isOrderHaveAdress = _addresId != 0 ? true : false; 
+            bool isOrderHaveDataTime = DataPicker.SelectedDate != null? true : false;
            
-
-
+            if(_orderId != 0)
+            {
+                result = true;
+            }
+            else
+            {
+                if (isOrderHaveAdress && isOrderHaveDataTime == true) result = true;
+            }
+            return result;
         }
     }
 }
