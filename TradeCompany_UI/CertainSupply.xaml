@@ -23,7 +23,7 @@
         <Button x:Name="Save" Content="Сохранить" Margin="10,0,0,71" VerticalAlignment="Bottom" Height="34" Click="Save_Click" HorizontalAlignment="Left" Width="190"/>
         <Button x:Name="Cancel" Content="Отменить" Margin="220,0,0,71" VerticalAlignment="Bottom" Height="34" HorizontalAlignment="Left" Width="190" Click="Cancel_Click"/>
         <Button x:Name="DeleteSupply" Content="Удалить поставку" Margin="10,0,0,23" VerticalAlignment="Bottom" Height="34" HorizontalAlignment="Left" Width="190" Click="DeleteSupply_Click"/>
-        <DataGrid x:Name="dgSupplyList" Grid.Row="1" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" MouseDoubleClick="dgSupplyList_MouseDoubleClick" CellEditEnding="dgSupplyList_CellEditEnding">
+        <DataGrid x:Name="dgSupplyList" Margin="20,0,20,0" Background="#F9F9F9" Grid.Row="1" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" MouseDoubleClick="dgSupplyList_MouseDoubleClick" CellEditEnding="dgSupplyList_CellEditEnding">
             <DataGrid.Columns >
                 <DataGridTextColumn Binding="{Binding Path=ProductID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Header="ID" IsReadOnly="True" Width="30" MinWidth="30"></DataGridTextColumn>
                 <DataGridTextColumn Binding="{Binding Path=ProductName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Наименование" IsReadOnly="True" Width="*" MinWidth="100"></DataGridTextColumn>
@@ -32,9 +32,9 @@
                 <DataGridTextColumn Binding="{Binding Path=ProductMeasureUnit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="ед. изм." IsReadOnly="True" Width="52" MinWidth="52"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel Margin="10,10,10,10" Grid.Row="2" VerticalAlignment="Bottom" Height="100">
+        <StackPanel Margin="20,10,20,10" Grid.Row="2" VerticalAlignment="Bottom" Height="100">
             <TextBlock Text="Комментарий"></TextBlock>
-            <TextBox x:Name="SupplyComment" Margin="0,0,0,0"  Text="" TextWrapping="Wrap" Height="84" ></TextBox>
+            <TextBox x:Name="SupplyComment" Margin="0,0,0,0"  Text="" TextWrapping="Wrap" Height="84" HorizontalContentAlignment="Left" VerticalContentAlignment="Top"></TextBox>
         </StackPanel>
     </Grid>
 </Page>
