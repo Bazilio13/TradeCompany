@@ -26,6 +26,7 @@ namespace TradeCompany_UI
         private StatisticsDataAccess _dataAccess = new StatisticsDataAccess();
         private ProductsDataAccess _products;
         private FilterGroupModel _filter = new FilterGroupModel();
+        private int _id;
 
         UINavi _uiNavi;
         public StatisticsByProducts()
@@ -59,14 +60,16 @@ namespace TradeCompany_UI
             StatisticsGroupsModel item = (StatisticsGroupsModel)dg.CurrentItem;
             if (item != null)
             {
+                clearFilter(sender, (MouseButtonEventArgs)e);
                 SetCategory(item.ID, item.CategoryName);
             }
 
         }
         public void SetCategory(int id, string name)
         {
-
-            DGProducts.ItemsSource = _dataAccess.GetStatisticsProductsByGroupID(id);
+            _filter.Null();
+            _id = id;
+            DGProducts.ItemsSource = _dataAccess.GetStatisticsProductsByGroupID(id, _filter);
             DGAllGroups.Visibility = Visibility.Collapsed;
             DGProducts.Visibility = Visibility.Visible;
             ButtonExit.Visibility = Visibility.Visible;
@@ -98,7 +101,7 @@ namespace TradeCompany_UI
         private void clearFilter(object sender, RoutedEventArgs e)
         {
             _filter.Null();
-            DGAllGroups.ItemsSource = _dataAccess.GetStatisticsProducts(_filter);
+            SetFilter();
             DateFromForSupply.SelectedDate = null;
             DateUntilForSupply.SelectedDate = null;
             DateFromForOrder.SelectedDate = null;
@@ -111,20 +114,26 @@ namespace TradeCompany_UI
             ToPrice.Text = "";
         }
 
-        private void GroupFilter(object sender, RoutedEventArgs e)
+        private void GroupFilter()
         {
             _filter.MinDateSupply = DateFromForSupply.SelectedDate;
-            _filter.MaxDateSupply = CorrectMaxDate(DateUntilForSupply.SelectedDate); 
+            _filter.MaxDateSupply = CorrectMaxDate(DateUntilForSupply.SelectedDate);
             _filter.MinDateOrder = DateFromForOrder.SelectedDate;
             _filter.MaxDateOrder = CorrectMaxDate(DateUntilForOrder.SelectedDate);
             _filter.PeriodFor = PeriodFor.SelectedDate;
             _filter.PeriodUntil = CorrectMaxDate(PeriodUntil.SelectedDate);
 
             _filter.MinAmount = ConvertStringToFloat(FromOrdersAmount.Text);
-            _filter.MaxAmount = ConvertStringToFloat(ToOrdersAmount.Text);     
+            _filter.MaxAmount = ConvertStringToFloat(ToOrdersAmount.Text);
             _filter.MinSum = ConvertStringToFloat(FromPrice.Text);
             _filter.MaxSum = ConvertStringToFloat(ToPrice.Text);
-            DGAllGroups.ItemsSource = _dataAccess.GetStatisticsProducts(_filter);
+
+            SetFilter();
+
+        }
+        private void GroupFilter(object sender, RoutedEventArgs e)
+        {
+            GroupFilter();
         }
 
         private float? ConvertStringToFloat(string str)
@@ -156,23 +165,26 @@ namespace TradeCompany_UI
             return correctDate;
         }
 
-        private void ButtonYear(object sender, RoutedEventArgs e)
+        private void SetFilter()
         {
-            ButtonDate(365);
+            if (DGAllGroups.Visibility == Visibility.Visible)
+            {
+                DGAllGroups.ItemsSource = _dataAccess.GetStatisticsProducts(_filter);
+            }
+            else
+            {
+                DGProducts.ItemsSource = _dataAccess.GetStatisticsProductsByGroupID(_id, _filter);
+            }
         }
 
         private void ButtonDate(int date)
         {
-            _filter.MinDateSupply = ChangeDateTime(date);
-            _filter.MaxDateSupply = CorrectMaxDate(DateTime.Now);
-            _filter.MinDateOrder = ChangeDateTime(date);
-            _filter.MaxDateOrder = CorrectMaxDate(DateTime.Now);
-            DGAllGroups.ItemsSource = _dataAccess.GetStatisticsProducts(_filter);
+            _filter.PeriodFor = ChangeDateTime(date);
+            _filter.PeriodUntil = CorrectMaxDate(DateTime.Now);
+            SetFilter();
+            PeriodFor.SelectedDate = _filter.PeriodFor;
+            PeriodUntil.SelectedDate = _filter.PeriodUntil;
 
-            DateUntilForSupply.SelectedDate = _filter.MaxDateSupply;
-            DateFromForSupply.SelectedDate = _filter.MinDateSupply;
-            DateFromForOrder.SelectedDate = _filter.MinDateOrder;
-            DateUntilForOrder.SelectedDate = _filter.MaxDateOrder;
         }
 
         private DateTime? ChangeDateTime(int time)
@@ -188,22 +200,21 @@ namespace TradeCompany_UI
         {
             ButtonDate(31);
         }
+        private void ButtonYear(object sender, RoutedEventArgs e)
+        {
+            ButtonDate(365);
+        }
+        private void ButtonToday(object sender, RoutedEventArgs e)
+        {
+            ButtonDate(1);
+        }
+
 
         private void GroupFilter(object sender, SelectionChangedEventArgs e)
         {
-            _filter.MinDateSupply = DateFromForSupply.SelectedDate;
-            _filter.MaxDateSupply = CorrectMaxDate(DateUntilForSupply.SelectedDate);
-            _filter.MinDateOrder = DateFromForOrder.SelectedDate;
-            _filter.MaxDateOrder = CorrectMaxDate(DateUntilForOrder.SelectedDate);
-            _filter.PeriodFor = PeriodFor.SelectedDate;
-            _filter.PeriodUntil = CorrectMaxDate(PeriodUntil.SelectedDate);
-
-            _filter.MinAmount = ConvertStringToFloat(FromOrdersAmount.Text);
-            _filter.MaxAmount = ConvertStringToFloat(ToOrdersAmount.Text);
-            _filter.MinSum = ConvertStringToFloat(FromPrice.Text);
-            _filter.MaxSum = ConvertStringToFloat(ToPrice.Text);
-            DGAllGroups.ItemsSource = _dataAccess.GetStatisticsProducts(_filter);
+            GroupFilter();
         }
+
     }
 
 }

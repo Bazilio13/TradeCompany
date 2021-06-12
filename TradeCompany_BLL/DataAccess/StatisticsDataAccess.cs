@@ -23,9 +23,9 @@ namespace TradeCompany_BLL.DataAccess
             return clinetsModel;
         }
 
-        public List<StatisticsProductModel>  GetStatisticsProductsByGroupID(int id)
+        public List<StatisticsProductModel>  GetStatisticsProductsByGroupID(int id, FilterGroupModel filter)
         {
-            List<StatisticsProductDTO> statisticsProductsDTOs = _statistecsData.GetStatisticsProductsByGroupID(id);
+            List<StatisticsProductDTO> statisticsProductsDTOs = _statistecsData.GetStatisticsProductsByGroupID(id, filter.MinDateSupply, filter.MaxDateSupply, filter.MinDateOrder, filter.MaxDateOrder, filter.MinAmount, filter.MaxAmount, filter.MinSum, filter.MaxSum, filter.PeriodFor, filter.PeriodUntil);
             List<StatisticsProductModel> clinetsModel = _mapDTOtoModel.MapStatisticsProductsDTOToStatisticsProductsModel(statisticsProductsDTOs);
             return clinetsModel;
         }
