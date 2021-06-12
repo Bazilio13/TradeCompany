@@ -180,16 +180,18 @@ namespace TradeCompany_UI
         private void ButtonDate(int date)
         {
             _filter.PeriodFor = ChangeDateTime(date);
-            _filter.PeriodUntil = CorrectMaxDate(DateTime.Now);
-            SetFilter();
+            _filter.PeriodUntil = CorrectMaxDate(DateTime.Today);
+
             PeriodFor.SelectedDate = _filter.PeriodFor;
             PeriodUntil.SelectedDate = _filter.PeriodUntil;
+
+            SetFilter();
 
         }
 
         private DateTime? ChangeDateTime(int time)
         {
-            DateTime timeTmp = DateTime.Now;
+            DateTime timeTmp = DateTime.Today;
             timeTmp = timeTmp.AddDays(-time);
             DateTime? correctDate = (DateTime?)timeTmp;
             return correctDate;
@@ -206,7 +208,7 @@ namespace TradeCompany_UI
         }
         private void ButtonToday(object sender, RoutedEventArgs e)
         {
-            ButtonDate(1);
+            ButtonDate(0);
         }
 
 
