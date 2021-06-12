@@ -47,23 +47,23 @@
             <StackPanel Orientation="Vertical" Width="188" DockPanel.Dock="Right" Margin="29,0,0,0">
                 <TextBlock HorizontalAlignment="Center" FontSize="18" FontWeight="Bold" Margin="0,0,0,35">Фильтр</TextBlock>
 
-                <StackPanel Orientation="Vertical" Margin="0,0,0,5" HorizontalAlignment="Center">
+                <StackPanel Orientation="Vertical" Margin="0,0,0,15" HorizontalAlignment="Center">
                     <TextBlock Height="20" TextWrapping="Wrap" Margin="0,0,0,9" HorizontalAlignment="Center" Width="51"><Run Language="ru-ru" Text="Клиент:"/><LineBreak/><Run Language="ru-ru"/></TextBlock>
                     <TextBox x:Name="ClientFiltr" TextWrapping="Wrap"  Height="25" VerticalAlignment="Top" HorizontalAlignment="Center" Width="180" TextChanged="ClientFiltr_TextChanged"/>
                 </StackPanel>
-                <StackPanel Orientation="Vertical" Margin="0,0,0,10" HorizontalAlignment="Center">
+                <StackPanel Orientation="Vertical" Margin="0,0,0,30" HorizontalAlignment="Center">
                     <TextBlock Height="20" HorizontalAlignment="Center" Margin="0,0,0,9" TextWrapping="Wrap" VerticalAlignment="Top" Width="45"><Run Language="ru-ru" Text="Адрес:"/></TextBlock>
                     <TextBox x:Name="AddressFiltr" Margin="0,0,0,0" TextWrapping="Wrap"  Height="25" VerticalAlignment="Top" HorizontalAlignment="Center" Width="180" TextChanged="AddressFiltr_TextChanged"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,0,0,100" Width="142">
                     <DockPanel Width="141" Margin="0,0,0,5">
-                        <TextBlock DockPanel.Dock="Left" HorizontalAlignment="Center" Height="25" Margin="0,5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="19"><Run Language="ru-ru" Text="С"/></TextBlock>
-                        <DatePicker x:Name="MinDate" DockPanel.Dock="Right" Margin="0,0,0,0" Height="25" Width="110" SelectedDateChanged="MinDate_SelectedDateChanged"/>
+                        <TextBlock DockPanel.Dock="Left" HorizontalAlignment="Center" Height="25" Margin="0,5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="19"><Run Language="ru-ru" Text="От"/></TextBlock>
+                        <DatePicker x:Name="MinDate" DockPanel.Dock="Right" Margin="0,0,0,0" Height="25" Width="110" SelectedDateChanged="MinDate_SelectedDateChanged" BorderBrush="#FFF3DFC4" Background="#FFF3DFC4"/>
                     </DockPanel>
                     <DockPanel>
-                        <TextBlock HorizontalAlignment="Left" Height="25" Margin="0,5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="20"><Run Language="ru-ru" Text="По"/></TextBlock>
-                        <DatePicker Name="MaxDate" Margin="0,0,0,0" Height="25" Width="110" SelectedDateChanged="MaxDate_SelectedDateChanged"/>
+                        <TextBlock HorizontalAlignment="Left" Height="25" Margin="0,5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="20"><Run Language="ru-ru" Text="До"/></TextBlock>
+                        <DatePicker Name="MaxDate" Margin="0,0,0,0" Height="25" Width="110" SelectedDateChanged="MaxDate_SelectedDateChanged" BorderBrush="#FFF3DFC4" Background="#FFF3DFC4"/>
                     </DockPanel>
                 </StackPanel>
 

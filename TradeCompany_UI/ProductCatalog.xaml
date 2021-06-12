@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TradeCompany_UI"
       mc:Ignorable="d"
-      d:DesignHeight="450"
+      d:DesignHeight="1450"
       Title="ProductCatalog">
 
 
@@ -77,23 +77,27 @@
                     </StackPanel>
                 </DockPanel>
 
-                <DockPanel  Margin="0,0,0,0" Height="20">
-                    <RadioButton x:Name="RadioButtonWholesalePrice" DockPanel.Dock="Left" Margin="20,0,0,0" Content="Опт" Height="16" Width="50" Checked="RadioButtonWholesalePrice_Checked"/>
-                    <RadioButton x:Name="RadioButtonRetailPrice" DockPanel.Dock="Right" Margin="20,0,0,0" Content="Розница" Height="16" Width="76" Checked="RadioButtonRetailPrice_Checked"/>
+                
 
-                </DockPanel>
+                <StackPanel Orientation="Vertical" Margin="0,0,0,30" Height="110">
+                    <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" Margin="0,0,0,15">Цена:</TextBlock>
+                    <DockPanel  Margin="0,0,0,10" Height="20">
+                        <RadioButton x:Name="RadioButtonWholesalePrice" DockPanel.Dock="Left" Margin="20,0,0,0" Content="Опт" Height="16" Width="50" Checked="RadioButtonWholesalePrice_Checked"/>
+                        <RadioButton x:Name="RadioButtonRetailPrice" DockPanel.Dock="Right" Margin="20,0,0,0" Content="Розница" Height="16" Width="76" Checked="RadioButtonRetailPrice_Checked"/>
 
-                <DockPanel Margin="0,0,0,30" Height="59">
-                    <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center">Цена:</TextBlock>
-                    <StackPanel DockPanel.Dock="Right">
+                    </DockPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Margin="0,0,27,0">
+                            <TextBlock Margin="30,0,0,0">от</TextBlock>
+                            <TextBox x:Name="FromPrice" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Width="80" Height="20" VerticalContentAlignment="Center" Text="" TextAlignment="Center" TextChanged="FromPrice_TextChange" IsEnabled="False"/>
+                        </StackPanel>
+                        <StackPanel>
                         <TextBlock Margin="30,0,0,0">до</TextBlock>
                         <TextBox x:Name="ToPrice" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" TextAlignment="Center" Height="20" Width="80" TextChanged="ToPrice_TextChange" IsEnabled="False"/>
                     </StackPanel>
-                    <StackPanel DockPanel.Dock="Left">
-                        <TextBlock Margin="30,0,0,0">от</TextBlock>
-                        <TextBox x:Name="FromPrice" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Width="80" Height="20" VerticalContentAlignment="Center" Text="" TextAlignment="Center" TextChanged="FromPrice_TextChange" IsEnabled="False"/>
+                    
                     </StackPanel>
-                </DockPanel>
+                </StackPanel>
                 <Button x:Name="ResetFilters" Content="Сбросить фильтр" HorizontalAlignment="Center" Click="ResetFiltersButton_Click"/>
             </StackPanel>
         </DockPanel>

@@ -19,7 +19,6 @@
     <Page Remove="Styles\CheckBoxStyle.xaml" />
     <Page Remove="Styles\ComboBoxStyle.xaml" />
     <Page Remove="Styles\DataGridStyle.xaml" />
-    <Page Remove="Styles\DatePickerStyle.xaml" />
     <Page Remove="Styles\HeaderButton.xaml" />
     <Page Remove="Styles\InnerButtonStyle.xaml" />
     <Page Remove="Styles\RadioButtonStyle.xaml" />
@@ -42,9 +41,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Resource>
     <Resource Include="Styles\ComboBoxStyle.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Resource>
-    <Resource Include="Styles\DatePickerStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Resource>
     <Resource Include="Styles\RadioButtonStyle.xaml">
