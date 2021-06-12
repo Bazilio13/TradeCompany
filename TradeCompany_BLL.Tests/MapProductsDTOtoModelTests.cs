@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using TradeCompany_BLL.Models;
+using TradeCompany_BLL.Tests.ProductsSource;
 using TradeCompany_DAL.DTOs;
 
 namespace TradeCompany_BLL.Tests
@@ -20,6 +21,7 @@ namespace TradeCompany_BLL.Tests
 
         }
 
+        [TestCaseSource(typeof(Map_ProductsForOrderDTO_To_ProductsForOrderModelSource))]
         public void Map_ProductsForOrderDTO_To_ProductsForOrderModelTests(List<ProductForOrderDTO> productForOrderDTO, List<ProductsForOrderModel>  expected )
         {
             List<ProductsForOrderModel> actual = mapsDTOtoModel.Map_ProductsForOrderDTO_To_ProductsForOrderModel(productForOrderDTO);
@@ -27,7 +29,7 @@ namespace TradeCompany_BLL.Tests
             Assert.AreEqual(expected, actual);
         }
 
-
+        [TestCaseSource(typeof(MapProductDTOToProductBaseModelSource))]
         public void MapProductDTOToProductBaseModelTests(List<ProductDTO> productDTO, List<ProductBaseModel> expected)
         {
             List<ProductBaseModel> actual = mapsDTOtoModel.MapProductDTOToProductBaseModel(productDTO);
