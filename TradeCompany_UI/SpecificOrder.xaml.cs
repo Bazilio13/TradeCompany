@@ -187,12 +187,28 @@ namespace TradeCompany_UI
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            _uinavi.GoToThePage(new ProductCatalog(this));
 
+            if (bgOrderListModels.Count != 0)
+            {
+                if (bgOrderListModels.Last().Amount == 0 && bgOrderListModels.Count >=1)
+                {
+                    Button_AddExistingProduct.IsEnabled = false;
+                }
+                else
+                {
+                    _uinavi.GoToThePage(new ProductCatalog(this));
+                }
+            }
+            else
+            {
+                _uinavi.GoToThePage(new ProductCatalog(this));
+            }
+            //_uinavi.GoToThePage(new ProductCatalog(this));
         }
 
         public void AddProductToCollection(ProductBaseModel productBaseModel)
         {
+
             specificProduct = new OrderListModel();
             specificProduct.ProductID = productBaseModel.ID;
             specificProduct.ProductName = productBaseModel.Name;
@@ -239,7 +255,6 @@ namespace TradeCompany_UI
         private void ChooseClient_Click(object sender, RoutedEventArgs e)
         {
             _uinavi.GoToThePage(new Clients(this));
-
         }
 
         private void cbAdress_Loaded(object sender, RoutedEventArgs e)
@@ -265,19 +280,21 @@ namespace TradeCompany_UI
         private void dgSpecificOrder_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
             var i = (OrderListModel)e.Row.Item;
-            
             if (_productBaseModel.StockAmount - i.Amount >= 0)
             {
                 listOfProductForOrder.Add(specificProduct);
                 _sum += specificProduct.Price * i.Amount;
                 Sum.Text ="Сумма заказа: " + _sum;
+                Button_AddExistingProduct.IsEnabled = true;
             }
             else
             {
                 bgOrderListModels.Remove(bgOrderListModels.Last());
                 new MessageWindow("На складе нет столько товара").ShowDialog();
             }
-            
+           
+
+
         }
     }
 }

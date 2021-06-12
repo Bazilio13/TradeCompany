@@ -48,7 +48,7 @@
             <Label Content="Коментарий" Grid.Column="5" HorizontalAlignment="Left" Height="40" Margin="9,1,0,0" VerticalAlignment="Top" Width="146"/>
         </Grid>
 
-        <DataGrid x:Name="dgSpecificOrder" FontSize="15" Margin="26,34,34,26" Loaded="dgSpecificOrder_Loaded" Grid.Row="2" AutoGenerateColumns="False" RowEditEnding="dgSpecificOrder_RowEditEnding" CellEditEnding="dgSpecificOrder_CellEditEnding"  >
+        <DataGrid x:Name="dgSpecificOrder" FontSize="15" Margin="26,34,34,26" Loaded="dgSpecificOrder_Loaded" Grid.Row="2" AutoGenerateColumns="False" RowEditEnding="dgSpecificOrder_RowEditEnding" CellEditEnding="dgSpecificOrder_CellEditEnding" CanUserAddRows="False" >
             <DataGrid.Columns >
 
                 <DataGridTextColumn Binding="{Binding Path= ProductID}" Header="ID Товара" Width="0.2*" />
@@ -79,7 +79,7 @@
                 <ColumnDefinition Width="267*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Button x:Name="ChooseClient" Content="Выбрать клиента" Margin="21,12,16,10" FontSize="12" Click="ChooseClient_Click" />
-            <Button Content="Добавить существующий товар" HorizontalAlignment="Left" FontSize="12" Height="33" VerticalAlignment="Center" Width="278" Click="Button_Click" Grid.Column="1" Margin="22,0,0,0"/>
+            <Button x:Name="Button_AddExistingProduct" Content="Добавить существующий товар" HorizontalAlignment="Left" FontSize="12" Height="33" VerticalAlignment="Center" Width="278" Click="Button_Click" Grid.Column="1" Margin="22,0,0,0"/>
             <Button x:Name="AddProductInOrder" Content="Добавить продукты в заказ" HorizontalAlignment="Left"  Height="35" Margin="19,0,0,0" VerticalAlignment="Center" Width="243" Click="AddProductInOrder_Click" Grid.Column="2"  FontSize="12" />
         </Grid>
     </Grid>
