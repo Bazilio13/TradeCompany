@@ -44,7 +44,7 @@
             </Grid>
 
             <Label Content="Адрес:" Grid.Column="4" HorizontalAlignment="Right" Height="25" Margin="0,4,56,0" VerticalAlignment="Top" Width="100"/>
-            <TextBox Grid.Column="5" x:Name="Comment" Height="62" Margin="9,24,9,0" Text="Комментарий" TextWrapping="Wrap" VerticalAlignment="Top"/>
+            <TextBox Grid.Column="5" x:Name="Comment" Height="62" Margin="9,24,9,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top"/>
             <Label Content="Коментарий" Grid.Column="5" HorizontalAlignment="Left" Height="40" Margin="9,1,0,0" VerticalAlignment="Top" Width="146"/>
         </Grid>
 

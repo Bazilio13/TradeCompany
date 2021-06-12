@@ -21,6 +21,7 @@ namespace TradeCompany_UI
         private int _clientId;
         private int _addresId; // можно в Модельку оформить
         private string _adress;
+        private float _sum = 0;
         ProductBaseModel _productBaseModel;
 
         private OrderModel newOrder;
@@ -268,12 +269,15 @@ namespace TradeCompany_UI
             if (_productBaseModel.StockAmount - i.Amount >= 0)
             {
                 listOfProductForOrder.Add(specificProduct);
+                _sum += specificProduct.Price;
+                Sum.Text ="Сумма заказа: " + _sum;
             }
             else
             {
                 bgOrderListModels.Remove(bgOrderListModels.Last());
                 new MessageWindow("На складе нет столько товара").ShowDialog();
-             }
+            }
+            
         }
     }
 }

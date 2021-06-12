@@ -209,7 +209,7 @@ namespace TradeCompany_DAL
         }
         public OrdersDTO MapsOrdersDTO(OrdersDTO order, OrderListsDTO orderList, ClientDTO client, ProductDTO product, List<OrdersDTO> result)
         {
-            orderList.productDTO = product;
+            
             OrdersDTO crntOrder = null;
             foreach (var o in result)
             {
@@ -226,7 +226,9 @@ namespace TradeCompany_DAL
             }
             if (orderList != null)
             {
+                orderList.productDTO = product;
                 crntOrder.OrderLists.Add(orderList);
+                
             }
             return order;
         }
