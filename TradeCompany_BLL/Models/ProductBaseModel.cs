@@ -61,5 +61,29 @@ namespace TradeCompany_BLL.Models
             sizes.Add(150);
             return sizes;
         }
+
+        public override bool Equals(object obj)
+        {
+            bool result = true;
+            if (obj is ProductBaseModel model && Groups.Count == model.Groups.Count)
+            {
+                for (int i = 0; i < Groups.Count; i++)
+                {
+                    if (Groups[i] != model.Groups[i])
+                    {
+                        result = false;
+                    }
+                }
+                return result &&
+                   ID == model.ID &&
+                   Name == model.Name &&
+                   StockAmount == model.StockAmount &&
+                   MeasureUnitName == model.MeasureUnitName &&
+                   WholesalePrice == model.WholesalePrice &&
+                   RetailPrice == model.RetailPrice &&
+                   LastSupplyDate == model.LastSupplyDate;
+            }
+            return false;
+        }
     }
 }
