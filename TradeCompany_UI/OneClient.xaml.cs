@@ -35,12 +35,16 @@ namespace TradeCompany_UI
         private List<String> _newAddresses = new List<String>();
         private MapsDTOtoModel _map = new MapsDTOtoModel();
         private List<FeedbackModel> _feedback = new List<FeedbackModel>();
-        public ClientModel client = new ClientModel();
+        private ClientModel client = new ClientModel();
+        private Clients _clientsPage;
+        
 
 
 
         public OneClient(int id, Page previosPage = null)
         {
+            _clientsPage = (Clients)_previosPage;
+
             InitializeComponent();
             _uiNavi = UINavi.GetUINavi();
             _previosPage = previosPage;
@@ -56,6 +60,7 @@ namespace TradeCompany_UI
 
         public OneClient(Page previosPage = null)
         {
+            _clientsPage = (Clients)_previosPage;
             InitializeComponent();
             _uiNavi = UINavi.GetUINavi();
             _previosPage = previosPage;
@@ -69,7 +74,7 @@ namespace TradeCompany_UI
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-
+            _clientsPage = (Clients)_previosPage;
             MapsDTOtoModel map = new MapsDTOtoModel();
 
             if (_id != -1)
@@ -121,7 +126,6 @@ namespace TradeCompany_UI
                 RadioButtonTypePersonF.IsChecked = true;
                 RadioButtonTypeBayR.IsChecked = true;
                 TBRegistrarionDate.Visibility = Visibility.Collapsed;
-                ButtonChange.IsEnabled = false;
                 RadioButtonTypeBayO.IsChecked = true;
                 RadioButtonTypeBayR.IsChecked = true;
             }
@@ -130,15 +134,6 @@ namespace TradeCompany_UI
             cbWish.ItemsSource = allProducts;
 
         }
-
-
-
-        private void ChangeClient(object sender, RoutedEventArgs e)
-
-        {
-            ButtonChange.IsEnabled = false;
-        }
-
 
 
         private void SaveClient(object sender, RoutedEventArgs e)
@@ -155,6 +150,12 @@ namespace TradeCompany_UI
                 }
                 _clientsData.SaveWishListByClientID(_wishList, _id);
                 maps.MapAddressesListModelToAddressesListDTO(_newAddresses, _id); //нужно исправить
+
+                if (MessageBox.Show("Клиент сохранен", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    _clientsPage.UpdateDG();
+                    _uiNavi.GoToThePage(_previosPage);
+                }
             }
         }
 
@@ -342,7 +343,7 @@ namespace TradeCompany_UI
 
         private void Exit(object sender, RoutedEventArgs e)
         {
-             _uiNavi.GoToThePage(_previosPage);
+            _uiNavi.GoToThePage(_previosPage);
         }
 
         private void DeleteClients(object sender, RoutedEventArgs e)
@@ -354,6 +355,7 @@ namespace TradeCompany_UI
                     _clientsData.SoftDeleteClientByID(_id);
                 }                   
                 MessageBox.Show("Клиент удален", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                _clientsPage.UpdateDG();
                 _uiNavi.GoToThePage(_previosPage);
 
             }
@@ -364,6 +366,7 @@ namespace TradeCompany_UI
                     _clientsData.SoftDeleteClientByID(_id);
                 }
             }
+
         }
        
     }

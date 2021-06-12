@@ -33,9 +33,13 @@ namespace TradeCompany_UI
             InitializeComponent();
             _uiNavi = UINavi.GetUINavi();
             _previosPage = previosPage;
-
             _clientsData = new ClientsDataAccess();
             dgClientsTable.ItemsSource = _clientsData.GetClients();
+        }
+        public void UpdateDG()
+        {
+            dgClientsTable.ItemsSource = _clientsData.GetClients();
+
         }
 
         private void Border_Loaded(object sender, RoutedEventArgs e)

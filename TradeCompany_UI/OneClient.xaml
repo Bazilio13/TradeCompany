@@ -77,12 +77,11 @@
 
             <WrapPanel x:Name ="WPWish"/>
             <WrapPanel HorizontalAlignment="Right">
-            <Button x:Name="ButtonExit" Content="Вернуться" VerticalAlignment="Top" Height="33" IsCancel="True" Click="Exit" HorizontalAlignment="Right" Width="128"/>
+            <Button x:Name="ButtonExit" Content="Назад" VerticalAlignment="Top" Height="33" IsCancel="True" Click="Exit" HorizontalAlignment="Right" Width="128"/>
             <Button x:Name="ButtonSave" Content="Сохранить" VerticalAlignment="Top" Height="33" IsCancel="True" Click="SaveClient" HorizontalAlignment="Right" Width="128"/>
             <Button x:Name="ButtonDelete" Content="Удалить"  VerticalAlignment="Top" Height="33" IsCancel="True" Click="DeleteClients" HorizontalAlignment="Left" Width="128"/>
             </WrapPanel>
         </StackPanel>
-        <Button x:Name="ButtonChange" Content="Изменить" Margin="0,99,10,0" VerticalAlignment="Top" Height="33" IsCancel="True" Click="ChangeClient" HorizontalAlignment="Right" Width="128"/>
 
 
 
