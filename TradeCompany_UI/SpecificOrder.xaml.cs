@@ -301,6 +301,7 @@ namespace TradeCompany_UI
 
         private void dgSpecificOrder_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
+            СheckInputData(e);
             var i = (OrderListModel)e.Row.Item;
             if (_productBaseModel.StockAmount - i.Amount >= 0)
             {
@@ -308,12 +309,7 @@ namespace TradeCompany_UI
                 _sum += specificProduct.Price * i.Amount;
                 Sum.Text = "Сумма заказа: " + _sum;
                 Button_AddExistingProduct.IsEnabled = true;
-                //bool check = TurnOnAddProductInOrderButton();
-                //if (check == true)
-                //{
 
-                //    AddProductInOrder.IsEnabled = true;
-                //}
                 AddProductInOrder.IsEnabled = true;
             }
             else
@@ -322,6 +318,28 @@ namespace TradeCompany_UI
                 new MessageWindow("На складе нет столько товара").ShowDialog();
             }
         }
+
+        private static void СheckInputData(DataGridCellEditEndingEventArgs e)
+        {
+            TextBox textBox = (TextBox)e.EditingElement;
+            if (textBox.Text == "")
+            {
+                textBox.Text = "0";
+            }
+            else
+            {
+                foreach (char ch in textBox.Text)
+                {
+                    if (!char.IsDigit(ch))
+                    {
+                        new MessageWindow("В поле количество можно вводить только числа").ShowDialog();
+                        textBox.Text = "0";
+                        break;
+                    }
+                }
+            }
+        }
+
         private bool TurnOnAddProductInOrderButton()
         {
             bool result = false;
