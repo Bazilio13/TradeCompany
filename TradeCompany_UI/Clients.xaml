@@ -64,11 +64,11 @@
 
                 <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,0,0,100">
                     <DockPanel>
-                        <TextBlock HorizontalAlignment="Center" Height="25" Margin="0,5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="10"><Run Language="ru-ru" Text="С"/></TextBlock>
+                        <TextBlock HorizontalAlignment="Center" Height="25" Margin="0,5,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="20"><Run Language="ru-ru" Text="От"/></TextBlock>
                         <DatePicker x:Name="MinDate" HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Top" Height="25" Width="100"  CalendarClosed="ClientsFiltr" />
                     </DockPanel>
                     <DockPanel>
-                        <TextBlock HorizontalAlignment="Left" Height="25" Margin="0,5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="20"><Run Language="ru-ru" Text="По"/></TextBlock>
+                        <TextBlock HorizontalAlignment="Left" Height="25" Margin="0,5,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="20"><Run Language="ru-ru" Text="До"/></TextBlock>
                         <DatePicker Name="MaxDate" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="25" Width="100" CalendarClosed="ClientsFiltr" />
                     </DockPanel>
                 </StackPanel>
