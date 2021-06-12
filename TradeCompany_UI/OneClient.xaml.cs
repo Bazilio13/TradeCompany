@@ -27,10 +27,10 @@ namespace TradeCompany_UI
 
         private int _id;
         private ClientsDataAccess _clientsData = new ClientsDataAccess();
+        private AddressesDataAccess _addressesData = new AddressesDataAccess();
         private List<WishModel> _wishList = new List<WishModel>();
         private List<OrderModel> _orderList = new List<OrderModel>();
-        private List<String> _oldAddresses = new List<String>();
-        private List<String> _newAddresses = new List<String>();
+        private List<String> _addressesList = new List<String>();
         private MapsDTOtoModel _map = new MapsDTOtoModel();
         private List<FeedbackModel> _feedback = new List<FeedbackModel>();
 
@@ -101,7 +101,7 @@ namespace TradeCompany_UI
                 else { RadioButtonTypeBayR.IsChecked = true; }
 
 
-                _oldAddresses = map.MapClientDTOToAddressesByID(_id); //нужно исправить 
+                _addressesList = _addressesData.GetListAddressesByID(_id); 
                 AddAddress();
                 LoadWishPanel();
                 LoadFeedback();
@@ -132,7 +132,6 @@ namespace TradeCompany_UI
 
 
         private void SaveClient(object sender, RoutedEventArgs e)
-
         {
             if (FieldValidation())
             {
@@ -144,7 +143,8 @@ namespace TradeCompany_UI
                     _id = _clientsData.GetLastClient().ID;
                 }
                 _clientsData.SaveWishListByClientID(_wishList, _id);
-                maps.MapAddressesListModelToAddressesListDTO(_newAddresses, _id); //нужно исправить
+                ReloadAddressesFromPanel();
+                _addressesData.AddAddressByID(_id, _addressesList); 
             }
         }
 
@@ -257,18 +257,9 @@ namespace TradeCompany_UI
 
         private void AddAddress()
         {
-            foreach (String address in _oldAddresses)
+            foreach (String address in _addressesList)
             {
-                stackPanelAddresses.Children.Add(new TextBox
-                {
-                    Text = address,
-                    HorizontalAlignment = HorizontalAlignment.Left,
-                    TextWrapping = TextWrapping.Wrap,
-                    Width = 390,
-                    Height = 21,
-                    Margin = new Thickness(0, 5, 0, 0),
-                    IsEnabled = false
-                });
+                MakeFieldAddress(address);
             }
         }
 
@@ -277,19 +268,40 @@ namespace TradeCompany_UI
             String addedAddress = ((TextBox)stackPanelAddresses.Children[0]).Text;
             if (addedAddress != "")
             {
-                stackPanelAddresses.Children.Add(new TextBox
-                {
-                    Text = addedAddress,
-                    HorizontalAlignment = HorizontalAlignment.Left,
-                    TextWrapping = TextWrapping.Wrap,
-                    Width = 390,
-                    Height = 21,
-                    Margin = new Thickness(0, 5, 0, 0),
-                    IsEnabled = false
-                }); ;
+                MakeFieldAddress(addedAddress);
                 ((TextBox)stackPanelAddresses.Children[0]).Text = "";
-                _newAddresses.Add(addedAddress);
+                _addressesList.Add(addedAddress);
             }
+        }
+
+        private void MakeFieldAddress(String address)
+        {
+            stackPanelAddresses.Children.Add(new TextBox
+            {
+                Text = address,
+                HorizontalAlignment = HorizontalAlignment.Left,
+                TextWrapping = TextWrapping.Wrap,
+                Width = 390,
+                Height = 21,
+                Margin = new Thickness(0, 5, 0, 0)
+            });
+
+            Image img = new Image();
+            img.Width = 12;
+            img.Height = 12;
+            img.Margin = new Thickness(0, -20, 84, 0);
+            img.HorizontalAlignment = HorizontalAlignment.Right;
+            img.MouseLeftButtonDown += (sender, e) =>
+            {
+                MouseLeftButtonDown_DeleteAddress(sender, e);
+            };
+            BitmapImage bi = new BitmapImage();
+            bi.BeginInit();
+            bi.UriSource = new Uri(@"/Pictures/minus.png", UriKind.RelativeOrAbsolute);
+            bi.EndInit();
+            img.Source = bi;
+
+            stackPanelAddresses.Children.Add(img);
         }
 
         public void LoadFeedback()
@@ -330,5 +342,30 @@ namespace TradeCompany_UI
             }
 
         }
+
+        private void ReloadAddressesFromPanel()
+        {
+            List<String> newAddresses = new List<String>();
+            for(int i = 2; i < stackPanelAddresses.Children.Count; i++)
+            {
+                if (stackPanelAddresses.Children[i] is TextBox)
+                {
+                    newAddresses.Add(((TextBox)stackPanelAddresses.Children[i]).Text);
+                }
+            }
+            _addressesList = new List<String>(newAddresses);
+        }
+
+        private void MouseLeftButtonDown_DeleteAddress(object sender, MouseButtonEventArgs e)
+        {
+            Image img = (Image)sender;
+
+            int index = stackPanelAddresses.Children.IndexOf(img);
+            TextBox tbAddress = (TextBox)stackPanelAddresses.Children[index - 1];
+            _addressesList.Remove(tbAddress.Text);
+            stackPanelAddresses.Children.RemoveAt(index);
+            stackPanelAddresses.Children.RemoveAt(index - 1);
+        }
+
     }
 }
