@@ -70,8 +70,8 @@ namespace TradeCompany_UI
         private void GetOrderById(int id)
         {
             _infoAboutOrder = _orderDataAccess.GetOrderById(id).First();
-            //Sum.Text = _infoAboutOrder.Summ.ToString();
             Sum.Text = "Сумма заказа: " + _infoAboutOrder.Summ.ToString();
+            _sum = _infoAboutOrder.Summ;
             Comment.Text = _infoAboutOrder.Comment;
             _orderId = id;
             _clientId = _infoAboutOrder.ClientsID;
@@ -175,10 +175,10 @@ namespace TradeCompany_UI
             }
         }
 
-        private float CountOrderSumm()
+        private float CountOrderSumm(List<OrderListModel> orderListModels)
         {
             float summ = 0;
-            foreach (var item in listOfProductForOrder)
+            foreach (var item in orderListModels)
             {
                 summ += (item.Price * item.Amount);
             }
@@ -228,7 +228,7 @@ namespace TradeCompany_UI
             newOrder.ClientsID = _clientId;
             newOrder.Client = _clientFullInfo.Name;
             newOrder.ClientsPhone = _clientFullInfo.Phone;
-            newOrder.Summ = CountOrderSumm();
+            newOrder.Summ = CountOrderSumm(listOfProductForOrder);
             newOrder.OrderListModel = listOfProductForOrder;
             newOrder.AddressID = _addresId;
             newOrder.Address = _adress;
@@ -269,7 +269,7 @@ namespace TradeCompany_UI
             if (_productBaseModel.StockAmount - i.Amount >= 0)
             {
                 listOfProductForOrder.Add(specificProduct);
-                _sum += specificProduct.Price;
+                _sum += specificProduct.Price * i.Amount;
                 Sum.Text ="Сумма заказа: " + _sum;
             }
             else
