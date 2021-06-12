@@ -4,15 +4,7 @@
     
     <Style TargetType="DatePickerTextBox">
         <Setter Property="Background" Value="#F3DFC4" />
-        <Setter Property="BorderBrush" Value="#F3DFC4"/>
-        <Setter Property="Control.Template">
-            <Setter.Value>
-                <ControlTemplate>                    
-                    <TextBox x:Name="PART_TextBox" 
-                                    BorderBrush="#F3DFC4" Background="#F3DFC4" />
-                </ControlTemplate>
-            </Setter.Value>            
-        </Setter>
+        <Setter Property="BorderBrush" Value="#F3DFC4"/>        
     </Style>
 
 </ResourceDictionary>-->

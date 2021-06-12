@@ -9,7 +9,7 @@
         <Setter Property="HorizontalGridLinesBrush" Value="#6E304B" />
         <Setter Property="VerticalGridLinesBrush" Value="#6E304B" />
         <Setter Property="ColumnHeaderHeight" Value="66"/>
-        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="FontSize" Value="12"/>
 
         <Setter Property="ColumnHeaderStyle">
             <Setter.Value>
