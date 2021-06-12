@@ -20,7 +20,7 @@
         <ScrollViewer>
             <StackPanel Grid.Column="0" Orientation="Vertical" Margin="20,70,20,0">
                 <DockPanel Margin="0,0,0,20" HorizontalAlignment="Right">
-                    <Button x:Name="ProductStatButton" Content="ПО ТОВАРАМ" Margin="0,0,20,0"/>
+                    <Button x:Name="ProductStatButton" Style="{StaticResource StatButton}" Content="ПО ТОВАРАМ" Margin="0,0,20,0"/>
                     <Button x:Name="StatisticsByClients" Content="ПО КЛИЕНТАМ" Click="StatisticsByClientsButton_Click"/>
                 </DockPanel>
                 <DockPanel Margin="0,0,0,15">
