@@ -170,7 +170,7 @@ namespace TradeCompany_UI
         {
             foreach (var product in orderListModels)
             {
-                _ProductsDataAccess.ReduceProductAmountInStockByID(product.ID, (int)product.Amount); 
+                _ProductsDataAccess.ReduceProductAmountInStockByID(product.ProductID, (int)product.Amount); 
             }
         }
 

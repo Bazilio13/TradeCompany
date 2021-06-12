@@ -280,8 +280,8 @@ namespace TradeCompany_DAL
             string query;
             using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
             {
-                query = "exec [TradeCompany_DataBase].[ReduceProductAmountInStockByID] @id , @amout";
-                dbConnection.Query(query, new { id, amount });
+                query = "exec [TradeCompany_DataBase].[ReduceProductAmountInStockByID] @id , @amount";
+                dbConnection.Query(query, new { id , amount });
             }
 
         }
