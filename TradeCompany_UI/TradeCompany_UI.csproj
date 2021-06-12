@@ -10,6 +10,7 @@
   <ItemGroup>
     <None Remove="Pictures\details.png" />
     <None Remove="Pictures\minus.png" />
+    <None Remove="Pictures\filter.png" />
     <None Remove="Pictures\search.png" />
   </ItemGroup>
 
@@ -36,6 +37,7 @@
     </Resource>
     <Resource Include="Pictures\details.png" />
     <Resource Include="Pictures\minus.png" />
+    <Resource Include="Pictures\filter.png" />
     <Resource Include="Styles\CheckBoxStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Resource>

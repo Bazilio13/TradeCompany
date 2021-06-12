@@ -171,5 +171,24 @@ namespace TradeCompany_BLL
             List<AddressModel> addressModels = mapper.Map<List<AddressModel>>(addressesDTO);
             return addressModels;
         }
+        public List<StatisticsGroupsModel> MapStatisticsGroursDTOToStatisticsGroursModel(List<StatisticsGroupsDTO> statisticsDTO)
+        {
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<StatisticsGroupsDTO, StatisticsGroupsModel>());
+            Mapper mapper = new Mapper(config);
+            List<StatisticsGroupsModel> statisticsProductsModel = mapper.Map<List<StatisticsGroupsModel>>(statisticsDTO);
+            return statisticsProductsModel;
+
+        }
+        
+        public List<StatisticsProductModel> MapStatisticsProductsDTOToStatisticsProductsModel(List<StatisticsProductDTO> statisticsDTO)
+        {
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<StatisticsProductDTO, StatisticsProductModel>());
+            Mapper mapper = new Mapper(config);
+            List<StatisticsProductModel> statisticsProductsModel = mapper.Map<List<StatisticsProductModel>>(statisticsDTO);
+            return statisticsProductsModel;
+
+        }
+
+
     }
 }
