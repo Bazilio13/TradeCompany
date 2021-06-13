@@ -255,10 +255,21 @@ namespace TradeCompany_UI
             }
             else
             {
-                _uiNavi.GoToThePage(new AddNewProduct(productBaseModel.ID, this));
+                if(!(productBaseModel is null))
+                {
+                    _uiNavi.GoToThePage(new AddNewProduct(productBaseModel.ID, this));
+                }
             }
         }
 
-        
+        private void ProductCatalogPage_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            dgProductCatalog.UnselectAll();
+        }
+
+        private void ProductCatalogPanel_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            dgProductCatalog.UnselectAll();
+        }
     }
 }

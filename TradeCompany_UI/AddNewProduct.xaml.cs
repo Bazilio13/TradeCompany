@@ -82,7 +82,7 @@ namespace TradeCompany_UI
                     ChosenCategories.Text += group.Name + " / ";
                 }
                 Text_RetailPrice.Text = _currentProduct.RetailPrice.ToString();
-                Text_WholesalePrice.Text = _currentProduct.RetailPrice.ToString();
+                Text_WholesalePrice.Text = _currentProduct.WholesalePrice.ToString();
                 Text_StockAmount.Text = _currentProduct.StockAmount.ToString();
                 Text_Description.Text = _currentProduct.Description;
                 Text_Comments.Text = _currentProduct.Comments;

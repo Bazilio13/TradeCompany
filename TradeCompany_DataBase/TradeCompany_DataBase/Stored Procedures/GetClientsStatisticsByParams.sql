@@ -1,6 +1,6 @@
 ﻿CREATE PROCEDURE [TradeCompany_DataBase].[GetClientsStatisticsByParams]
-@FromOrdersСount int,
-@ToOrdersСount int,
+@FromCount int,
+@OrdersCount int,
 @Type binary,
 @FromLastOrderDate datetime,
 @UntilLastOrderDate datetime,
@@ -28,8 +28,8 @@ inner join
 	group by C.Name, C.ID) as SecondSet
 	on FirstSet.ID = SecondSet.ID
 	where
-	(@FromOrdersСount IS NULL OR FirstSet.OrdersСount >= @FromOrdersСount) AND
-	(@ToOrdersСount IS NULL OR FirstSet.OrdersСount <= @ToOrdersСount) AND
+	(@FromCount IS NULL OR FirstSet.OrdersСount >= @FromCount) AND
+	(@OrdersCount IS NULL OR FirstSet.OrdersСount <= @OrdersCount) AND
 	(@FromAmount is null or SecondSet.TotalAmount >= @FromAmount) AND
 	(@ToAmount is null or SecondSet.TotalAmount <= @ToAmount) AND
 	(@Type IS NULL OR FirstSet.Type = @Type ) AND
