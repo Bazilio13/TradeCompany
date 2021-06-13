@@ -91,8 +91,15 @@ namespace TradeCompany_UI
 
         private void ShowInfoAboutClient()
         {
+            if (_orderModel.ID == 0)
+            {
+                ID.Text = "ID заказа: будет присвоен после сохранения";
+            }
+            else
+            {
+                ID.Text = "ID заказа: " + _orderModel.ID;
+            }
 
-            ID.Text = "ID заказа: " + _orderModel.ID;
             ClientName.Text = _client.Name;
             Phone.Text = _client.Phone;
             Button_AddExistingProduct.IsEnabled = true;
