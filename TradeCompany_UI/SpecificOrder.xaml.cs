@@ -9,6 +9,7 @@ using TradeCompany_BLL.DataAccess;
 using TradeCompany_BLL.Models;
 using TradeCompany_UI.Interfaces;
 using TradeCompany_UI.Pop_ups;
+using System.Windows.Input;
 
 namespace TradeCompany_UI
 {
@@ -34,7 +35,7 @@ namespace TradeCompany_UI
         private AddressModel _clientAdress;
 
         private List<OrderListModel> listOfProductForOrder = new List<OrderListModel>();
-        private List<OrderListModel> listOfLastAddedProducts = new List<OrderListModel>();
+        private List<OrderListModel> originalListOfProduct = new List<OrderListModel>();
         public List<AddressModel> listOAddressModel = new List<AddressModel>();
         public List<ProductModel> _productModel = new List<ProductModel>();
 
@@ -80,6 +81,8 @@ namespace TradeCompany_UI
             _orderId = id;
             _clientId = _infoAboutOrder.ClientsID;
             DataPicker.SelectedDate = _infoAboutOrder.DateTime;
+
+            originalListOfProduct = _infoAboutOrder.OrderListModel;
 
             foreach (var item in _infoAboutOrder.OrderListModel)
             {
@@ -144,10 +147,10 @@ namespace TradeCompany_UI
 
         private void SaveProductInOrder_ButtonClick(object sender, RoutedEventArgs e)
         {
-            if (listOfProductForOrder.Equals(listOfLastAddedProducts))
-            {
-                return; // после сохранения отчистить список
-            }
+            //if (listOfProductForOrder.Equals(listOfLastAddedProducts))
+            //{
+            //    return; // после сохранения отчистить список
+            //}
 
             if (_orderId == 0)
             {
@@ -161,15 +164,29 @@ namespace TradeCompany_UI
                 FillInfoAboutNewOrder();
                 _orderDataAccess.AddOrder(newOrder);
             }
-            else
+            if(originalListOfProduct.Count != bgOrderListModels.Count) // написать иквалс
             {
-                _orderDataAccess.AddOrderList(listOfProductForOrder);
-                listOfLastAddedProducts = listOfProductForOrder;
-                ReduceProductsAmountInStock(listOfLastAddedProducts);
-               // listOfProductForOrder.Clear(); 
+                listOfProductForOrder = FillProductListFromDateGrid();
+                newOrder = new OrderModel();
+                FillInfoAboutNewOrder();
             }
+            
+                _orderDataAccess.AddOrderList(listOfProductForOrder);
+                ReduceProductsAmountInStock(listOfProductForOrder);
+               //listOfProductForOrder.Clear(); 
+            
 
             new MessageWindow("Продукты добавлены в базу").ShowDialog();
+        }
+
+        private List<OrderListModel> FillProductListFromDateGrid()
+        {
+            listOfProductForOrder = new List<OrderListModel>();
+            foreach (var product in bgOrderListModels)
+            {
+                listOfProductForOrder.Add(product);
+            }
+            return listOfProductForOrder;
         }
 
         private void ReduceProductsAmountInStock(List<OrderListModel> orderListModels)
@@ -180,15 +197,13 @@ namespace TradeCompany_UI
             }
         }
 
+        private float CountSummProductsOfBindingList()
+        {
+            return bgOrderListModels.Sum(s => s.Price * s.Amount); 
+        }
         private float CountOrderSumm(List<OrderListModel> orderListModels)
         {
-            return orderListModels.Sum(s => s.Price * s.Amount); //вариант суммы
-            //float summ = 0;
-            //foreach (var item in orderListModels)
-            //{
-            //    summ += (item.Price * item.Amount);
-            //}
-            //return summ;
+            return orderListModels.Sum(s => s.Price * s.Amount);
         }
 
         private void AddProduct_ButtonClick(object sender, RoutedEventArgs e) 
@@ -300,11 +315,12 @@ namespace TradeCompany_UI
             {
                 bgOrderListModels.Remove(bgOrderListModels.Last());
                 new MessageWindow("На складе нет столько товара").ShowDialog();
+                Button_AddExistingProduct.IsEnabled = true;
                 return;
             }
             
             listOfProductForOrder.Add(specificProduct);
-            _sum += specificProduct.Price * product.Amount;
+            _sum = CountSummProductsOfBindingList();
             Sum.Text = "Сумма заказа: " + _sum;
             Button_AddExistingProduct.IsEnabled = true;
             AddProductInOrder.IsEnabled = true;
@@ -375,6 +391,17 @@ namespace TradeCompany_UI
             if(feedbackModel.Count == 0) { return; }
             FeedbackTextBox.Text = feedbackModel.Last().Text;
 
+        }
+
+        private void dgSpecificOrder_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Back)
+            {
+                var index = dgSpecificOrder.SelectedIndex;
+                bgOrderListModels.RemoveAt(index);
+                Sum.Text = bgOrderListModels.Sum(s => s.Price * s.Amount).ToString();
+
+            }
         }
     }
 }
