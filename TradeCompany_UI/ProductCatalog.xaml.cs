@@ -291,5 +291,20 @@ namespace TradeCompany_UI
         {
             dgProductCatalog.UnselectAll();
         }
+
+
+        private void LengthCheck_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            ErrorMessageBox(tb);
+        }
+
+        private void ErrorMessageBox(TextBox textBox)
+        {
+            if (textBox.Text.Length >= textBox.MaxLength)
+            {
+                MessageBox.Show("Введено максимальное число символов", "", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 }

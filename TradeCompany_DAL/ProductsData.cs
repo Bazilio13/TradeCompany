@@ -10,7 +10,7 @@ using System.Data;
 
 namespace TradeCompany_DAL
 {
-    public class ProductsData
+    public class ProductsData: ProductsDataInterface
     {
         public string ConnectionString { get; set; }
         public ProductsData()

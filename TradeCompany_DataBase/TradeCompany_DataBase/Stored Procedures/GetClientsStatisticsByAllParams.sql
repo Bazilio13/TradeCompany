@@ -11,7 +11,7 @@
 	@ToOrdersCount int
 	AS
 	select t1.Name, t1.RegistrationDate, t1.Counts as CountOrder, t1.TotalAmount, t1.LastOrderDate, t1.ID from 
-	(select O.ClientsID as ID, C.RegistrationDate, C.Name, count(OL.OrderID) as Counts, sum(OL.Price * OL.Amount) as TotalAmount, C.LastOrderDate
+	(select O.ClientsID as ID, C.RegistrationDate, C.Name, count(OL.OrderID) as Counts, sum(OL.Price * OL.Amount) as TotalAmount, MAX(O.DateTime) as LastOrderDate --C.LastOrderDate
 from TradeCompany_DataBase.ProductGroups as PG 
 left join TradeCompany_DataBase.Product_ProductGroups as PPG on PPG.ProductGroupID = PG.ID
 left join TradeCompany_DataBase.Products as P on PPG.ProductID = p.ID
@@ -24,7 +24,7 @@ AND (@UntilDate is null or O.DateTime <= @UntilDate)
 AND (@FromLastOrder is null or C.LastOrderDate >= @FromLastOrder)
 AND (@UntilLastOrder is null or C.LastOrderDate <= @UntilLastOrder)
 AND (@Type is null or C.Type = @Type)
-group by O.ClientsID, C.RegistrationDate, C.Name,C.LastOrderDate
+group by O.ClientsID, C.RegistrationDate, C.Name--C.LastOrderDate
 having
 (@FromOrdersCount is null or count(OL.OrderID) >= @FromOrdersCount)
 AND (@ToOrdersCount is null or count(OL.OrderID) <= @ToOrdersCount)

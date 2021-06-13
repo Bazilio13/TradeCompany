@@ -12,5 +12,12 @@ namespace TradeCompany_BLL.Tests.Mocks
         { new DateTime(2021, 2, 3, 13, 20, 35),
           new DateTime(2021, 4, 10, 8, 30, 10),
           new DateTime(2021, 10, 18, 22, 5, 55)};
+
+        public static List<DateTime> MaxDataTimes { get; set; } = new List<DateTime>()
+        {
+          new DateTime(2021, 5, 3, 13, 20, 35),
+          new DateTime(2021, 7, 10, 8, 30, 10),
+          new DateTime(2021, 10, 30, 22, 5, 55)
+        };
     }
 }

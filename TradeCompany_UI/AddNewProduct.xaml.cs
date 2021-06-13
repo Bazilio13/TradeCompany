@@ -138,7 +138,7 @@ namespace TradeCompany_UI
 
         private void Name_Text_TextChanged(object sender, TextChangedEventArgs e)
         {
-            TextBoxLengthCheck(NameLimit, Name_Text, e, 250);
+            TextBoxLengthCheck(NameLimit, Name_Text, e);
             EnableSaveButton();
         }
 
@@ -225,14 +225,15 @@ namespace TradeCompany_UI
             }
         }
 
+
         private void Text_Description_TextChanged(object sender, TextChangedEventArgs e)
         {
-            TextBoxLengthCheck(DescriptionLimit, Text_Description, e, 500);
+            TextBoxLengthCheck(DescriptionLimit, Text_Description, e);
         }
 
         private void Text_Comments_TextChanged(object sender, TextChangedEventArgs e)
         {
-            TextBoxLengthCheck(CommentsLimit, Text_Comments, e, 500);
+            TextBoxLengthCheck(CommentsLimit, Text_Comments, e);
         }
 
 
@@ -270,12 +271,21 @@ namespace TradeCompany_UI
             Text_Comments.Select(Text_StockAmount.Text.Length, 0);
         }
 
-        private void TextBoxLengthCheck(TextBlock textBlock, TextBox textBox, TextChangedEventArgs e, int limit)
+        private void TextBoxLengthCheck(TextBlock textBlock, TextBox textBox, TextChangedEventArgs e)
         {
-            textBlock.Text = (limit - textBox.Text.Length).ToString();
-            if (textBox.Text.Length >= limit)
+            textBlock.Text = (textBox.MaxLength - textBox.Text.Length).ToString();
+            ErrorMessageBox(textBox);
+            //if (textBox.Text.Length >= textBox.MaxLength)
+            //{
+            //    MessageBox.Show("Введено аксимальное число символов", "", MessageBoxButton.OK, MessageBoxImage.Error);
+            //}
+        }
+
+        private void ErrorMessageBox(TextBox textBox)
+        {
+            if (textBox.Text.Length >= textBox.MaxLength)
             {
-                MessageBox.Show("Введено аксимальное число символов", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Введено максимальное число символов", "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -353,6 +363,12 @@ namespace TradeCompany_UI
                 _prodCatalog.ApplyFilters();
                 _uiNavi.GoToThePage(_priviosPage);
             }
+        }
+
+        private void Text_RetailPrice_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            ErrorMessageBox(tb);
         }
     }
 }

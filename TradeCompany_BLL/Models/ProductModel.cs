@@ -23,5 +23,20 @@ namespace TradeCompany_BLL.Models
         {
             Groups = new List<ProductGroupModel>();
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is ProductModel model &&
+                   ID == model.ID &&
+                   Name == model.Name &&
+                   StockAmount == model.StockAmount &&
+                   MeasureUnitName == model.MeasureUnitName &&
+                   MeasureUnit == model.MeasureUnit &&
+                   WholesalePrice == model.WholesalePrice &&
+                   RetailPrice == model.RetailPrice &&
+                   LastSupplyDate == model.LastSupplyDate &&
+                   Description == model.Description &&
+                   Comments == model.Comments;
+        }
     }
 }

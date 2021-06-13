@@ -29,7 +29,7 @@
                 <DataGrid x:Name="dgSupplys" Grid.Row="1" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="True" MouseDoubleClick="dgSupplys_MouseDoubleClick">
                     <DataGrid.Columns >
                         <DataGridTextColumn Binding="{Binding Path=ID}"  Header="ID" Width="30" MinWidth="30"></DataGridTextColumn>
-                        <DataGridTextColumn Binding="{Binding Path=DateTime}" Header="Дата поставки" Width="135" MinWidth="100"></DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding StringFormat = dd MMMM yyyy, ConverterCulture=ru, Path=DateTime}" Header="Дата поставки" Width="135" MinWidth="100"></DataGridTextColumn>
                         <DataGridTextColumn Binding="{Binding Path=Comment}" Header="Комментарий" Width="*" MinWidth="150"></DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>

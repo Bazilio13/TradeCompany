@@ -36,6 +36,14 @@ namespace TradeCompany_BLL.Tests
 
             Assert.AreEqual(expected, actual);
         }
+
+        [TestCaseSource(typeof(MapProductDTOToProductModelSource))]
+        public void MapProductDTOToProductModelTests(List<ProductModel> expected, List<ProductDTO> productDTO)
+        {
+            List<ProductModel> actual = mapsDTOtoModel.MapProductDTOToProductModel(productDTO);
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 
 
