@@ -10,11 +10,11 @@
 
     <Grid Background="#F9F9F9">
         <Grid.RowDefinitions>
-            <RowDefinition Height="170"></RowDefinition>
+            <RowDefinition Height="220"></RowDefinition>
             <RowDefinition></RowDefinition>
-            <RowDefinition Height="160"></RowDefinition>
+            <RowDefinition Height="180"></RowDefinition>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Vertical">
+        <StackPanel Orientation="Vertical" Margin="20,70,20,0">
             <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
                 <Button x:Name="ChooseClient" Content="Выбрать клиента" Click="ChooseClient_Click" Margin="0,0,15,0"/>
                 <Button x:Name="Button_AddExistingProduct" Content="Добавить товар" Click="AddProduct_ButtonClick" IsEnabled ="False"/>
@@ -32,7 +32,7 @@
                 <Button x:Name="AddProductInOrder" Content="Сохранить" Click="SaveProductInOrder_ButtonClick" IsEnabled="False" />
             </StackPanel>
         </StackPanel>
-        <DataGrid x:Name="dgSpecificOrder" Loaded="dgSpecificOrder_Loaded" Grid.Row="1" AutoGenerateColumns="False" RowEditEnding="dgSpecificOrder_RowEditEnding" CellEditEnding="dgSpecificOrder_CellEditEnding" CanUserAddRows="False" PreviewKeyDown="dgSpecificOrder_PreviewKeyDown" >
+        <DataGrid x:Name="dgSpecificOrder" Loaded="dgSpecificOrder_Loaded" Grid.Row="1" Margin="20,0,20,0" AutoGenerateColumns="False" RowEditEnding="dgSpecificOrder_RowEditEnding" CellEditEnding="dgSpecificOrder_CellEditEnding" CanUserAddRows="False" PreviewKeyDown="dgSpecificOrder_PreviewKeyDown" >
             <DataGrid.Columns >
 
                 <DataGridTextColumn Binding="{Binding Path= ProductID}" Header="ID Товара" Width="0.2*" IsReadOnly="True" />
@@ -44,6 +44,20 @@
 
             </DataGrid.Columns>
         </DataGrid>
-        
+        <StackPanel Grid.Row="2" Orientation="Vertical" Margin="20,0,20,0">
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock>Отзыв:</TextBlock>
+                    <TextBox x:Name="FeedbackTextBox" Loaded="FeedbackTextBox_Loaded" Height="100" Width="380" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <TextBlock>Комментарий:</TextBlock>
+                    <TextBox x:Name="Comment" Text="" TextWrapping="Wrap" AcceptsReturn="True" Height="100" Width="380" VerticalScrollBarVisibility="Visible" />
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="SendFeedback_Button" Content="Отправить отзыв" Click="SendFeedback_Button_Click" />
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Page>
