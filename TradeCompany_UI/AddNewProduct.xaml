@@ -19,7 +19,7 @@
 
             <TextBlock x:Name="PageTitle" HorizontalAlignment="Center" Text="Добавление товара" TextWrapping="Wrap" VerticalAlignment="Top" Height="28" Width="Auto" FontSize="22" Margin="0,-2,0,0"/>
             <TextBox x:Name="ID_Text" HorizontalAlignment="Left" Margin="51,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="270" SelectionOpacity="1" FontSize="16" IsEnabled="False" Height="25"/>
-            <TextBox x:Name="Name_Text" MaxLength="250" HorizontalAlignment="Left" Margin="51,110,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="563" SelectionOpacity="1" FontSize="16" Height="Auto" TextChanged="Name_Text_TextChanged"/>
+            <TextBox x:Name="Name_Text" MaxLength="250" HorizontalAlignment="Left" Margin="51,110,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="563" SelectionOpacity="1" FontSize="16" Height="25" TextChanged="Name_Text_TextChanged"/>
             <ComboBox x:Name="Category" HorizontalAlignment="Left" Margin="51,158,0,0" VerticalAlignment="Top" Width="423" Height="24" IsEditable="True" DropDownClosed="Category_DropDownClosed" />
             <TextBlock HorizontalAlignment="Left" Margin="51,42,0,0" Text="ID" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Height="21" Width="23"/>
             <TextBlock HorizontalAlignment="Left" Margin="51,89,0,0" Text="Наименование*" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.543,0.551" FontSize="16" Height="21" Width="135"/>
