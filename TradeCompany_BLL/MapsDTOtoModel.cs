@@ -23,10 +23,10 @@ namespace TradeCompany_BLL
             return clientBaseModel;
         }
 
-        public ClientModel MapClientDTOToClientModel(ClientDTO clientDTO)
-        {
-            throw new NotImplementedException();
-        }
+        //public ClientModel MapClientDTOToClientModel(ClientDTO clientDTO)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         public ClientBaseModel MapLastClientDTOToLastClientBaseModel(ClientDTO clientDTO)
         {

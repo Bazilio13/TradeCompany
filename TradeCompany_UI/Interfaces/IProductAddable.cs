@@ -10,6 +10,6 @@ namespace TradeCompany_UI.Interfaces
     interface IProductAddable
     {
         void AddProductToCollection(ProductBaseModel productBaseModel);
-        void AddProductToCollection(ProductBaseModel productBaseModel);
+        
     }
 }

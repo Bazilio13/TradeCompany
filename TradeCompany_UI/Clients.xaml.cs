@@ -27,19 +27,15 @@ namespace TradeCompany_UI
         private UINavi _uiNavi;
 
         private ClientsDataAccess _clientsData;
-        private UINavi _uiNavi;
-        private Page _previosPage;
-
+       
         public Clients(Page previosPage = null)
         {
-            InitializeComponent();
             InitializeComponent();
             _uiNavi = UINavi.GetUINavi();
             _previosPage = previosPage;
             _clientsData = new ClientsDataAccess();
             dgClientsTable.ItemsSource = _clientsData.GetClients();
-            _uiNavi = UINavi.GetUINavi();
-            _previosPage = previosPage;
+            
         }
         public void UpdateDG()
         {
@@ -150,9 +146,9 @@ namespace TradeCompany_UI
             
         }
 
-        private void AddNewClient(object sender, RoutedEventArgs e)
-        {
-            _uiNavi.GoToThePage(new OneClient(this));
-        }
+        //private void AddNewClient(object sender, RoutedEventArgs e)
+        //{
+        //    _uiNavi.GoToThePage(new OneClient(this));
+        //}
     }
 }

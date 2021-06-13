@@ -223,11 +223,5 @@ namespace TradeCompany_UI
         {
             _uiNavi.GoToThePage(_priviosPage);
         }
-
-        public void AddProductToCollection(ProductBaseModel productBaseModel)
-        {
-            //SupplyListModel supplyListModel = new SupplyListModel();
-            //_ocSupplyListModels=
-        }
     }
 }

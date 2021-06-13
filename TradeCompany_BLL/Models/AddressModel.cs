@@ -19,6 +19,10 @@ namespace TradeCompany_BLL.Models
             Address = address;
 
         }
+        public AddressModel()
+        {
+
+        }
 
         public override bool Equals(object obj)
         {

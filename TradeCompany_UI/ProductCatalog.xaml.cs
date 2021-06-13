@@ -251,7 +251,6 @@ namespace TradeCompany_UI
             {
                 IProductAddable productAddable = (IProductAddable)_previosPage;
                 productAddable.AddProductToCollection(productBaseModel);
-                productAddable.AddProductToCollection(productBaseModel);
                 _uiNavi.GoToThePage(_previosPage);
             }
             else

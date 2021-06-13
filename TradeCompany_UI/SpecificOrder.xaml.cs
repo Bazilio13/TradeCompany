@@ -10,6 +10,7 @@ using TradeCompany_BLL.Models;
 using TradeCompany_UI.Interfaces;
 using TradeCompany_UI.Pop_ups;
 using System.Windows.Input;
+using TradeCompany_BLL.DataAccess;
 
 namespace TradeCompany_UI
 {
@@ -43,7 +44,7 @@ namespace TradeCompany_UI
        
         OrderDataAccess _orderDataAccess = new OrderDataAccess();
         ClientsDataAccess _clientsDataAccess = new ClientsDataAccess();
-        AddressesDataAccess _addressesDataAccess = new AddressesDataAccess();
+        TradeCompany_BLL.DataAccess.AddressesDataAccess _addressesDataAccess = new TradeCompany_BLL.DataAccess.AddressesDataAccess();
         ProductsDataAccess _productsDataAccess = new ProductsDataAccess();
         FeedbacksDataAccess _FeedbacksDataAccess = new FeedbacksDataAccess();
 
@@ -163,19 +164,22 @@ namespace TradeCompany_UI
 
                 FillInfoAboutNewOrder();
                 _orderDataAccess.AddOrder(newOrder);
+                new MessageWindow("Продукты добавлены в базу").ShowDialog();
+                return;
+
             }
-            if(originalListOfProduct.Count != bgOrderListModels.Count) // написать иквалс
+            if((originalListOfProduct.Count != bgOrderListModels.Count) && _orderId > 0) // написать иквалс
             {
                 listOfProductForOrder = FillProductListFromDateGrid();
                 newOrder = new OrderModel();
                 FillInfoAboutNewOrder();
+
             }
             
                 _orderDataAccess.AddOrderList(listOfProductForOrder);
                 ReduceProductsAmountInStock(listOfProductForOrder);
                //listOfProductForOrder.Clear(); 
             
-
             new MessageWindow("Продукты добавлены в базу").ShowDialog();
         }
 
