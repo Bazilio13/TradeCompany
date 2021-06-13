@@ -10,22 +10,40 @@
 
     <Grid Background="#F9F9F9">
         <Grid.RowDefinitions>
-            <RowDefinition Height="180"></RowDefinition>
+            <RowDefinition Height="170"></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="160"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Vertical">
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
                 <Button x:Name="ChooseClient" Content="Выбрать клиента" Click="ChooseClient_Click" Margin="0,0,15,0"/>
                 <Button x:Name="Button_AddExistingProduct" Content="Добавить товар" Click="AddProduct_ButtonClick" IsEnabled ="False"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                <TextBlock x:Name="ID" Text="ID Заказа" VerticalAlignment="Center" TextWrapping="Wrap" Width="136"/>
+                <TextBlock x:Name="ClientName" Text="Клиент" VerticalAlignment="Center" TextWrapping="Wrap" Width="170"/>
+                <Label x:Name="Data">
+                    <DatePicker x:Name="DataPicker" FirstDayOfWeek="Monday" SelectedDateFormat="Short" />
+                </Label>
+                <TextBlock x:Name="Sum" Text="Сумма" VerticalAlignment="Center" TextWrapping="Wrap" Width="112"/>
+                <ComboBox x:Name="cbAdress" VerticalAlignment="Center" IsSynchronizedWithCurrentItem="True" SelectedIndex="0" Loaded="cbAdress_Loaded" DropDownClosed="cbAdress_DropDownClosed" Width="200" Height="21" />
             </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,10">
                 <Button x:Name="AddProductInOrder" Content="Сохранить" Click="SaveProductInOrder_ButtonClick" IsEnabled="False" />
             </StackPanel>
         </StackPanel>
+        <DataGrid x:Name="dgSpecificOrder" Loaded="dgSpecificOrder_Loaded" Grid.Row="1" AutoGenerateColumns="False" RowEditEnding="dgSpecificOrder_RowEditEnding" CellEditEnding="dgSpecificOrder_CellEditEnding" CanUserAddRows="False" PreviewKeyDown="dgSpecificOrder_PreviewKeyDown" >
+            <DataGrid.Columns >
+
+                <DataGridTextColumn Binding="{Binding Path= ProductID}" Header="ID Товара" Width="0.2*" IsReadOnly="True" />
+                <DataGridTextColumn x:Name="Product" Binding="{Binding Path= ProductName, UpdateSourceTrigger=PropertyChanged}" Header="Товар" Width="1*" IsReadOnly="True" />
+
+                <DataGridTextColumn Binding="{Binding Path= Price}" Header="Цена" Width="0.5*" IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="Amount" Binding="{Binding Path = Amount, UpdateSourceTrigger=PropertyChanged}" Header="Количество" Width="0.5*" />
+                <DataGridTextColumn x:Name="ProductMeasureUnit" Header="Единицы измерения" Binding="{Binding Path= ProductMeasureUnit}" Width="0.5*" IsReadOnly="True"/>
+
+            </DataGrid.Columns>
+        </DataGrid>
         
     </Grid>
 </Page>
