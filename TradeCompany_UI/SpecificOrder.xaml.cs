@@ -371,6 +371,11 @@ namespace TradeCompany_UI
 
         private void SendFeedback_Button_Click(object sender, RoutedEventArgs e)
         {
+            if(_orderModel.ID == 0)
+            {
+                new MessageWindow("Зайдите в раздел заказы и выберете данный заказ, тогда вы сможете оставить отзыв").ShowDialog();
+                return;
+            }
             FillFeedback();
            _FeedbacksDataAccess.AddFeedbackByOrderId(_orderModel.ID, _feedbackModel);
             new MessageWindow("Отзыв отправлен").ShowDialog();
