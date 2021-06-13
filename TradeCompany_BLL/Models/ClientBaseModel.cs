@@ -14,5 +14,24 @@ namespace TradeCompany_BLL.Models
         public string Phone { get; set; }
         public string ContactPerson { get; set; }
         public DateTime? LastOrderDate { get; set; }
+
+
+        public override bool Equals(object obj)
+        {
+            ClientBaseModel model = (ClientBaseModel)obj;
+            return 
+            ID == model.ID &&
+            Name == model.Name &&
+            E_mail == model.E_mail &&
+            Phone == model.Phone &&
+            ContactPerson == model.ContactPerson &&
+            LastOrderDate == model.LastOrderDate;
+        }
+
+        public override int GetHashCode()
+        {
+            throw new NotImplementedException();
+        }
     }
+
 }
