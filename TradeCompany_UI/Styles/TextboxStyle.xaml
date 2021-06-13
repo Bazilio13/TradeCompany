@@ -147,6 +147,7 @@
 
     <!-- every TextBox with property Style="{StaticResource TextBoxBaseStyle}" will use this style -->
     <Style x:Key="TextBoxBaseStyle" TargetType="{x:Type TextBox}">
+        
         <Setter Property="Background">
             <Setter.Value>
                 <SolidColorBrush Color="{StaticResource ControlBackground}"/>
@@ -157,6 +158,7 @@
                 <SolidColorBrush Color="{StaticResource ControlForeground}"/>
             </Setter.Value>
         </Setter>
+        
         <Setter Property="Padding" Value="0 0"/>
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>

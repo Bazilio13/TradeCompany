@@ -41,7 +41,7 @@ namespace TradeCompany_UI
             List<ProductGroupModel> allGroups = _products.GetAllGroups();
             ProductGroupSelect.ItemsSource = allGroups;
             ProductGroupSelect.DisplayMemberPath = "Name";
-            ProductGroupSelect.Text = "";
+            ProductGroupSelect.Text = "Выбор категории";
         }
 
         private void DateFromForSupply_SelectedDateChange(object sender, SelectionChangedEventArgs e)
@@ -52,6 +52,8 @@ namespace TradeCompany_UI
         private void StatisticsByClientsButton_Click(object sender, RoutedEventArgs e)
         {
             _uiNavi.GoToThePage(new StatisticsByClients(this));
+            
+
         }
 
         private void DGCategory_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -85,7 +87,7 @@ namespace TradeCompany_UI
             DGProducts.Visibility = Visibility.Collapsed;
             ButtonExit.Visibility = Visibility.Collapsed;
             textBlockLabel.Visibility = Visibility.Collapsed;
-            ProductGroupSelect.Text = "";
+            ProductGroupSelect.Text = "Выбор категории";
         }
 
         private void ProductGroupSelect_DropDownClosed(object sender, EventArgs e)
@@ -215,8 +217,7 @@ namespace TradeCompany_UI
         private void GroupFilter(object sender, SelectionChangedEventArgs e)
         {
             GroupFilter();
-        }
-
+        }        
     }
 
 }

@@ -21,14 +21,14 @@
             <StackPanel Grid.Column="0" Orientation="Vertical" Margin="20,70,20,0">
                 <DockPanel Margin="0,0,0,20">
                     <Image Source="Pictures/search.png" Width="29" Height="29" Margin="0,5,0,0"></Image>
-                    <TextBox x:Name="SearchBox" DockPanel.Dock="Left" BorderBrush="#6E304B" Background="#F9F9F9" Width="191" Height="22" TextChanged="SearchBox_TextChanged" HorizontalContentAlignment="Left" BorderThickness="0,0,0,1"/>
+                    <TextBox x:Name="SearchBox" DockPanel.Dock="Left" BorderBrush="#6E304B" Background="#F9F9F9" Width="191" Height="22" TextChanged="SearchBox_TextChanged" HorizontalContentAlignment="Left" BorderThickness="0,0,0,1" Cursor="Hand"/>
 
                     <Button x:Name="CreateSupply"  DockPanel.Dock="Right" Content="Новая поставка" Click="CreateSupply_Click" HorizontalAlignment="Right"/>
                 </DockPanel>
 
                 <DataGrid x:Name="dgSupplys" Grid.Row="1" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="True" MouseDoubleClick="dgSupplys_MouseDoubleClick">
                     <DataGrid.Columns >
-                        <DataGridTextColumn Binding="{Binding Path=ID}"  Header="№" Width="30" MinWidth="30"></DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Path=ID}"  Header="ID" Width="30" MinWidth="30"></DataGridTextColumn>
                         <DataGridTextColumn Binding="{Binding Path=DateTime}" Header="Дата поставки" Width="135" MinWidth="100"></DataGridTextColumn>
                         <DataGridTextColumn Binding="{Binding Path=Comment}" Header="Комментарий" Width="*" MinWidth="150"></DataGridTextColumn>
                     </DataGrid.Columns>
@@ -45,23 +45,23 @@
             <StackPanel Orientation="Vertical" Width="188" DockPanel.Dock="Right" Margin="29,0,0,0">
                 <TextBlock HorizontalAlignment="Center" FontSize="18" FontWeight="Bold" Margin="0,0,0,35">Фильтр</TextBlock>
 
-                <StackPanel Orientation="Vertical" Margin="0,0,0,5" HorizontalAlignment="Center">
+                <StackPanel Orientation="Vertical" Margin="0,0,0,15" HorizontalAlignment="Center">
                     <TextBlock Height="20" TextWrapping="Wrap" Margin="0,0,0,9" HorizontalAlignment="Center" Width="56"><Run Language="ru-ru" Text="Товары:"/><LineBreak/><Run Language="ru-ru"/></TextBlock>
                     <TextBox x:Name="ProductFiltr" TextWrapping="Wrap"  Height="25" VerticalAlignment="Top" HorizontalAlignment="Center" Width="180" TextChanged="ProductFiltr_TextChanged"/>
                 </StackPanel>
-                <StackPanel Orientation="Vertical" Margin="0,0,0,10" HorizontalAlignment="Center">
+                <StackPanel Orientation="Vertical" Margin="0,0,0,30" HorizontalAlignment="Center">
                     <TextBlock Height="20" HorizontalAlignment="Center" Margin="0,0,0,9" TextWrapping="Wrap" Width="82"><Run Language="ru-ru" Text="Категории:"/></TextBlock>
                     <TextBox x:Name="ProductGroupFiltr" Margin="0,0,0,0" TextWrapping="Wrap"  Height="25" VerticalAlignment="Top" HorizontalAlignment="Center" Width="180" TextChanged="ProductGroupFiltr_TextChanged"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="0,0,0,100" Width="142">
                     <DockPanel Width="141" Margin="0,0,0,5">
-                        <TextBlock DockPanel.Dock="Left" Height="25" Margin="0,5,0,0" TextWrapping="Wrap" Width="19"><Run Language="ru-ru" Text="С"/></TextBlock>
-                        <DatePicker x:Name="MinDate" SelectedDateChanged="MinDate_SelectedDateChanged" DockPanel.Dock="Right" Width="110" Height="25"/>
+                        <TextBlock DockPanel.Dock="Left" Height="25" Margin="0,5,0,0" TextWrapping="Wrap" Width="19"><Run Language="ru-ru" Text="От"/></TextBlock>
+                        <DatePicker x:Name="MinDate" SelectedDateChanged="MinDate_SelectedDateChanged" DockPanel.Dock="Right" Width="110" Height="25" BorderBrush="#FFF3DFC4" Background="#FFF3DFC4"/>
                     </DockPanel>
                     <DockPanel>
-                        <TextBlock HorizontalAlignment="Left" Height="25" Margin="0,5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="20"><Run Language="ru-ru" Text="По"/></TextBlock>
-                        <DatePicker Name="MaxDate" Margin="0,0,0,0" Height="25" Width="110" SelectedDateChanged="MaxDate_SelectedDateChanged"/>
+                        <TextBlock HorizontalAlignment="Left" Height="25" Margin="0,5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="20"><Run Language="ru-ru" Text="До"/></TextBlock>
+                        <DatePicker Name="MaxDate" Margin="0,0,0,0" Height="25" Width="110" SelectedDateChanged="MaxDate_SelectedDateChanged" BorderBrush="#FFF3DFC4" Background="#FFF3DFC4"/>
                     </DockPanel>
                 </StackPanel>
 
