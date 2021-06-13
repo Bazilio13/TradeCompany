@@ -42,6 +42,7 @@ namespace TradeCompany_UI
         {
             _uiNavi.GoToThePage(new StatisticsByProducts());
         }
+        
 
         private void ClientsButton_Click(object sender, RoutedEventArgs e)
         {

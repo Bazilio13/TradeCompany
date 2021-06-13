@@ -26,7 +26,7 @@
                     <Button x:Name="ButtonNewClient" DockPanel.Dock="Right" Content="Новый клиент" Click="AddNewClient" HorizontalAlignment="Right"/>
                 </DockPanel>
 
-                <DataGrid x:Name="dgClientsTable" AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" SelectionMode="Single" MouseLeftButtonDown="dgClientsTable_MouseLeftButtonDown">
+                <DataGrid x:Name="dgClientsTable" AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" SelectionMode="Single" MouseDoubleClick="dgClientsTable_MouseDoubleClick">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding ="{Binding Path = ID}"  IsReadOnly="True" Header="id" Width="30"/>
                         <DataGridTextColumn Binding ="{Binding Path = Name}"  IsReadOnly="True" Header="ФИО/Название" Width="200"/>

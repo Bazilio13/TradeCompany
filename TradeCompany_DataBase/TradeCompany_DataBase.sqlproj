@@ -145,6 +145,8 @@
     <Build Include="TradeCompany_DataBase\Stored Procedures\GetPotentialClientsByProductsIDs.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\SoftDeleteProductByID.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\GetLastProductID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\ReduceProductAmountInStockByID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetFeedbackByOrderID.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\SetAddressIsDeleted.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\GetAddressIsDeleted.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\GetAddresses.sql" />
