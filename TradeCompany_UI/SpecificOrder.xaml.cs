@@ -448,6 +448,11 @@ namespace TradeCompany_UI
                 AddProductInOrder.IsEnabled = true;
             }
         }
+
+        private void PreviousPage_Click(object sender, RoutedEventArgs e)
+        {
+            GoToThePreviousPage();
+        }
     }
 }
 

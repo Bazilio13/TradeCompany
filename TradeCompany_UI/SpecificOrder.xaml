@@ -44,6 +44,7 @@
                 </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button x:Name="PreviousPage" Content="Назад"  IsEnabled="True" Click="PreviousPage_Click" />
                 <Button x:Name="AddProductInOrder" Content="Сохранить" Click="SaveProductInOrder_ButtonClick" IsEnabled="False" />
             </StackPanel>
         </StackPanel>
