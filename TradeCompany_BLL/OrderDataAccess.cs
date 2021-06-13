@@ -75,5 +75,10 @@ namespace TradeCompany_BLL
             _ordersData.AddOrder(ordersDTO);
         }
 
+        public void DeleteOrderListByID(int id)
+        {
+            _ordersData.DeleteOrderListByID(id);
+        }
+        
     }
 }

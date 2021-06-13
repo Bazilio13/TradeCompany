@@ -155,7 +155,7 @@ namespace TradeCompany_UI
 
             if (_orderId == 0)
             {
-                bool check = VerifyWhetherDateAndAddress(); 
+                bool check = VerifyWhetherDateAndAddress();
                 if (!check)
                 {
                     new MessageWindow("Заполните все поля").ShowDialog();
@@ -164,23 +164,33 @@ namespace TradeCompany_UI
 
                 FillInfoAboutNewOrder();
                 _orderDataAccess.AddOrder(newOrder);
-                new MessageWindow("Продукты добавлены в базу").ShowDialog();
+                NotifyAboutSuccessfulAdditionInBase();
                 return;
 
             }
-            if((originalListOfProduct.Count != bgOrderListModels.Count) && _orderId > 0) // написать иквалс
+
+            if (!(originalListOfProduct.Equals(bgOrderListModels)) && _orderId > 0) 
             {
                 listOfProductForOrder = FillProductListFromDateGrid();
                 newOrder = new OrderModel();
                 FillInfoAboutNewOrder();
-
-            }
+                _orderDataAccess.DeleteOrderListByID(_orderId);
+                
+                _orderDataAccess.AddOrderList(newOrder.OrderListModel);
+                NotifyAboutSuccessfulAdditionInBase();
+                return;
+             }
             
                 _orderDataAccess.AddOrderList(listOfProductForOrder);
-                ReduceProductsAmountInStock(listOfProductForOrder);
-               //listOfProductForOrder.Clear(); 
-            
+                 NotifyAboutSuccessfulAdditionInBase();
+        }
+
+        private void NotifyAboutSuccessfulAdditionInBase()
+        {
+            ReduceProductsAmountInStock(listOfProductForOrder);
             new MessageWindow("Продукты добавлены в базу").ShowDialog();
+            listOfProductForOrder.Clear();
+            
         }
 
         private List<OrderListModel> FillProductListFromDateGrid()
