@@ -33,6 +33,14 @@ namespace TradeCompany_DAL.DTOs
                         result = false;
                     }
                 }
+                if (ClientDTO is null || dTO.ClientDTO is null)
+                {
+                    result = ClientDTO == dTO.ClientDTO;
+                }
+                else if (!ClientDTO.Equals(dTO.ClientDTO))
+                {
+                    result = false;
+                }
 
                 return result &&
                        ID == dTO.ID &&
@@ -40,8 +48,7 @@ namespace TradeCompany_DAL.DTOs
                        DateTime == dTO.DateTime &&
                        AddressID == dTO.AddressID &&
                        Comment == dTO.Comment &&
-                       Address == dTO.Address &&
-                       ClientDTO.Equals(dTO.ClientDTO);
+                       Address == dTO.Address;
             }
             return false;
         }
