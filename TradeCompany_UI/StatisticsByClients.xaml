@@ -20,7 +20,7 @@
             <StackPanel Grid.Column="0" Orientation="Vertical" Margin="20,70,20,0">
                 <DockPanel Margin="0,0,0,20" HorizontalAlignment="Right">
                     <Button x:Name="StatisticsByProducts" Content="ПО ТОВАРАМ" Margin="0,0,20,0" Click="StatisticsByProductsButton_Click"/>
-                    <Button Content="ПО КЛИЕНТАМ"/>
+                    <Button Content="ПО КЛИЕНТАМ" Style="{StaticResource StatButton}"/>
                 </DockPanel>
                 <DockPanel HorizontalAlignment="Right" Margin="0,0,0,12">
                     <Image Source="Pictures/filter.png" Height="28" Margin="0,0,5,0"/>
@@ -55,12 +55,29 @@
                 <ComboBox x:Name="ProductGroupSelect" HorizontalAlignment="Center" Margin="0,0,0,25" SelectedIndex="0" Height="22" Width="150" Grid.RowSpan="2" IsEditable="True" />
 
                 <TextBlock HorizontalAlignment="Center" FontSize="14" Margin="0,0,0,11">Период:</TextBlock>
-                <DatePicker x:Name="DateFromForSupply" HorizontalAlignment="Center" Margin="0,0,0,11" RenderTransformOrigin="0.309,-0.578" Height="28" Width="114" Focusable="False"/>
-                <DatePicker x:Name="DateUntilForSupply"  HorizontalAlignment="Center" Margin="0,0,0,13" Height="27" Width="112"/>
-
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="0,0,0,30" Width="142">
+                    <DockPanel Width="141" Margin="0,0,0,5">
+                        <TextBlock DockPanel.Dock="Left" Height="25" Margin="0,5,0,0" TextWrapping="Wrap" Width="19"><Run Language="ru-ru" Text="От"/></TextBlock>
+                        <DatePicker x:Name="DateFromForSupply" HorizontalAlignment="Center" RenderTransformOrigin="0.309,-0.578" Width="110" Height="25" Focusable="False" BorderBrush="#FFF3DFC4" Background="#FFF3DFC4"/>
+                    </DockPanel>
+                    <DockPanel Width="141" Margin="0,0,0,5">
+                        <TextBlock DockPanel.Dock="Left" Height="25" Margin="0,5,0,0" TextWrapping="Wrap" Width="19"><Run Language="ru-ru" Text="До"/></TextBlock>
+                        <DatePicker x:Name="DateUntilForSupply" HorizontalAlignment="Center" RenderTransformOrigin="0.309,-0.578" Width="110" Height="25" Focusable="False" BorderBrush="#FFF3DFC4" Background="#FFF3DFC4"/>
+                    </DockPanel>
+                </StackPanel>
                 <TextBlock HorizontalAlignment="Center" FontSize="14" Margin="0,0,0,11">Дата последнего заказа:</TextBlock>
-                <DatePicker x:Name="DateFromForOrder" HorizontalAlignment="Center" Margin="0,0,0,11" RenderTransformOrigin="0.309,-0.578" Height="28" Width="114" Focusable="False"/>
-                <DatePicker x:Name="DateUntilForOrder"  HorizontalAlignment="Center" Margin="0,0,0,20" Height="27" Width="112"/>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="0,0,0,30" Width="142">
+                    <DockPanel Width="141" Margin="0,0,0,5">
+                        <TextBlock DockPanel.Dock="Left" Height="25" Margin="0,5,0,0" TextWrapping="Wrap" Width="19"><Run Language="ru-ru" Text="От"/></TextBlock>
+                        <DatePicker x:Name="DateFromForOrder" HorizontalAlignment="Center" RenderTransformOrigin="0.309,-0.578" Width="110" Height="25" Focusable="False" BorderBrush="#FFF3DFC4" Background="#FFF3DFC4"/>
+                    </DockPanel>
+                    <DockPanel Width="141" Margin="0,0,0,5">
+                        <TextBlock DockPanel.Dock="Left" Height="25" Margin="0,5,0,0" TextWrapping="Wrap" Width="19"><Run Language="ru-ru" Text="До"/></TextBlock>
+                        <DatePicker x:Name="DateUntilForOrder" HorizontalAlignment="Center" RenderTransformOrigin="0.309,-0.578" Width="110" Height="25" Focusable="False" BorderBrush="#FFF3DFC4" Background="#FFF3DFC4"/>
+                    </DockPanel>
+                </StackPanel>
+                
+                
 
                 <DockPanel  Margin="0,0,0,20">
                     <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" FontSize="14">Количество заказов:</TextBlock>

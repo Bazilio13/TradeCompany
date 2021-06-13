@@ -25,7 +25,7 @@ namespace TradeCompany_UI.TableElements
             ColumnSizes = columnSizes;
             BorderThickness = new Thickness(0);
             Height = 23;            
-            _border = new Border() { BorderThickness = new Thickness(1, 1, 0, 0), Height = 23, BorderBrush = Brushes.Black };
+            _border = new Border() { BorderThickness = new Thickness(1, 1, 1, 0), Height = 23, BorderBrush = Brushes.Black };
             AddChild(_border);
             _stackPanel = new StackPanel();
             _border.Child = _stackPanel;
