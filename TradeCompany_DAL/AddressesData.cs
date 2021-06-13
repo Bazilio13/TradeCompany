@@ -10,7 +10,7 @@ using System.Data;
 
 namespace TradeCompany_DAL
 {
-    public class AddressesData
+    public class AddressesData: AddressesDataInterface
     {
         public string ConnectionString { get; set; }
 
