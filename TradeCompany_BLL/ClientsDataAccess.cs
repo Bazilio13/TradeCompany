@@ -41,7 +41,7 @@ namespace TradeCompany_BLL
         public List<WishModel> GetWishListByClientID(int id)
         {
             List<WishDTO> wishDTOs = _clientData.GetWishesListByClientID(id);
-            List<WishModel> wishModelList = _mapDTOtoModel.MapWishesDTOToWishesModelListByID(wishDTOs);
+            List<WishModel> wishModelList = _mapDTOtoModel.MapWishesDTOToWishesModelList(wishDTOs);
             return wishModelList;
         }
 

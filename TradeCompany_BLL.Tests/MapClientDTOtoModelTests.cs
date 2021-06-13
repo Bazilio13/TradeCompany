@@ -30,6 +30,13 @@ namespace TradeCompany_BLL.Tests
             Assert.AreEqual(expected, actual);
         }
 
+        [TestCaseSource(typeof(MapWishesDTOToWishesModelList_Source))]
+        public void MapWishesDTOToWishesModelListTests(List<WishDTO> wishDTO, List<WishModel> expected)
+        {
+            List<WishModel> actual = mapsDTOtoModel.MapWishesDTOToWishesModelList(wishDTO);
+            Assert.AreEqual(expected, actual);
+        }
+
 
 
 
