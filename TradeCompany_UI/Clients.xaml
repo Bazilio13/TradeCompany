@@ -33,7 +33,7 @@
                         <DataGridTextColumn Binding ="{Binding Path = ContactPerson}"  IsReadOnly="True" Header="Контактное лицо" Width="150"/>
                         <DataGridTextColumn Binding ="{Binding Path = Phone}" IsReadOnly="True" Header="Телефон" Width="150"/>
                         <DataGridTextColumn Binding ="{Binding Path = E_mail}" IsReadOnly="True" Header="Email" Width="200" />
-                        <DataGridTextColumn Binding ="{Binding Path = LastOrderDate}" IsReadOnly="True" Header="Дата последнего заказа" Width="*"/>
+                        <DataGridTextColumn Binding ="{Binding StringFormat = dd MMMM yyyy, ConverterCulture=ru, Path = LastOrderDate}" IsReadOnly="True" Header="Дата последнего заказа" Width="*"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>

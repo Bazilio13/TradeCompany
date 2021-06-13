@@ -92,11 +92,34 @@ namespace TradeCompany_BLL
         {
             List<ClientsStatisticsDTO> clientsStatDTO = _clientData.GetClientsStatistics();
             List<ClientsStatisticsModel> clientsStatModel = _mapDTOtoModel.MapClientsStatDTOToClientsStatModel(clientsStatDTO);
-            
-            double? totalSum = 0;
+            FormStatistics(clientsStatModel);
+            return clientsStatModel;
+        }
+
+        public List<ClientsStatisticsModel> GetClientsStatisticsByParams(FilterGroupModel filter)
+        {
+            List<ClientsStatisticsDTO> clientsStatDTO = _clientData.GetClientsStatisticsByParams(filter.FromOrdersCount, filter.ToOrdersCount,
+                filter.Type, filter.MinDateOrder, filter.MaxDateOrder, filter.PeriodFor, filter.PeriodUntil, filter.MinAmount, filter.MaxAmount);
+            List<ClientsStatisticsModel> clientsStatModel = _mapDTOtoModel.MapClientsStatDTOToClientsStatModel(clientsStatDTO);
+            FormStatistics(clientsStatModel);
+            return clientsStatModel;
+        }
+
+        public List<ClientsStatisticsModel> GetClientsStatisticsByProductGroups(FilterGroupModel filter)
+        {
+            List<ClientsStatisticsDTO> clientsStatDTO = _clientData.GetClientsStatisticsByProductGroups(filter.ID, filter.PeriodFor,
+                filter.PeriodUntil, filter.MinDateOrder, filter.MaxDateOrder, filter.Type, filter.MinAmount, filter.MaxAmount, filter.FromOrdersCount, filter.ToOrdersCount);
+            List<ClientsStatisticsModel> clientsStatModel = _mapDTOtoModel.MapClientsStatDTOToClientsStatModel(clientsStatDTO);
+            FormStatistics(clientsStatModel);
+            return clientsStatModel;
+        }
+
+        private void FormStatistics(List<ClientsStatisticsModel> clientsStatModel)
+        {
+            double totalSum = 0;
             foreach (ClientsStatisticsModel model in clientsStatModel)
             {
-                if (!(model.TotalAmount is null))
+                if (!(model.TotalAmount == 0))
                 {
                     totalSum += model.TotalAmount;
                 }
@@ -104,13 +127,12 @@ namespace TradeCompany_BLL
 
             foreach (ClientsStatisticsModel model in clientsStatModel)
             {
-                if(!(model.TotalAmount is null))
+                if (!(model.TotalAmount == 0))
                 {
-                    model.AverageCheck = model.TotalAmount / model.OrdersСount;
+                    model.AverageCheck = model.TotalAmount / model.CountOrder;
                     model.Percentage = (model.TotalAmount / totalSum) * 100;
                 }
             }
-            return clientsStatModel;
         }
     }
 }
