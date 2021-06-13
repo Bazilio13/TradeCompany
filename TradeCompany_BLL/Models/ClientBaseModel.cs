@@ -18,8 +18,7 @@ namespace TradeCompany_BLL.Models
 
         public override bool Equals(object obj)
         {
-            ClientBaseModel model = (ClientBaseModel)obj;
-            return 
+            return obj is ClientBaseModel model &&
             ID == model.ID &&
             Name == model.Name &&
             E_mail == model.E_mail &&
