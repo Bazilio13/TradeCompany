@@ -34,6 +34,17 @@ namespace TradeCompany_BLL.Tests
             List<SupplyListModel> actual = _map.MapSupplyListDTOToSupplyListModel(supplyListsDTO);
             Assert.AreEqual(expected, actual);
         }
-
+        [TestCaseSource(typeof(MapsSupplyModelToSupplyDTO_Sourse))]
+        public void MapsSupplyModelToSupplyDTO_Test(SupplyModel supplyModel, SupplyDTO expected)
+        {
+            SupplyDTO actual = _map.MapsSupplyModelToSupplyDTO(supplyModel);
+            Assert.AreEqual(expected, actual);
+        }
+        [TestCaseSource(typeof(MapsSupplyListModelsToSupplyListDTOs_Sourse))]
+        public void MapsSupplyListModelsToSupplyListDTOs_Test(List<SupplyListModel> supplyModels, int supplyID, List<SupplyListDTO> expected)
+        {
+            List<SupplyListDTO> actual = _map.MapsSupplyListModelsToSupplyListDTOs(supplyModels, supplyID);
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
