@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TradeCompany_UI"
       mc:Ignorable="d"
-      Title="StatisticsByClients" Height="1777">
+      Title="StatisticsByClients">
 
     <Grid Background="#F9F9F9">
         <Grid.RowDefinitions>
@@ -17,30 +17,30 @@
         </Grid.ColumnDefinitions>
 
         <ScrollViewer>
-            <StackPanel Grid.Column="0" Orientation="Vertical" Margin="20,70,20,0">
+            <StackPanel Grid.Column="0" Orientation="Vertical" Margin="20,70,20,20">
                 <DockPanel Margin="0,0,0,20" HorizontalAlignment="Right">
                     <Button x:Name="StatisticsByProducts" Content="ПО ТОВАРАМ" Margin="0,0,20,0" Click="StatisticsByProductsButton_Click"/>
                     <Button Content="ПО КЛИЕНТАМ" Style="{StaticResource StatButton}"/>
                 </DockPanel>
                 <DockPanel HorizontalAlignment="Right" Margin="0,0,0,12">
                     <Image Source="Pictures/filter.png" Height="28" Margin="0,0,5,0"/>
-                    <Button Content="Год" Margin="0,0,10,0" Click="OneYearButtonClick"/>
-                    <Button Content="Пол года" Margin="0,0,10,0" Click="HalfYearButtonClick"/>
-                    <Button Content="Месяц" Margin="0,0,10,0" Click="MonthButtonClick"/>
-                    <Button Content="Вчера" Margin="0,0,10,0" Click="YesterdayButtonClick"/>
-                    <Button Content="Сегодня" Click="TodayButtonClick"/>
+                    <Button x:Name="OneYearButton"  Content="Год" Margin="0,0,10,0" Click="OneYearButtonClick"/>
+                    <Button x:Name="HalfYearButton" Content="Пол года" Margin="0,0,10,0" Click="HalfYearButtonClick"/>
+                    <Button x:Name="MonthButton" Content="Месяц" Margin="0,0,10,0" Click="MonthButtonClick"/>
+                    <Button x:Name="YesterdayButton" Content="Вчера" Margin="0,0,10,0" Click="YesterdayButtonClick"/>
+                    <Button x:Name="TodayButton" Content="Сегодня" Click="TodayButtonClick"/>
                 </DockPanel>
 
-                <DataGrid x:Name="dgClientsStat" Grid.Row="1" AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" ScrollViewer.CanContentScroll="True" FontSize="12" MouseDoubleClick="dgClientsStat_MouseDoubleClick">
+                <DataGrid x:Name="dgClientsStat" AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" FontSize="12" MouseDoubleClick="dgClientsStat_MouseDoubleClick" ScrollViewer.CanContentScroll="True">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding ="{Binding Path = ID}" IsReadOnly="True" Header="ID" Width="50" MinWidth="50"/>
-                        <DataGridTextColumn Binding ="{Binding Path = Name}" IsReadOnly="True" Header="Клиент" Width="125" MinWidth="125"/>
-                        <DataGridTextColumn Binding ="{Binding StringFormat = dd MMMM yyyy, ConverterCulture=ru, Path = RegistrationDate}" IsReadOnly="True" Header="Дата регистрации" Width="125" MinWidth="125"/>
+                        <DataGridTextColumn Binding ="{Binding Path = Name}" IsReadOnly="True" Header="Клиент" Width="*" MinWidth="125"/>
+                        <DataGridTextColumn Binding ="{Binding StringFormat = dd MMMM yyyy, ConverterCulture=ru, Path = RegistrationDate}" IsReadOnly="True" Header="Дата регистрации" Width="100" MinWidth="100"/>
                         <DataGridTextColumn Binding ="{Binding Path = CountOrder}" IsReadOnly="True" Header="Кол-во заказов" Width="70" MinWidth="70"/>
                         <DataGridTextColumn Binding ="{Binding Path = TotalAmount}" IsReadOnly="True" Header="Сумма" Width="82" MinWidth="82" />
                         <DataGridTextColumn Binding ="{Binding StringFormat=0.00, Path = Percentage}" IsReadOnly="True" Header="% от общей суммы" Width="82" MinWidth="82"/>
                         <DataGridTextColumn Binding ="{Binding StringFormat=0, Path = AverageCheck}" IsReadOnly="True" Header="Средний чек" Width="82" MinWidth="82"/>
-                        <DataGridTextColumn Binding ="{Binding StringFormat = dd MMMM yyyy, ConverterCulture=ru, Path = LastOrderDate}" IsReadOnly="True" Header="Последний заказ" Width="*" MinWidth="82"/>
+                        <DataGridTextColumn Binding ="{Binding StringFormat = dd MMMM yyyy, ConverterCulture=ru, Path = LastOrderDate}" IsReadOnly="True" Header="Последний заказ" Width="100" MinWidth="100"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
@@ -81,7 +81,7 @@
                 
                 
 
-                <DockPanel  Margin="0,0,0,20">
+                <DockPanel Margin="0,0,0,20">
                     <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" FontSize="14">Количество заказов:</TextBlock>
                     <StackPanel DockPanel.Dock="Right">
                         <TextBlock Margin="30,0,0,0">до</TextBlock>

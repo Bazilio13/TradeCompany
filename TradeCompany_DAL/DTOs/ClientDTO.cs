@@ -22,6 +22,7 @@ namespace TradeCompany_DAL.DTOs
 
         public override bool Equals(object obj)
         {
+            
             return obj is ClientDTO dTO &&
                    ID == dTO.ID &&
                    Name == dTO.Name &&

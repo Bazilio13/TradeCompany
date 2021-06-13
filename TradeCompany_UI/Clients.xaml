@@ -19,7 +19,7 @@
         </Grid.ColumnDefinitions>
 
         <ScrollViewer>
-            <StackPanel Grid.Column="0" Orientation="Vertical" Margin="20,70,20,0">
+            <StackPanel Grid.Column="0" Orientation="Vertical" Margin="20,70,20,20">
                 <DockPanel Margin="0,0,0,20">
                     <Image Source="Pictures/search.png" Width="29" Height="29" Margin="0,5,0,0"></Image>
                     <TextBox x:Name="ClientFiltr"  DockPanel.Dock="Left" BorderBrush="#6E304B" Background="#F9F9F9" Width="191" Height="22" HorizontalContentAlignment="Left" BorderThickness="0,0,0,1" TextChanged="textInput" Cursor="Hand"/>
@@ -29,11 +29,11 @@
                 <DataGrid x:Name="dgClientsTable" AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" SelectionMode="Single" MouseDoubleClick="dgClientsTable_MouseDoubleClick">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding ="{Binding Path = ID}"  IsReadOnly="True" Header="id" Width="30"/>
-                        <DataGridTextColumn Binding ="{Binding Path = Name}"  IsReadOnly="True" Header="ФИО/Название" Width="200"/>
+                        <DataGridTextColumn Binding ="{Binding Path = Name}"  IsReadOnly="True" Header="ФИО/Название" Width="*" MinWidth="200"/>
                         <DataGridTextColumn Binding ="{Binding Path = ContactPerson}"  IsReadOnly="True" Header="Контактное лицо" Width="150"/>
                         <DataGridTextColumn Binding ="{Binding Path = Phone}" IsReadOnly="True" Header="Телефон" Width="150"/>
                         <DataGridTextColumn Binding ="{Binding Path = E_mail}" IsReadOnly="True" Header="Email" Width="200" />
-                        <DataGridTextColumn Binding ="{Binding StringFormat = dd MMMM yyyy, ConverterCulture=ru, Path = LastOrderDate}" IsReadOnly="True" Header="Дата последнего заказа" Width="*"/>
+                        <DataGridTextColumn Binding ="{Binding StringFormat = dd MMMM yyyy, ConverterCulture=ru, Path = LastOrderDate}" IsReadOnly="True" Header="Дата последнего заказа" Width="100"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
