@@ -18,7 +18,7 @@
         </Grid.ColumnDefinitions>
 
         <ScrollViewer>
-            <StackPanel Grid.Column="0" Orientation="Vertical" Margin="20,70,20,0">
+            <StackPanel Grid.Column="0" Orientation="Vertical" Margin="20,70,20,20">
                 <DockPanel Margin="0,0,0,20" HorizontalAlignment="Right">
                     <Button x:Name="ProductStatButton" Style="{StaticResource StatButton}" Content="ПО ТОВАРАМ" Margin="0,0,20,0"/>
                     <Button x:Name="StatisticsByClients" Content="ПО КЛИЕНТАМ" Click="StatisticsByClientsButton_Click"/>
@@ -46,7 +46,7 @@
                 <TextBlock x:Name="textBlockLabel" Foreground="#6E304B" Margin="0,-37,0,10" HorizontalAlignment="Center" TextAlignment="Center" FontWeight="Bold" Text="Текст" Width="132" Height="25"/>
 
 
-                <DataGrid x:Name ="DGAllGroups" Grid.Row="1" AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" ScrollViewer.CanContentScroll="True" MouseLeftButtonDown="DGCategory_MouseLeftButtonDown">
+                <DataGrid x:Name ="DGAllGroups" AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" ScrollViewer.CanContentScroll="True" MouseLeftButtonDown="DGCategory_MouseLeftButtonDown">
 
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding ="{Binding Path = CategoryName}" IsReadOnly="True" Header="Категория" Width="155" MinWidth="155"/>
