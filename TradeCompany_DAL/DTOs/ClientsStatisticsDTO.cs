@@ -9,8 +9,9 @@ namespace TradeCompany_DAL.DTOs
     public class ClientsStatisticsDTO
     {
         public int ID { get; set; }
+        public DateTime? RegistrationDate { get; set; }
         public string Name { get; set; }
-        public int OrdersСount { get; set; }
+        public int? CountOrder { get; set; }
         public double? TotalAmount { get; set; }
         public DateTime? LastOrderDate { get; set; }
     }

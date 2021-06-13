@@ -15,5 +15,17 @@ namespace TradeCompany_BLL.Models
         public DateTime? LastOrderDate { get; set; }
         public float Amount { get; set; }
         public int StockAmount { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            return obj is StatisticsGroupsModel model &&
+                   ID == model.ID &&
+                   CategoryName == model.CategoryName &&
+                   Summ == model.Summ &&
+                   LastSupplyDate == model.LastSupplyDate &&
+                   LastOrderDate == model.LastOrderDate &&
+                   Amount == model.Amount &&
+                   StockAmount == model.StockAmount;
+        }
     }
 }

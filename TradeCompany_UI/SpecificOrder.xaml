@@ -22,8 +22,8 @@
                 <Button x:Name="ChooseClient" Content="Выбрать клиента" Click="ChooseClient_Click" Margin="0,0,15,0"/>
                 <Button x:Name="Button_AddExistingProduct" Content="Добавить товар" Click="AddProduct_ButtonClick" IsEnabled ="False"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
-                <StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                <StackPanel Height="74">
                     <TextBlock x:Name="ID" Text="ID Заказа" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap" Width="136" Margin="0,0,0,10"/>
                     <TextBlock x:Name="Sum" Text="Сумма" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap" Width="112"/>
                 </StackPanel>
@@ -62,11 +62,11 @@
         </DataGrid>
         <StackPanel Grid.Row="2" Orientation="Vertical" Grid.Column="0" Margin="20,0,20,0">
             <DockPanel Margin="0,0,0,15" HorizontalAlignment="Stretch">
-                <DockPanel Margin="0,0,0,0" HorizontalAlignment="Stretch" DockPanel.Dock="Top">
+                <DockPanel Margin="0,0,0,0" HorizontalAlignment="Stretch" DockPanel.Dock="Bottom">
                     <TextBlock HorizontalAlignment="Left" DockPanel.Dock="Top">Отзыв:</TextBlock>
                     <TextBox x:Name="FeedbackTextBox" DockPanel.Dock="Bottom" Loaded="FeedbackTextBox_Loaded" VerticalContentAlignment="Top" Height="80" TextWrapping="Wrap" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"></TextBox>
                 </DockPanel>
-                <DockPanel HorizontalAlignment="Stretch" DockPanel.Dock="Bottom">
+                <DockPanel HorizontalAlignment="Stretch" DockPanel.Dock="Top">
                     <TextBlock HorizontalAlignment="Left" DockPanel.Dock="Top">Комментарий:</TextBlock>
                     <TextBox x:Name="Comment" Text="" DockPanel.Dock="Bottom" VerticalContentAlignment="Top" TextWrapping="Wrap" AcceptsReturn="True" Height="80" ScrollViewer.VerticalScrollBarVisibility="Auto" SelectionChanged="Comment_SelectionChanged"  />
                 </DockPanel>

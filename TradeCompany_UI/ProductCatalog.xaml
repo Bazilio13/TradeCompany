@@ -1,4 +1,4 @@
-﻿<Page x:Class="TradeCompany_UI.ProductCatalog"
+﻿<Page x:Name="ProductCatalogPage" x:Class="TradeCompany_UI.ProductCatalog"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:TradeCompany_UI"
       mc:Ignorable="d"
       d:DesignHeight="1450"
-      Title="ProductCatalog">
+      Title="ProductCatalog" MouseDown="ProductCatalogPanel_MouseDown"> 
 
 
     <Grid Background="#F9F9F9">
@@ -18,7 +18,7 @@
             <ColumnDefinition Width="250"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <ScrollViewer>
-            <StackPanel Grid.Column="0" Orientation="Vertical" Margin="20,70,20,0">
+            <StackPanel x:Name="ProductCatalogPanel" Grid.Column="0" Orientation="Vertical" Margin="20,70,20,20" MouseDown="ProductCatalogPanel_MouseDown">
                 <DockPanel Margin="0,0,0,20">
                     <Image Source="Pictures/search.png" Width="29" Height="29" Margin="0,5,0,0"></Image>
                     <TextBox x:Name="ProductSearch" DockPanel.Dock="Left" BorderBrush="#6E304B" Background="#F9F9F9" Width="191" Height="22" TextChanged="ProductSearch_TextChange" HorizontalContentAlignment="Left" BorderThickness="0,0,0,1" Cursor="Hand"/>
@@ -29,12 +29,12 @@
 
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding ="{Binding Path = ID}" IsReadOnly="True" Header="ID" Width="58" MinWidth="58"/>
-                        <DataGridTextColumn Binding ="{Binding Path = Name}"  IsReadOnly="True" Header="Наименование" Width="103" MinWidth="103"/>
+                        <DataGridTextColumn Binding ="{Binding Path = Name}"  IsReadOnly="True" Header="Наименование" Width="*" MinWidth="103"/>
                         <DataGridTextColumn Binding ="{Binding Path = StockAmount}" IsReadOnly="True" Header="Остаток" Width="82" MinWidth="82"/>
                         <DataGridTextColumn Binding ="{Binding Path = MeasureUnitName}" IsReadOnly="True" Header="Единица измерения" Width="82" MinWidth="82" />
                         <DataGridTextColumn Binding ="{Binding Path = WholesalePrice}" IsReadOnly="True" Header="Цена опт." Width="82" MinWidth="82"/>
                         <DataGridTextColumn Binding ="{Binding Path = RetailPrice}" IsReadOnly="True" Header="Цена розн." Width="82" MinWidth="82"/>
-                        <DataGridTextColumn Binding ="{Binding StringFormat = dd MMMM yyyy, ConverterCulture=ru, Path = LastSupplyDate}" IsReadOnly="True" Header="Дата последней поставки" Width="*" MinWidth="82"/>
+                        <DataGridTextColumn Binding ="{Binding StringFormat = dd MMMM yyyy, ConverterCulture=ru, Path = LastSupplyDate}" IsReadOnly="True" Header="Дата последней поставки" Width="100" MinWidth="100"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
@@ -43,7 +43,7 @@
        
 
         <DockPanel  Grid.Column="1" Margin="0,15,0,0" Width="221">
-            <Button Margin="10,14,10,0" Style="{StaticResource ButtonPotentialClients}" Width="191" DockPanel.Dock="Top" Content="Список потенцеальных&#xA;            клиентов" Height="55" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Click="Button_Click"/>
+            <Button Margin="10,14,10,0" Style="{StaticResource ButtonPotentialClients}" Width="191" DockPanel.Dock="Top" Content="Список потенциальных&#xA;            клиентов" Height="55" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Click="Button_Click"/>
             <StackPanel DockPanel.Dock="Left" Width="4">
                 <Line X1="0" Y1="20" X2="0" Y2="540" Stroke="#6E304B" StrokeThickness="2"/>
             </StackPanel>
@@ -69,11 +69,11 @@
                     <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" FontSize="14">Остаток:</TextBlock>
                     <StackPanel DockPanel.Dock="Right">
                         <TextBlock Margin="30,0,0,0">до</TextBlock>
-                        <TextBox x:Name="ToStockAmount" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" TextAlignment="Center" Width="80" Height="20" TextChanged="ToStockAmount_TextChange"/>
+                        <TextBox x:Name="ToStockAmount" TextWrapping="Wrap" MaxLength="15" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" TextAlignment="Center" Width="80" Height="20" TextChanged="ToStockAmount_TextChange"/>
                     </StackPanel>
                     <StackPanel DockPanel.Dock="Left">
                         <TextBlock Margin="30,0,0,0">от</TextBlock>
-                        <TextBox x:Name="FromStockAmount" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" VerticalContentAlignment="Center" TextAlignment="Center" Height="20" RenderTransformOrigin="0.219,0.561" TextChanged="FromStockAmount_TextChange"/>
+                        <TextBox x:Name="FromStockAmount" TextWrapping="Wrap" MaxLength="15" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" VerticalContentAlignment="Center" TextAlignment="Center" Height="20" RenderTransformOrigin="0.219,0.561" TextChanged="FromStockAmount_TextChange"/>
                     </StackPanel>
                 </DockPanel>
 
@@ -93,7 +93,7 @@
                         </StackPanel>
                         <StackPanel>
                         <TextBlock Margin="30,0,0,0">до</TextBlock>
-                        <TextBox x:Name="ToPrice" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" TextAlignment="Center" Height="20" Width="80" TextChanged="ToPrice_TextChange" IsEnabled="False"/>
+                        <TextBox x:Name="ToPrice" TextWrapping="Wrap" MaxLength="15" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" TextAlignment="Center" Height="20" Width="80" TextChanged="ToPrice_TextChange" IsEnabled="False"/>
                     </StackPanel>
                     
                     </StackPanel>

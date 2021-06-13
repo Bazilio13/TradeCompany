@@ -14,7 +14,14 @@ namespace TradeCompany_DAL.DTOs
         public int ClientID { get; set; }
         public int OrderID { get; set; }
 
-
-
+        public override bool Equals(object obj)
+        {
+            return obj is FeedBacksDTO dTO &&
+                   ID == dTO.ID &&
+                   DateTime == dTO.DateTime &&
+                   Text == dTO.Text &&
+                   ClientID == dTO.ClientID &&
+                   OrderID == dTO.OrderID;
+        }
     }
 }

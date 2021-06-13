@@ -10,5 +10,14 @@ namespace TradeCompany_BLL.Models
     {
         public int ID { get; set; }
         public string Name { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            return obj is WishModel model &&
+                   ID == model.ID &&
+                   Name == model.Name;
+        }
     }
+
+
 }

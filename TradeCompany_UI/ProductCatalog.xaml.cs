@@ -131,7 +131,7 @@ namespace TradeCompany_UI
             {
                 DateTime timeTmp = (DateTime)DateUntil.SelectedDate;
                 timeTmp = timeTmp.AddDays(1);
-                timeTmp = timeTmp.AddMilliseconds(-1);
+                timeTmp = timeTmp.AddMilliseconds(-2);
                 _filtrMaxDateTime = (DateTime?)timeTmp;
             }
             ApplyFilters();
@@ -257,7 +257,10 @@ namespace TradeCompany_UI
             }
             else
             {
-                _uiNavi.GoToThePage(new AddNewProduct(productBaseModel.ID, this));
+                if(!(productBaseModel is null))
+                {
+                    _uiNavi.GoToThePage(new AddNewProduct(productBaseModel.ID, this));
+                }
             }
         }
 
@@ -279,5 +282,14 @@ namespace TradeCompany_UI
             }
         }
 
+        private void ProductCatalogPage_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            dgProductCatalog.UnselectAll();
+        }
+
+        private void ProductCatalogPanel_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            dgProductCatalog.UnselectAll();
+        }
     }
 }

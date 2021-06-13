@@ -13,21 +13,21 @@ namespace TradeCompany_BLL.Models
         public string E_mail { get; set; }
         public string Phone { get; set; }
         public string ContactPerson { get; set; }
-        public DateTime? LastOrderDate { get; set; }
-
-
-        public override bool Equals(object obj)
-        {
-            ClientBaseModel model = (ClientBaseModel)obj;
-            return 
-            ID == model.ID &&
-            Name == model.Name &&
-            E_mail == model.E_mail &&
-            Phone == model.Phone &&
-            ContactPerson == model.ContactPerson &&
-            LastOrderDate == model.LastOrderDate;
-        }
-
+        public DateTime? LastOrderDate { get; set; }
+
+
+        public override bool Equals(object obj)
+        {
+            //ClientBaseModel model = (ClientBaseModel)obj;
+            return obj is ClientBaseModel model &&
+            ID == model.ID &&
+            Name == model.Name &&
+            E_mail == model.E_mail &&
+            Phone == model.Phone &&
+            ContactPerson == model.ContactPerson &&
+            LastOrderDate == model.LastOrderDate;
+        }
+
     }
 
 }

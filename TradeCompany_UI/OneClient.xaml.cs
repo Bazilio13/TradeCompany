@@ -74,7 +74,11 @@ namespace TradeCompany_UI
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            _clientsPage = (Clients)_previosPage;
+            if(!(_previosPage is StatisticsByClients))
+            {
+                _clientsPage = (Clients)_previosPage;
+            } 
+
             MapsDTOtoModel map = new MapsDTOtoModel();
 
             if (_id != -1)
@@ -394,10 +398,12 @@ namespace TradeCompany_UI
                 if (MessageBox.Show("Удалить из каталога?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
                     _clientsData.SoftDeleteClientByID(_id);
+                    MessageBox.Show("Клиент удален", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                    _clientsPage.UpdateDG();
+                    _uiNavi.GoToThePage(_previosPage);
+
                 }
-                MessageBox.Show("Клиент удален", "", MessageBoxButton.OK, MessageBoxImage.Information);
-                _clientsPage.UpdateDG();
-                _uiNavi.GoToThePage(_previosPage);
+
 
             }
             else
