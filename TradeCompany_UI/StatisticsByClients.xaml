@@ -60,22 +60,22 @@
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="0,0,0,30" Width="142">
                     <DockPanel Width="141" Margin="0,0,0,5">
                         <TextBlock DockPanel.Dock="Left" Height="25" Margin="0,5,0,0" TextWrapping="Wrap" Width="19"><Run Language="ru-ru" Text="От"/></TextBlock>
-                        <DatePicker x:Name="DateFromForSupply" HorizontalAlignment="Center" RenderTransformOrigin="0.309,-0.578" Width="110" Height="25" Focusable="False" BorderBrush="#FFF3DFC4" Background="#FFF3DFC4"/>
+                        <DatePicker x:Name="DateFromForSupply" HorizontalAlignment="Center" RenderTransformOrigin="0.309,-0.578" Width="110" Height="25" Focusable="False" BorderBrush="#FFF3DFC4" Background="#FFF3DFC4" SelectedDateChanged="Period_SelectedDateChanged"/>
                     </DockPanel>
                     <DockPanel Width="141" Margin="0,0,0,5">
                         <TextBlock DockPanel.Dock="Left" Height="25" Margin="0,5,0,0" TextWrapping="Wrap" Width="19"><Run Language="ru-ru" Text="До"/></TextBlock>
-                        <DatePicker x:Name="DateUntilForSupply" HorizontalAlignment="Center" RenderTransformOrigin="0.309,-0.578" Width="110" Height="25" Focusable="False" BorderBrush="#FFF3DFC4" Background="#FFF3DFC4"/>
+                        <DatePicker x:Name="DateUntilForSupply" HorizontalAlignment="Center" RenderTransformOrigin="0.309,-0.578" Width="110" Height="25" Focusable="False" BorderBrush="#FFF3DFC4" Background="#FFF3DFC4" SelectedDateChanged="Period_SelectedDateChanged"/>
                     </DockPanel>
                 </StackPanel>
                 <TextBlock HorizontalAlignment="Center" FontSize="14" Margin="0,0,0,11">Дата последнего заказа:</TextBlock>
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="0,0,0,30" Width="142">
                     <DockPanel Width="141" Margin="0,0,0,5">
                         <TextBlock DockPanel.Dock="Left" Height="25" Margin="0,5,0,0" TextWrapping="Wrap" Width="19"><Run Language="ru-ru" Text="От"/></TextBlock>
-                        <DatePicker x:Name="DateFromForOrder" HorizontalAlignment="Center" RenderTransformOrigin="0.309,-0.578" Width="110" Height="25" Focusable="False" BorderBrush="#FFF3DFC4" Background="#FFF3DFC4"/>
+                        <DatePicker x:Name="DateFromForOrder" HorizontalAlignment="Center" RenderTransformOrigin="0.309,-0.578" Width="110" Height="25" Focusable="False" BorderBrush="#FFF3DFC4" Background="#FFF3DFC4" SelectedDateChanged="LastOrderDate_SelectedDateChanged"/>
                     </DockPanel>
                     <DockPanel Width="141" Margin="0,0,0,5">
                         <TextBlock DockPanel.Dock="Left" Height="25" Margin="0,5,0,0" TextWrapping="Wrap" Width="19"><Run Language="ru-ru" Text="До"/></TextBlock>
-                        <DatePicker x:Name="DateUntilForOrder" HorizontalAlignment="Center" RenderTransformOrigin="0.309,-0.578" Width="110" Height="25" Focusable="False" BorderBrush="#FFF3DFC4" Background="#FFF3DFC4"/>
+                        <DatePicker x:Name="DateUntilForOrder" HorizontalAlignment="Center" RenderTransformOrigin="0.309,-0.578" Width="110" Height="25" Focusable="False" BorderBrush="#FFF3DFC4" Background="#FFF3DFC4" SelectedDateChanged="LastOrderDate_SelectedDateChanged"/>
                     </DockPanel>
                 </StackPanel>
                 

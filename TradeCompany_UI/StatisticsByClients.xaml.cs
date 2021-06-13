@@ -58,8 +58,8 @@ namespace TradeCompany_UI
             _filter.MaxAmount = ValidateInput(ToPrice);
             _filter.MaxDateOrder = CorrectMaxDate(DateUntilForOrder.SelectedDate);
             _filter.MinDateOrder = DateFromForOrder.SelectedDate;
-            _filter.PeriodFor = PeriodFrom.SelectedDate;
-            _filter.PeriodUntil = PeriodUntil.SelectedDate;
+            _filter.PeriodFor = DateFromForSupply.SelectedDate;
+            _filter.PeriodUntil = DateUntilForSupply.SelectedDate;
 
         }
 
@@ -196,10 +196,10 @@ namespace TradeCompany_UI
 
         private void Period_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (PeriodFrom.SelectedDate > PeriodUntil.SelectedDate)
+            if (DateFromForSupply.SelectedDate > DateUntilForSupply.SelectedDate)
             {
-                PeriodFrom.SelectedDate = null;
-                PeriodUntil.SelectedDate = null;
+                DateFromForSupply.SelectedDate = null;
+                DateUntilForSupply.SelectedDate = null;
                 MessageBox.Show("Неверный выбор даты");
             }
             ApplyFilters();
@@ -208,7 +208,7 @@ namespace TradeCompany_UI
         private void ButtonDate(int date)
         {
             _filter.PeriodFor = ChangeDateTime(date);
-            PeriodFrom.SelectedDate = _filter.PeriodFor;
+            DateFromForSupply.SelectedDate = _filter.PeriodFor;
 
             _filter.PeriodUntil = CorrectMaxDate(DateTime.Today);
             if (date == 1)
@@ -216,7 +216,7 @@ namespace TradeCompany_UI
                 _filter.PeriodUntil = CorrectMaxDate(ChangeDateTime(date));
             }
 
-            PeriodUntil.SelectedDate = _filter.PeriodUntil;
+            DateUntilForSupply.SelectedDate = _filter.PeriodUntil;
             ApplyFilters();
 
 
@@ -262,8 +262,8 @@ namespace TradeCompany_UI
 
         private void NullifyPeriodCalendars()
         {
-            PeriodFrom.SelectedDate = null;
-            PeriodUntil.SelectedDate = null;
+            DateFromForSupply.SelectedDate = null;
+            DateUntilForSupply.SelectedDate = null;
         }
 
         private void ProductGroupSelect_DropDownClosed(object sender, EventArgs e)

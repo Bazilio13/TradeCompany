@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:TradeCompany_UI"
       mc:Ignorable="d"
       d:DesignHeight="1450"
-      Title="ProductCatalog">
+      Title="ProductCatalog" MouseDown="ProductCatalogPanel_MouseDown"> 
 
 
     <Grid Background="#F9F9F9">
