@@ -28,6 +28,13 @@ namespace TradeCompany_BLL
             FeedBacksDTO feedBacksDTO = _feedbackMaps.MapsFeedbackModelToFeedbackDTO(feedback);
             _feetbacksData.AddFeedback(feedBacksDTO);
         }
+        public List<FeedbackModel> GetFeedbackByOrderID(int orderId)
+        {
+            List<FeedBacksDTO> feedbackDTOs;
+            feedbackDTOs = _feetbacksData.GetFeedbackByOrderID(orderId);
+            List<FeedbackModel> feedbackModels = _map.MapFeedbackDTOToFeedbackModel(feedbackDTOs);
+            return feedbackModels;
+        }
 
     }
 }
