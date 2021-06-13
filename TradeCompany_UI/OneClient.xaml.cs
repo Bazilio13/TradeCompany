@@ -190,6 +190,11 @@ namespace TradeCompany_UI
                 textBoxContactPerson.Background = Brushes.Pink;
                 validation = false;
             }
+            if(_addressesList.Count == 0)
+            {
+                textBoxForWriteAddress.Background = Brushes.Pink;
+                validation = false;
+            }
 
             return validation;
         }
