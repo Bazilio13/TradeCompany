@@ -32,7 +32,7 @@ namespace TradeCompany_BLL
             return clientModel;
         }
 
-        public List<WishModel> MapWishesDTOToWishesModelListByID(List<WishDTO> wishListDTO) 
+        public List<WishModel> MapWishesDTOToWishesModelList(List<WishDTO> wishListDTO) 
         { 
             var config = new MapperConfiguration(cfg => cfg.CreateMap<WishDTO, WishModel>());
             Mapper mapper = new Mapper(config);

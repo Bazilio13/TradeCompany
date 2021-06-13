@@ -1,11 +1,11 @@
 ﻿create PROCEDURE [TradeCompany_DataBase].[GetClientsStatistics]
 AS
-select FirstSet.ID, FirstSet.Name, FirstSet.OrdersСount, SecondSet.TotalAmount, FirstSet.LastOrderDate
+select FirstSet.ID, FirstSet.RegistrationDate, FirstSet.Name, FirstSet.CountOrder, SecondSet.TotalAmount, FirstSet.LastOrderDate
 from
-(select Clients.ID, Clients.Name, count(o.ID) as OrdersСount, MAX(O.DateTime) as LastOrderDate
+(select Clients.ID, Clients.RegistrationDate, Clients.Name, count(o.ID) as CountOrder, MAX(O.DateTime) as LastOrderDate
 from [TradeCompany_DataBase].Clients as Clients
 	left join TradeCompany_DataBase.Orders as O on O.ClientsID = Clients.ID
-	group by Clients.Name, Clients.ID) as FirstSet
+	group by Clients.Name, Clients.ID, Clients.RegistrationDate) as FirstSet
 inner join
 	(select c.ID, c.Name, sum(ol.Price * ol.Amount) as TotalAmount
 	from [TradeCompany_DataBase].[Orders] as O

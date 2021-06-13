@@ -20,6 +20,12 @@ namespace TradeCompany_BLL.Models
         public float? MinSum { get; set; }
         public float? MaxSum { get; set; }
 
+        public int? FromOrdersCount { get; set; }
+        public int? ToOrdersCount { get; set; }
+
+        public byte? Type { get; set; }
+        public int? ID { get; set; }
+
         public FilterGroupModel()
         {
         }
@@ -36,6 +42,10 @@ namespace TradeCompany_BLL.Models
             MaxSum = null;
             PeriodFor = null;
             PeriodUntil = null;
+            FromOrdersCount = null;
+            ToOrdersCount = null;
+            Type = null;
+            //ID = null;
         }
     }
 }

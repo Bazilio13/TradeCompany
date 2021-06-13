@@ -18,7 +18,7 @@
         </Grid.ColumnDefinitions>
 
         <ScrollViewer>
-            <StackPanel Grid.Column="0" Orientation="Vertical" Margin="20,70,20,0">
+            <StackPanel Grid.Column="0" Orientation="Vertical" Margin="20,70,20,20">
                 <DockPanel Margin="0,0,0,20">
                     <Image Source="Pictures/search.png" Width="29" Height="29" Margin="0,5,0,0"></Image>
                     <TextBox x:Name="SearchBox" DockPanel.Dock="Left" BorderBrush="#6E304B" Background="#F9F9F9" Width="191" Height="22" TextChanged="SearchBox_TextChanged" HorizontalContentAlignment="Left" BorderThickness="0,0,0,1" Cursor="Hand"/>
@@ -29,7 +29,7 @@
                 <DataGrid x:Name="dgSupplys" Grid.Row="1" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="True" MouseDoubleClick="dgSupplys_MouseDoubleClick">
                     <DataGrid.Columns >
                         <DataGridTextColumn Binding="{Binding Path=ID}"  Header="ID" Width="30" MinWidth="30"></DataGridTextColumn>
-                        <DataGridTextColumn Binding="{Binding Path=DateTime}" Header="Дата поставки" Width="135" MinWidth="100"></DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Path=DateTime}" Header="Дата поставки" Width="145" MinWidth="145"></DataGridTextColumn>
                         <DataGridTextColumn Binding="{Binding Path=Comment}" Header="Комментарий" Width="*" MinWidth="150"></DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>

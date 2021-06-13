@@ -182,7 +182,60 @@ namespace TradeCompany_DAL
             return clientsStat;
         }
 
+        public List<ClientsStatisticsDTO> GetClientsStatisticsByParams(int? FromCount,  int? OrdersCount, byte? Type, 
+                    DateTime? FromLastOrderDate, DateTime? UntilLastOrderDate, DateTime? MinDate, 
+                    DateTime? MaxDate, float? FromAmount, float? ToAmount)
+        {
+            List<ClientsStatisticsDTO> clientsStat = new List<ClientsStatisticsDTO>();
+            string query = "exec TradeCompany_DataBase.GetClientsStatisticsByParams @FromCount, @OrdersCount, @Type, @FromLastOrderDate, @UntilLastOrderDate, @MinDate, @MaxDate, @FromAmount, @ToAmount";
 
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                clientsStat = dbConnection.Query<ClientsStatisticsDTO>(query, new
+                {
+                    FromCount,
+                    OrdersCount,
+                    Type,
+                    FromLastOrderDate,
+                    UntilLastOrderDate,
+                    MinDate,
+                    MaxDate,
+                    FromAmount,
+                    ToAmount
+                 }
+                    ).AsList<ClientsStatisticsDTO>();
+            }
+
+            return clientsStat;
+        }
+
+        public List<ClientsStatisticsDTO> GetClientsStatisticsByProductGroups(int? ID, DateTime? FromDate, DateTime? UntilDate,
+                    DateTime? FromLastOrder, DateTime? UntilLastOrder, byte? Type,
+                    float? FromAmount, float? ToAmount, int? FromOrdersCount, int? ToOrdersCount)
+        {
+            List<ClientsStatisticsDTO> clientsStat = new List<ClientsStatisticsDTO>();
+            string query = "exec TradeCompany_DataBase.GetClientsStatisticsByAllParams @ID, @FromDate, @UntilDate, @FromLastOrder, @UntilLastOrder, @Type, @FromAmount, @ToAmount, @FromOrdersCount, @ToOrdersCount";
+
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                clientsStat = dbConnection.Query<ClientsStatisticsDTO>(query, new
+                {
+                    ID,
+                    FromDate,
+                    UntilDate,
+                    FromLastOrder,
+                    UntilLastOrder,
+                    Type,
+                    FromAmount,
+                    ToAmount,
+                    FromOrdersCount,
+                    ToOrdersCount
+                }
+                    ).AsList<ClientsStatisticsDTO>();
+            }
+
+            return clientsStat;
+        }
 
     }
 }
