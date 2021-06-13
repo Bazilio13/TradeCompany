@@ -12,9 +12,20 @@ namespace TradeCompany_BLL.DataAccess
 {
     public class SupplysDataAccess
     {
-        private SupplysData _supplysData = new SupplysData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
+        private SupplysDataInterface _supplysData; 
 
         private SupplysMaps _map = new SupplysMaps();
+
+        public SupplysDataAccess()
+        {
+            _supplysData = new SupplysData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
+        }
+
+        public SupplysDataAccess(SupplysDataInterface supplysData)
+        {
+            _supplysData = supplysData;
+        }
+
         public List<SupplyModel> GetSupplyModelsByParams(DateTime? minDateTime = null, DateTime? maxDateTime = null, string product = null, string productGroup = null)
         {
             List<SupplyDTO> supplyDTOs;

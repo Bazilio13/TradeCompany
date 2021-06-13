@@ -10,7 +10,7 @@ using TradeCompany_DAL.DTOs;
 
 namespace TradeCompany_DAL
 {
-    public class SupplysData
+    public class SupplysData : SupplysDataInterface
     {
         public string ConnectionString { get; set; }
         public SupplysData()
