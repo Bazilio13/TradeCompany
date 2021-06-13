@@ -98,6 +98,7 @@ namespace TradeCompany_UI
             ProductGroupSelect.Text = "Выбор категории";
             ProductGroupSelect.SelectedItem = null;
             ApplyFilters();
+            ButtonPicked(sender);
         }
 
         private void ApplyFilters()
@@ -203,6 +204,7 @@ namespace TradeCompany_UI
                 MessageBox.Show("Неверный выбор даты");
             }
             ApplyFilters();
+            ButtonPicked(sender);
         }
 
         private void ButtonDate(int date)
@@ -217,9 +219,7 @@ namespace TradeCompany_UI
             }
 
             DateUntilForSupply.SelectedDate = _filter.PeriodUntil;
-            ApplyFilters();
-
-
+            ApplyFilters();  
         }
 
         private DateTime? ChangeDateTime(int time)
@@ -234,30 +234,35 @@ namespace TradeCompany_UI
         {
             NullifyPeriodCalendars();
             ButtonDate(365);
+            ButtonPicked(sender);
         }
 
         private void HalfYearButtonClick(object sender, RoutedEventArgs e)
         {
             NullifyPeriodCalendars();
             ButtonDate(182);
+            ButtonPicked(sender);
         }
 
         private void MonthButtonClick(object sender, RoutedEventArgs e)
         {
             NullifyPeriodCalendars();
             ButtonDate(31);
+            ButtonPicked(sender);
         }
 
         private void YesterdayButtonClick(object sender, RoutedEventArgs e)
         {
             NullifyPeriodCalendars();
             ButtonDate(1);
+            ButtonPicked(sender);
         }
 
         private void TodayButtonClick(object sender, RoutedEventArgs e)
         {
             NullifyPeriodCalendars();
             ButtonDate(0);
+            ButtonPicked(sender);
         }
 
         private void NullifyPeriodCalendars()
@@ -293,6 +298,38 @@ namespace TradeCompany_UI
             {
                 _uiNavi.GoToThePage(new OneClient(statModel.ID, this));
             }
+        }
+
+        private void ButtonPicked(object sender)
+        {
+            TodayButton.Style = (Style)TodayButton.FindResource("ResetButtonStyle");
+            YesterdayButton.Style = (Style)YesterdayButton.FindResource("ResetButtonStyle");
+            MonthButton.Style = (Style)MonthButton.FindResource("ResetButtonStyle");
+            HalfYearButton.Style = (Style)HalfYearButton.FindResource("ResetButtonStyle");
+            OneYearButton.Style = (Style)OneYearButton.FindResource("ResetButtonStyle");
+
+
+            if (sender == TodayButton)
+            {
+                TodayButton.Style = (Style)TodayButton.FindResource("StatButton");
+            }
+            if (sender == YesterdayButton)
+            {
+                YesterdayButton.Style = (Style)YesterdayButton.FindResource("StatButton");
+            }
+            if (sender == MonthButton)
+            {
+                MonthButton.Style = (Style)MonthButton.FindResource("StatButton");
+            }
+            if (sender == HalfYearButton)
+            {
+                HalfYearButton.Style = (Style)HalfYearButton.FindResource("StatButton");
+            }
+            if (sender == OneYearButton)
+            {
+                OneYearButton.Style = (Style)OneYearButton.FindResource("StatButton");
+            }
+
         }
     }
 }
