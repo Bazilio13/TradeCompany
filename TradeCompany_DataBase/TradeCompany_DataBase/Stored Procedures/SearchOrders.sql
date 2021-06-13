@@ -11,8 +11,9 @@ AS
 	left join [TradeCompany_DataBase].MeasureUnits as M on m.ID = P.MeasureUnit
 	left join [TradeCompany_DataBase].Addresses as A on o.AddressID = A.ID
 	Where 
-	c.Name LIKE '%'+@Str+'%' or
+	O.IsDeleted = 0 and
+	(c.Name LIKE '%'+@Str+'%' or
 	o.Comment LIKE '%'+@Str+'%' or
 	concat (o.ID,'') LIKE '%'+@Str+'%' or
-	a.Address LIKE '%'+@Str+'%'
+	a.Address LIKE '%'+@Str+'%')
 	order by o.DateTime desc, o.ID desc

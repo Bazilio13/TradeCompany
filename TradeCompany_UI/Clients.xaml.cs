@@ -27,14 +27,24 @@ namespace TradeCompany_UI
         private UINavi _uiNavi;
 
         private ClientsDataAccess _clientsData;
+        private UINavi _uiNavi;
+        private Page _previosPage;
 
         public Clients(Page previosPage = null)
         {
             InitializeComponent();
+            InitializeComponent();
+            _uiNavi = UINavi.GetUINavi();
+            _previosPage = previosPage;
             _clientsData = new ClientsDataAccess();
             dgClientsTable.ItemsSource = _clientsData.GetClients();
             _uiNavi = UINavi.GetUINavi();
             _previosPage = previosPage;
+        }
+        public void UpdateDG()
+        {
+            dgClientsTable.ItemsSource = _clientsData.GetClients();
+
         }
 
         private void Border_Loaded(object sender, RoutedEventArgs e)
@@ -110,7 +120,7 @@ namespace TradeCompany_UI
             CheckBoxOpt.IsChecked = false;
             CheckBoxRetail.IsChecked = false;
             MinDate.SelectedDate = null;
-            MinDate.SelectedDate = null;
+            MaxDate.SelectedDate = null;
             ClientsFiltr(sender, e);
         }
         private void AddNewClient(object sender, RoutedEventArgs e)
@@ -134,9 +144,15 @@ namespace TradeCompany_UI
                 if (item != null)
                 {
                     int id = item.ID;
-                    frame.Content = new OneClient(id);
+                _uiNavi.GoToThePage(new OneClient(id, this));
                 }
             }
+            
+        }
+
+        private void AddNewClient(object sender, RoutedEventArgs e)
+        {
+            _uiNavi.GoToThePage(new OneClient(this));
         }
     }
 }

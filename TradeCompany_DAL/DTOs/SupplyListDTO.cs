@@ -13,5 +13,28 @@ namespace TradeCompany_DAL.DTOs
         public int ProductID { get; set; }
         public float Amount { get; set; }
         public ProductDTO productDTO { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            bool result = true;
+            if (obj is SupplyListDTO dTO)
+            {
+                if (productDTO is null || dTO.productDTO is null)
+                {
+                    result = productDTO == dTO.productDTO;
+                }
+                else
+                {
+                    result = productDTO.Equals(dTO.productDTO);
+                }
+
+                return result &&
+                       ID == dTO.ID &&
+                       SupplyID == dTO.SupplyID &&
+                       ProductID == dTO.ProductID &&
+                       Amount == dTO.Amount;
+            }
+            return false;
+        }
     }
 }

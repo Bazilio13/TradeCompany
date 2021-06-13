@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>TradeCompany_DataBase</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{433e903b-e651-4ea9-b5f2-238437442a20}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath />
+    <RootNamespace>TradeCompany_DataBase</RootNamespace>
+    <AssemblyName>TradeCompany_DataBase</AssemblyName>
+    <ModelCollation>1049,CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <DefaultCollation>Cyrillic_General_CI_AS</DefaultCollation>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+    <IncludeSchemaNameInFileName>False</IncludeSchemaNameInFileName>
+    <DefaultSchema>TradeCompany_DataBase</DefaultSchema>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="TradeCompany_DataBase\" />
+    <Folder Include="TradeCompany_DataBase\Tables\" />
+    <Folder Include="TradeCompany_DataBase\Stored Procedures\" />
+    <Folder Include="Security\" />
+    <Folder Include="TradeCompany_DataBase\Functions" />
+    <Folder Include="TradeCompany_DataBase\Functions\Table-valued Functions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="TradeCompany_DataBase\Tables\Addresses.sql" />
+    <Build Include="TradeCompany_DataBase\Tables\Clients.sql" />
+    <Build Include="TradeCompany_DataBase\Tables\FeedBacks.sql" />
+    <Build Include="TradeCompany_DataBase\Tables\MeasureUnits.sql" />
+    <Build Include="TradeCompany_DataBase\Tables\OrderLists.sql" />
+    <Build Include="TradeCompany_DataBase\Tables\Orders.sql" />
+    <Build Include="TradeCompany_DataBase\Tables\ProductGroups.sql" />
+    <Build Include="TradeCompany_DataBase\Tables\Products.sql" />
+    <Build Include="TradeCompany_DataBase\Tables\Supplies.sql" />
+    <Build Include="TradeCompany_DataBase\Tables\SupplyLists.sql" />
+    <Build Include="TradeCompany_DataBase\Tables\Wishes.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\AddOrder.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\AddOrderList.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\DeleteOrderByID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\DeleteOrderListByID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetOrders.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetOrdersByID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetOrdersByParams.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\UpdateOrder.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\UpdateOrderListByID.sql" />
+    <Build Include="Security\TradeCompany_DataBase.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetClientByID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetClients.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\UpdateClientByID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\DeleteClientByID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\AddClient.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\AddProduct.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\AddProductGroup.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\AddProductToProductGroup.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\DeleteProductGroupByID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetProductByID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetProductGroupByID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetProductGroups.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetProducts.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\UpdateProductByID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\UpdateProductGroupByID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetProductByLetter.sql" />
+    <Build Include="TradeCompany_DataBase\Tables\Product_ProductGroups.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetClientsByName.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\AddFeedback.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\DeleteAllFeedbacksByClientId.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\DeleteFeedbackById.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\DeleteFeedbackByOrderID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetFeedbackByID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\AddSupply.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\DeleteSupplyByID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetSupplies.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetSupplyByID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\UpdateSupplyByID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\AddSupplyList.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetAllAddresses.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\AddAddress.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\DeleteAddressByIDAndAddress.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetAddressesByClientID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\UpdateFeedBackById.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\AddProduct.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\AddProductGroup.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\AddProductToProductGroup.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\DeleteGroupFromProduct.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\DeleteProductByID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\DeleteProductGroupByID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetProductByID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetProductByLetter.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetProductGroupByID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetProductGroups.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetProducts.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\UpdateProductByID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\UpdateProductGroupByID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetProductsByOrderId.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\SearchOrders.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetProductsByAllParams.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetSypplysByParams.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\SearchSupplys.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\DeleteSupplyListsBySupplyID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetAllMeasureUnits.sql" />
+    <Build Include="TradeCompany_DataBase\Functions\Table-valued Functions\Iter_intlist_to_table.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetPotentialClientsByProductsIDs.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\SoftDeleteProductByID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetLastProductID.sql" />
+<<<<<<< HEAD
+    <Build Include="TradeCompany_DataBase\Stored Procedures\ReduceProductAmountInStockByID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetFeedbackByOrderID.sql" />
+=======
+    <Build Include="TradeCompany_DataBase\Stored Procedures\SetAddressIsDeleted.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetAddressIsDeleted.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetAddresses.sql" />
+    <Build Include="TradeCompany_DataBase\UpdateAddressByIsDeleted.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetAllAddressesByClientID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\SoftDeleteOrderByID.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\UpdateProductStockBySupplyID_Plus.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\UpdateProductStockBySupplyID_Minus.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\UpdateProductLastSupplyDate.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\UpdateProductLastSupplyDateWhenDeleteSupply.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetClientsStatistics.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetClientsStatisticsByAllParams.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\GetClientsStatisticsByParams.sql" />
+>>>>>>> main
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="TradeCompany_DataBase.refactorlog" />
+  </ItemGroup>
+</Project>

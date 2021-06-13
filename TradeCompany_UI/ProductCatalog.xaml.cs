@@ -48,7 +48,7 @@ namespace TradeCompany_UI
             List<ProductGroupModel> allGroups = _products.GetAllGroups();
             ProductGroupSelect.ItemsSource = allGroups;
             ProductGroupSelect.DisplayMemberPath = "Name";
-            ProductGroupSelect.Text = "";
+            ProductGroupSelect.Text = "Выбор категории";
         }
 
         private void ProductSearch_TextChange(object sender, TextChangedEventArgs e)
@@ -144,20 +144,10 @@ namespace TradeCompany_UI
             RadioButtonRetailPrice.IsChecked = false;
             RadioButtonWholesalePrice.IsChecked = false;
             PricesTextBoxesEnabled(false);
-            ProductSearch.Text = "";
-            ProductGroupSelect.Text = "";
+            ProductGroupSelect.Text = "Выбор категории";
             DateFrom.SelectedDate = null;
             DateUntil.SelectedDate = null;
-            _filtrByText = null;
             _filtrByGategory = null;
-            _filtrFromStockAmount = null;
-            _filtrToStockAmount = null;
-            _filtrFromWholesalePrice = null;
-            _filtrToWholesalePrice = null;
-            _filtrFromRetailPrice = null;
-            _filtrToRetailPrice = null;
-            _filtrMinDateTime = null;
-            _filtrMaxDateTime = null;
             dgProductCatalog.ItemsSource = _products.GetAllProducts();
         }
 
@@ -195,9 +185,6 @@ namespace TradeCompany_UI
                         MessageBox.Show("Неверный ввод");
                     }
                 }
-                //float tmp = filtr;
-                //if(float.IsInfinity(filtr))
-
                 return filtr;
             }
 
@@ -263,7 +250,7 @@ namespace TradeCompany_UI
             if (_previosPage is IProductAddable)
             {
                 IProductAddable productAddable = (IProductAddable)_previosPage;
-                
+                productAddable.AddProductToCollection(productBaseModel);
                 productAddable.AddProductToCollection(productBaseModel);
                 _uiNavi.GoToThePage(_previosPage);
             }

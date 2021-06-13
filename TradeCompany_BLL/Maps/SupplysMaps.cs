@@ -1,9 +1,5 @@
 ﻿using AutoMapper;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TradeCompany_BLL.Models;
 using TradeCompany_DAL.DTOs;
 
@@ -48,7 +44,7 @@ namespace TradeCompany_BLL.SypplysMaps
         public List<SupplyListDTO> MapsSupplyListModelsToSupplyListDTOs(List<SupplyListModel> supplyModels, int supplyID)
         {
             var config = new MapperConfiguration(cfg => cfg.CreateMap<SupplyListModel, SupplyListDTO>()
-            .ForMember(dest => dest.ID, option => option.MapFrom(sorse => supplyID)));
+            .ForMember(dest => dest.SupplyID, option => option.MapFrom(sorse => supplyID)));
             Mapper mapper = new Mapper(config);
             List<SupplyListDTO> supplyDTOs;
             supplyDTOs = mapper.Map<List<SupplyListDTO>>(supplyModels);

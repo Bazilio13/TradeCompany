@@ -19,9 +19,9 @@
             <DatePicker x:Name="SupplysDate" Margin="0,0,0,0" VerticalAlignment="Top" Height="25" Width="110" SelectedDateChanged="SupplysDate_SelectedDateChanged"/>
         </StackPanel>
         <Button Name="PotentialClients" Content="Список потенциальных клиентов" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Height="34" Width="280" Click="PotentialClients_Click"/>
-        <Button x:Name="AddProduct" Content="Добавить существующий товар" HorizontalAlignment="Right" Margin="0,58,241,0" VerticalAlignment="Top" Height="34" Width="280" Click="AddProduct_Click"/>
-        <Button x:Name="AddNewProduct" Content="Добавить новый товар" Margin="0,10,313,0" VerticalAlignment="Top" Height="34" Click="AddNewProduct_Click" HorizontalAlignment="Right" Width="208"/>
+        <Button x:Name="AddProduct" Content="Добавить товар" HorizontalAlignment="Right" Margin="0,58,181,0" VerticalAlignment="Top" Height="34" Width="180" Click="AddProduct_Click"/>
         <Button x:Name="Save" Content="Сохранить" Margin="10,0,0,71" VerticalAlignment="Bottom" Height="34" Click="Save_Click" HorizontalAlignment="Left" Width="190"/>
+        <Button x:Name="Cancel" Content="Отменить" Margin="220,0,0,71" VerticalAlignment="Bottom" Height="34" HorizontalAlignment="Left" Width="190" Click="Cancel_Click"/>
         <Button x:Name="DeleteSupply" Content="Удалить поставку" Margin="10,0,0,23" VerticalAlignment="Bottom" Height="34" HorizontalAlignment="Left" Width="190" Click="DeleteSupply_Click"/>
         <DataGrid x:Name="dgSupplyList" Grid.Row="1" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" MouseDoubleClick="dgSupplyList_MouseDoubleClick" CellEditEnding="dgSupplyList_CellEditEnding">
             <DataGrid.Columns >

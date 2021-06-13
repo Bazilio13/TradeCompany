@@ -57,7 +57,6 @@ namespace TradeCompany_UI
             _currentProduct = _productsData.GetProductByID(_id);
             _currentProductID = _id;
             PageTitle.Text = "Информация о товаре";
-            Button_Save.Content = "Изменить";
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -216,9 +215,6 @@ namespace TradeCompany_UI
         private void CreateCategoryButton_Click(object sender, RoutedEventArgs e)
         {
             AddNewCategoryWindow addNewCategoryWindow = new AddNewCategoryWindow();
-            //вынести в само окно
-            addNewCategoryWindow.Owner = _uiNavi.MainWindow;
-            addNewCategoryWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
 
             if (addNewCategoryWindow.ShowDialog() == true)
             {
@@ -247,7 +243,7 @@ namespace TradeCompany_UI
             {
                 if (ChosenCategories.Text.Contains(selectedItem.Name))
                 {
-                    MessageBox.Show($"Категория \"{selectedItem.Name}\" уже выбрана", "", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show($"Категория \"{selectedItem.Name}\" уже выбрана", "", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.None, MessageBoxOptions.DefaultDesktopOnly);
                     Category.Text = "";
                     return;
                 }
@@ -309,7 +305,7 @@ namespace TradeCompany_UI
             }
         }
 
-        //рефактор вместе с cancel button
+
         private bool CheckingFieldsForData()
         {
             bool IsValid = true;

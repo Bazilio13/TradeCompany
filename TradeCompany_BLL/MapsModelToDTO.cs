@@ -31,14 +31,7 @@ namespace TradeCompany_BLL
             return wishListDTO;
         }
 
-        public void MapAddressesListModelToAddressesListDTO(List<String> addressesList, int id)
-        {
-            AddressesData data = new AddressesData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
-            foreach (String address in addressesList)
-            {
-                data.AddAddress(id, address);
-            }
-        }
+
         public List<OrderListsDTO> MapOrderListModelToOrderDTO(List<OrderListModel> orderListModels)
         {
             var config = new MapperConfiguration(cfg => cfg.CreateMap<OrderListModel , OrderListsDTO>()
