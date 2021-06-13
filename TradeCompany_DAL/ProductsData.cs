@@ -149,6 +149,40 @@ namespace TradeCompany_DAL
             }
             return output;
         }
+        public List<ProductDTO> GetProductsByLetter(string inputString)
+        {
+            List<ProductDTO> products = new List<ProductDTO>();
+            string query;
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                query = "exec TradeCompany_DataBase.GetProductByLetter @InputString";
+                dbConnection.Query<ProductDTO, ProductGroupDTO, ProductDTO>(query,
+                    (product, group) =>
+                    {
+                        ProductDTO crntProduct = null;
+                        foreach (var p in products)
+                        {
+                            if (p.ID == product.ID)
+                            {
+                                crntProduct = p;
+                                break;
+                            }
+                        }
+                        if (crntProduct is null)
+                        {
+                            crntProduct = product;
+                            products.Add(crntProduct);
+                        }
+                        if (!(group is null))
+                        {
+                            crntProduct.Group.Add(group);
+                        }
+                        return crntProduct;
+                    }, new { inputString },
+                    splitOn: "ID");
+            }
+            return products;
+        }
 
         public void DeleteProductByID(int id)
         {
@@ -240,6 +274,16 @@ namespace TradeCompany_DAL
                 measureUnits = dbConnection.Query<MeasureUnitsDTO>(query).AsList<MeasureUnitsDTO>();
             }
             return measureUnits;
+        }
+        public void ReduceProductAmountInStockByID(int id , int amount)
+        {
+            string query;
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                query = "exec [TradeCompany_DataBase].[ReduceProductAmountInStockByID] @id , @amount";
+                dbConnection.Query(query, new { id , amount });
+            }
+
         }
     }
 }

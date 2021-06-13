@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TradeCompany_UI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="768" Width="1024">
+        Title="MainWindow" Height="768" Width="1366">
 
     <Grid Background="#F9F9F9">
         <Grid.ColumnDefinitions>
@@ -52,14 +52,7 @@
                         <Image Style="{StaticResource ButtonNavigationIcons}" Source="Pictures/stats.png"/>
                         <TextBlock Style="{StaticResource ButtonNavigationText}">Статистика</TextBlock>
                     </StackPanel>
-                </Button>
-
-                <Button x:Name="SettingsButton" Style="{StaticResource ButtonNavigation}">
-                    <StackPanel Height="75" Width="105" Orientation="Vertical">
-                        <Image Style="{StaticResource ButtonNavigationIcons}" Source="Pictures/settings.png"/>
-                        <TextBlock Style="{StaticResource ButtonNavigationText}">Настройки</TextBlock>
-                    </StackPanel>
-                </Button>
+                </Button>                
             </StackPanel>
             <StackPanel DockPanel.Dock="Right" Width="4">
                 <Line X1="0" Y1="80" X2="0" Y2="600" Stroke="#6E304B" StrokeThickness="2"/>

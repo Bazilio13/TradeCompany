@@ -117,7 +117,19 @@ namespace TradeCompany_DAL
 
             return result;
         }
+        
+        public List<FeedBacksDTO> GetFeedbackByOrderID(int orderId)
+        {
+            string query;
+            List<FeedBacksDTO> result = new List<FeedBacksDTO>();
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                query = "exec [TradeCompany_DataBase].[GetFeedbackByOrderID] @OrderID";
+                result = dbConnection.Query<FeedBacksDTO>(query, new { orderId }).AsList<FeedBacksDTO>();
+            }
 
+            return result;
+        }
 
 
     }

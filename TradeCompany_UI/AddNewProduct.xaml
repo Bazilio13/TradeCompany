@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TradeCompany_UI"
       mc:Ignorable="d"
-      d:DesignHeight="450"
+      d:DesignHeight="650"
       Title="AddNewProduct" Loaded="Page_Loaded">
     <ScrollViewer>
         <Grid Background="#F9F9F9"  HorizontalAlignment="Center" Margin="20,70,20,0" >
@@ -25,13 +25,13 @@
             <TextBlock HorizontalAlignment="Left" Margin="51,89,0,0" Text="Наименование*" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.543,0.551" FontSize="16" Height="21" Width="135"/>
             <TextBlock HorizontalAlignment="Left" Margin="51,135,0,0" Text="Категория*" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.541,0.711" FontSize="16" Height="21" Width="92"/>
             <TextBlock HorizontalAlignment="Left" Margin="51,183,0,0" Text="Выбранные категории" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.541,0.711" FontSize="16" Height="21" Width="227"/>
-            <Button x:Name="ChangeCategoriesButton"  ToolTip="Изменить" HorizontalAlignment="Left" Margin="550,205,0,0" VerticalAlignment="Top" Height="25" Width="64" FontWeight="Bold" Click="ChangeCategoriesButton_Click">
-                <Image Source="Pictures/details.png" Width="13" Height="13"/>
+            <Button x:Name="ChangeCategoriesButton" Style="{StaticResource detailsButton}"  ToolTip="Изменить" HorizontalAlignment="Left" Margin="579,200,0,0" VerticalAlignment="Top"  FontWeight="Bold" Click="ChangeCategoriesButton_Click">
+                <Image Source="Pictures/details.png" Width="29" Height="29"/>
             </Button>
             <Button x:Name="CreateCategoryButton" Content="Создать" ToolTip="Создать новую категорию" HorizontalAlignment="Left" Margin="499,155,0,0" VerticalAlignment="Top" Height="33" Width="115" FontWeight="Bold" Background="#FFE8E4E4" RenderTransformOrigin="0.669,0.68" Click="CreateCategoryButton_Click" FontSize="10" VerticalContentAlignment="Top"/>
             <TextBlock x:Name="DateText" HorizontalAlignment="Left" Margin="344,42,0,0" Text="Дата последней поставки" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Height="21" Width="198"/>
             <TextBox x:Name="CreationDate" HorizontalAlignment="Left" Margin="344,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="270" SelectionOpacity="1" FontSize="16" IsEnabled="False" Height="25"/>
-            <TextBox x:Name="ChosenCategories" HorizontalAlignment="Left" Margin="51,205,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="481" SelectionOpacity="1" FontSize="16" Height="Auto" IsEnabled="False" Text="Не выбрано" FontStyle="Normal" FontWeight="Normal"/>
+            <TextBox x:Name="ChosenCategories" HorizontalAlignment="Left" Margin="51,205,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="519" SelectionOpacity="1" FontSize="16" Height="Auto" IsEnabled="False" Text="Не выбрано" FontStyle="Normal" FontWeight="Normal"/>
 
             <TextBox x:Name="Text_RetailPrice" Grid.Row="1" MaxLength="9" HorizontalAlignment="Left" Margin="51,21,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="270" SelectionOpacity="1" FontSize="16" Height="25" TextChanged="Text_RetailPrice_TextChanged"/>
             <TextBox x:Name="Text_WholesalePrice" Grid.Row="1" MaxLength="9" HorizontalAlignment="Left" Margin="344,21,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="270" SelectionOpacity="1" FontSize="16" Height="25" TextChanged="Text_WholesalePrice_TextChanged"/>

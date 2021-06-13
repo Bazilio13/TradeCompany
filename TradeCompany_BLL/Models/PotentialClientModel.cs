@@ -72,5 +72,28 @@ namespace TradeCompany_BLL.Models
             return sizes;
         }
 
+        public override bool Equals(object obj)
+        {
+            bool result = true;
+            if (obj is PotentialClientModel model && Products.Count == model.Products.Count)
+            {
+                for (int i = 0; i < Products.Count; i++)
+                {
+                    if (!Products[i].Equals(model.Products[i]))
+                    {
+                        result = false;
+                    }
+                }
+                return result &&
+                   ID == model.ID &&
+                   ClientName == model.ClientName &&
+                   E_mail == model.E_mail &&
+                   Phone == model.Phone &&
+                   ContactPerson == model.ContactPerson &&
+                   Type == model.Type &&
+                   LastOrderDate == model.LastOrderDate;
+            }
+            return false;
+        }
     }
 }

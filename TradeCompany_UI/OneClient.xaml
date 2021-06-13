@@ -5,85 +5,87 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TradeCompany_UI"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="1450" d:DesignWidth="800"
       Title="OneClient" Loaded="Page_Loaded">
+    <ScrollViewer>
+        <Grid Background="#F9F9F9" Margin="0,0,0,0" >
+            <StackPanel>
+                <StackPanel x:Name="Panel" Width="500" Margin="0,52,0,0">
+                    <TextBlock FontWeight="Bold" FontSize="18" Text="Карточка клиента" HorizontalAlignment="Center"/>
+                    <TextBlock x:Name="TBRegistrarionDate" Text="Дата регистрации" HorizontalAlignment="Center"/>
 
-    <Grid Background="#F9F9F9" Margin="0,0,0,-227" >
-        <StackPanel x:Name="Panel" Width="500" Margin="0,52,0,0" >
-            <TextBlock Text="Карточка клиента" HorizontalAlignment="Center"/>
-            <TextBlock x:Name="TBRegistrarionDate" Text="Дата регистрации" HorizontalAlignment="Center"/>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition ></RowDefinition>
+                            <RowDefinition ></RowDefinition>
+                        </Grid.RowDefinitions>
 
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition ></RowDefinition>
-                    <RowDefinition ></RowDefinition>
-                </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"></ColumnDefinition>
+                            <ColumnDefinition Width="100"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <WrapPanel Grid.Row="0" Grid.Column="1" Margin="0,7,-300,0" Grid.RowSpan="2">
+                            <RadioButton x:Name="RadioButtonTypePersonF" Content="Физическое лицо" Margin="0,0,30,0"/>
+                            <RadioButton x:Name="RadioButtonTypePersonU" Content="Юридическое лицо"/>
+                        </WrapPanel>
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100"></ColumnDefinition>
-                    <ColumnDefinition Width="100"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <WrapPanel Grid.Row="0" Grid.Column="1" Margin="0,7,-300,0" Grid.RowSpan="2">
-                    <RadioButton x:Name="RadioButtonTypePersonF" Content="Физическое лицо" Margin="0,0,30,0"/>
-                    <RadioButton x:Name="RadioButtonTypePersonU" Content="Юридическое лицо"/>
-                </WrapPanel>
+                        <WrapPanel Grid.Column ="1" Margin="0,28,-300,0" Grid.Row="1">
+                            <RadioButton x:Name="RadioButtonTypeBayR" Content="Розница" Margin="0,0,30,0"/>
+                            <RadioButton x:Name="RadioButtonTypeBayO" Content="Опт"/>
+                        </WrapPanel>
 
-                <WrapPanel Grid.Column ="1" Margin="0,28,-300,0" Grid.Row="1">
-                    <RadioButton x:Name="RadioButtonTypeBayR" Content="Розница" Margin="0,0,30,0"/>
-                    <RadioButton x:Name="RadioButtonTypeBayO" Content="Опт"/>
-                </WrapPanel>
+                        <StackPanel Grid.Row="0" Grid.RowSpan="2">
+                            <Label Content="Тип клиента"/>
+                            <Label Content="Тип заказа"/>
+                        </StackPanel>
 
-                <StackPanel Grid.Row="0" Grid.RowSpan="2">
-                    <Label Content="Тип клиента"/>
-                    <Label Content="Тип заказа"/>
+                    </Grid>
+
+                    <Label Content="ФИО/Название*" FontSize="9" Margin="0,4,0,0"/>
+                    <TextBox Name="textBoxName" MaxLength="255" HorizontalAlignment="center"  TextWrapping="Wrap" VerticalAlignment="Top" Width="500" Height="21" AutomationProperties.HelpText="ФИО/Название*" Margin="0,-5,0,3" PreviewMouseDown="Focus" />
+                    <Label Content="ИНН" FontSize="9" Margin="0,0,0,0"/>
+                    <TextBox Name ="textBoxINN" MaxLength="100" HorizontalAlignment="center" TextWrapping="Wrap" VerticalAlignment="Top" Width="500" Height="21" Margin="0,-5,0,0" PreviewTextInput="ValidationByINN"/>
+                    <Label Content="Номер телефона*" FontSize="9"/>
+                    <Label Content="Email" FontSize="9" Margin="0,-28,200,10" HorizontalAlignment="Right"/>
+                    <TextBox x:Name ="textBoxPhone"  MaxLength="30" TextWrapping="Wrap" Width="245" Height="21" HorizontalAlignment="Left" PreviewMouseDown="Focus" PreviewTextInput="ValidationByNumber" Margin="0,-12,0,3" />
+                    <TextBox x:Name ="textBoxE_mail"  MaxLength="100" TextWrapping="Wrap" Width="245" Height="21" VerticalAlignment="Stretch" Margin="0,-29,0,-1" HorizontalAlignment="Right"/>
+                    <Label Content="Контактное лицо*" FontSize="9"/>
+                    <TextBox Name ="textBoxContactPerson" MaxLength="255" HorizontalAlignment="center"  TextWrapping="Wrap" VerticalAlignment="Top" Width="500" Height="30" Margin="0,-5,0,3" PreviewMouseDown="Focus"/>
+                    <Label Content="Адреса" FontSize="9"/>
+                    <StackPanel Name="stackPanelAddresses" VerticalAlignment="Top" Margin="0,-5,0,3">
+                        <TextBox Name ="textBoxForWriteAddress" HorizontalAlignment="Left" MaxLength="255" TextWrapping="Wrap" Width="371" Height="21" Margin="0,0,0,0" />
+                        <Button x:Name="buttonAddAddress" HorizontalAlignment="Right" Content="Добавить адрес" Width="118" Height="32" Margin="0,-27,0,5" Click="buttonAddAddress_Click" VerticalContentAlignment="Bottom"/>
+                    </StackPanel>
+                    <Label Content="Комментарий" FontSize="9" Margin="0,0,0,0"/>
+                    <TextBox Name ="textBoxComments" HorizontalAlignment="center" MaxLength="1500" TextWrapping="Wrap" VerticalAlignment="Top" Width="500" MinHeight="21" Margin="0,-5,0,3"/>
+                    <ComboBox x:Name="cbWish" Text="Интересующие товары"  StaysOpenOnEdit="True"  IsEditable="True" SelectionChanged="clicNewWishProduct" DisplayMemberPath="Name" Margin="0,10,0,10" Width="500" />
+
+                    <WrapPanel x:Name ="WPWish" HorizontalAlignment="Center"/>
                 </StackPanel>
+                <StackPanel>
+                <Button x:Name="ButtonFeedback" Content="Отзывы" Click="VisibilityFeedback" Margin="0,10,0,0" Width="500" />
 
-            </Grid>
+                <WrapPanel x:Name="SPFeedbackPanel" Visibility="Collapsed" HorizontalAlignment="Center"></WrapPanel>
 
-            <Label Content="ФИО/Название*" FontSize="9" Margin="0,4,0,0"/>
-            <TextBox Name="textBoxName" MaxLength="255" HorizontalAlignment="center"  TextWrapping="Wrap" VerticalAlignment="Top" Width="500" Height="21" AutomationProperties.HelpText="ФИО/Название*" Margin="0,-5,0,3" PreviewMouseDown="Focus" />
-            <Label Content="ИНН" FontSize="9" Margin="0,0,0,0"/>
-            <TextBox Name ="textBoxINN" MaxLength="100" HorizontalAlignment="center" TextWrapping="Wrap" VerticalAlignment="Top" Width="500" Height="21" Margin="0,-5,0,0" PreviewTextInput="ValidationByINN"/>
-            <Label Content="Номер телефона*" FontSize="9"/>
-            <Label Content="Email" FontSize="9" Margin="0,-28,200,10" HorizontalAlignment="Right"/>
-            <TextBox x:Name ="textBoxPhone"  MaxLength="30" TextWrapping="Wrap" Width="245" Height="21" HorizontalAlignment="Left" PreviewMouseDown="Focus" PreviewTextInput="ValidationByNumber" Margin="0,-12,0,3" />
-            <TextBox x:Name ="textBoxE_mail"  MaxLength="100" TextWrapping="Wrap" Width="245" Height="21" VerticalAlignment="Stretch" Margin="0,-29,0,-1" HorizontalAlignment="Right"/>
-            <Label Content="Контактное лицо*" FontSize="9"/>
-            <TextBox Name ="textBoxContactPerson" MaxLength="255" HorizontalAlignment="center"  TextWrapping="Wrap" VerticalAlignment="Top" Width="500" Height="30" Margin="0,-5,0,3" PreviewMouseDown="Focus"/>
-            <Label Content="Адреса" FontSize="9"/>
-            <StackPanel Name="stackPanelAddresses" VerticalAlignment="Top" Margin="0,-5,0,3">
-                <TextBox HorizontalAlignment="Left" MaxLength="255" TextWrapping="Wrap" Width="371" Height="21" Margin="0,0,0,0" />
-                <Button x:Name="buttonAddAddress" HorizontalAlignment="Right" Content="Добавить адрес" Width="118" Height="32" Margin="0,-27,0,5" Click="buttonAddAddress_Click" VerticalContentAlignment="Bottom"/>
+                <Button x:Name="ButtonStory" Content="История заказов" Click="VisibilityStory" Margin="0,10,0,10" Width="500" />
+                <DataGrid x:Name="dgOrdersTable"  Visibility="Collapsed" FontSize="16"  AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" Grid.Row="1" SelectionMode="Single" Margin="20,0,20,20" >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding ="{Binding Path = ID}"  IsReadOnly="True" Header="id" Width="40"/>
+                        <DataGridTextColumn Binding ="{Binding Path = Address}"  IsReadOnly="True" Header="Адрес" Width="200"/>
+                        <DataGridTextColumn Binding ="{Binding Path = Summ}"  IsReadOnly="True" Header="Сумма" Width="200"/>
+                        <DataGridTextColumn Binding ="{Binding Path = DateTime}" IsReadOnly="True" Header="Дата" Width="200"/>
+                        <DataGridTextColumn Binding ="{Binding Path = Comment}" IsReadOnly="True" Header="Комментарий" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+
+                <WrapPanel HorizontalAlignment="Center" Margin="0,0,0,10">
+                    <Button x:Name="ButtonExit" Content="Назад" Margin="0,0,60,0" VerticalAlignment="Top" Height="33" IsCancel="True" Click="Exit" HorizontalAlignment="Right" Width="128"/>
+                    <Button x:Name="ButtonSave" Content="Сохранить" Margin="0,0,55,0" VerticalAlignment="Top" Height="33" IsCancel="True" Click="SaveClient" HorizontalAlignment="Right" Width="128"/>
+                    <Button x:Name="ButtonDelete" Content="Удалить"  VerticalAlignment="Top" Height="33" IsCancel="True" Click="DeleteClients" HorizontalAlignment="Left" Width="128"/>
+                </WrapPanel>
             </StackPanel>
-            <Label Content="Комментарий" FontSize="9" Margin="0,0,0,0"/>
-            <TextBox Name ="textBoxComments" HorizontalAlignment="center" MaxLength="1500" TextWrapping="Wrap" VerticalAlignment="Top" Width="500" MinHeight="21" Margin="0,-5,0,3"/>
-
-            <Button x:Name="ButtonFeedback" Content="Отзывы" Click="VisibilityFeedback" Margin="0,10,0,0" />
-
-            <WrapPanel x:Name="SPFeedbackPanel" Visibility="Collapsed"></WrapPanel>
-
-            <Button x:Name="ButtonStory" Content="История заказов" Click="VisibilityStory" Margin="0,10,0,0" />
-            <DataGrid x:Name="dgOrdersTable"  Visibility="Collapsed" FontSize="16"  AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" Grid.Row="1" SelectionMode="Single" Margin="0,0,0,20" >
-                <DataGrid.Columns>
-                    <DataGridTextColumn Binding ="{Binding Path = ID}"  IsReadOnly="True" Header="id" Width="30"/>
-                    <DataGridTextColumn Binding ="{Binding Path = Address}"  IsReadOnly="True" Header="Адрес" Width="150"/>
-                    <DataGridTextColumn Binding ="{Binding Path = Summ}"  IsReadOnly="True" Header="Сумма" Width="40"/>
-                    <DataGridTextColumn Binding ="{Binding Path = DateTime}" IsReadOnly="True" Header="Дата" Width="85"/>
-                    <DataGridTextColumn Binding ="{Binding Path = Comment}" IsReadOnly="True" Header="Комментарий" Width="*"/>
-                </DataGrid.Columns>
-            </DataGrid>
-
-            <ComboBox x:Name="cbWish" Text="Интересующие товары"  StaysOpenOnEdit="True"  IsEditable="True" SelectionChanged="clicNewWishProduct" DisplayMemberPath="Name" Margin="0,10,0,10" />
-
-            <WrapPanel x:Name ="WPWish"/>
-            <WrapPanel HorizontalAlignment="Right">
-            <Button x:Name="ButtonExit" Content="Назад" VerticalAlignment="Top" Height="33" IsCancel="True" Click="Exit" HorizontalAlignment="Right" Width="128"/>
-            <Button x:Name="ButtonSave" Content="Сохранить" VerticalAlignment="Top" Height="33" IsCancel="True" Click="SaveClient" HorizontalAlignment="Right" Width="128"/>
-            <Button x:Name="ButtonDelete" Content="Удалить"  VerticalAlignment="Top" Height="33" IsCancel="True" Click="DeleteClients" HorizontalAlignment="Left" Width="128"/>
-            </WrapPanel>
         </StackPanel>
-
-
-
     </Grid>
+</ScrollViewer>
 </Page>

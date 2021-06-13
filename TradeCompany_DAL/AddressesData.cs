@@ -10,7 +10,7 @@ using System.Data;
 
 namespace TradeCompany_DAL
 {
-    public class AddressesData
+    public class AddressesData: AddressesDataInterface
     {
         public string ConnectionString { get; set; }
 
@@ -35,7 +35,6 @@ namespace TradeCompany_DAL
 
             return addressesList;
         }
-
         public List<AddressDTO> GetAddressesByID(int clientId)
         {
             List<AddressDTO> addressesList = new List<AddressDTO>();
@@ -48,7 +47,21 @@ namespace TradeCompany_DAL
             return addressesList;
         }
 
-        public int AddAddress(int clientId, String address)
+        public List<AddressDTO> GetAddressesByClientID(int clientId)
+        {
+            string query;
+            List<AddressDTO> addressesList = new List<AddressDTO>();
+
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                query = "exec TradeCompany_DataBase.GetAddressesByClientID @ClientID";
+                addressesList = dbConnection.Query<AddressDTO>(query, new { clientId }).AsList<AddressDTO>();
+            }
+
+            return addressesList;
+        }
+
+        public int AddAddress(int clientId, String address) // почему тут String, а не string и нужно вернуть индекс
         {
             int id;
             string query = "exec TradeCompany_DataBase.AddAddress @ClientId, @Address";

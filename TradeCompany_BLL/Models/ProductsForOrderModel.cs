@@ -14,5 +14,16 @@ namespace TradeCompany_BLL.Models
         public int Price { get; set; }
         public int MeasureUnit { get; set; }
         public string ProductGroupName { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            return obj is ProductsForOrderModel model &&
+                   ProductID == model.ProductID &&
+                   Name == model.Name &&
+                   Amount == model.Amount &&
+                   Price == model.Price &&
+                   MeasureUnit == model.MeasureUnit &&
+                   ProductGroupName == model.ProductGroupName;
+        }
     }
 }

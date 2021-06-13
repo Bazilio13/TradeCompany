@@ -20,16 +20,24 @@
         <ScrollViewer>
             <StackPanel Grid.Column="0" Orientation="Vertical" Margin="20,70,20,0">
                 <DockPanel Margin="0,0,0,20" HorizontalAlignment="Right">
-                    <Button Content="ПО ТОВАРАМ" Margin="0,0,20,0"/>
+                    <Button x:Name="ProductStatButton" Style="{StaticResource StatButton}" Content="ПО ТОВАРАМ" Margin="0,0,20,0"/>
                     <Button x:Name="StatisticsByClients" Content="ПО КЛИЕНТАМ" Click="StatisticsByClientsButton_Click"/>
                 </DockPanel>
-                <DockPanel HorizontalAlignment="Stretch" Margin="0,0,0,12">
-                    <DatePicker x:Name="PeriodFor" Height="27" Width="112" HorizontalAlignment="Left" CalendarClosed="GroupFilter"/>
-                    <DatePicker x:Name="PeriodUntil" Height="27" Width="112" HorizontalAlignment="Left" CalendarClosed="GroupFilter"/> 
-                    <Image Source="Pictures/filter.png" Height="28" Margin="0,0,5,0" HorizontalAlignment="Right"/>
-                    <Button Content="Год" Margin="0,0,10,0" Click="ButtonYear" HorizontalAlignment="Right"/>
-                    <Button Content="Месяц" Margin="0,0,10,0" Click="ButtonMonth" HorizontalAlignment="Right"/>
-                    <Button Content="Сегодня" Click="ButtonToday" HorizontalAlignment="Right"/>
+                <DockPanel Margin="0,0,0,15">
+                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" Height="33" VerticalAlignment="Bottom">
+                        <Image Source="Pictures/filter.png" Height="28" Margin="0,0,5,0" HorizontalAlignment="Right"/>
+                        <Button Content="Год" Margin="0,0,10,0" Click="ButtonYear" HorizontalAlignment="Right"/>
+                        <Button Content="Месяц" Margin="0,0,10,0" Click="ButtonMonth" HorizontalAlignment="Right"/>
+                        <Button Content="Сегодня" Click="ButtonToday" HorizontalAlignment="Right"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" DockPanel.Dock="Right">
+                        <TextBlock Margin="65,0,0,5">Выбор периода:</TextBlock>
+                        <StackPanel Orientation="Horizontal">
+                            <DatePicker x:Name="PeriodFor" Height="27" Width="112" HorizontalAlignment="Left" CalendarClosed="GroupFilter" BorderBrush="#FFF3DFC4" Background="#FFF3DFC4" Margin="0,0,10,0"/>
+                            <DatePicker x:Name="PeriodUntil" Height="27" Width="112" HorizontalAlignment="Left" CalendarClosed="GroupFilter" BorderBrush="#FFF3DFC4" Background="#FFF3DFC4"/>
+                        </StackPanel>
+                    </StackPanel>
+                    
                 </DockPanel>
                 <DockPanel HorizontalAlignment="Left" Width="520" Margin="0,0,0,0">
                     <Button x:Name ="ButtonExit" Content="Назад" Width="100" HorizontalAlignment="Left" Margin="0,2,0,10" Click="ClickExit" />
@@ -41,7 +49,7 @@
                 <DataGrid x:Name ="DGAllGroups" Grid.Row="1" AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" ScrollViewer.CanContentScroll="True" MouseLeftButtonDown="DGCategory_MouseLeftButtonDown">
 
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding ="{Binding Path = CategoryName}" IsReadOnly="True" Header="Категория" Width="125" MinWidth="125"/>
+                        <DataGridTextColumn Binding ="{Binding Path = CategoryName}" IsReadOnly="True" Header="Категория" Width="155" MinWidth="155"/>
                         <DataGridTextColumn Binding ="{Binding Path = Amount}" IsReadOnly="True" Header="Количество (заказов)" Width="103" MinWidth="103"/>
                         <DataGridTextColumn Binding ="{Binding Path = Summ }" IsReadOnly="True" Header="Сумма" Width="82" MinWidth="82" />
                         <DataGridTextColumn Binding ="{Binding Path = StockAmount}" IsReadOnly="True" Header="Остаток" Width="82" MinWidth="82"/>
@@ -71,28 +79,45 @@
             </StackPanel>
 
             <StackPanel Orientation="Vertical" Width="188" DockPanel.Dock="Right" Margin="29,0,0,0">
-                <TextBlock HorizontalAlignment="Center" FontSize="18" FontWeight="Bold" Margin="0,0,0,35">Фильтр</TextBlock>
-                <TextBlock Text="Выбор категории:" TextWrapping="Wrap" Width="149"/>
+                <TextBlock HorizontalAlignment="Center" FontSize="18" FontWeight="Bold" Margin="0,0,0,35">Фильтр</TextBlock>                
 
                 <ComboBox x:Name="ProductGroupSelect" HorizontalAlignment="Center" Margin="0,0,0,33" SelectedIndex="0" Height="22" Width="150" Grid.RowSpan="2" IsEditable="True"  DropDownClosed="ProductGroupSelect_DropDownClosed" />
 
-                <TextBlock HorizontalAlignment="Center" FontSize="14" Margin="0,0,0,11">Дата последней поставки:</TextBlock>
-                <DatePicker x:Name="DateFromForSupply" HorizontalAlignment="Center" Margin="0,0,0,11" RenderTransformOrigin="0.309,-0.578" Height="28" Width="114" Focusable="False" SelectedDateChanged="GroupFilter"/>
-                <DatePicker x:Name="DateUntilForSupply"  HorizontalAlignment="Center" Margin="0,0,0,13" Height="27" Width="112" SelectedDateChanged="GroupFilter"/>
+                <TextBlock HorizontalAlignment="Center" FontSize="14" Margin="0,0,0,11">Дата последней поставки:</TextBlock>                
 
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="0,0,0,30" Width="142">
+                    <DockPanel Width="141" Margin="0,0,0,5">
+                        <TextBlock DockPanel.Dock="Left" Height="25" Margin="0,5,0,0" TextWrapping="Wrap" Width="19"><Run Language="ru-ru" Text="От"/></TextBlock>
+                        <DatePicker x:Name="DateFromForSupply" HorizontalAlignment="Center" RenderTransformOrigin="0.309,-0.578" Width="110" Height="25" Focusable="False" SelectedDateChanged="GroupFilter" BorderBrush="#FFF3DFC4" Background="#FFF3DFC4"/>
+                    </DockPanel>
+                    <DockPanel Width="141" Margin="0,0,0,5">
+                        <TextBlock DockPanel.Dock="Left" Height="25" Margin="0,5,0,0" TextWrapping="Wrap" Width="19"><Run Language="ru-ru" Text="До"/></TextBlock>
+                        <DatePicker x:Name="DateUntilForSupply" HorizontalAlignment="Center" SelectedDateChanged="GroupFilter" RenderTransformOrigin="0.309,-0.578" Width="110" Height="25" Focusable="False" BorderBrush="#FFF3DFC4" Background="#FFF3DFC4"/>
+                    </DockPanel>
+                </StackPanel>
+                
                 <TextBlock HorizontalAlignment="Center" FontSize="14" Margin="0,0,0,11">Дата последнего заказа:</TextBlock>
-                <DatePicker x:Name="DateFromForOrder" HorizontalAlignment="Center" Margin="0,0,0,11" RenderTransformOrigin="0.309,-0.578" Height="28" Width="114" Focusable="False" SelectedDateChanged="GroupFilter"/>
-                <DatePicker x:Name="DateUntilForOrder"  HorizontalAlignment="Center" Margin="0,0,0,13" Height="27" Width="112" SelectedDateChanged="GroupFilter"/>
-
+                
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="0,0,0,30" Width="142">
+                    <DockPanel Width="141" Margin="0,0,0,5">
+                        <TextBlock DockPanel.Dock="Left" Height="25" Margin="0,5,0,0" TextWrapping="Wrap" Width="19"><Run Language="ru-ru" Text="От"/></TextBlock>
+                        <DatePicker x:Name="DateFromForOrder" HorizontalAlignment="Center" RenderTransformOrigin="0.309,-0.578" Width="110" Height="25" Focusable="False" SelectedDateChanged="GroupFilter" BorderBrush="#FFF3DFC4" Background="#FFF3DFC4"/>
+                    </DockPanel>
+                    <DockPanel Width="141" Margin="0,0,0,5">
+                        <TextBlock DockPanel.Dock="Left" Height="25" Margin="0,5,0,0" TextWrapping="Wrap" Width="19"><Run Language="ru-ru" Text="До"/></TextBlock>
+                        <DatePicker x:Name="DateUntilForOrder" HorizontalAlignment="Center" SelectedDateChanged="GroupFilter" RenderTransformOrigin="0.309,-0.578" Width="110" Height="25" Focusable="False" BorderBrush="#FFF3DFC4" Background="#FFF3DFC4"/>
+                    </DockPanel>
+                </StackPanel>
+                
                 <DockPanel  Margin="0,0,0,18">
                     <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" FontSize="14">Количество заказов:</TextBlock>
                     <StackPanel DockPanel.Dock="Right">
                         <TextBlock Margin="30,0,0,0">до</TextBlock>
-                        <TextBox x:Name="ToOrdersAmount" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" TextAlignment="Center" Width="80" Height="20" PreviewTextInput="ValidationByNumber" TextChanged="GroupFilter"/>
+                        <TextBox x:Name="ToOrdersAmount" TextWrapping="Wrap" MaxLength="15" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" TextAlignment="Center" Width="80" Height="20" PreviewTextInput="ValidationByNumber" TextChanged="GroupFilter"/>
                     </StackPanel>
                     <StackPanel DockPanel.Dock="Left">
                         <TextBlock Margin="30,0,0,0">от</TextBlock>
-                        <TextBox x:Name="FromOrdersAmount" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" VerticalContentAlignment="Center" TextAlignment="Center" Height="20" RenderTransformOrigin="0.219,0.561"  PreviewTextInput="ValidationByNumber" TextChanged="GroupFilter"/>
+                        <TextBox x:Name="FromOrdersAmount" TextWrapping="Wrap" MaxLength="15" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" VerticalContentAlignment="Center" TextAlignment="Center" Height="20" RenderTransformOrigin="0.219,0.561"  PreviewTextInput="ValidationByNumber" TextChanged="GroupFilter"/>
                     </StackPanel>
                 </DockPanel>
 
@@ -104,11 +129,11 @@
                     <DockPanel DockPanel.Dock="Bottom">
                         <StackPanel DockPanel.Dock="Right">
                             <TextBlock Margin="30,0,0,0">до</TextBlock>
-                            <TextBox x:Name="ToPrice" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" TextAlignment="Center" Height="20" Width="80"  PreviewTextInput="ValidationByNumber" TextChanged="GroupFilter"/>
+                            <TextBox x:Name="ToPrice" TextWrapping="Wrap" MaxLength="15" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" TextAlignment="Center" Height="20" Width="80"  PreviewTextInput="ValidationByNumber" TextChanged="GroupFilter"/>
                         </StackPanel>
                         <StackPanel DockPanel.Dock="Left">
                             <TextBlock Margin="30,0,0,0">от</TextBlock>
-                            <TextBox x:Name="FromPrice" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Width="80" Height="20" VerticalContentAlignment="Center" Text="" TextAlignment="Center"  PreviewTextInput="ValidationByNumber" TextChanged="GroupFilter"/>
+                            <TextBox x:Name="FromPrice" TextWrapping="Wrap" MaxLength="15" HorizontalAlignment="Left" VerticalAlignment="Center" Width="80" Height="20" VerticalContentAlignment="Center" Text="" TextAlignment="Center"  PreviewTextInput="ValidationByNumber" TextChanged="GroupFilter"/>
                         </StackPanel>
                     </DockPanel>
                 </DockPanel>

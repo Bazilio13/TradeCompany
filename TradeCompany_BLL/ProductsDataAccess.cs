@@ -98,5 +98,10 @@ namespace TradeCompany_BLL
             ProductDTO productDTO = _mapsModelToDTO.MapProductModelToProductDTO(productModel);
             _productsData.UpdateProductByID(productDTO);
         }
+        public void ReduceProductAmountInStockByID(int id, int minusAmount)
+        {
+            _productsData.ReduceProductAmountInStockByID(id, minusAmount);
+
+        }
     }
 }

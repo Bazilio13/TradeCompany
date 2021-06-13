@@ -5,46 +5,74 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TradeCompany_UI"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="1450" d:DesignWidth="800"
       Title="SpecificOrder">
 
-    <Grid Background="WhiteSmoke">
+    <Grid Background="#F9F9F9">
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.6*"></RowDefinition>
-            <RowDefinition Height="3*"></RowDefinition>
-            <RowDefinition Height="0.6*"></RowDefinition>
+            <RowDefinition Height="240"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="260"></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="52,19,0,0" Text="Дата" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="15"/>
-            <TextBlock Grid.Column="2" HorizontalAlignment="Left" Margin="58,19,0,0" Text="ID" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="15"/>
-            <TextBlock x:Name="ClientName" Grid.Column="3" HorizontalAlignment="Left" Margin="47,19,0,0" Text="Клиент" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="15"/>
-            <TextBlock Grid.Column="4" HorizontalAlignment="Left" Margin ="60,19,0,0"  Text="Адрес" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="15"/>
-        </Grid>
-        <DataGrid x:Name="dgSpecificOrder" FontSize="15" Margin="30" Loaded="dgSpecificOrder_Loaded" Grid.Row="1" AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn x:Name="NumberOfProduct"  Header="№" Width="0.1*"/>
-                <DataGridTextColumn Binding="{Binding Path= ProductID}" Header="ID Товара" Width="0.3*"/>
-                <DataGridTextColumn Binding="{Binding Path= Name}" Header="Товар" Width="1*"/>
-                <DataGridTextColumn Binding="{Binding Path= Amount}" Header="Количество" Width="0.5*"/>
-                <DataGridTextColumn Binding="{Binding Path= Price}" Header="Цена" Width="0.5*"/>
-                <DataGridTextColumn Binding="{Binding Path= Amount}" Header="Сумма" Width="0.5*"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Vertical" Grid.Row="0" Margin="20,70,20,10">
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                <Button x:Name="ChooseClient" Content="Выбрать клиента" Click="ChooseClient_Click" Margin="0,0,15,0"/>
+                <Button x:Name="Button_AddExistingProduct" Content="Добавить товар" Click="AddProduct_ButtonClick" IsEnabled ="False"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                <StackPanel>
+                    <TextBlock x:Name="ID" Text="ID Заказа" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap" Width="136" Margin="0,0,0,10"/>
+                    <TextBlock x:Name="Sum" Text="Сумма" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap" Width="112"/>
+                </StackPanel>
+
+                <StackPanel Width="228">
+                    <TextBlock x:Name="ClientName" Text="Клиент" TextWrapping="Wrap" Width="170" Margin="0,0,0,10" HorizontalAlignment="Left"/>
+                    <TextBlock x:Name="Phone" Grid.Row="1" Text="Телефон" TextWrapping="Wrap" Width="170" HorizontalAlignment="Left"/>
+                </StackPanel>
+                <StackPanel Width="122" Margin="0,0,30,0">
+                    <TextBlock HorizontalAlignment="Center">Дата заказа:</TextBlock>
+                    <Label x:Name="Data" Height="36">
+                        <DatePicker x:Name="DataPicker" FirstDayOfWeek="Monday" SelectedDateFormat="Short" BorderBrush="#FFF3DFC4" Background="#FFF3DFC4"/>
+                    </Label>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock HorizontalAlignment="Center" Margin="0,0,0,5">Адрес:</TextBlock>
+                    <ComboBox x:Name="cbAdress" IsSynchronizedWithCurrentItem="True" SelectedIndex="0" Loaded="cbAdress_Loaded" DropDownClosed="cbAdress_DropDownClosed" Width="200" Height="23" />
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button x:Name="AddProductInOrder" Content="Сохранить" Click="SaveProductInOrder_ButtonClick" IsEnabled="False" />
+            </StackPanel>
+        </StackPanel>
+        <DataGrid x:Name="dgSpecificOrder" Loaded="dgSpecificOrder_Loaded" Grid.Row="1" Margin="20,0,20,0" AutoGenerateColumns="False" RowEditEnding="dgSpecificOrder_RowEditEnding" CellEditEnding="dgSpecificOrder_CellEditEnding" CanUserAddRows="False" PreviewKeyDown="dgSpecificOrder_PreviewKeyDown" >
+            <DataGrid.Columns >
+
+                <DataGridTextColumn Binding="{Binding Path= ProductID}" Header="ID Товара" Width="0.2*" IsReadOnly="True" />
+                <DataGridTextColumn x:Name="Product" Binding="{Binding Path= ProductName, UpdateSourceTrigger=PropertyChanged}" Header="Товар" Width="1*" IsReadOnly="True" />
+
+                <DataGridTextColumn Binding="{Binding Path= Price}" Header="Цена" Width="0.5*" IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="Amount" Binding="{Binding Path = Amount, UpdateSourceTrigger=PropertyChanged}" Header="Количество" Width="0.5*" />
+                <DataGridTextColumn x:Name="ProductMeasureUnit" Header="Единицы измерения" Binding="{Binding Path= ProductMeasureUnit}" Width="0.5*" IsReadOnly="True"/>
 
             </DataGrid.Columns>
         </DataGrid>
-        <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="583*"/>
-                <ColumnDefinition Width="8*"/>
-                <ColumnDefinition Width="209*"/>
-            </Grid.ColumnDefinitions>
-            <Button Name="PlaceOrder" HorizontalAlignment="Center" Background="SteelBlue" Height="40" Width="300" Content="Сформировать" FontSize="15" Margin="248,12,35,12"></Button>
-        </Grid>
+        <StackPanel Grid.Row="2" Orientation="Vertical" Grid.Column="0" Margin="20,0,20,0">
+            <DockPanel Margin="0,0,0,15" HorizontalAlignment="Stretch">
+                <DockPanel Margin="0,0,0,0" HorizontalAlignment="Stretch" DockPanel.Dock="Top">
+                    <TextBlock HorizontalAlignment="Left" DockPanel.Dock="Top">Отзыв:</TextBlock>
+                    <TextBox x:Name="FeedbackTextBox" DockPanel.Dock="Bottom" Loaded="FeedbackTextBox_Loaded" VerticalContentAlignment="Top" Height="80" TextWrapping="Wrap" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"></TextBox>
+                </DockPanel>
+                <DockPanel HorizontalAlignment="Stretch" DockPanel.Dock="Bottom">
+                    <TextBlock HorizontalAlignment="Left" DockPanel.Dock="Top">Комментарий:</TextBlock>
+                    <TextBox x:Name="Comment" Text="" DockPanel.Dock="Bottom" VerticalContentAlignment="Top" TextWrapping="Wrap" AcceptsReturn="True" Height="80" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                </DockPanel>
+            </DockPanel>
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="SendFeedback_Button" Content="Отправить отзыв" Click="SendFeedback_Button_Click" />
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Page>
