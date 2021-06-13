@@ -91,6 +91,7 @@ namespace TradeCompany_UI
 
         private void ShowInfoAboutClient()
         {
+
             ID.Text = "ID заказа: " + _orderModel.ID;
             ClientName.Text = _client.Name;
             Phone.Text = _client.Phone;
@@ -109,11 +110,6 @@ namespace TradeCompany_UI
         private void dgSpecificOrder_Loaded(object sender, RoutedEventArgs e)
         {
             dgSpecificOrder.ItemsSource = bgOrderListModels;
-        }
-
-        private void dgSpecificOrder_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
-        {
-
         }
 
         private void SaveProductInOrder_ButtonClick(object sender, RoutedEventArgs e)
@@ -144,7 +140,6 @@ namespace TradeCompany_UI
                 FillInfoAboutNewOrder();
                 _orderDataAccess.DeleteOrderListByID(_orderModel.ID);
                 SetIdForOrderLists();
-                //_orderDataAccess.AddOrderList(newOrder.OrderListModel);
                 _orderDataAccess.UpdateOrdersByID(_orderModel);
                 NotifyAboutSuccessfulAdditionInBase();
                 IncreaseProductAmountInStockByID(_deletedProductFromOrder);
@@ -232,7 +227,7 @@ namespace TradeCompany_UI
             specificProduct = new OrderListModel();
             specificProduct.ProductID = productBaseModel.ID;
             specificProduct.ProductName = productBaseModel.Name;
-            specificProduct.Price = _client.Type ? productBaseModel.WholesalePrice : productBaseModel.RetailPrice; //почему не использовали enum, _clientFullInfo.Type переименовать Type
+            specificProduct.Price = _client.Type ? productBaseModel.WholesalePrice : productBaseModel.RetailPrice;
             specificProduct.ProductMeasureUnit = productBaseModel.MeasureUnitName;
             specificProduct.OrderID = _orderId;
             _crntProductBaseModel = productBaseModel;
@@ -284,13 +279,13 @@ namespace TradeCompany_UI
                 return;
             }
 
-            if (_client == null) //перенести в open event
+            if (_client == null) 
             {
                 new MessageWindow("Выберите клиента").ShowDialog();
                 return;
             }
 
-            if (listOAddressModel.Count == 0) //перенести в open event
+            if (listOAddressModel.Count == 0) 
             {
                 new MessageWindow("У клиента нет адресов").ShowDialog();
                 return;

@@ -48,7 +48,7 @@
                 <Button x:Name="AddProductInOrder" Content="Сохранить" Click="SaveProductInOrder_ButtonClick" IsEnabled="False" />
             </StackPanel>
         </StackPanel>
-        <DataGrid x:Name="dgSpecificOrder" Loaded="dgSpecificOrder_Loaded" Grid.Row="1" Margin="20,0,20,0" AutoGenerateColumns="False" RowEditEnding="dgSpecificOrder_RowEditEnding" CellEditEnding="dgSpecificOrder_CellEditEnding" CanUserAddRows="False" PreviewKeyDown="dgSpecificOrder_PreviewKeyDown" >
+        <DataGrid x:Name="dgSpecificOrder" Loaded="dgSpecificOrder_Loaded" Grid.Row="1" Margin="20,0,20,0" AutoGenerateColumns="False" CellEditEnding="dgSpecificOrder_CellEditEnding" CanUserAddRows="False" PreviewKeyDown="dgSpecificOrder_PreviewKeyDown" >
             <DataGrid.Columns >
 
                 <DataGridTextColumn Binding="{Binding Path= ProductID}" Header="ID Товара" Width="0.2*" IsReadOnly="True" />
