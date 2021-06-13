@@ -299,7 +299,7 @@ namespace TradeCompany_UI
         private void InputValidation(TextBox textbox)
         {
             textbox.Text = Regex.Replace(textbox.Text, @"[.]+", ",");
-            textbox.Text = Regex.Replace(textbox.Text, @"[^0-9,.]+", "");
+            textbox.Text = Regex.Replace(textbox.Text, @"[^0-9,.-]+", "");
             textbox.SelectionStart = textbox.Text.Length;
             if (textbox.Text != "")
             {
