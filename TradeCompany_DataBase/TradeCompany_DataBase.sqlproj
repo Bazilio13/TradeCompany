@@ -160,6 +160,7 @@
     <Build Include="TradeCompany_DataBase\Stored Procedures\GetClientsStatistics.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\GetClientsStatisticsByAllParams.sql" />
     <Build Include="TradeCompany_DataBase\Stored Procedures\GetClientsStatisticsByParams.sql" />
+    <Build Include="TradeCompany_DataBase\Stored Procedures\IncreaseProductAmountInStockByID.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="TradeCompany_DataBase.refactorlog" />
