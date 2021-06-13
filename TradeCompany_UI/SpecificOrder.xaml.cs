@@ -26,13 +26,12 @@ namespace TradeCompany_UI
         private float _sum = 0;
         
 
-        private OrderModel newOrder = new OrderModel();
-        private OrderModel _infoAboutOrder;
+        private OrderModel _orderModel = new OrderModel();
         private OrderListModel specificProduct;
-        private ProductBaseModel _productBaseModel;
+        private ProductBaseModel _crntProductBaseModel = new ProductBaseModel();
         private FeedbackModel _feedbackModel;
 
-        private ClientModel _clientFullInfo;
+        private ClientModel _client;
         private AddressModel _clientAdress;
 
         private List<OrderListModel> listOfProductForOrder = new List<OrderListModel>();
@@ -58,10 +57,10 @@ namespace TradeCompany_UI
         public SpecificOrder(int id)
         {
             InitializeComponent();
-            newOrder.ID = id;
+            _orderModel.ID = id;
             _uinavi = UINavi.GetUINavi();
             GetOrderById(id);
-            SetInfoAboutClient();
+            _client = _clientsDataAccess.GetClientByClientID(_orderModel.ClientsID);
             ShowAllInfoAboutOrder();
         }
 
@@ -73,17 +72,14 @@ namespace TradeCompany_UI
 
         private void GetOrderById(int id)
         {
-            _infoAboutOrder = _orderDataAccess.GetOrderById(id).First();
-            Sum.Text = "Сумма заказа: " + _infoAboutOrder.Summ.ToString();
-            _sum = _infoAboutOrder.Summ;
-            Comment.Text = _infoAboutOrder.Comment;
-            _orderId = id;
-            _clientId = _infoAboutOrder.ClientsID;
-            DataPicker.SelectedDate = _infoAboutOrder.DateTime;
+            _orderModel = _orderDataAccess.GetOrderById(id).First();            
+            Sum.Text = "Сумма заказа: " + _orderModel.Summ.ToString();
+            _sum = _orderModel.Summ;
+            Comment.Text = _orderModel.Comment;
+            DataPicker.SelectedDate = _orderModel.DateTime;
+            originalListOfProduct = _orderModel.OrderListModel;
 
-            originalListOfProduct = _infoAboutOrder.OrderListModel;
-
-            foreach (var item in _infoAboutOrder.OrderListModel)
+            foreach (var item in _orderModel.OrderListModel)
             {
                 bgOrderListModels.Add(item);
             }
@@ -91,31 +87,16 @@ namespace TradeCompany_UI
 
         private void ShowInfoAboutClient()
         {
-            ID.Text = "ID заказа : " + _orderId;
-            ClientName.Text = _clientFullInfo.Name;
-            Phone.Text = _clientFullInfo.Phone;
+            ID.Text = "ID заказа : " + _orderModel.ID;
+            ClientName.Text = _client.Name;
+            Phone.Text = _client.Phone;
             Button_AddExistingProduct.IsEnabled = true;
         }
 
-        private void SetInfoAboutClient() 
-        {
-            _clientFullInfo = new ClientModel()
-            {
-                ID = _infoAboutOrder.ID,
-                Name = _infoAboutOrder.Client,
-                Phone = _infoAboutOrder.ClientsPhone
-            };
-
-            _clientAdress = new AddressModel()
-            {
-                Address = _infoAboutOrder.Address,
-                ID = _infoAboutOrder.ID
-            };
-        }
 
         private void FillComboBoxAddress()
         {
-            listOAddressModel = _addressesDataAccess.GetAddressByClientID(_clientId);
+            listOAddressModel = _addressesDataAccess.GetAddressByClientID(_orderModel.ClientsID);
             cbAdress.ItemsSource = listOAddressModel;
             cbAdress.DisplayMemberPath = "Address";
             cbAdress.Text = "Адрес";
@@ -147,7 +128,7 @@ namespace TradeCompany_UI
         private void SaveProductInOrder_ButtonClick(object sender, RoutedEventArgs e)
         {
 
-            if (_orderId == 0)
+            if (_orderModel.ID == 0)
             {
                 bool check = VerifyWhetherDateAndAddress();
                 if (!check)
@@ -157,45 +138,42 @@ namespace TradeCompany_UI
                 }
 
                 FillInfoAboutNewOrder();
-                _orderDataAccess.AddOrder(newOrder);
+                _orderDataAccess.AddOrder(_orderModel);
                 NotifyAboutSuccessfulAdditionInBase();
                 return;
 
             }
 
-            if (_orderId > 0) 
+            if (_orderModel.ID > 0) 
             {
-                listOfProductForOrder = FillProductListFromDateGrid();
+                FillProductListFromDateGrid();
                
                 FillInfoAboutNewOrder();
-                _orderDataAccess.DeleteOrderListByID(_orderId);
-                
+                _orderDataAccess.DeleteOrderListByID(_orderModel.ID);
+                SetIdForOrderLists();
                 //_orderDataAccess.AddOrderList(newOrder.OrderListModel);
-                _orderDataAccess.UpdateOrdersByID(newOrder);
+                _orderDataAccess.UpdateOrdersByID(_orderModel);
                 NotifyAboutSuccessfulAdditionInBase();
                 return;
              }
 
-            _orderDataAccess.AddOrderList(listOfProductForOrder);
+            _orderDataAccess.AddOrderList(_orderModel.OrderListModel);
             NotifyAboutSuccessfulAdditionInBase();
         }
 
         private void NotifyAboutSuccessfulAdditionInBase()
         {
-            ReduceProductsAmountInStock(listOfProductForOrder);
-            new MessageWindow("Продукты добавлены в базу").ShowDialog();
-            listOfProductForOrder.Clear();
-            
+            ReduceProductsAmountInStock(_orderModel.OrderListModel);
+            new MessageWindow("Продукты добавлены в базу").ShowDialog();            
         }
 
-        private List<OrderListModel> FillProductListFromDateGrid()
+        private void FillProductListFromDateGrid()
         {
-            listOfProductForOrder = new List<OrderListModel>();
+            _orderModel.OrderListModel = new List<OrderListModel>();
             foreach (var product in bgOrderListModels)
             {
-                listOfProductForOrder.Add(product);
+                _orderModel.OrderListModel.Add(product);
             }
-            return listOfProductForOrder;
         }
 
         private void ReduceProductsAmountInStock(List<OrderListModel> orderListModels)
@@ -242,32 +220,26 @@ namespace TradeCompany_UI
             specificProduct = new OrderListModel();
             specificProduct.ProductID = productBaseModel.ID;
             specificProduct.ProductName = productBaseModel.Name;
-            specificProduct.Price = _clientFullInfo.Type ? productBaseModel.WholesalePrice : productBaseModel.RetailPrice; //почему не использовали enum, _clientFullInfo.Type переименовать Type
+            specificProduct.Price = _client.Type ? productBaseModel.WholesalePrice : productBaseModel.RetailPrice; //почему не использовали enum, _clientFullInfo.Type переименовать Type
             specificProduct.ProductMeasureUnit = productBaseModel.MeasureUnitName;
             specificProduct.OrderID = _orderId;
-            _productBaseModel = productBaseModel;
+            _crntProductBaseModel = productBaseModel;
 
             bgOrderListModels.Add(specificProduct);
         }
 
         public void AddClientToOrder(ClientBaseModel clientBaseModel)
         {
-            _clientId = clientBaseModel.ID;
-            _clientFullInfo = _clientsDataAccess.GetClientByClientID(_clientId);
+            _orderModel.ClientsID = clientBaseModel.ID;
+            _client = _clientsDataAccess.GetClientByClientID(_orderModel.ClientsID);
             ShowAllInfoAboutOrder();
         }
 
         private void FillInfoAboutNewOrder()
         {
-            newOrder.DateTime = (DateTime)DataPicker.SelectedDate;
-            newOrder.ClientsID = _clientId;
-            newOrder.Client = _clientFullInfo.Name;
-            newOrder.ClientsPhone = _clientFullInfo.Phone;
-            newOrder.Summ = CountOrderSumm(listOfProductForOrder);
-            newOrder.OrderListModel = listOfProductForOrder;
-            newOrder.AddressID = _clientAdress.ID;
-            newOrder.Address = _adress;
-            newOrder.Comment = Comment.Text;
+            _orderModel.DateTime = (DateTime)DataPicker.SelectedDate;
+            _orderModel.Summ = CountSummProductsOfBindingList();
+            _orderModel.Comment = Comment.Text;
         }
 
         private void ChooseClient_Click(object sender, RoutedEventArgs e)
@@ -277,8 +249,16 @@ namespace TradeCompany_UI
 
         private void cbAdress_Loaded(object sender, RoutedEventArgs e)
         {
-            if (_orderId != 0)
+            if (_orderModel.ID != 0)
             {
+                for (int i = 0; i < listOAddressModel.Count; i++)
+                {
+                    if (listOAddressModel[i].ID == _orderModel.AddressID)
+                    {
+                        cbAdress.SelectedIndex = i;
+                        return;
+                    }
+                }
                 cbAdress.SelectedIndex = 0;
             }
         }
@@ -292,7 +272,7 @@ namespace TradeCompany_UI
                 return;
             }
 
-            if (_clientFullInfo == null) //перенести в open event
+            if (_client == null) //перенести в open event
             {
                 new MessageWindow("Выберите клиента").ShowDialog();
                 return;
@@ -304,8 +284,8 @@ namespace TradeCompany_UI
                 return;
             }
 
-            _addresId = addresInfo.ID;
-            _adress = addresInfo.Address;
+            _orderModel.AddressID = addresInfo.ID;
+            _orderModel.Address = addresInfo.Address;
         }
 
         public void AddProductToCollection(int productID, string productName, string productMeasureUnit, List<ProductGroupModel> productGroupModels)
@@ -319,8 +299,9 @@ namespace TradeCompany_UI
             var product = (OrderListModel)e.Row.Item; 
 
             if (product.Amount == 0) return;
-
-            if(_productBaseModel.StockAmount - product.Amount < 0)
+            ProductsDataAccess productsDataAccess = new ProductsDataAccess();
+            _crntProductBaseModel.StockAmount = productsDataAccess.GetProductByID(product.ProductID).StockAmount;
+            if (_crntProductBaseModel.StockAmount - product.Amount < 0)
             {
                 bgOrderListModels.Remove(bgOrderListModels.Last());
                 new MessageWindow("На складе нет столько товара").ShowDialog();
@@ -333,6 +314,14 @@ namespace TradeCompany_UI
             Sum.Text = "Сумма заказа: " + _sum;
             Button_AddExistingProduct.IsEnabled = true;
             AddProductInOrder.IsEnabled = true;
+        }
+
+        private void SetIdForOrderLists()
+        {
+            foreach (OrderListModel orderList in _orderModel.OrderListModel)
+            {
+                orderList.OrderID = _orderModel.ID;
+            }
         }
 
         private void VerifyWhetherInputHasDigits(DataGridCellEditEndingEventArgs e)
@@ -353,17 +342,17 @@ namespace TradeCompany_UI
 
         private bool VerifyWhetherDateAndAddress() 
         {
-            if (_orderId != 0)
+            if (_orderModel.ID != 0)
             {
                 return true;
             }
 
-            return _addresId != 0 && DataPicker.SelectedDate != null;
+            return _orderModel.AddressID != 0 && DataPicker.SelectedDate != null;
         }
 
         private void FillFeedback()
         {
-            if (string.IsNullOrWhiteSpace(FeedbackTextBox.Text) || _orderId == 0)
+            if (string.IsNullOrWhiteSpace(FeedbackTextBox.Text) || _orderModel.ID == 0)
             {
                 return;
             }
@@ -375,8 +364,8 @@ namespace TradeCompany_UI
 
             _feedbackModel = new FeedbackModel()
             {
-                OrderID = _infoAboutOrder.ID,
-                ClientID = _clientId,
+                OrderID = _orderModel.ID,
+                ClientID = _orderModel.ClientsID,
                 DateTime = DateTime.Now,
                 Text = FeedbackTextBox.Text
 
@@ -386,17 +375,17 @@ namespace TradeCompany_UI
         private void SendFeedback_Button_Click(object sender, RoutedEventArgs e)
         {
             FillFeedback();
-           _FeedbacksDataAccess.AddFeedbackByOrderId(_orderId, _feedbackModel);
+           _FeedbacksDataAccess.AddFeedbackByOrderId(_orderModel.ID, _feedbackModel);
             new MessageWindow("Отзыв отправлен").ShowDialog();
 
         }
 
         private void FeedbackTextBox_Loaded(object sender, RoutedEventArgs e)
         {
-            if(_orderId ==  0) { return; }
+            if(_orderModel.ID ==  0) { return; }
 
             List<FeedbackModel> feedbackModel = new List<FeedbackModel>();
-            feedbackModel = _FeedbacksDataAccess.GetFeedbackByOrderID(_orderId);
+            feedbackModel = _FeedbacksDataAccess.GetFeedbackByOrderID(_orderModel.ID);
             if(feedbackModel.Count == 0) { return; }
             FeedbackTextBox.Text = feedbackModel.Last().Text;
 

@@ -31,7 +31,7 @@
             <TextBlock x:Name="ID" HorizontalAlignment="Center" Text="ID Заказа" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="15" Height="83" Width="64"/>
             <TextBlock Grid.Column="1" x:Name="Sum" HorizontalAlignment="Center" Text="Сумма" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="15" Height="82" Width="89"/>
             <TextBlock x:Name="ClientName" Grid.Column="3" HorizontalAlignment="Right" Margin="0,5,12,0" Text="Клиент" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="15" Height="20" Width="127"/>
-            <ComboBox  Grid.Column="4" x:Name="cbAdress"  HorizontalAlignment="Right" Height="36" Margin="0,28,23,0" VerticalAlignment="Top" Width="135" IsSynchronizedWithCurrentItem="True" SelectedIndex="0" Loaded="cbAdress_Loaded" DropDownClosed="cbAdress_DropDownClosed" />
+            <ComboBox  Grid.Column="4" x:Name="cbAdress"  HorizontalAlignment="Right" Height="36" Margin="0,28,23,0" VerticalAlignment="Top" Width="135" IsSynchronizedWithCurrentItem="True" Loaded="cbAdress_Loaded" DropDownClosed="cbAdress_DropDownClosed" />
 
 
             <Grid Grid.Column="2" Grid.ColumnSpan="2" Margin="135,2,4,-2">
