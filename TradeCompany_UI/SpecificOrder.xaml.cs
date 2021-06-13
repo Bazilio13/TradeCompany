@@ -24,7 +24,8 @@ namespace TradeCompany_UI
         private int _addresId; 
         private string _adress;
         private float _sum = 0;
-        //private string _oldComment = "";
+        private Page _previousPage;
+        
 
         private OrderModel _orderModel = new OrderModel();
         private OrderListModel specificProduct;
@@ -50,15 +51,17 @@ namespace TradeCompany_UI
 
         private UINavi _uinavi;
 
-        public SpecificOrder()
+        public SpecificOrder(Page previosPage = null)
         {
             InitializeComponent();
             _uinavi = UINavi.GetUINavi();
+            _previousPage = previosPage;
         }
-        public SpecificOrder(int id)
+        public SpecificOrder(int id, Page previosPage = null)
         {
             InitializeComponent();
             _orderModel.ID = id;
+            _previousPage = previosPage;
             _uinavi = UINavi.GetUINavi();
             GetOrderById(id);
             _client = _clientsDataAccess.GetClientByClientID(_orderModel.ClientsID);
@@ -128,7 +131,9 @@ namespace TradeCompany_UI
                 FillInfoAboutNewOrder();
                 _orderDataAccess.AddOrder(_orderModel);
                 NotifyAboutSuccessfulAdditionInBase();
-                return;
+                GoToThePreviousPage();
+
+                //return;
 
             }
 
@@ -143,11 +148,21 @@ namespace TradeCompany_UI
                 _orderDataAccess.UpdateOrdersByID(_orderModel);
                 NotifyAboutSuccessfulAdditionInBase();
                 IncreaseProductAmountInStockByID(_deletedProductFromOrder);
+                GoToThePreviousPage();
                 return;
              }
 
             _orderDataAccess.AddOrderList(_orderModel.OrderListModel);
             NotifyAboutSuccessfulAdditionInBase();
+            GoToThePreviousPage();
+        }
+
+        private void GoToThePreviousPage()
+        {
+            if (!(_previousPage is null))
+            {
+                _uinavi.GoToThePage(_previousPage);
+            }
         }
 
         private void NotifyAboutSuccessfulAdditionInBase()

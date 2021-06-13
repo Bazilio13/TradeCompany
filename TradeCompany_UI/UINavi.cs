@@ -31,5 +31,7 @@ namespace TradeCompany_UI
         {
             MainWindow.MainFrame.Content = page;
         }
+
+
     }
 }

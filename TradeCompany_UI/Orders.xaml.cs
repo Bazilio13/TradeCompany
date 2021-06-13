@@ -108,7 +108,7 @@ namespace TradeCompany_UI
             if (dgOrders.CurrentItem != null)
             {
                 OrderModel crntModel = (OrderModel)dgOrders.CurrentItem;
-                _uiNavi.GoToThePage(new SpecificOrder(crntModel.ID));
+                _uiNavi.GoToThePage(new SpecificOrder(crntModel.ID,this));
             }
         }
     }
