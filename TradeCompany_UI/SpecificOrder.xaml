@@ -44,7 +44,7 @@
             </Grid>
 
             <Label Content="Адрес:" Grid.Column="4" HorizontalAlignment="Right" Height="25" Margin="0,4,56,0" VerticalAlignment="Top" Width="100"/>
-            <TextBox Grid.Column="5" x:Name="Comment" Height="62" Margin="9,24,9,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top"/>
+            <TextBox Grid.Column="5" x:Name="Comment" Height="62" Margin="9,24,9,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" />
             <Label Content="Коментарий" Grid.Column="5" HorizontalAlignment="Left" Height="40" Margin="9,1,0,0" VerticalAlignment="Top" Width="146"/>
         </Grid>
 
@@ -53,7 +53,7 @@
 
                 <DataGridTextColumn Binding="{Binding Path= ProductID}" Header="ID Товара" Width="0.2*" IsReadOnly="True" />
                 <DataGridTextColumn x:Name="Product" Binding="{Binding Path= ProductName, UpdateSourceTrigger=PropertyChanged}" Header="Товар" Width="1*" IsReadOnly="True" />
-                <DataGridTextColumn x:Name="Grops"  Header="Категория" Width="0.5*" Binding="{Binding Path= Groups, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
+               
                 <DataGridTextColumn Binding="{Binding Path= Price}" Header="Цена" Width="0.5*" IsReadOnly="True"/>
                 <DataGridTextColumn x:Name="Amount" Binding="{Binding Path = Amount, UpdateSourceTrigger=PropertyChanged}" Header="Количество" Width="0.5*" />
                 <DataGridTextColumn x:Name="ProductMeasureUnit" Header="Единицы измерения" Binding="{Binding Path= ProductMeasureUnit}" Width="0.5*" IsReadOnly="True"/>
@@ -92,8 +92,8 @@
                     <RowDefinition></RowDefinition>
                     <RowDefinition Height="0.5*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <TextBox x:Name="FeedbackTextBox"></TextBox>
-                <Button x:Name="SendFeedback_Button" Content="Отправить отзыв" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Width="399" Click="SendFeedback_Button_Click" IsEnabled="False"/>
+                <TextBox x:Name="FeedbackTextBox" Loaded="FeedbackTextBox_Loaded"  TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"></TextBox>
+                <Button x:Name="SendFeedback_Button" Content="Отправить отзыв" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Width="399" Click="SendFeedback_Button_Click" />
 
             </Grid>
 

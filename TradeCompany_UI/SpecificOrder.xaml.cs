@@ -338,7 +338,7 @@ namespace TradeCompany_UI
 
         private void FillFeedback()
         {
-            if(FeedbackTextBox.Text is null || _orderId == 0)
+            if (string.IsNullOrWhiteSpace(FeedbackTextBox.Text) || _orderId == 0)
             {
                 return;
             }
@@ -356,8 +356,6 @@ namespace TradeCompany_UI
                 Text = FeedbackTextBox.Text
 
             };
-
-            FeedbackTextBox.IsEnabled = true;
         }
 
         private void SendFeedback_Button_Click(object sender, RoutedEventArgs e)
@@ -365,6 +363,17 @@ namespace TradeCompany_UI
             FillFeedback();
            _FeedbacksDataAccess.AddFeedbackByOrderId(_orderId, _feedbackModel);
             new MessageWindow("Отзыв отправлен").ShowDialog();
+
+        }
+
+        private void FeedbackTextBox_Loaded(object sender, RoutedEventArgs e)
+        {
+            if(_orderId ==  0) { return; }
+
+            List<FeedbackModel> feedbackModel = new List<FeedbackModel>();
+            feedbackModel = _FeedbacksDataAccess.GetFeedbackByOrderID(_orderId);
+            if(feedbackModel.Count == 0) { return; }
+            FeedbackTextBox.Text = feedbackModel.Last().Text;
 
         }
     }
