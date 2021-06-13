@@ -79,6 +79,13 @@ namespace TradeCompany_BLL
         {
             _ordersData.DeleteOrderListByID(id);
         }
-        
+
+        public void UpdateOrdersByID(OrderModel order)
+        {
+            OrdersDTO orderDTO = _mapsModelToDTO.MapOrderModelToOrdersDTO(order);
+            _ordersData.UpdateOrdersByID(orderDTO);
+        }
+
+
     }
 }

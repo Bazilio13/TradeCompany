@@ -26,7 +26,7 @@ namespace TradeCompany_UI
         private float _sum = 0;
         
 
-        private OrderModel newOrder;
+        private OrderModel newOrder = new OrderModel();
         private OrderModel _infoAboutOrder;
         private OrderListModel specificProduct;
         private ProductBaseModel _productBaseModel;
@@ -54,13 +54,11 @@ namespace TradeCompany_UI
         {
             InitializeComponent();
             _uinavi = UINavi.GetUINavi();
-            newOrder = new OrderModel();
-
         }
         public SpecificOrder(int id)
         {
             InitializeComponent();
-
+            newOrder.ID = id;
             _uinavi = UINavi.GetUINavi();
             GetOrderById(id);
             SetInfoAboutClient();
@@ -148,10 +146,6 @@ namespace TradeCompany_UI
 
         private void SaveProductInOrder_ButtonClick(object sender, RoutedEventArgs e)
         {
-            //if (listOfProductForOrder.Equals(listOfLastAddedProducts))
-            //{
-            //    return; // после сохранения отчистить список
-            //}
 
             if (_orderId == 0)
             {
@@ -169,20 +163,21 @@ namespace TradeCompany_UI
 
             }
 
-            if (!(originalListOfProduct.Equals(bgOrderListModels)) && _orderId > 0) 
+            if (_orderId > 0) 
             {
                 listOfProductForOrder = FillProductListFromDateGrid();
-                newOrder = new OrderModel();
+               
                 FillInfoAboutNewOrder();
                 _orderDataAccess.DeleteOrderListByID(_orderId);
                 
-                _orderDataAccess.AddOrderList(newOrder.OrderListModel);
+                //_orderDataAccess.AddOrderList(newOrder.OrderListModel);
+                _orderDataAccess.UpdateOrdersByID(newOrder);
                 NotifyAboutSuccessfulAdditionInBase();
                 return;
              }
-            
-                _orderDataAccess.AddOrderList(listOfProductForOrder);
-                 NotifyAboutSuccessfulAdditionInBase();
+
+            _orderDataAccess.AddOrderList(listOfProductForOrder);
+            NotifyAboutSuccessfulAdditionInBase();
         }
 
         private void NotifyAboutSuccessfulAdditionInBase()
@@ -270,7 +265,7 @@ namespace TradeCompany_UI
             newOrder.ClientsPhone = _clientFullInfo.Phone;
             newOrder.Summ = CountOrderSumm(listOfProductForOrder);
             newOrder.OrderListModel = listOfProductForOrder;
-            newOrder.AddressID = _addresId;
+            newOrder.AddressID = _clientAdress.ID;
             newOrder.Address = _adress;
             newOrder.Comment = Comment.Text;
         }
@@ -416,6 +411,11 @@ namespace TradeCompany_UI
                 Sum.Text = bgOrderListModels.Sum(s => s.Price * s.Amount).ToString();
 
             }
+        }
+
+        private void DataPicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

@@ -26,7 +26,7 @@
                 <ColumnDefinition Width="165*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Label Grid.Column="2" x:Name="Data"  HorizontalAlignment="Left" Margin="7,0,0,0" VerticalAlignment="Center" FontSize="15" Height="38" Width="127">
-                <DatePicker x:Name="DataPicker" Grid.Column="2"  FirstDayOfWeek="Monday" SelectedDateFormat="Short" />
+                <DatePicker x:Name="DataPicker" Grid.Column="2"  FirstDayOfWeek="Monday" SelectedDateFormat="Short" SelectedDateChanged="DataPicker_SelectedDateChanged" />
             </Label>
             <TextBlock x:Name="ID" HorizontalAlignment="Center" Text="ID Заказа" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="15" Height="83" Width="64"/>
             <TextBlock Grid.Column="1" x:Name="Sum" HorizontalAlignment="Center" Text="Сумма" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="15" Height="82" Width="89"/>

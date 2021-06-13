@@ -193,16 +193,15 @@ namespace TradeCompany_DAL
                     ordersDTO.AddressID,
                     ordersDTO.Comment
                 });
-                query = "exec TradeCompany_DataBase.UpdateOrderListByID @ID, @OrderID, @ProductID, @Amount, @Price";
-                foreach (OrderListsDTO olDTO in ordersDTO.OrderLists)
+                query = "exec TradeCompany_DataBase.AddOrderList @OrderID, @ProductID, @Amount, @Price";
+                foreach (OrderListsDTO orderListDTO in ordersDTO.OrderLists)
                 {
-                    dbConnection.Query(query, new
+                    dbConnection.Query<int>(query, new
                     {
-                        olDTO.ID,
-                        olDTO.OrderID,
-                        olDTO.ProductID,
-                        olDTO.Amount,
-                        olDTO.Price
+                        orderListDTO.OrderID,
+                        orderListDTO.ProductID,
+                        orderListDTO.Amount,
+                        orderListDTO.Price
                     });
                 }
             }
