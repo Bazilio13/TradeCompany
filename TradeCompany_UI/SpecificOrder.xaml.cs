@@ -415,6 +415,7 @@ namespace TradeCompany_UI
                 var index = dgSpecificOrder.SelectedIndex;
                 _deletedProductFromOrder.Add(bgOrderListModels[index]);
                 bgOrderListModels.RemoveAt(index);
+                AddProductInOrder.IsEnabled = true;
                 Sum.Text = bgOrderListModels.Sum(s => s.Price * s.Amount).ToString();
 
             }
