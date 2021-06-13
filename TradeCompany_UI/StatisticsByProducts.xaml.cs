@@ -114,6 +114,7 @@ namespace TradeCompany_UI
             ToOrdersAmount.Text = "";
             FromPrice.Text = "";
             ToPrice.Text = "";
+            ButtonPicked(sender);
         }
 
         private void GroupFilter()
@@ -129,7 +130,6 @@ namespace TradeCompany_UI
             _filter.MaxAmount = ConvertStringToFloat(ToOrdersAmount.Text);
             _filter.MinSum = ConvertStringToFloat(FromPrice.Text);
             _filter.MaxSum = ConvertStringToFloat(ToPrice.Text);
-
             SetFilter();
 
         }
@@ -187,8 +187,7 @@ namespace TradeCompany_UI
             PeriodFor.SelectedDate = _filter.PeriodFor;
             PeriodUntil.SelectedDate = _filter.PeriodUntil;
 
-            SetFilter();
-
+            SetFilter();  
         }
 
         private DateTime? ChangeDateTime(int time)
@@ -203,14 +202,17 @@ namespace TradeCompany_UI
         private void ButtonMonth(object sender, RoutedEventArgs e)
         {
             ButtonDate(31);
+            ButtonPicked(sender);
         }
         private void ButtonYear(object sender, RoutedEventArgs e)
         {
             ButtonDate(365);
+            ButtonPicked(sender);
         }
         private void ButtonToday(object sender, RoutedEventArgs e)
         {
             ButtonDate(0);
+            ButtonPicked(sender);
         }
 
 
@@ -219,26 +221,33 @@ namespace TradeCompany_UI
             GroupFilter();
         }
 
+        private void Period_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ButtonPicked(sender);
+        }
+
         private void ButtonPicked(object sender)
         {
-            ButtonToday.Style = (Style)ButtonToday.FindResource("ResetButtonStyle");
-            ButtonMonth.Style = (Style)ButtonMonth.FindResource("ResetButtonStyle");
-            ButtonYear.Style = (Style)ButtonYear.FindResource("ResetButtonStyle");            
+            ButtonTodayName.Style = (Style)ButtonTodayName.FindResource("ResetButtonStyle");
+            ButtonMonthName.Style = (Style)ButtonMonthName.FindResource("ResetButtonStyle");
+            ButtonYearName.Style = (Style)ButtonYearName.FindResource("ResetButtonStyle");            
 
 
-            if (sender == ButtonToday)
+            if (sender == ButtonTodayName)
             {
-                ButtonToday.Style = (Style)ButtonToday.FindResource("StatButton");
+                ButtonTodayName.Style = (Style)ButtonTodayName.FindResource("StatButton");
             }
-            if (sender == ButtonMonth)
+            if (sender == ButtonMonthName)
             {
-                ButtonMonth.Style = (Style)ButtonMonth.FindResource("StatButton");
+                ButtonMonthName.Style = (Style)ButtonMonthName.FindResource("StatButton");
             }
-            if (sender == ButtonYear)
+            if (sender == ButtonYearName)
             {
-                ButtonYear.Style = (Style)ButtonYear.FindResource("StatButton");
+                ButtonYearName.Style = (Style)ButtonYearName.FindResource("StatButton");
             }  
         }
+
+        
     }
 
 }
