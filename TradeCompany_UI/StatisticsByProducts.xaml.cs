@@ -217,7 +217,28 @@ namespace TradeCompany_UI
         private void GroupFilter(object sender, SelectionChangedEventArgs e)
         {
             GroupFilter();
-        }        
+        }
+
+        private void ButtonPicked(object sender)
+        {
+            ButtonToday.Style = (Style)ButtonToday.FindResource("ResetButtonStyle");
+            ButtonMonth.Style = (Style)ButtonMonth.FindResource("ResetButtonStyle");
+            ButtonYear.Style = (Style)ButtonYear.FindResource("ResetButtonStyle");            
+
+
+            if (sender == ButtonToday)
+            {
+                ButtonToday.Style = (Style)ButtonToday.FindResource("StatButton");
+            }
+            if (sender == ButtonMonth)
+            {
+                ButtonMonth.Style = (Style)ButtonMonth.FindResource("StatButton");
+            }
+            if (sender == ButtonYear)
+            {
+                ButtonYear.Style = (Style)ButtonYear.FindResource("StatButton");
+            }  
+        }
     }
 
 }
