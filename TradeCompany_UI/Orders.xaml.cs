@@ -74,7 +74,7 @@ namespace TradeCompany_UI
 
         private void CreateOrder_Click(object sender, RoutedEventArgs e)
         {
-            _uiNavi.GoToThePage(new SpecificOrder());
+            _uiNavi.GoToThePage(new SpecificOrder(this));
         }
 
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -108,7 +108,7 @@ namespace TradeCompany_UI
             if (dgOrders.CurrentItem != null)
             {
                 OrderModel crntModel = (OrderModel)dgOrders.CurrentItem;
-                _uiNavi.GoToThePage(new SpecificOrder(crntModel.ID));
+                _uiNavi.GoToThePage(new SpecificOrder(crntModel.ID,this));
             }
         }
     }

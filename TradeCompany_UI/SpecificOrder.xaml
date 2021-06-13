@@ -35,7 +35,7 @@
                 <StackPanel Width="122" Margin="0,0,30,0">
                     <TextBlock HorizontalAlignment="Center">Дата заказа:</TextBlock>
                     <Label x:Name="Data" Height="36">
-                        <DatePicker x:Name="DataPicker" FirstDayOfWeek="Monday" SelectedDateFormat="Short" BorderBrush="#FFF3DFC4" Background="#FFF3DFC4"/>
+                        <DatePicker x:Name="DataPicker" FirstDayOfWeek="Monday" SelectedDateFormat="Short" BorderBrush="#FFF3DFC4" Background="#FFF3DFC4" SelectedDateChanged="DataPicker_SelectedDateChanged_1"  />
                     </Label>
                 </StackPanel>
                 <StackPanel>
@@ -44,10 +44,11 @@
                 </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button x:Name="PreviousPage" Content="Назад"  IsEnabled="True" Click="PreviousPage_Click" />
                 <Button x:Name="AddProductInOrder" Content="Сохранить" Click="SaveProductInOrder_ButtonClick" IsEnabled="False" />
             </StackPanel>
         </StackPanel>
-        <DataGrid x:Name="dgSpecificOrder" Loaded="dgSpecificOrder_Loaded" Grid.Row="1" Margin="20,0,20,0" AutoGenerateColumns="False" RowEditEnding="dgSpecificOrder_RowEditEnding" CellEditEnding="dgSpecificOrder_CellEditEnding" CanUserAddRows="False" PreviewKeyDown="dgSpecificOrder_PreviewKeyDown" >
+        <DataGrid x:Name="dgSpecificOrder" Loaded="dgSpecificOrder_Loaded" Grid.Row="1" Margin="20,0,20,0" AutoGenerateColumns="False" CellEditEnding="dgSpecificOrder_CellEditEnding" CanUserAddRows="False" PreviewKeyDown="dgSpecificOrder_PreviewKeyDown" >
             <DataGrid.Columns >
 
                 <DataGridTextColumn Binding="{Binding Path= ProductID}" Header="ID Товара" Width="0.2*" IsReadOnly="True" />
@@ -67,7 +68,7 @@
                 </DockPanel>
                 <DockPanel HorizontalAlignment="Stretch" DockPanel.Dock="Top">
                     <TextBlock HorizontalAlignment="Left" DockPanel.Dock="Top">Комментарий:</TextBlock>
-                    <TextBox x:Name="Comment" Text="" DockPanel.Dock="Bottom" VerticalContentAlignment="Top" TextWrapping="Wrap" AcceptsReturn="True" Height="80" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                    <TextBox x:Name="Comment" Text="" DockPanel.Dock="Bottom" VerticalContentAlignment="Top" TextWrapping="Wrap" AcceptsReturn="True" Height="80" ScrollViewer.VerticalScrollBarVisibility="Auto" SelectionChanged="Comment_SelectionChanged"  />
                 </DockPanel>
             </DockPanel>
             <StackPanel Orientation="Horizontal">

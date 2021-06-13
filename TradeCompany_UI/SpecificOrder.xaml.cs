@@ -24,6 +24,7 @@ namespace TradeCompany_UI
         private int _addresId; 
         private string _adress;
         private float _sum = 0;
+        private Page _previousPage;
         
 
         private OrderModel _orderModel = new OrderModel();
@@ -36,8 +37,9 @@ namespace TradeCompany_UI
 
         private List<OrderListModel> listOfProductForOrder = new List<OrderListModel>();
         private List<OrderListModel> originalListOfProduct = new List<OrderListModel>();
-        public List<AddressModel> listOAddressModel = new List<AddressModel>();
-        public List<ProductModel> _productModel = new List<ProductModel>();
+        private List<AddressModel> listOAddressModel = new List<AddressModel>();
+        private List<ProductModel> _productModel = new List<ProductModel>();
+        private List<OrderListModel> _deletedProductFromOrder = new List<OrderListModel>();
 
         BindingList<OrderListModel> bgOrderListModels = new BindingList<OrderListModel>();
        
@@ -49,15 +51,17 @@ namespace TradeCompany_UI
 
         private UINavi _uinavi;
 
-        public SpecificOrder()
+        public SpecificOrder(Page previosPage = null)
         {
             InitializeComponent();
             _uinavi = UINavi.GetUINavi();
+            _previousPage = previosPage;
         }
-        public SpecificOrder(int id)
+        public SpecificOrder(int id, Page previosPage = null)
         {
             InitializeComponent();
             _orderModel.ID = id;
+            _previousPage = previosPage;
             _uinavi = UINavi.GetUINavi();
             GetOrderById(id);
             _client = _clientsDataAccess.GetClientByClientID(_orderModel.ClientsID);
@@ -87,7 +91,15 @@ namespace TradeCompany_UI
 
         private void ShowInfoAboutClient()
         {
-            ID.Text = "ID заказа : " + _orderModel.ID;
+            if (_orderModel.ID == 0)
+            {
+                ID.Text = "ID заказа: будет присвоен после сохранения";
+            }
+            else
+            {
+                ID.Text = "ID заказа: " + _orderModel.ID;
+            }
+
             ClientName.Text = _client.Name;
             Phone.Text = _client.Phone;
             Button_AddExistingProduct.IsEnabled = true;
@@ -107,24 +119,6 @@ namespace TradeCompany_UI
             dgSpecificOrder.ItemsSource = bgOrderListModels;
         }
 
-        private void dgSpecificOrder_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
-        {
-            //OrderListModel productInOrder = (OrderListModel)e.Row.Item;
-
-            //_orderId = 7;
-            //string nameOfAddedProduct = productInOrder.ProductName;
-            //var addedProduct = _orderDataAccess.GetProductsByLetter(nameOfAddedProduct);
-            //if (addedProduct == null)
-            //{
-            //    //return new window with information
-            //}
-            //addedProduct.Amount = productInOrder.Amount;
-            //addedProduct.OrderID = _orderId;
-
-            //listOfProductForOrder.Add(addedProduct);
-
-        }
-
         private void SaveProductInOrder_ButtonClick(object sender, RoutedEventArgs e)
         {
 
@@ -140,6 +134,8 @@ namespace TradeCompany_UI
                 FillInfoAboutNewOrder();
                 _orderDataAccess.AddOrder(_orderModel);
                 NotifyAboutSuccessfulAdditionInBase();
+                GoToThePreviousPage();
+
                 return;
 
             }
@@ -151,20 +147,30 @@ namespace TradeCompany_UI
                 FillInfoAboutNewOrder();
                 _orderDataAccess.DeleteOrderListByID(_orderModel.ID);
                 SetIdForOrderLists();
-                //_orderDataAccess.AddOrderList(newOrder.OrderListModel);
                 _orderDataAccess.UpdateOrdersByID(_orderModel);
                 NotifyAboutSuccessfulAdditionInBase();
+                IncreaseProductAmountInStockByID(_deletedProductFromOrder);
+                GoToThePreviousPage();
                 return;
              }
 
             _orderDataAccess.AddOrderList(_orderModel.OrderListModel);
             NotifyAboutSuccessfulAdditionInBase();
+            GoToThePreviousPage();
+        }
+
+        private void GoToThePreviousPage()
+        {
+            if (!(_previousPage is null))
+            {
+                _uinavi.GoToThePage(_previousPage);
+            }
         }
 
         private void NotifyAboutSuccessfulAdditionInBase()
         {
             ReduceProductsAmountInStock(_orderModel.OrderListModel);
-            new MessageWindow("Продукты добавлены в базу").ShowDialog();            
+            new MessageWindow("Сохранено").ShowDialog();            
         }
 
         private void FillProductListFromDateGrid()
@@ -181,6 +187,14 @@ namespace TradeCompany_UI
             foreach (var product in orderListModels)
             {
                 _productsDataAccess.ReduceProductAmountInStockByID(product.ProductID, (int)product.Amount);
+            }
+        }
+        private void IncreaseProductAmountInStockByID(List<OrderListModel> deletedProduct)
+        {
+            if (deletedProduct.Count == 0) return;
+            foreach (var product in deletedProduct)
+            {
+                _productsDataAccess.IncreaseProductAmountInStockByID(product.ProductID, (int)product.Amount);
             }
         }
 
@@ -220,7 +234,7 @@ namespace TradeCompany_UI
             specificProduct = new OrderListModel();
             specificProduct.ProductID = productBaseModel.ID;
             specificProduct.ProductName = productBaseModel.Name;
-            specificProduct.Price = _client.Type ? productBaseModel.WholesalePrice : productBaseModel.RetailPrice; //почему не использовали enum, _clientFullInfo.Type переименовать Type
+            specificProduct.Price = _client.Type ? productBaseModel.WholesalePrice : productBaseModel.RetailPrice;
             specificProduct.ProductMeasureUnit = productBaseModel.MeasureUnitName;
             specificProduct.OrderID = _orderId;
             _crntProductBaseModel = productBaseModel;
@@ -272,13 +286,13 @@ namespace TradeCompany_UI
                 return;
             }
 
-            if (_client == null) //перенести в open event
+            if (_client == null) 
             {
                 new MessageWindow("Выберите клиента").ShowDialog();
                 return;
             }
 
-            if (listOAddressModel.Count == 0) //перенести в open event
+            if (listOAddressModel.Count == 0) 
             {
                 new MessageWindow("У клиента нет адресов").ShowDialog();
                 return;
@@ -374,6 +388,11 @@ namespace TradeCompany_UI
 
         private void SendFeedback_Button_Click(object sender, RoutedEventArgs e)
         {
+            if(_orderModel.ID == 0)
+            {
+                new MessageWindow("Сохраните заказ").ShowDialog();
+                return;
+            }
             FillFeedback();
            _FeedbacksDataAccess.AddFeedbackByOrderId(_orderModel.ID, _feedbackModel);
             new MessageWindow("Отзыв отправлен").ShowDialog();
@@ -396,7 +415,9 @@ namespace TradeCompany_UI
             if (e.Key == Key.Back)
             {
                 var index = dgSpecificOrder.SelectedIndex;
+                _deletedProductFromOrder.Add(bgOrderListModels[index]);
                 bgOrderListModels.RemoveAt(index);
+                AddProductInOrder.IsEnabled = true;
                 Sum.Text = bgOrderListModels.Sum(s => s.Price * s.Amount).ToString();
 
             }
@@ -404,7 +425,37 @@ namespace TradeCompany_UI
 
         private void DataPicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
+            var datetime= (DateTime)e.Source;
+            if (!(_orderModel.DateTime.Equals(datetime.Date)))
+            {
+                AddProductInOrder.IsEnabled = true;
+            }
 
+        }
+
+        private void Comment_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            var text = (TextBox)e.Source;
+            if (_orderModel is null) return;
+            if (!(_orderModel.Comment is null)&&(_orderModel.Comment.Equals(text.Text)))
+            {
+                AddProductInOrder.IsEnabled = true;
+                _orderModel.Comment = text.Text;
+            }
+        }
+
+        private void DataPicker_SelectedDateChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+            var datetime = e.Source;
+            if (!(_orderModel.DateTime.ToString().Equals(datetime.ToString())))
+            {
+                AddProductInOrder.IsEnabled = true;
+            }
+        }
+
+        private void PreviousPage_Click(object sender, RoutedEventArgs e)
+        {
+            GoToThePreviousPage();
         }
     }
 }
