@@ -28,10 +28,6 @@ namespace TradeCompany_BLL.Models
             LastOrderDate == model.LastOrderDate;
         }
 
-        public override int GetHashCode()
-        {
-            throw new NotImplementedException();
-        }
     }
 
 }
