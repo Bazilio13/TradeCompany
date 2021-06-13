@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TradeCompany_UI"
       mc:Ignorable="d"
-      Title="StatisticsByClients" Height="777">
+      Title="StatisticsByClients" Height="1777">
 
     <Grid Background="#F9F9F9">
         <Grid.RowDefinitions>
@@ -49,7 +49,7 @@
                 <Line X1="0" Y1="20" X2="0" Y2="540" Stroke="#6E304B" StrokeThickness="2"/>
             </StackPanel>
 
-            <StackPanel Orientation="Vertical" Width="188" DockPanel.Dock="Right" Margin="0,20,0,0">
+            <StackPanel Orientation="Vertical" Width="188" DockPanel.Dock="Right" Margin="29,0,0,0">
                 <TextBlock HorizontalAlignment="Center" FontSize="18" FontWeight="Bold" Margin="0,0,0,35">Фильтр</TextBlock>
 
                 <ComboBox x:Name="ProductGroupSelect" HorizontalAlignment="Center" Margin="0,0,0,25" SelectedIndex="0" Height="22" Width="150" Grid.RowSpan="2" IsEditable="True" />
