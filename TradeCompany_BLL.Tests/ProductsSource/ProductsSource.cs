@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TradeCompany_BLL.Models;
+using TradeCompany_BLL.Tests.Mocks;
 using TradeCompany_DAL.DTOs;
 
 namespace TradeCompany_BLL.Tests.ProductsSource
@@ -80,6 +81,32 @@ namespace TradeCompany_BLL.Tests.ProductsSource
                     new List<ProductDTO>{},
                     new List<ProductBaseModel>{ }
             };
+        }
+    }
+
+    public class MapProductDTOToProductModelSource : IEnumerable
+    {
+        public IEnumerator GetEnumerator()
+        {
+            yield return new object[] { new List<ProductModel>() { ProductModelMock.models[0] }, new List<ProductDTO>() { ProductsDTOMock.DTOsFromDB[0] } };
+            yield return new object[] { new List<ProductModel>() { ProductModelMock.models[1] }, new List<ProductDTO>() { ProductsDTOMock.DTOsFromDB[1] } };
+            yield return new object[] { new List<ProductModel>() { ProductModelMock.models[2] }, new List<ProductDTO>() { ProductsDTOMock.DTOsFromDB[2] } };
+            yield return new object[] { new List<ProductModel>() { ProductModelMock.models[3] }, new List<ProductDTO>() { ProductsDTOMock.DTOsFromDB[3] } };
+            yield return new object[] { new List<ProductModel>(), new List<ProductDTO>() };
+
+        }
+    }
+
+    public class GetAllProductsByAllParamsSource : IEnumerable
+    {
+        public IEnumerator GetEnumerator()
+        {
+            yield return new object[] { "input", 1, 20, 50, 100, 300, 200, 400, DateTimeMock.DateTimes[0], DateTimeMock.MaxDataTimes[0],
+                 new List<ProductDTO>() { ProductsDTOMock.DTOsFromDB[0] }, new List<ProductBaseModel>() { ProductBaseModelMock.Models[0]} };
+            yield return new object[] { "inputs", 5, 21, 50, 105, 320, 200, 4, DateTimeMock.DateTimes[1], DateTimeMock.MaxDataTimes[1],
+                 new List<ProductDTO>() { ProductsDTOMock.DTOsFromDB[1] }, new List<ProductBaseModel>() { ProductBaseModelMock.Models[1]} };
+            yield return new object[] { "inputtt", 3, 12, 55, 100, 300, 250, 40, DateTimeMock.DateTimes[2], DateTimeMock.MaxDataTimes[2],
+                 new List<ProductDTO>() { ProductsDTOMock.DTOsFromDB[2] }, new List<ProductBaseModel>() { ProductBaseModelMock.Models[2]} };
         }
     }
 }
