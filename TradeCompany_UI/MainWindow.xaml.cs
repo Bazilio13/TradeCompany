@@ -40,7 +40,9 @@ namespace TradeCompany_UI
 
         private void MainButton_Click(object sender, RoutedEventArgs e)
         {
-            _uiNavi.GoToThePage(new StatisticsByProducts());
+            _uiNavi.GoToThePage(new StatisticsByProducts());      
+            this.Title = "Статистика";
+            ButtonPicked(StatisticsButton);
         }
         
 

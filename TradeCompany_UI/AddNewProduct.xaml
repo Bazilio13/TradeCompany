@@ -19,7 +19,7 @@
 
             <TextBlock x:Name="PageTitle" HorizontalAlignment="Center" Text="Добавление товара" TextWrapping="Wrap" VerticalAlignment="Top" Height="28" Width="Auto" FontSize="22" Margin="0,-2,0,0"/>
             <TextBox x:Name="ID_Text" HorizontalAlignment="Left" Margin="51,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="270" SelectionOpacity="1" FontSize="16" IsEnabled="False" Height="25"/>
-            <TextBox x:Name="Name_Text" MaxLength="250" HorizontalAlignment="Left" Margin="51,110,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="563" SelectionOpacity="1" FontSize="16" Height="Auto" TextChanged="Name_Text_TextChanged"/>
+            <TextBox x:Name="Name_Text" MaxLength="250" HorizontalAlignment="Left" Margin="51,110,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="563" SelectionOpacity="1" FontSize="16" Height="25" TextChanged="Name_Text_TextChanged"/>
             <ComboBox x:Name="Category" HorizontalAlignment="Left" Margin="51,158,0,0" VerticalAlignment="Top" Width="423" Height="24" IsEditable="True" DropDownClosed="Category_DropDownClosed" />
             <TextBlock HorizontalAlignment="Left" Margin="51,42,0,0" Text="ID" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Height="21" Width="23"/>
             <TextBlock HorizontalAlignment="Left" Margin="51,89,0,0" Text="Наименование*" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.543,0.551" FontSize="16" Height="21" Width="135"/>
@@ -41,20 +41,34 @@
             <TextBlock HorizontalAlignment="Left" Grid.Row="1" Margin="51,1,0,0" Text="Розничная цена*" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.541,0.711" FontSize="16" Height="21" Width="125"/>
             <TextBlock HorizontalAlignment="Left" Grid.Row="1" Margin="51,46,0,0" Text="Количество*" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.541,0.711" FontSize="16" Height="21" Width="113"/>
             <TextBlock HorizontalAlignment="Left" Grid.Row="1" Margin="344,46,0,0" Text="Единица измерения*" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.541,0.711" FontSize="16" Height="21" Width="154"/>
+            <StackPanel Grid.Row="2" Margin="51,0,0,0">
+                <StackPanel >
+                    <DockPanel>
+                        <TextBlock HorizontalAlignment="Left" Text="Описание / Характеристика" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.541,0.711" FontSize="16" Height="21" Width="227" />
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                            <TextBlock HorizontalAlignment="Left" Text="Осталось:" TextWrapping="Wrap" VerticalAlignment="Top" FontStyle="Italic" FontSize="10" Height="12" Width="48"/>
+                            <TextBlock x:Name="DescriptionLimit" HorizontalAlignment="Left" Text="500" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="10" Height="12" Width="20" IsEnabled="False" FontStyle="Italic" />
+                        </StackPanel>
 
+                    </DockPanel>
+                    <TextBox x:Name="Text_Description" MaxLength="500" HorizontalAlignment="Left" Margin="0,0,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="563" SelectionOpacity="1" FontSize="16" Height="Auto" TextChanged="Text_Description_TextChanged"/>
+                </StackPanel>
 
-            <TextBox x:Name="Text_Description" Grid.Row="2" MaxLength="500" HorizontalAlignment="Left" Margin="51,22,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="563" SelectionOpacity="1" FontSize="16" Height="Auto" TextChanged="Text_Description_TextChanged"/>
-            <TextBlock HorizontalAlignment="Left" Grid.Row="2" Margin="51,0,0,0" Text="Описание / Характеристика" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.541,0.711" FontSize="16" Height="21" Width="227" />
-
-            <TextBlock HorizontalAlignment="Left" Grid.Row="2" Margin="51,47,0,0" Text="Комментарии" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.541,0.711" FontSize="16" Height="21" Width="109" Grid.RowSpan="2" />
-            <TextBox x:Name="Text_Comments" MaxLength="500" Grid.Row="3" HorizontalAlignment="Left" Margin="51,22,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="563" SelectionOpacity="1" FontSize="16" Height="Auto" TextChanged="Text_Comments_TextChanged"/>
+                <StackPanel>
+                    <DockPanel>
+                        <TextBlock HorizontalAlignment="Left" Text="Комментарии" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.541,0.711" FontSize="16" Height="21" Width="109" Grid.RowSpan="2" />
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                            <TextBlock HorizontalAlignment="Left" Text="Осталось:" TextWrapping="Wrap" VerticalAlignment="Top" FontStyle="Italic" FontSize="10" Height="12" Width="48"/>
+                            <TextBlock x:Name="CommentsLimit" HorizontalAlignment="Left" Text="500" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="10" Width="21" IsEnabled="False" FontStyle="Italic" Height="12"/>
+                        </StackPanel>
+                    </DockPanel>
+                    <TextBox x:Name="Text_Comments" MaxLength="500" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="563" SelectionOpacity="1" FontSize="16" Height="Auto" TextChanged="Text_Comments_TextChanged"/>
+                </StackPanel>
+            </StackPanel>
+            
             <Button x:Name="Buton_Cancel" Grid.Row="4" Content="Назад" HorizontalAlignment="Left" Margin="51,26,0,0" VerticalAlignment="Top" Height="43" Width="162" FontSize="16" Click="Buton_Cancel_Click"/>
             <Button x:Name="Button_Save" Grid.Row="4" Content="Сохранить" HorizontalAlignment="Left" Margin="250,26,0,0" VerticalAlignment="Top" Height="43" Width="164" FontSize="16" Click="Button_Save_Click"/>
-
-            <TextBlock x:Name="DescriptionLimit" HorizontalAlignment="Left" Margin="594,9,0,0" Grid.Row="2" Text="500" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="10" Height="12" Width="20" IsEnabled="False" FontStyle="Italic" />
-            <TextBlock x:Name="CommentsLimit" HorizontalAlignment="Left" Margin="594,9,0,0" Grid.Row="3" Text="500" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="10" Width="21" IsEnabled="False" FontStyle="Italic" Height="12"/>
-            <TextBlock HorizontalAlignment="Left" Margin="546,9,0,0" Grid.Row="2" Text="Осталось:" TextWrapping="Wrap" VerticalAlignment="Top" FontStyle="Italic" FontSize="10" Height="12" Width="48"/>
-            <TextBlock HorizontalAlignment="Left" Margin="546,9,0,0" Grid.Row="3" Text="Осталось:" TextWrapping="Wrap" VerticalAlignment="Top" FontStyle="Italic" FontSize="10" Height="12" Width="48"/>
+            
             <TextBlock x:Name="NameLimit" HorizontalAlignment="Left" Margin="594,97,0,0" Text="250" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="10" Height="12" Width="21" IsEnabled="False" FontStyle="Italic" RenderTransformOrigin="0.181,0.406"/>
             <TextBlock HorizontalAlignment="Left" Margin="546,97,0,0" Text="Осталось:" TextWrapping="Wrap" VerticalAlignment="Top" FontStyle="Italic" FontSize="10" Height="12" Width="48"/>
             <Button x:Name="Button_Delete" Grid.Row="4" Content="Удалить" HorizontalAlignment="Left" Margin="450,26,0,0" VerticalAlignment="Top" Height="43" Width="164" FontSize="16" Click="Button_Delete_Click"/>
