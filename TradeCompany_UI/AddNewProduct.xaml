@@ -46,7 +46,7 @@
             <TextBox x:Name="Text_Description" Grid.Row="2" MaxLength="500" HorizontalAlignment="Left" Margin="51,22,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="563" SelectionOpacity="1" FontSize="16" Height="Auto" TextChanged="Text_Description_TextChanged"/>
             <TextBlock HorizontalAlignment="Left" Grid.Row="2" Margin="51,0,0,0" Text="Описание / Характеристика" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.541,0.711" FontSize="16" Height="21" Width="227" />
 
-            <TextBlock HorizontalAlignment="Left" Grid.Row="3" Margin="51,0,0,0" Text="Комментарии" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.541,0.711" FontSize="16" Height="21" Width="101" />
+            <TextBlock HorizontalAlignment="Left" Grid.Row="2" Margin="51,47,0,0" Text="Комментарии" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.541,0.711" FontSize="16" Height="21" Width="109" Grid.RowSpan="2" />
             <TextBox x:Name="Text_Comments" MaxLength="500" Grid.Row="3" HorizontalAlignment="Left" Margin="51,22,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="563" SelectionOpacity="1" FontSize="16" Height="Auto" TextChanged="Text_Comments_TextChanged"/>
             <Button x:Name="Buton_Cancel" Grid.Row="4" Content="Назад" HorizontalAlignment="Left" Margin="51,26,0,0" VerticalAlignment="Top" Height="43" Width="162" FontSize="16" Click="Buton_Cancel_Click"/>
             <Button x:Name="Button_Save" Grid.Row="4" Content="Сохранить" HorizontalAlignment="Left" Margin="250,26,0,0" VerticalAlignment="Top" Height="43" Width="164" FontSize="16" Click="Button_Save_Click"/>
