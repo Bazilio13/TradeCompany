@@ -15,7 +15,7 @@ namespace TradeCompany_BLL.Models
         public string ClientsPhone { get; set; }
         public int AddressID { get; set; }
         public string Address { get; set; }
-        public int Summ { get; set; }
+        public float Summ { get; set; }
         public string Comment { get; set; }
         public List<OrderListModel> OrderListModel { get; set; }
 

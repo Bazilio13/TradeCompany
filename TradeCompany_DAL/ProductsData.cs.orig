@@ -136,19 +136,8 @@ namespace TradeCompany_DAL
             return crntProduct;
         }
 
-        public int GetLastProductID()
-        {
-            int output;
-            var p = new DynamicParameters();
-            p.Add("Output", dbType: DbType.Int32, direction: ParameterDirection.Output);
-            string query = "TradeCompany_DataBase.GetLastProductID";
-            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
-            {
-                dbConnection.Query<int>(query, p, commandType: CommandType.StoredProcedure);
-                output = p.Get<int>("Output");
-            }
-            return output;
-        }
+<<<<<<< HEAD
+
         public List<ProductDTO> GetProductsByLetter(string inputString)
         {
             List<ProductDTO> products = new List<ProductDTO>();
@@ -182,6 +171,20 @@ namespace TradeCompany_DAL
                     splitOn: "ID");
             }
             return products;
+=======
+        public int GetLastProductID()
+        {
+            int output;
+            var p = new DynamicParameters();
+            p.Add("Output", dbType: DbType.Int32, direction: ParameterDirection.Output);
+            string query = "TradeCompany_DataBase.GetLastProductID";
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                dbConnection.Query<int>(query, p, commandType: CommandType.StoredProcedure);
+                output = p.Get<int>("Output");
+            }
+            return output;
+>>>>>>> main
         }
 
         public void DeleteProductByID(int id)
@@ -274,16 +277,6 @@ namespace TradeCompany_DAL
                 measureUnits = dbConnection.Query<MeasureUnitsDTO>(query).AsList<MeasureUnitsDTO>();
             }
             return measureUnits;
-        }
-        public void ReduceProductAmountInStockByID(int id , int amount)
-        {
-            string query;
-            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
-            {
-                query = "exec [TradeCompany_DataBase].[ReduceProductAmountInStockByID] @id , @amount";
-                dbConnection.Query(query, new { id , amount });
-            }
-
         }
     }
 }

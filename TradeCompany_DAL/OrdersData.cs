@@ -70,6 +70,22 @@ namespace TradeCompany_DAL
             }
             return orderListsDTO;
         }
+        public void AddSpecificProductInOrder(SpecificProductDTO specificProductDTO)
+        {
+            string query;
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                query = "exec TradeCompany_DataBase.AddOrderList @OrderID, @ProductID, @Amount, @Price";
+                dbConnection.Query(query, new
+                {
+                    specificProductDTO.OrderID,
+                    specificProductDTO.ProductID,
+                    specificProductDTO.Amount,
+                    specificProductDTO.Price
+                });
+            }
+            
+        }
 
         public void DeleteOrderByID(int id)
         {
@@ -177,16 +193,15 @@ namespace TradeCompany_DAL
                     ordersDTO.AddressID,
                     ordersDTO.Comment
                 });
-                query = "exec TradeCompany_DataBase.UpdateOrderListByID @ID, @OrderID, @ProductID, @Amount, @Price";
-                foreach (OrderListsDTO olDTO in ordersDTO.OrderLists)
+                query = "exec TradeCompany_DataBase.AddOrderList @OrderID, @ProductID, @Amount, @Price";
+                foreach (OrderListsDTO orderListDTO in ordersDTO.OrderLists)
                 {
-                    dbConnection.Query(query, new
+                    dbConnection.Query<int>(query, new
                     {
-                        olDTO.ID,
-                        olDTO.OrderID,
-                        olDTO.ProductID,
-                        olDTO.Amount,
-                        olDTO.Price
+                        orderListDTO.OrderID,
+                        orderListDTO.ProductID,
+                        orderListDTO.Amount,
+                        orderListDTO.Price
                     });
                 }
             }
@@ -211,6 +226,7 @@ namespace TradeCompany_DAL
             {
                 orderList.productDTO = product;
                 crntOrder.OrderLists.Add(orderList);
+                
             }
             return order;
         }

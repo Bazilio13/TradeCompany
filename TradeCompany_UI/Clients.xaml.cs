@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TradeCompany_BLL;
 using TradeCompany_BLL.Models;
+using TradeCompany_UI.Interfaces;
 
 namespace TradeCompany_UI
 {
@@ -77,7 +78,7 @@ namespace TradeCompany_UI
             int? sale = null;
             if (CheckBoxF.IsChecked != CheckBoxU.IsChecked)
             {
-                if(CheckBoxF.IsChecked == true)
+                if (CheckBoxF.IsChecked == true)
                 {
                     person = 1;
                 }
@@ -120,20 +121,31 @@ namespace TradeCompany_UI
         }
 
 
-        private void dgClientsTable_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            DataGrid dg = (DataGrid)sender;
-            ClientBaseModel item = (ClientBaseModel)dg.CurrentItem;
-            if(item != null)
-            {
-                int id = item.ID;
-                _uiNavi.GoToThePage(new OneClient(id, this));
-            }
-        }
-
         private void AddNewClient(object sender, RoutedEventArgs e)
         {
             _uiNavi.GoToThePage(new OneClient(this));
-        }        
+        }
+
+
+        private void dgClientsTable_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            DataGrid dg = (DataGrid)sender;
+            ClientBaseModel item = (ClientBaseModel)dg.CurrentItem;
+            if (_previosPage is IClientAddable)
+            {
+                ClientBaseModel clientBaseModel = (ClientBaseModel)dgClientsTable.SelectedItem;
+                IClientAddable clientAddable = (IClientAddable)_previosPage;
+                clientAddable.AddClientToOrder(clientBaseModel);
+                _uiNavi.GoToThePage(_previosPage);
+            }
+            else
+            {
+                if (item != null)
+                {
+                    int id = item.ID;
+                    _uiNavi.GoToThePage(new OneClient(id, this));
+                }
+            }
+        }
     }
 }

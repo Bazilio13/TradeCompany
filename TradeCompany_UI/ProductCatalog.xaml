@@ -25,7 +25,7 @@
                     <Button x:Name="AddProduct"  DockPanel.Dock="Right" Content="Добавить товар" Click="AddProductButton_Click" HorizontalAlignment="Right"/>
                 </DockPanel>
 
-                <DataGrid x:Name="dgProductCatalog" Grid.Row="1" AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" SelectionMode="Single" MouseDoubleClick="dgProductCatalog_MouseDoubleClick" ScrollViewer.CanContentScroll="True">
+                <DataGrid x:Name="dgProductCatalog" Grid.Row="1" AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" SelectionMode="Extended" MouseDoubleClick="dgProductCatalog_MouseDoubleClick" ScrollViewer.CanContentScroll="True" >
 
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding ="{Binding Path = ID}" IsReadOnly="True" Header="ID" Width="58" MinWidth="58"/>
@@ -43,7 +43,7 @@
        
 
         <DockPanel  Grid.Column="1" Margin="0,15,0,0" Width="221">
-            <Button Margin="10,14,10,0" Style="{StaticResource ButtonPotentialClients}" Width="191" DockPanel.Dock="Top" Content="Список потенцеальных&#xA;            клиентов" Height="55" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+            <Button Margin="10,14,10,0" Style="{StaticResource ButtonPotentialClients}" Width="191" DockPanel.Dock="Top" Content="Список потенцеальных&#xA;            клиентов" Height="55" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Click="Button_Click"/>
             <StackPanel DockPanel.Dock="Left" Width="4">
                 <Line X1="0" Y1="20" X2="0" Y2="540" Stroke="#6E304B" StrokeThickness="2"/>
             </StackPanel>

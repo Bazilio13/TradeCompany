@@ -17,7 +17,8 @@ namespace TradeCompany_BLL.Tests.Mocks
         new ProductDTO { ID = 3, Name = "thirdN", StockAmount = 20, MeasureUnit = 2, MeasureUnitName = "secondMU", WholesalePrice = 10, RetailPrice = 5,
             LastSupplyDate = DateTimeMock.DateTimes[2], Comments = null, Description = null},
         new ProductDTO { ID = 4, Name = "forthN", StockAmount = 30, MeasureUnit = 3, MeasureUnitName = "thirdMU", WholesalePrice = 20, RetailPrice = 15,
-            LastSupplyDate = DateTimeMock.DateTimes[2], Comments = null, Description = null}
+            LastSupplyDate = DateTimeMock.DateTimes[2], Comments = null, Description = null},
+        new ProductDTO { }
         };
     }
 }

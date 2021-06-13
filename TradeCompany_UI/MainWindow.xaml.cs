@@ -26,6 +26,9 @@ namespace TradeCompany_UI
             InitializeComponent();
             _uiNavi = UINavi.GetUINavi();
             _uiNavi.MainWindow = this;
+            _uiNavi.GoToThePage(new StatisticsByProducts());
+            this.Title = "Статистика";
+            ButtonPicked(StatisticsButton);
         }
 
         private void OrdersButton_Click(object sender, RoutedEventArgs e)
@@ -39,6 +42,7 @@ namespace TradeCompany_UI
         {
             _uiNavi.GoToThePage(new StatisticsByProducts());
         }
+        
 
         private void ClientsButton_Click(object sender, RoutedEventArgs e)
         {
