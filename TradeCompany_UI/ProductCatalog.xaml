@@ -18,7 +18,7 @@
             <ColumnDefinition Width="250"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <ScrollViewer>
-            <StackPanel x:Name="ProductCatalogPanel" Grid.Column="0" Orientation="Vertical" Margin="20,70,20,0" MouseDown="ProductCatalogPanel_MouseDown">
+            <StackPanel x:Name="ProductCatalogPanel" Grid.Column="0" Orientation="Vertical" Margin="20,70,20,20" MouseDown="ProductCatalogPanel_MouseDown">
                 <DockPanel Margin="0,0,0,20">
                     <Image Source="Pictures/search.png" Width="29" Height="29" Margin="0,5,0,0"></Image>
                     <TextBox x:Name="ProductSearch" DockPanel.Dock="Left" BorderBrush="#6E304B" Background="#F9F9F9" Width="191" Height="22" TextChanged="ProductSearch_TextChange" HorizontalContentAlignment="Left" BorderThickness="0,0,0,1" Cursor="Hand"/>

@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TradeCompany_UI"
       mc:Ignorable="d"
-      Title="StatisticsByClients" Height="1777">
+      Title="StatisticsByClients">
 
     <Grid Background="#F9F9F9">
         <Grid.RowDefinitions>
@@ -17,7 +17,7 @@
         </Grid.ColumnDefinitions>
 
         <ScrollViewer>
-            <StackPanel Grid.Column="0" Orientation="Vertical" Margin="20,70,20,0">
+            <StackPanel Grid.Column="0" Orientation="Vertical" Margin="20,70,20,20">
                 <DockPanel Margin="0,0,0,20" HorizontalAlignment="Right">
                     <Button x:Name="StatisticsByProducts" Content="ПО ТОВАРАМ" Margin="0,0,20,0" Click="StatisticsByProductsButton_Click"/>
                     <Button Content="ПО КЛИЕНТАМ" Style="{StaticResource StatButton}"/>
@@ -31,7 +31,7 @@
                     <Button Content="Сегодня" Click="TodayButtonClick"/>
                 </DockPanel>
 
-                <DataGrid x:Name="dgClientsStat" Grid.Row="1" AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" ScrollViewer.CanContentScroll="True" FontSize="12" MouseDoubleClick="dgClientsStat_MouseDoubleClick">
+                <DataGrid x:Name="dgClientsStat" AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" FontSize="12" MouseDoubleClick="dgClientsStat_MouseDoubleClick" ScrollViewer.CanContentScroll="True">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding ="{Binding Path = ID}" IsReadOnly="True" Header="ID" Width="50" MinWidth="50"/>
                         <DataGridTextColumn Binding ="{Binding Path = Name}" IsReadOnly="True" Header="Клиент" Width="125" MinWidth="125"/>
@@ -81,7 +81,7 @@
                 
                 
 
-                <DockPanel  Margin="0,0,0,20">
+                <DockPanel Margin="0,0,0,20">
                     <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" FontSize="14">Количество заказов:</TextBlock>
                     <StackPanel DockPanel.Dock="Right">
                         <TextBlock Margin="30,0,0,0">до</TextBlock>
