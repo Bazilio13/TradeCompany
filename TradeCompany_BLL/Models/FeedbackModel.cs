@@ -14,5 +14,14 @@ namespace TradeCompany_BLL.Models
         public int ClientID { get; set; }
         public int OrderID { get; set; }
 
+        public override bool Equals(object obj)
+        {
+            return obj is FeedbackModel model &&
+                   ID == model.ID &&
+                   DateTime == model.DateTime &&
+                   Text == model.Text &&
+                   ClientID == model.ClientID &&
+                   OrderID == model.OrderID;
+        }
     }
 }

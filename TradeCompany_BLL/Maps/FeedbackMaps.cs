@@ -9,7 +9,7 @@ using TradeCompany_DAL.DTOs;
 
 namespace TradeCompany_BLL.Maps
 {
-    class FeedbackMaps
+    public class FeedbackMaps
     {
         public FeedBacksDTO MapsFeedbackModelToFeedbackDTO(FeedbackModel feedback)
         {
