@@ -30,6 +30,7 @@
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="Foreground" Value="#6E304B" />
+        <Setter Property="Cursor" Value="Hand"/>
     </Style>
 
     <Style TargetType="Button" x:Key="ButtonPotentialClients">
@@ -60,6 +61,7 @@
         <Setter Property="FontSize" Value="10"/>
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="Foreground" Value="#6E304B" />
+        <Setter Property="Cursor" Value="Hand"/>
     </Style>
     
     <Style TargetType="Button" x:Key="StatButton">
@@ -90,6 +92,7 @@
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="Foreground" Value="#F3DFC4" />
+        <Setter Property="Cursor" Value="Hand"/>
     </Style>
 
     <Style TargetType="Button" x:Key="detailsButton">

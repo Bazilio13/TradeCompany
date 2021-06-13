@@ -37,7 +37,7 @@ namespace TradeCompany_UI
 
         private void MainButton_Click(object sender, RoutedEventArgs e)
         {
-            _uiNavi.GoToThePage(new StartPage());
+            _uiNavi.GoToThePage(new StatisticsByProducts());
         }
 
         private void ClientsButton_Click(object sender, RoutedEventArgs e)

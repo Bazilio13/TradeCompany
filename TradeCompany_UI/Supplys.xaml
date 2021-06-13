@@ -21,7 +21,7 @@
             <StackPanel Grid.Column="0" Orientation="Vertical" Margin="20,70,20,0">
                 <DockPanel Margin="0,0,0,20">
                     <Image Source="Pictures/search.png" Width="29" Height="29" Margin="0,5,0,0"></Image>
-                    <TextBox x:Name="SearchBox" DockPanel.Dock="Left" BorderBrush="#6E304B" Background="#F9F9F9" Width="191" Height="22" TextChanged="SearchBox_TextChanged" HorizontalContentAlignment="Left" BorderThickness="0,0,0,1"/>
+                    <TextBox x:Name="SearchBox" DockPanel.Dock="Left" BorderBrush="#6E304B" Background="#F9F9F9" Width="191" Height="22" TextChanged="SearchBox_TextChanged" HorizontalContentAlignment="Left" BorderThickness="0,0,0,1" Cursor="Hand"/>
 
                     <Button x:Name="CreateSupply"  DockPanel.Dock="Right" Content="Новая поставка" Click="CreateSupply_Click" HorizontalAlignment="Right"/>
                 </DockPanel>

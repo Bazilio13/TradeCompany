@@ -22,7 +22,7 @@
             <StackPanel Grid.Column="0" Orientation="Vertical" Margin="20,70,20,0">
                 <DockPanel Margin="0,0,0,20">
                     <Image Source="Pictures/search.png" Width="29" Height="29" Margin="0,5,0,0"></Image>
-                    <TextBox x:Name="ClientFiltr" DockPanel.Dock="Left" BorderBrush="#6E304B" Background="#F9F9F9" Width="191" Height="22" HorizontalContentAlignment="Left" BorderThickness="0,0,0,1" TextChanged="textInput"/>
+                    <TextBox x:Name="ClientFiltr"  DockPanel.Dock="Left" BorderBrush="#6E304B" Background="#F9F9F9" Width="191" Height="22" HorizontalContentAlignment="Left" BorderThickness="0,0,0,1" TextChanged="textInput" Cursor="Hand"/>
                     <Button x:Name="ButtonNewClient" DockPanel.Dock="Right" Content="Новый клиент" Click="AddNewClient" HorizontalAlignment="Right"/>
                 </DockPanel>
 

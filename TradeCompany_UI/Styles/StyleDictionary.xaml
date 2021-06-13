@@ -9,7 +9,8 @@
             <Setter Property="Width" Value="105"/>
             <Setter Property="BorderBrush" Value="#F9F9F9"/>
             <Setter Property="Background" Value="#F9F9F9"/>
-        </Style.Setters>
+            <Setter Property="Cursor" Value="Hand"/>            
+        </Style.Setters>        
     </Style>
 
     <Style TargetType="Image" x:Key="ButtonNavigationIcons">
@@ -23,7 +24,7 @@
     <Style TargetType="TextBlock" x:Key="ButtonNavigationText">
         <Style.Setters>
             <Setter Property="Margin" Value="0,3,0,0"/>
-            <Setter Property="TextBlock.FontWeight" Value="500"/>
+            <Setter Property="TextBlock.FontWeight" Value="DemiBold"/>
             <Setter Property="TextBlock.FontSize" Value="18"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
         </Style.Setters>
