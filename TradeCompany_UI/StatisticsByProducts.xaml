@@ -61,7 +61,7 @@
                 <DataGrid x:Name ="DGProducts" Grid.Row="1" AutoGenerateColumns="False" CanUserAddRows ="False" CanUserDeleteRows="False" ScrollViewer.CanContentScroll="True">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding ="{Binding Path = ID}" IsReadOnly="True" Header="ID" Width="20" MinWidth="30"/>
-                        <DataGridTextColumn Binding ="{Binding Path = Name}" IsReadOnly="True" Header="Продукт" Width="125" MinWidth="125"/>
+                        <DataGridTextColumn Binding ="{Binding Path = Name}" IsReadOnly="True" Header="Товар" Width="125" MinWidth="125"/>
                         <DataGridTextColumn Binding ="{Binding Path = Amount}" IsReadOnly="True" Header="Количество (заказов)" Width="103" MinWidth="103"/>
                         <DataGridTextColumn Binding ="{Binding Path = Summ }" IsReadOnly="True" Header="Сумма" Width="82" MinWidth="82" />
                         <DataGridTextColumn Binding ="{Binding Path = StockAmount}" IsReadOnly="True" Header="Остаток" Width="82" MinWidth="82"/>
