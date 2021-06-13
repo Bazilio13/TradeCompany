@@ -29,12 +29,12 @@
 
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding ="{Binding Path = ID}" IsReadOnly="True" Header="ID" Width="58" MinWidth="58"/>
-                        <DataGridTextColumn Binding ="{Binding Path = Name}"  IsReadOnly="True" Header="Наименование" Width="103" MinWidth="103"/>
+                        <DataGridTextColumn Binding ="{Binding Path = Name}"  IsReadOnly="True" Header="Наименование" Width="*" MinWidth="103"/>
                         <DataGridTextColumn Binding ="{Binding Path = StockAmount}" IsReadOnly="True" Header="Остаток" Width="82" MinWidth="82"/>
                         <DataGridTextColumn Binding ="{Binding Path = MeasureUnitName}" IsReadOnly="True" Header="Единица измерения" Width="82" MinWidth="82" />
                         <DataGridTextColumn Binding ="{Binding Path = WholesalePrice}" IsReadOnly="True" Header="Цена опт." Width="82" MinWidth="82"/>
                         <DataGridTextColumn Binding ="{Binding Path = RetailPrice}" IsReadOnly="True" Header="Цена розн." Width="82" MinWidth="82"/>
-                        <DataGridTextColumn Binding ="{Binding StringFormat = dd MMMM yyyy, ConverterCulture=ru, Path = LastSupplyDate}" IsReadOnly="True" Header="Дата последней поставки" Width="*" MinWidth="82"/>
+                        <DataGridTextColumn Binding ="{Binding StringFormat = dd MMMM yyyy, ConverterCulture=ru, Path = LastSupplyDate}" IsReadOnly="True" Header="Дата последней поставки" Width="100" MinWidth="100"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
