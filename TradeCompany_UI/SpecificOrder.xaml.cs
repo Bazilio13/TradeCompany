@@ -88,7 +88,7 @@ namespace TradeCompany_UI
 
         private void ShowInfoAboutClient()
         {
-            ID.Text = "ID заказа : " + _orderModel.ID;
+            ID.Text = "ID заказа: " + _orderModel.ID;
             ClientName.Text = _client.Name;
             Phone.Text = _client.Phone;
             Button_AddExistingProduct.IsEnabled = true;
@@ -153,7 +153,7 @@ namespace TradeCompany_UI
         private void NotifyAboutSuccessfulAdditionInBase()
         {
             ReduceProductsAmountInStock(_orderModel.OrderListModel);
-            new MessageWindow("Продукты добавлены в базу").ShowDialog();            
+            new MessageWindow("Сохранено").ShowDialog();            
         }
 
         private void FillProductListFromDateGrid()
