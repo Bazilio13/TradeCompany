@@ -24,7 +24,7 @@ namespace TradeCompany_UI
         private int _addresId; 
         private string _adress;
         private float _sum = 0;
-        
+        //private string _oldComment = "";
 
         private OrderModel _orderModel = new OrderModel();
         private OrderListModel specificProduct;
@@ -408,6 +408,16 @@ namespace TradeCompany_UI
         private void DataPicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void Comment_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            var text = (TextBox)e.Source;
+            if (!(_orderModel.Comment.Equals(text.Text)))
+            {
+                AddProductInOrder.IsEnabled = true;
+                _orderModel.Comment = text.Text;
+            }
         }
     }
 }

@@ -67,7 +67,7 @@
                 </DockPanel>
                 <DockPanel HorizontalAlignment="Stretch" DockPanel.Dock="Bottom">
                     <TextBlock HorizontalAlignment="Left" DockPanel.Dock="Top">Комментарий:</TextBlock>
-                    <TextBox x:Name="Comment" Text="" DockPanel.Dock="Bottom" VerticalContentAlignment="Top" TextWrapping="Wrap" AcceptsReturn="True" Height="80" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                    <TextBox x:Name="Comment" Text="" DockPanel.Dock="Bottom" VerticalContentAlignment="Top" TextWrapping="Wrap" AcceptsReturn="True" Height="80" ScrollViewer.VerticalScrollBarVisibility="Auto" SelectionChanged="Comment_SelectionChanged"  />
                 </DockPanel>
             </DockPanel>
             <StackPanel Orientation="Horizontal">
