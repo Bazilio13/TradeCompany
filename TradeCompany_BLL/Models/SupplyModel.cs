@@ -17,5 +17,25 @@ namespace TradeCompany_BLL.Models
         {
             SupplyListModel = new List<SupplyListModel>();
         }
+
+        public override bool Equals(object obj)
+        {
+            bool result = true;
+            if (obj is SupplyModel model && SupplyListModel.Count == model.SupplyListModel.Count)
+            {
+                for (int i = 0; i < SupplyListModel.Count; i++)
+                {
+                    if (!SupplyListModel[i].Equals(model.SupplyListModel[i]))
+                    {
+                        result = false;
+                    }
+                }
+                return result &&
+                   ID == model.ID &&
+                   DateTime == model.DateTime &&
+                   Comment == model.Comment;
+            }
+            return false;
+        }
     }
 }

@@ -20,7 +20,7 @@ namespace TradeCompany_DAL.DTOs
             {
                 for (int i = 0; i < SupplyLists.Count; i++)
                 {
-                    if (SupplyLists[i] != dTO.SupplyLists[i])
+                    if (!SupplyLists[i].Equals(dTO.SupplyLists[i]))
                     {
                         result = false;
                     }

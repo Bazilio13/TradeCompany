@@ -24,5 +24,28 @@ namespace TradeCompany_BLL.Models
             }
         }
         public List<ProductGroupModel> ProductGroups { get; set; } = new List<ProductGroupModel>();
+
+        public override bool Equals(object obj)
+        {
+            bool result = true;
+            if (obj is SupplyListModel model && ProductGroups.Count == model.ProductGroups.Count)
+            {
+                for (int i = 0; i < ProductGroups.Count; i++)
+                {
+                    if (!ProductGroups[i].Equals(model.ProductGroups[i]))
+                    {
+                        result = false;
+                    }
+                }
+                return result &&
+                   _amount == model._amount &&
+                   ID == model.ID &&
+                   ProductID == model.ProductID &&
+                   ProductName == model.ProductName &&
+                   ProductMeasureUnit == model.ProductMeasureUnit &&
+                   Amount == model.Amount; ;
+            }
+            return false;
+        }
     }
 }

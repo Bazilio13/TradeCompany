@@ -21,7 +21,7 @@ namespace TradeCompany_DAL.DTOs
                    SupplyID == dTO.SupplyID &&
                    ProductID == dTO.ProductID &&
                    Amount == dTO.Amount &&
-                   productDTO == dTO.productDTO;
+                   productDTO.Equals(dTO.productDTO);
         }
     }
 }

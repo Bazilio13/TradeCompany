@@ -14,9 +14,9 @@ namespace TradeCompany_BLL.Tests.SupplysMapsSourse
     {
         public IEnumerator GetEnumerator()
         {
-            yield return new object[] {new List<SupplyDTO>(){SupplyDTOMock.DTOs[0], SupplyDTOMock.DTOs[1], SupplyDTOMock.DTOs[2] },
-                                       new List<SupplyModel>(){ SupplyModelMock.Models[0], SupplyModelMock.Models[1] , SupplyModelMock.Models[2] }
-            };
+            yield return new object[] {new List<SupplyDTO>(){SupplyDTOMock.DTOsFromDB[0]},new List<SupplyModel>(){ SupplyModelMock.Models[0]}};
+            yield return new object[] { new List<SupplyDTO>() { SupplyDTOMock.DTOsFromDB[1] }, new List<SupplyModel>() { SupplyModelMock.Models[1] } };
+            yield return new object[] { new List<SupplyDTO>() { SupplyDTOMock.DTOsFromDB[2] }, new List<SupplyModel>() { SupplyModelMock.Models[2] } };
         }
     }
 }

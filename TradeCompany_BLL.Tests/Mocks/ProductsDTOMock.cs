@@ -9,7 +9,7 @@ namespace TradeCompany_BLL.Tests.Mocks
 {
     public static class ProductsDTOMock
     {
-        public static List<ProductDTO> DTOs { get; set; } = new List<ProductDTO>()
+        public static List<ProductDTO> DTOsFromDB { get; set; } = new List<ProductDTO>()
         { new ProductDTO { ID = 1, Name = "firstN", StockAmount = 10, MeasureUnit = 1, MeasureUnitName = "firstMU", WholesalePrice = 50, RetailPrice = 25,
             LastSupplyDate = DateTimeMock.DateTimes[0], Comments = "Comment", Description = "Description"},
         new ProductDTO { ID = 2, Name = "secondN", StockAmount = 0, MeasureUnit = 2, MeasureUnitName = "secondMU", WholesalePrice = 40, RetailPrice = 20,
@@ -17,6 +17,7 @@ namespace TradeCompany_BLL.Tests.Mocks
         new ProductDTO { ID = 3, Name = "thirdN", StockAmount = 20, MeasureUnit = 2, MeasureUnitName = "secondMU", WholesalePrice = 10, RetailPrice = 5,
             LastSupplyDate = DateTimeMock.DateTimes[2], Comments = null, Description = null},
         new ProductDTO { ID = 4, Name = "forthN", StockAmount = 30, MeasureUnit = 3, MeasureUnitName = "thirdMU", WholesalePrice = 20, RetailPrice = 15,
-            LastSupplyDate = DateTimeMock.DateTimes[2], Comments = null, Description = null}};
+            LastSupplyDate = DateTimeMock.DateTimes[2], Comments = null, Description = null}
+        };
     }
 }
