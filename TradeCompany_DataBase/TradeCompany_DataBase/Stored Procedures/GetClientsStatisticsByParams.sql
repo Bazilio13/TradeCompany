@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [TradeCompany_DataBase].[GetClientsStatisticsByParams]
+﻿create PROCEDURE [TradeCompany_DataBase].[GetClientsStatisticsByParams]
 @FromCount int,
 @OrdersCount int,
 @Type binary,
@@ -10,9 +10,9 @@
 @ToAmount float
 
 AS
-select FirstSet.ID, FirstSet.RegistrationDate, FirstSet.Name, FirstSet.OrdersСount, SecondSet.TotalAmount, FirstSet.LastOrderDate
+select FirstSet.ID, FirstSet.RegistrationDate, FirstSet.Name, FirstSet.CountOrder, SecondSet.TotalAmount, FirstSet.LastOrderDate
 from
-	(select Clients.ID, Clients.RegistrationDate, Clients.Name, count(o.ID) as OrdersСount, MAX(O.DateTime) as LastOrderDate, Clients.Type
+	(select Clients.ID, Clients.RegistrationDate, Clients.Name, count(o.ID) as CountOrder, MAX(O.DateTime) as LastOrderDate, Clients.Type
 	from [TradeCompany_DataBase].Clients as Clients
 	left join TradeCompany_DataBase.Orders as O on O.ClientsID = Clients.ID
 	where (@MinDate is null OR O.DateTime >= @MinDate) AND
@@ -28,8 +28,8 @@ inner join
 	group by C.Name, C.ID) as SecondSet
 	on FirstSet.ID = SecondSet.ID
 	where
-	(@FromCount IS NULL OR FirstSet.OrdersСount >= @FromCount) AND
-	(@OrdersCount IS NULL OR FirstSet.OrdersСount <= @OrdersCount) AND
+	(@FromCount IS NULL OR FirstSet.CountOrder >= @FromCount) AND
+	(@OrdersCount IS NULL OR FirstSet.CountOrder <= @OrdersCount) AND
 	(@FromAmount is null or SecondSet.TotalAmount >= @FromAmount) AND
 	(@ToAmount is null or SecondSet.TotalAmount <= @ToAmount) AND
 	(@Type IS NULL OR FirstSet.Type = @Type ) AND

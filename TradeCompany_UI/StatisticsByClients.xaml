@@ -36,7 +36,7 @@
                         <DataGridTextColumn Binding ="{Binding Path = ID}" IsReadOnly="True" Header="ID" Width="50" MinWidth="50"/>
                         <DataGridTextColumn Binding ="{Binding Path = Name}" IsReadOnly="True" Header="Клиент" Width="125" MinWidth="125"/>
                         <DataGridTextColumn Binding ="{Binding StringFormat = dd MMMM yyyy, ConverterCulture=ru, Path = RegistrationDate}" IsReadOnly="True" Header="Дата регистрации" Width="125" MinWidth="125"/>
-                        <DataGridTextColumn Binding ="{Binding Path = OrdersСount}" IsReadOnly="True" Header="Кол-во заказов" Width="70" MinWidth="70"/>
+                        <DataGridTextColumn Binding ="{Binding Path = CountOrder}" IsReadOnly="True" Header="Кол-во заказов" Width="70" MinWidth="70"/>
                         <DataGridTextColumn Binding ="{Binding Path = TotalAmount}" IsReadOnly="True" Header="Сумма" Width="82" MinWidth="82" />
                         <DataGridTextColumn Binding ="{Binding StringFormat=0.00, Path = Percentage}" IsReadOnly="True" Header="% от общей суммы" Width="82" MinWidth="82"/>
                         <DataGridTextColumn Binding ="{Binding StringFormat=0, Path = AverageCheck}" IsReadOnly="True" Header="Средний чек" Width="82" MinWidth="82"/>

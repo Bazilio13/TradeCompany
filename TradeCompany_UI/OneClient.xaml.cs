@@ -74,13 +74,11 @@ namespace TradeCompany_UI
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            if(_previosPage.GetType().Equals(typeof(StatisticsByClients)))
-            {
-                //_clientsPage = (StatisticsByClients)_previosPage;
-            } else
+            if(!(_previosPage is StatisticsByClients))
             {
                 _clientsPage = (Clients)_previosPage;
-            }
+            } 
+
             MapsDTOtoModel map = new MapsDTOtoModel();
 
             if (_id != -1)

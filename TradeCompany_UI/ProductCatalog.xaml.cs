@@ -129,7 +129,7 @@ namespace TradeCompany_UI
             {
                 DateTime timeTmp = (DateTime)DateUntil.SelectedDate;
                 timeTmp = timeTmp.AddDays(1);
-                timeTmp = timeTmp.AddMilliseconds(-1);
+                timeTmp = timeTmp.AddMilliseconds(-2);
                 _filtrMaxDateTime = (DateTime?)timeTmp;
             }
             ApplyFilters();

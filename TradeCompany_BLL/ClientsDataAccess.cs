@@ -129,7 +129,7 @@ namespace TradeCompany_BLL
             {
                 if (!(model.TotalAmount == 0))
                 {
-                    model.AverageCheck = model.TotalAmount / model.OrdersСount;
+                    model.AverageCheck = model.TotalAmount / model.CountOrder;
                     model.Percentage = (model.TotalAmount / totalSum) * 100;
                 }
             }

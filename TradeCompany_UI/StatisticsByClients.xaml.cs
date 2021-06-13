@@ -59,7 +59,6 @@ namespace TradeCompany_UI
             _filter.MaxDateOrder = CorrectMaxDate(DateUntilForOrder.SelectedDate);
             _filter.MinDateOrder = DateFromForOrder.SelectedDate;
             _filter.PeriodFor = PeriodFrom.SelectedDate;
-            //_filter.PeriodUntil = CorrectMaxDate(PeriodUntil.SelectedDate);
             _filter.PeriodUntil = PeriodUntil.SelectedDate;
 
         }
@@ -178,7 +177,7 @@ namespace TradeCompany_UI
             {
                 DateTime timeTmp = (DateTime)date;
                 timeTmp = timeTmp.AddDays(1);
-                timeTmp = timeTmp.AddMilliseconds(-1);
+                timeTmp = timeTmp.AddMilliseconds(-2);
                 correctDate = (DateTime?)timeTmp;
             }
             return correctDate;
@@ -258,7 +257,7 @@ namespace TradeCompany_UI
         private void TodayButtonClick(object sender, RoutedEventArgs e)
         {
             NullifyPeriodCalendars();
-            ButtonDate(1);
+            ButtonDate(0);
         }
 
         private void NullifyPeriodCalendars()
