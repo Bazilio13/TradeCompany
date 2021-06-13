@@ -24,7 +24,11 @@ namespace TradeCompany_DAL.DTOs
             {
                 for (int i = 0; i < OrderLists.Count; i++)
                 {
-                    if (OrderLists[i] != dTO.OrderLists[i])
+                    if (OrderLists[i] is null || dTO.OrderLists[i] is null)
+                    {
+                        result = OrderLists[i] == dTO.OrderLists[i];
+                    }
+                    else if (!OrderLists[i].Equals(dTO.OrderLists[i]))
                     {
                         result = false;
                     }
@@ -37,7 +41,7 @@ namespace TradeCompany_DAL.DTOs
                        AddressID == dTO.AddressID &&
                        Comment == dTO.Comment &&
                        Address == dTO.Address &&
-                       ClientDTO == dTO.ClientDTO;
+                       ClientDTO.Equals(dTO.ClientDTO);
             }
             return false;
         }

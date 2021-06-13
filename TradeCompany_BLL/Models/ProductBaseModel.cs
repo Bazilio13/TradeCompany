@@ -69,7 +69,11 @@ namespace TradeCompany_BLL.Models
             {
                 for (int i = 0; i < Groups.Count; i++)
                 {
-                    if (Groups[i] != model.Groups[i])
+                    if (Groups[i] is null || model.Groups[i] is null)
+                    {
+                        result = Groups[i] == model.Groups[i];
+                    }
+                    if (!Groups[i].Equals(model.Groups[i]))
                     {
                         result = false;
                     }

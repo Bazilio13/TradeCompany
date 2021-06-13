@@ -18,6 +18,7 @@ namespace TradeCompany_BLL.Tests
         [SetUp]
         public void Setup()
         {
+            map = new MapsDTOtoModel();
         }
 
 

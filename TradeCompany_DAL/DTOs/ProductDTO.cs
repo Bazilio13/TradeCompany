@@ -27,7 +27,11 @@ namespace TradeCompany_DAL.DTOs
             {
                 for (int i = 0; i < Group.Count; i++)
                 {
-                    if (Group[i] != dTO.Group[i])
+                    if (Group[i] is null || dTO.Group[i] is null)
+                    {
+                        result = Group[i] == dTO.Group[i];
+                    }
+                    else if (Group[i].Equals(dTO.Group[i]))
                     {
                         result = false;
                     }

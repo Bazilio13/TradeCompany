@@ -79,7 +79,7 @@ namespace TradeCompany_BLL.Models
             {
                 for (int i = 0; i < Products.Count; i++)
                 {
-                    if (Products[i] != model.Products[i])
+                    if (!Products[i].Equals(model.Products[i]))
                     {
                         result = false;
                     }

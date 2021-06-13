@@ -31,7 +31,11 @@ namespace TradeCompany_BLL.Models
             {
                 for (int i = 0; i < OrderListModel.Count; i++)
                 {
-                    if (OrderListModel[i] != model.OrderListModel[i])
+                    if (OrderListModel[i] is null || model.OrderListModel[i] is null)
+                    {
+                        result = OrderListModel[i] == model.OrderListModel[i];
+                    }
+                    if (!OrderListModel[i].Equals(model.OrderListModel[i]))
                     {
                         result = false;
                     }

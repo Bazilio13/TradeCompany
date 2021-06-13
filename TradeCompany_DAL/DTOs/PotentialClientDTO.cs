@@ -24,7 +24,11 @@ namespace TradeCompany_DAL.DTOs
             {
                 for (int i = 0; i < Products.Count; i++)
                 {
-                    if (Products[i] != dTO.Products[i])
+                    if (Products[i] is null || dTO.Products[i] is null)
+                    {
+                        result = Products[i] == dTO.Products[i];
+                    }
+                    else if (Products[i].Equals(dTO.Products[i]))
                     {
                         result = false;
                     }
