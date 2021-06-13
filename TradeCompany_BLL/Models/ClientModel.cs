@@ -37,12 +37,6 @@ namespace TradeCompany_BLL.Models
                    RegistrationDate == model.RegistrationDate;
         }
 
-
-
-        //public override bool Equals(object obj)
-        //{
-        //    return base.Equals(obj);
-        //}
     }
 
 }
