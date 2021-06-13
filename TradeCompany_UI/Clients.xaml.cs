@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TradeCompany_BLL;
 using TradeCompany_BLL.Models;
+using TradeCompany_UI.Interfaces;
 
 namespace TradeCompany_UI
 {
@@ -130,10 +131,20 @@ namespace TradeCompany_UI
         {
             DataGrid dg = (DataGrid)sender;
             ClientBaseModel item = (ClientBaseModel)dg.CurrentItem;
-            if (item != null)
+            if (_previosPage is IClientAddable)
             {
-                int id = item.ID;
-                _uiNavi.GoToThePage(new OneClient(id, this));
+                ClientBaseModel clientBaseModel = (ClientBaseModel)dgClientsTable.SelectedItem;
+                IClientAddable clientAddable = (IClientAddable)_previosPage;
+                clientAddable.AddClientToOrder(clientBaseModel);
+                _uiNavi.GoToThePage(_previosPage);
+            }
+            else
+            {
+                if (item != null)
+                {
+                    int id = item.ID;
+                    _uiNavi.GoToThePage(new OneClient(id, this));
+                }
             }
         }
     }
