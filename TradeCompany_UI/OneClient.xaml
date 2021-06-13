@@ -79,7 +79,7 @@
                 </DataGrid>
 
 
-                <WrapPanel HorizontalAlignment="Center" Margin="0,0,0,0">
+                <WrapPanel HorizontalAlignment="Center" Margin="0,0,0,10">
                     <Button x:Name="ButtonExit" Content="Назад" Margin="0,0,60,0" VerticalAlignment="Top" Height="33" IsCancel="True" Click="Exit" HorizontalAlignment="Right" Width="128"/>
                     <Button x:Name="ButtonSave" Content="Сохранить" Margin="0,0,55,0" VerticalAlignment="Top" Height="33" IsCancel="True" Click="SaveClient" HorizontalAlignment="Right" Width="128"/>
                     <Button x:Name="ButtonDelete" Content="Удалить"  VerticalAlignment="Top" Height="33" IsCancel="True" Click="DeleteClients" HorizontalAlignment="Left" Width="128"/>
