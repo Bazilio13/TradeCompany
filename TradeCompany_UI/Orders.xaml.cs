@@ -74,7 +74,7 @@ namespace TradeCompany_UI
 
         private void CreateOrder_Click(object sender, RoutedEventArgs e)
         {
-            _uiNavi.GoToThePage(new SpecificOrder());
+            _uiNavi.GoToThePage(new SpecificOrder(this));
         }
 
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)

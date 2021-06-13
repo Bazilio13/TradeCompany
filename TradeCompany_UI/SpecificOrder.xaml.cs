@@ -133,7 +133,7 @@ namespace TradeCompany_UI
                 NotifyAboutSuccessfulAdditionInBase();
                 GoToThePreviousPage();
 
-                //return;
+                return;
 
             }
 
@@ -388,7 +388,7 @@ namespace TradeCompany_UI
         {
             if(_orderModel.ID == 0)
             {
-                new MessageWindow("Зайдите в раздел заказы и выберете данный заказ, тогда вы сможете оставить отзыв").ShowDialog();
+                new MessageWindow("Сохраните заказ").ShowDialog();
                 return;
             }
             FillFeedback();
@@ -434,7 +434,8 @@ namespace TradeCompany_UI
         private void Comment_SelectionChanged(object sender, RoutedEventArgs e)
         {
             var text = (TextBox)e.Source;
-            if (!(_orderModel.Comment.Equals(text.Text)))
+            if (_orderModel is null) return;
+            if (!(_orderModel.Comment is null)&&(_orderModel.Comment.Equals(text.Text)))
             {
                 AddProductInOrder.IsEnabled = true;
                 _orderModel.Comment = text.Text;
