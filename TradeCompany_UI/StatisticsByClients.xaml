@@ -85,11 +85,11 @@
                     <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" FontSize="14">Количество заказов:</TextBlock>
                     <StackPanel DockPanel.Dock="Right">
                         <TextBlock Margin="30,0,0,0">до</TextBlock>
-                        <TextBox x:Name="ToOrdersAmount" TextWrapping="Wrap" MaxLength="15" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" TextAlignment="Center" Width="80" Height="20" PreviewTextInput="OrdersAmount_PreviewTextInput" TextChanged="FilterTextInput"/>
+                        <TextBox x:Name="ToOrdersAmount" TextWrapping="Wrap" MaxLength="8" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" TextAlignment="Center" Width="80" Height="20" PreviewTextInput="OrdersAmount_PreviewTextInput" TextChanged="FilterTextInput"/>
                     </StackPanel>
                     <StackPanel DockPanel.Dock="Left">
                         <TextBlock Margin="30,0,0,0">от</TextBlock>
-                        <TextBox x:Name="FromOrdersAmount" TextWrapping="Wrap" MaxLength="15" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" VerticalContentAlignment="Center" TextAlignment="Center" Height="20" RenderTransformOrigin="0.219,0.561" PreviewTextInput="OrdersAmount_PreviewTextInput" TextChanged="FilterTextInput"/>
+                        <TextBox x:Name="FromOrdersAmount" TextWrapping="Wrap" MaxLength="8" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" VerticalContentAlignment="Center" TextAlignment="Center" Height="20" RenderTransformOrigin="0.219,0.561" PreviewTextInput="OrdersAmount_PreviewTextInput" TextChanged="FilterTextInput"/>
                     </StackPanel>
                 </DockPanel>
                 <TextBlock Margin="30,0,30,5" Width="83">Тип клиента:</TextBlock>

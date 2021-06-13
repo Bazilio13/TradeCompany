@@ -275,10 +275,6 @@ namespace TradeCompany_UI
         {
             textBlock.Text = (textBox.MaxLength - textBox.Text.Length).ToString();
             ErrorMessageBox(textBox);
-            //if (textBox.Text.Length >= textBox.MaxLength)
-            //{
-            //    MessageBox.Show("Введено аксимальное число символов", "", MessageBoxButton.OK, MessageBoxImage.Error);
-            //}
         }
 
         private void ErrorMessageBox(TextBox textBox)
