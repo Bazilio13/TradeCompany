@@ -113,11 +113,11 @@
                     <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" FontSize="14">Количество заказов:</TextBlock>
                     <StackPanel DockPanel.Dock="Right">
                         <TextBlock Margin="30,0,0,0">до</TextBlock>
-                        <TextBox x:Name="ToOrdersAmount" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" TextAlignment="Center" Width="80" Height="20" PreviewTextInput="ValidationByNumber" TextChanged="GroupFilter"/>
+                        <TextBox x:Name="ToOrdersAmount" TextWrapping="Wrap" MaxLength="15" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" TextAlignment="Center" Width="80" Height="20" PreviewTextInput="ValidationByNumber" TextChanged="GroupFilter"/>
                     </StackPanel>
                     <StackPanel DockPanel.Dock="Left">
                         <TextBlock Margin="30,0,0,0">от</TextBlock>
-                        <TextBox x:Name="FromOrdersAmount" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" VerticalContentAlignment="Center" TextAlignment="Center" Height="20" RenderTransformOrigin="0.219,0.561"  PreviewTextInput="ValidationByNumber" TextChanged="GroupFilter"/>
+                        <TextBox x:Name="FromOrdersAmount" TextWrapping="Wrap" MaxLength="15" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" VerticalContentAlignment="Center" TextAlignment="Center" Height="20" RenderTransformOrigin="0.219,0.561"  PreviewTextInput="ValidationByNumber" TextChanged="GroupFilter"/>
                     </StackPanel>
                 </DockPanel>
 
@@ -129,11 +129,11 @@
                     <DockPanel DockPanel.Dock="Bottom">
                         <StackPanel DockPanel.Dock="Right">
                             <TextBlock Margin="30,0,0,0">до</TextBlock>
-                            <TextBox x:Name="ToPrice" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" TextAlignment="Center" Height="20" Width="80"  PreviewTextInput="ValidationByNumber" TextChanged="GroupFilter"/>
+                            <TextBox x:Name="ToPrice" TextWrapping="Wrap" MaxLength="15" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" TextAlignment="Center" Height="20" Width="80"  PreviewTextInput="ValidationByNumber" TextChanged="GroupFilter"/>
                         </StackPanel>
                         <StackPanel DockPanel.Dock="Left">
                             <TextBlock Margin="30,0,0,0">от</TextBlock>
-                            <TextBox x:Name="FromPrice" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Width="80" Height="20" VerticalContentAlignment="Center" Text="" TextAlignment="Center"  PreviewTextInput="ValidationByNumber" TextChanged="GroupFilter"/>
+                            <TextBox x:Name="FromPrice" TextWrapping="Wrap" MaxLength="15" HorizontalAlignment="Left" VerticalAlignment="Center" Width="80" Height="20" VerticalContentAlignment="Center" Text="" TextAlignment="Center"  PreviewTextInput="ValidationByNumber" TextChanged="GroupFilter"/>
                         </StackPanel>
                     </DockPanel>
                 </DockPanel>
