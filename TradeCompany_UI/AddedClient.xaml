@@ -8,7 +8,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AddedClient" Loaded="Page_Loaded">
 
-
+    <ScrollViewer>
     <Grid Background="White">
 
         <TextBox Name="textBoxName" HorizontalAlignment="Left" Margin="191,73,0,0" Text="Название" TextWrapping="Wrap" VerticalAlignment="Top" Width="424" Height="21"/>
@@ -26,4 +26,5 @@
 
 
     </Grid>
+    </ScrollViewer>
 </Page>
