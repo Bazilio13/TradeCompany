@@ -36,8 +36,9 @@ namespace TradeCompany_UI
 
         private List<OrderListModel> listOfProductForOrder = new List<OrderListModel>();
         private List<OrderListModel> originalListOfProduct = new List<OrderListModel>();
-        public List<AddressModel> listOAddressModel = new List<AddressModel>();
-        public List<ProductModel> _productModel = new List<ProductModel>();
+        private List<AddressModel> listOAddressModel = new List<AddressModel>();
+        private List<ProductModel> _productModel = new List<ProductModel>();
+        private List<OrderListModel> _deletedProductFromOrder = new List<OrderListModel>();
 
         BindingList<OrderListModel> bgOrderListModels = new BindingList<OrderListModel>();
        
@@ -109,19 +110,6 @@ namespace TradeCompany_UI
 
         private void dgSpecificOrder_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
         {
-            //OrderListModel productInOrder = (OrderListModel)e.Row.Item;
-
-            //_orderId = 7;
-            //string nameOfAddedProduct = productInOrder.ProductName;
-            //var addedProduct = _orderDataAccess.GetProductsByLetter(nameOfAddedProduct);
-            //if (addedProduct == null)
-            //{
-            //    //return new window with information
-            //}
-            //addedProduct.Amount = productInOrder.Amount;
-            //addedProduct.OrderID = _orderId;
-
-            //listOfProductForOrder.Add(addedProduct);
 
         }
 
@@ -154,6 +142,7 @@ namespace TradeCompany_UI
                 //_orderDataAccess.AddOrderList(newOrder.OrderListModel);
                 _orderDataAccess.UpdateOrdersByID(_orderModel);
                 NotifyAboutSuccessfulAdditionInBase();
+                IncreaseProductAmountInStockByID(_deletedProductFromOrder);
                 return;
              }
 
@@ -181,6 +170,14 @@ namespace TradeCompany_UI
             foreach (var product in orderListModels)
             {
                 _productsDataAccess.ReduceProductAmountInStockByID(product.ProductID, (int)product.Amount);
+            }
+        }
+        private void IncreaseProductAmountInStockByID(List<OrderListModel> deletedProduct)
+        {
+            if (deletedProduct.Count == 0) return;
+            foreach (var product in deletedProduct)
+            {
+                _productsDataAccess.IncreaseProductAmountInStockByID(product.ProductID, (int)product.Amount);
             }
         }
 
@@ -396,6 +393,7 @@ namespace TradeCompany_UI
             if (e.Key == Key.Back)
             {
                 var index = dgSpecificOrder.SelectedIndex;
+                _deletedProductFromOrder.Add(bgOrderListModels[index]);
                 bgOrderListModels.RemoveAt(index);
                 Sum.Text = bgOrderListModels.Sum(s => s.Price * s.Amount).ToString();
 

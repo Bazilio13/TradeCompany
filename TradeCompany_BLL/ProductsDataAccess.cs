@@ -103,5 +103,11 @@ namespace TradeCompany_BLL
             _productsData.ReduceProductAmountInStockByID(id, minusAmount);
 
         }
+        public void IncreaseProductAmountInStockByID(int id, int plusAmount)
+        {
+            _productsData.IncreaseProductAmountInStockByID(id, plusAmount);
+
+        }
+
     }
 }

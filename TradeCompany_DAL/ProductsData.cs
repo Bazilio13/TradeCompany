@@ -285,5 +285,14 @@ namespace TradeCompany_DAL
             }
 
         }
+        public void IncreaseProductAmountInStockByID(int id, int amount)
+        {
+            string query;
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                query = "exec [TradeCompany_DataBase].[IncreaseProductAmountInStockByID] @id , @amount";
+                dbConnection.Query(query, new { id, amount });
+            }
+        }
     }
 }
