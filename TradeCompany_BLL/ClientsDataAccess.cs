@@ -12,9 +12,19 @@ namespace TradeCompany_BLL
     public class ClientsDataAccess
     {
 
-        private ClientsData _clientData = new ClientsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
+        private ClientsDataInterface _clientData;
         private MapsDTOtoModel _mapDTOtoModel = new MapsDTOtoModel();
         private MapsModelToDTO _mapModelToDTO = new MapsModelToDTO();
+
+        public ClientsDataAccess()
+        {
+            _clientData = new ClientsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
+        }
+
+        public ClientsDataAccess(ClientsDataInterface clientsData)
+        {
+            _clientData = clientsData;
+        }
 
 
         public List<ClientBaseModel> GetClients()

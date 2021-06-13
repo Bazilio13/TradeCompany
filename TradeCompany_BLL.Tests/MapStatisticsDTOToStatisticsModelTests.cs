@@ -32,7 +32,5 @@ namespace TradeCompany_BLL.Tests
             Assert.AreEqual(expected, actual);
         }
 
-
-
     }
 }

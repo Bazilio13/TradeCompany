@@ -10,7 +10,7 @@ using System.Data.SqlClient;
 
 namespace TradeCompany_DAL
 {
-    public class FeedBacksData
+    public class FeedBacksData : FeedbacksDataInterface
     {
         public string ConnectionString { get; set; }
         public FeedBacksData()

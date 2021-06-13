@@ -12,9 +12,21 @@ namespace TradeCompany_BLL
 {
     public class FeedbacksDataAccess
 {
-        private FeedBacksData _feetbacksData = new FeedBacksData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
+        private FeedbacksDataInterface _feetbacksData;
         private MapsDTOtoModel _map = new MapsDTOtoModel();
         private FeedbackMaps _feedbackMaps = new FeedbackMaps();
+
+        public FeedbacksDataAccess()
+        {
+            _feetbacksData = new FeedBacksData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
+
+        }
+
+        public FeedbacksDataAccess(FeedbacksDataInterface feetbacksData)
+        {
+            _feetbacksData = feetbacksData;
+        }
+
 
         public List<FeedbackModel> GetFeedbacksByClientID(int id)
         {

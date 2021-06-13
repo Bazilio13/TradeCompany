@@ -10,7 +10,7 @@ using System.Data.SqlClient;
 
 namespace TradeCompany_DAL
 {
-    public class ClientsData
+    public class ClientsData : ClientsDataInterface
     {
         public string ConnectionString { get; set; }
 
