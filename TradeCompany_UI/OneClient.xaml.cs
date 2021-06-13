@@ -398,10 +398,12 @@ namespace TradeCompany_UI
                 if (MessageBox.Show("Удалить из каталога?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
                     _clientsData.SoftDeleteClientByID(_id);
+                    MessageBox.Show("Клиент удален", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                    _clientsPage.UpdateDG();
+                    _uiNavi.GoToThePage(_previosPage);
+
                 }
-                MessageBox.Show("Клиент удален", "", MessageBoxButton.OK, MessageBoxImage.Information);
-                _clientsPage.UpdateDG();
-                _uiNavi.GoToThePage(_previosPage);
+
 
             }
             else
