@@ -17,6 +17,7 @@ namespace TradeCompany_BLL.Tests.SupplysMapsSourse
             yield return new object[] { new List<SupplyDTO>() { SupplyDTOMock.DTOsFromDB[0] }, new List<SupplyModel>() { SupplyModelMock.Models[0] } };
             yield return new object[] { new List<SupplyDTO>() { SupplyDTOMock.DTOsFromDB[1] }, new List<SupplyModel>() { SupplyModelMock.Models[1] } };
             yield return new object[] { new List<SupplyDTO>() { SupplyDTOMock.DTOsFromDB[2] }, new List<SupplyModel>() { SupplyModelMock.Models[2] } };
+            yield return new object[] { new List<SupplyDTO>(), new List<SupplyModel>() };
         }
     }
 }
