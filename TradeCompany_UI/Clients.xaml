@@ -76,7 +76,7 @@
                 <Button x:Name="ResetFilters" Content="Сбросить фильтр" HorizontalAlignment="Center" Click="ButtonFiltr_Click"/>
             </StackPanel>
         </DockPanel>
-        <Frame Name="frame" NavigationUIVisibility="Hidden" Grid.RowSpan="2" Panel.ZIndex="2"/>
+        <Frame Name="frame" NavigationUIVisibility="Hidden" Grid.ColumnSpan="2" Panel.ZIndex="2"/>
 
     </Grid>
 
