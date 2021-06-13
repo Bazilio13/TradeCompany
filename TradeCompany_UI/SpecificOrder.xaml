@@ -10,25 +10,40 @@
 
     <Grid Background="#F9F9F9">
         <Grid.RowDefinitions>
-            <RowDefinition Height="220"></RowDefinition>
+            <RowDefinition Height="240"></RowDefinition>
             <RowDefinition></RowDefinition>
-            <RowDefinition Height="180"></RowDefinition>
+            <RowDefinition Height="260"></RowDefinition>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Vertical" Margin="20,70,20,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Vertical" Grid.Row="0" Margin="20,70,20,10">
             <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
                 <Button x:Name="ChooseClient" Content="Выбрать клиента" Click="ChooseClient_Click" Margin="0,0,15,0"/>
                 <Button x:Name="Button_AddExistingProduct" Content="Добавить товар" Click="AddProduct_ButtonClick" IsEnabled ="False"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
-                <TextBlock x:Name="ID" Text="ID Заказа" VerticalAlignment="Center" TextWrapping="Wrap" Width="136"/>
-                <TextBlock x:Name="ClientName" Text="Клиент" VerticalAlignment="Center" TextWrapping="Wrap" Width="170"/>
-                <Label x:Name="Data">
-                    <DatePicker x:Name="DataPicker" FirstDayOfWeek="Monday" SelectedDateFormat="Short" />
-                </Label>
-                <TextBlock x:Name="Sum" Text="Сумма" VerticalAlignment="Center" TextWrapping="Wrap" Width="112"/>
-                <ComboBox x:Name="cbAdress" VerticalAlignment="Center" IsSynchronizedWithCurrentItem="True" SelectedIndex="0" Loaded="cbAdress_Loaded" DropDownClosed="cbAdress_DropDownClosed" Width="200" Height="21" />
+                <StackPanel>
+                    <TextBlock x:Name="ID" Text="ID Заказа" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap" Width="136" Margin="0,0,0,10"/>
+                    <TextBlock x:Name="Sum" Text="Сумма" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap" Width="112"/>
+                </StackPanel>
+                
+                <StackPanel Width="228">
+                    <TextBlock x:Name="ClientName" Text="Клиент" TextWrapping="Wrap" Width="170" Margin="0,0,0,10" HorizontalAlignment="Left"/>
+                    <TextBlock x:Name="Phone" Grid.Row="1" Text="Телефон" TextWrapping="Wrap" Width="170" HorizontalAlignment="Left"/>
+                </StackPanel>
+                <StackPanel Width="122" Margin="0,0,30,0">
+                    <TextBlock HorizontalAlignment="Center">Дата заказа:</TextBlock>
+                    <Label x:Name="Data" Height="36">
+                        <DatePicker x:Name="DataPicker" FirstDayOfWeek="Monday" SelectedDateFormat="Short" />
+                    </Label>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock HorizontalAlignment="Center" Margin="0,0,0,5">Адрес:</TextBlock>
+                    <ComboBox x:Name="cbAdress" VerticalAlignment="Center" IsSynchronizedWithCurrentItem="True" SelectedIndex="0" Loaded="cbAdress_Loaded" DropDownClosed="cbAdress_DropDownClosed" Width="200" Height="21" />
+                </StackPanel>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,10">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button x:Name="AddProductInOrder" Content="Сохранить" Click="SaveProductInOrder_ButtonClick" IsEnabled="False" />
             </StackPanel>
         </StackPanel>
@@ -44,17 +59,17 @@
 
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel Grid.Row="2" Orientation="Vertical" Margin="20,0,20,0">
-            <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
-                <StackPanel Orientation="Vertical">
-                    <TextBlock>Отзыв:</TextBlock>
-                    <TextBox x:Name="FeedbackTextBox" Loaded="FeedbackTextBox_Loaded" Height="100" Width="380" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"></TextBox>
-                </StackPanel>
-                <StackPanel Orientation="Vertical">
-                    <TextBlock>Комментарий:</TextBlock>
-                    <TextBox x:Name="Comment" Text="" TextWrapping="Wrap" AcceptsReturn="True" Height="100" Width="380" VerticalScrollBarVisibility="Visible" />
-                </StackPanel>
-            </StackPanel>
+        <StackPanel Grid.Row="2" Orientation="Vertical" Grid.Column="0" Margin="20,0,20,0">
+            <DockPanel Margin="0,0,0,15" HorizontalAlignment="Stretch">
+                <DockPanel Margin="0,0,0,0" HorizontalAlignment="Stretch" DockPanel.Dock="Top">
+                    <TextBlock HorizontalAlignment="Left" DockPanel.Dock="Top">Отзыв:</TextBlock>
+                    <TextBox x:Name="FeedbackTextBox" DockPanel.Dock="Bottom" Loaded="FeedbackTextBox_Loaded" VerticalContentAlignment="Top" Height="80" TextWrapping="Wrap" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"></TextBox>
+                </DockPanel>
+                <DockPanel HorizontalAlignment="Stretch" DockPanel.Dock="Bottom">
+                    <TextBlock HorizontalAlignment="Left" DockPanel.Dock="Top">Комментарий:</TextBlock>
+                    <TextBox x:Name="Comment" Text="" DockPanel.Dock="Bottom" VerticalContentAlignment="Top" TextWrapping="Wrap" AcceptsReturn="True" Height="80" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                </DockPanel>
+            </DockPanel>
             <StackPanel Orientation="Horizontal">
                 <Button x:Name="SendFeedback_Button" Content="Отправить отзыв" Click="SendFeedback_Button_Click" />
             </StackPanel>
