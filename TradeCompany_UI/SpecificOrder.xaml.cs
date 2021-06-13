@@ -407,6 +407,11 @@ namespace TradeCompany_UI
 
         private void DataPicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
+            var datetime= (DateTime)e.Source;
+            if (!(_orderModel.DateTime.Equals(datetime.Date)))
+            {
+                AddProductInOrder.IsEnabled = true;
+            }
 
         }
 
@@ -417,6 +422,15 @@ namespace TradeCompany_UI
             {
                 AddProductInOrder.IsEnabled = true;
                 _orderModel.Comment = text.Text;
+            }
+        }
+
+        private void DataPicker_SelectedDateChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+            var datetime = e.Source;
+            if (!(_orderModel.DateTime.ToString().Equals(datetime.ToString())))
+            {
+                AddProductInOrder.IsEnabled = true;
             }
         }
     }

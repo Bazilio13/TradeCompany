@@ -35,7 +35,7 @@
                 <StackPanel Width="122" Margin="0,0,30,0">
                     <TextBlock HorizontalAlignment="Center">Дата заказа:</TextBlock>
                     <Label x:Name="Data" Height="36">
-                        <DatePicker x:Name="DataPicker" FirstDayOfWeek="Monday" SelectedDateFormat="Short" BorderBrush="#FFF3DFC4" Background="#FFF3DFC4"/>
+                        <DatePicker x:Name="DataPicker" FirstDayOfWeek="Monday" SelectedDateFormat="Short" BorderBrush="#FFF3DFC4" Background="#FFF3DFC4" SelectedDateChanged="DataPicker_SelectedDateChanged_1"  />
                     </Label>
                 </StackPanel>
                 <StackPanel>
