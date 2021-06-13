@@ -32,7 +32,11 @@ namespace TradeCompany_BLL.Models
             {
                 for (int i = 0; i < ProductGroups.Count; i++)
                 {
-                    if (!ProductGroups[i].Equals(model.ProductGroups[i]))
+                    if(ProductGroups[i] is null || model.ProductGroups[i] is null)
+                    {
+                        result = ProductGroups[i] == model.ProductGroups[i];
+                    }
+                    else if (!ProductGroups[i].Equals(model.ProductGroups[i]))
                     {
                         result = false;
                     }

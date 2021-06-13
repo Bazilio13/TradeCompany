@@ -25,6 +25,10 @@ namespace TradeCompany_BLL.Models
             {
                 for (int i = 0; i < SupplyListModel.Count; i++)
                 {
+                    if (SupplyListModel[i] is null || model.SupplyListModel[i] is null)
+                    {
+                        result = SupplyListModel[i] == model.SupplyListModel[i];
+                    }
                     if (!SupplyListModel[i].Equals(model.SupplyListModel[i]))
                     {
                         result = false;

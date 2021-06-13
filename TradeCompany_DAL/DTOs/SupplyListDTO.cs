@@ -19,7 +19,11 @@ namespace TradeCompany_DAL.DTOs
             bool result = true;
             if (obj is SupplyListDTO dTO)
             {
-                if (!(productDTO is null && dTO.productDTO is null))
+                if (productDTO is null || dTO.productDTO is null)
+                {
+                    result = productDTO == dTO.productDTO;
+                }
+                else
                 {
                     result = productDTO.Equals(dTO.productDTO);
                 }
