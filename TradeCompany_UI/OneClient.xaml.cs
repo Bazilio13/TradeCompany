@@ -37,7 +37,7 @@ namespace TradeCompany_UI
         private List<FeedbackModel> _feedback = new List<FeedbackModel>();
         private ClientModel client = new ClientModel();
         private Clients _clientsPage;
-        
+
 
 
 
@@ -53,7 +53,7 @@ namespace TradeCompany_UI
             FeedbacksDataAccess fda = new FeedbacksDataAccess();
             OrderDataAccess dataAccess = new OrderDataAccess();
             _orderList = dataAccess.GetOrderModelsByClientID(_id);
-            _feedback = fda.GetFeedbacksByClientID(_id); 
+            _feedback = fda.GetFeedbacksByClientID(_id);
         }
 
 
@@ -85,7 +85,7 @@ namespace TradeCompany_UI
             {
                 dgOrdersTable.ItemsSource = _orderList;
                 ClientModel client = _clientsData.GetClientByClientID(_id);
-                TBRegistrarionDate.Text = "Дата регистрации: " + client.RegistrationDate.ToString("dd.MM.yyyy",CultureInfo.InvariantCulture);
+                TBRegistrarionDate.Text = "Дата регистрации: " + client.RegistrationDate.ToString("dd.MM.yyyy", CultureInfo.InvariantCulture);
                 textBoxName.Text = client.Name;
                 if (client.INN != null)
                 {
@@ -102,7 +102,7 @@ namespace TradeCompany_UI
                 if (client.ContactPerson != null)
                 {
                     textBoxContactPerson.Text = client.ContactPerson;
-                } 
+                }
                 if (client.Comment != null)
                 {
                     textBoxComments.Text = client.Comment;
@@ -120,7 +120,7 @@ namespace TradeCompany_UI
                 else { RadioButtonTypeBayR.IsChecked = true; }
 
 
-                _addressesList = _addressesData.GetListAddressesByID(_id); 
+                _addressesList = _addressesData.GetListAddressesByID(_id);
                 AddAddress();
                 LoadWishPanel();
                 LoadFeedback();
@@ -134,7 +134,7 @@ namespace TradeCompany_UI
                 RadioButtonTypeBayR.IsChecked = true;
             }
             ProductsDataAccess product = new ProductsDataAccess();
-            List<ProductBaseModel> allProducts = product.GetAllProducts(); 
+            List<ProductBaseModel> allProducts = product.GetAllProducts();
             cbWish.ItemsSource = allProducts;
 
         }
@@ -153,7 +153,7 @@ namespace TradeCompany_UI
                 }
                 _clientsData.SaveWishListByClientID(_wishList, _id);
                 ReloadAddressesFromPanel();
-                _addressesData.AddAddressByID(_id, _addressesList); 
+                _addressesData.AddAddressByID(_id, _addressesList);
 
                 MessageBox.Show("Клиент сохранен", "Подтверждение", MessageBoxButton.OK, MessageBoxImage.Question);
                 _clientsPage.UpdateDG();
@@ -194,7 +194,7 @@ namespace TradeCompany_UI
                 textBoxContactPerson.Background = Brushes.Pink;
                 validation = false;
             }
-            if(_addressesList.Count == 0)
+            if (_addressesList.Count == 0)
             {
                 textBoxForWriteAddress.Background = Brushes.Pink;
                 validation = false;
@@ -251,10 +251,10 @@ namespace TradeCompany_UI
                 tag.Background = new SolidColorBrush(Color.FromRgb(243, 223, 196));
                 tag.TabIndex = i;
                 tag.Click += (sender, e) =>
-                  {
-                      Button tmp = (Button)sender;
-                      ChangeWishList(tmp.Content.ToString());
-                  };
+                {
+                    Button tmp = (Button)sender;
+                    ChangeWishList(tmp.Content.ToString());
+                };
                 WPWish.Children.Add(tag);
             }
         }
@@ -328,7 +328,7 @@ namespace TradeCompany_UI
             {
                 TextBlock fb = new TextBlock();
                 fb.TextWrapping = TextWrapping.Wrap;
-                fb.Text = feedback.DateTime + "    " + "Заказ №  " + feedback.OrderID + "\n" +feedback.Text;
+                fb.Text = feedback.DateTime + "    " + "Заказ №  " + feedback.OrderID + "\n" + feedback.Text;
                 fb.Margin = new Thickness(5, 5, 5, 5);
                 fb.Padding = new Thickness(5, 3, 5, 3);
                 fb.Background = new SolidColorBrush(Color.FromRgb(243, 223, 196));
@@ -338,11 +338,11 @@ namespace TradeCompany_UI
 
         private void VisibilityStory(object sender, RoutedEventArgs e)
         {
-            if(dgOrdersTable.Visibility == Visibility.Visible)
+            if (dgOrdersTable.Visibility == Visibility.Visible)
             {
                 dgOrdersTable.Visibility = Visibility.Collapsed;
             }
-            else 
+            else
             {
                 dgOrdersTable.Visibility = Visibility.Visible;
             }
@@ -364,7 +364,7 @@ namespace TradeCompany_UI
         private void ReloadAddressesFromPanel()
         {
             List<String> newAddresses = new List<String>();
-            for(int i = 2; i < stackPanelAddresses.Children.Count; i++)
+            for (int i = 2; i < stackPanelAddresses.Children.Count; i++)
             {
                 if (stackPanelAddresses.Children[i] is TextBox)
                 {
@@ -393,12 +393,12 @@ namespace TradeCompany_UI
 
         private void DeleteClients(object sender, RoutedEventArgs e)
         {
-            if(_id != -1)
+            if (_id != -1)
             {
                 if (MessageBox.Show("Удалить из каталога?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
                     _clientsData.SoftDeleteClientByID(_id);
-                }                   
+                }
                 MessageBox.Show("Клиент удален", "", MessageBoxButton.OK, MessageBoxImage.Information);
                 _clientsPage.UpdateDG();
                 _uiNavi.GoToThePage(_previosPage);
@@ -413,6 +413,6 @@ namespace TradeCompany_UI
             }
 
         }
-       
+
     }
 }

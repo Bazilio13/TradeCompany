@@ -23,19 +23,19 @@ namespace TradeCompany_UI
     /// </summary>
     public partial class Clients : Page
     {
-        private Page _previosPage;
-        private UINavi _uiNavi;
 
         private ClientsDataAccess _clientsData;
-       
+        private UINavi _uiNavi;
+        private Page _previosPage;
+
         public Clients(Page previosPage = null)
         {
+            InitializeComponent();
             InitializeComponent();
             _uiNavi = UINavi.GetUINavi();
             _previosPage = previosPage;
             _clientsData = new ClientsDataAccess();
             dgClientsTable.ItemsSource = _clientsData.GetClients();
-            
         }
         public void UpdateDG()
         {
@@ -78,7 +78,7 @@ namespace TradeCompany_UI
             int? sale = null;
             if (CheckBoxF.IsChecked != CheckBoxU.IsChecked)
             {
-                if(CheckBoxF.IsChecked == true)
+                if (CheckBoxF.IsChecked == true)
                 {
                     person = 1;
                 }
@@ -119,13 +119,18 @@ namespace TradeCompany_UI
             MaxDate.SelectedDate = null;
             ClientsFiltr(sender, e);
         }
+
+
         private void AddNewClient(object sender, RoutedEventArgs e)
         {
-            frame.Content = new OneClient();
+            _uiNavi.GoToThePage(new OneClient(this));
         }
+
 
         private void dgClientsTable_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            DataGrid dg = (DataGrid)sender;
+            ClientBaseModel item = (ClientBaseModel)dg.CurrentItem;
             if (_previosPage is IClientAddable)
             {
                 ClientBaseModel clientBaseModel = (ClientBaseModel)dgClientsTable.SelectedItem;
@@ -135,20 +140,12 @@ namespace TradeCompany_UI
             }
             else
             {
-                DataGrid dg = (DataGrid)sender;
-                ClientBaseModel item = (ClientBaseModel)dg.CurrentItem;
                 if (item != null)
                 {
                     int id = item.ID;
-                _uiNavi.GoToThePage(new OneClient(id, this));
+                    _uiNavi.GoToThePage(new OneClient(id, this));
                 }
             }
-            
         }
-
-        //private void AddNewClient(object sender, RoutedEventArgs e)
-        //{
-        //    _uiNavi.GoToThePage(new OneClient(this));
-        //}
     }
 }

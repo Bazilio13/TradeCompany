@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using TradeCompany_BLL;
 using TradeCompany_BLL.Models;
 using TradeCompany_UI.Interfaces;
+using TradeCompany_UI.Pop_ups;
 
 namespace TradeCompany_UI
 {
@@ -37,6 +38,7 @@ namespace TradeCompany_UI
         private DateTime? _filtrMaxDateTime;
         private UINavi _uiNavi;
         private Page _previosPage;
+        private List<ProductBaseModel> _crntProduct = null;
 
         public ProductCatalog(Page previosPage = null)
         {
@@ -259,6 +261,24 @@ namespace TradeCompany_UI
                 {
                     _uiNavi.GoToThePage(new AddNewProduct(productBaseModel.ID, this));
                 }
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            List<int> ints = new List<int>();
+            foreach (object obj in dgProductCatalog.SelectedItems)
+            {
+                ProductBaseModel product = (ProductBaseModel)obj;
+                ints.Add(product.ID);
+            }
+            if (ints.Count > 0)
+            {
+                _uiNavi.GoToThePage(new PotentialClients(ints, this));
+            }
+            else
+            {
+                new MessageWindow("Не выбрано ни одного товара").ShowDialog();
             }
         }
 
