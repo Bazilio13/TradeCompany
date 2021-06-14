@@ -12,9 +12,18 @@ namespace TradeCompany_BLL.DataAccess
         public class StatisticsDataAccess
         {
 
-        private StatisticsData _statistecsData = new StatisticsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
+        private StatisticsDataInterface _statistecsData;
         private MapsDTOtoModel _mapDTOtoModel = new MapsDTOtoModel();
 
+        public StatisticsDataAccess()
+        {
+            _statistecsData = new StatisticsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
+        }
+
+        public StatisticsDataAccess(StatisticsDataInterface statisticsData)
+        {
+            _statistecsData = statisticsData;
+        }
 
         public List<StatisticsGroupsModel> GetStatisticsProducts(FilterGroupModel filter)
         {

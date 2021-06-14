@@ -10,7 +10,7 @@ using TradeCompany_DAL.DTOs;
 
 namespace TradeCompany_DAL
 {
-    public class StatisticsData
+    public class StatisticsData : StatisticsDataInterface
     {
         public string ConnectionString { get; set; }
 
