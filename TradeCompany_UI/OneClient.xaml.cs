@@ -17,6 +17,8 @@ using TradeCompany_BLL.Models;
 using System.Runtime;
 using TradeCompany_DAL.DTOs;
 using System.Globalization;
+using TradeCompany_UI.Pop_ups;
+using TradeCompany_UI.DialogWindows;
 
 namespace TradeCompany_UI
 {
@@ -155,7 +157,9 @@ namespace TradeCompany_UI
                 ReloadAddressesFromPanel();
                 _addressesData.AddAddressByID(_id, _addressesList);
 
-                MessageBox.Show("Клиент сохранен", "Подтверждение", MessageBoxButton.OK, MessageBoxImage.Question);
+                new MessageWindow("Клиент сохранен").ShowDialog();
+                //MessageWindow.Show("Клиент сохранен", "Подтверждение", MessageBoxButton.OK, MessageBoxImage.Question);
+                //MessageBox.Show("Клиент сохранен", "Подтверждение", MessageBoxButton.OK, MessageBoxImage.Question);
                 _clientsPage.UpdateDG();
                 _uiNavi.GoToThePage(_previosPage);
             }
@@ -395,22 +399,26 @@ namespace TradeCompany_UI
         {
             if (_id != -1)
             {
-                if (MessageBox.Show("Удалить из каталога?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                ConfirmitionWindow confirmitionWindow = new ConfirmitionWindow("Вы уверены, что хотите удалить клинета");
+                if (confirmitionWindow.ShowDialog() == true)
                 {
                     _clientsData.SoftDeleteClientByID(_id);
-                    MessageBox.Show("Клиент удален", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                    new MessageWindow("Клиент удалён").ShowDialog();
                     _clientsPage.UpdateDG();
                     _uiNavi.GoToThePage(_previosPage);
 
                 }
 
-
             }
             else
             {
-                if (MessageBox.Show("Клиент не сохранен", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                ConfirmitionWindow confirmitionWindow = new ConfirmitionWindow("Клиент не сохранен!");
+                if (confirmitionWindow.ShowDialog() == true)
                 {
                     _clientsData.SoftDeleteClientByID(_id);
+                    _clientsPage.UpdateDG();
+                    _uiNavi.GoToThePage(_previosPage);
+
                 }
             }
 
