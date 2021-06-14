@@ -254,6 +254,11 @@ namespace TradeCompany_UI
             _orderModel.DateTime = (DateTime)DataPicker.SelectedDate;
             _orderModel.Summ = CountSummProductsOfBindingList();
             _orderModel.Comment = Comment.Text;
+            if(_orderModel.ID > 0)
+            {
+                return;
+            }
+            _orderModel.OrderListModel = listOfProductForOrder;
         }
 
         private void ChooseClient_Click(object sender, RoutedEventArgs e)
