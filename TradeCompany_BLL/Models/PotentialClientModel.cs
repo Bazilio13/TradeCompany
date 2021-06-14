@@ -64,7 +64,7 @@ namespace TradeCompany_BLL.Models
         {
             List<int> sizes = new List<int>();
             sizes.Add(30);
-            sizes.Add(200);
+            sizes.Add(250);
             sizes.Add(200);
             sizes.Add(120);
             sizes.Add(150);
