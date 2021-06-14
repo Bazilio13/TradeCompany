@@ -163,6 +163,10 @@ namespace TradeCompany_UI
         {
             if (!(_previousPage is null))
             {
+                if (_previousPage is Orders orders)
+                {
+                    orders.FilterOrders();
+                }
                 _uinavi.GoToThePage(_previousPage);
             }
         }
