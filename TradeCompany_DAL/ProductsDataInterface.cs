@@ -33,5 +33,6 @@ namespace TradeCompany_DAL
 
         public List<MeasureUnitsDTO> GetAllMeasureUnits();
         public void ReduceProductAmountInStockByID(int id, int amount);
+        public void IncreaseProductAmountInStockByID(int id, int plusAmount);
     }
 }
