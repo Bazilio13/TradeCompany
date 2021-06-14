@@ -10,7 +10,7 @@ using TradeCompany_DAL.DTOs;
 
 namespace TradeCompany_DAL
 {
-    public class PotentialClientsData
+    public class PotentialClientsData : PotentialClientDataInterface
     {
         private string _connectionString;
         public PotentialClientsData(string connectionString)

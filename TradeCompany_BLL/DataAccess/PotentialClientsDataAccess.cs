@@ -11,9 +11,20 @@ namespace TradeCompany_BLL.DataAccess
 {
     public class PotentialClientsDataAccess
     {
-        private PotentialClientsData _data = new PotentialClientsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
+        private PotentialClientDataInterface _data;
 
         private PotentialClientMaps _map = new PotentialClientMaps();
+
+        public PotentialClientsDataAccess()
+        {
+            _data = new PotentialClientsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
+
+        }
+
+        public PotentialClientsDataAccess(PotentialClientDataInterface data)
+        {
+            _data = data;
+        }
 
         public List<PotentialClientModel> GetPotentialClientsByProductsIDs(List<int> ids, string clientSearch = null)
         {
