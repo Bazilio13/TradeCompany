@@ -163,6 +163,10 @@ namespace TradeCompany_UI
         {
             if (!(_previousPage is null))
             {
+                if (_previousPage is Orders orders)
+                {
+                    orders.FilterOrders();
+                }
                 _uinavi.GoToThePage(_previousPage);
             }
         }
@@ -234,7 +238,7 @@ namespace TradeCompany_UI
             specificProduct = new OrderListModel();
             specificProduct.ProductID = productBaseModel.ID;
             specificProduct.ProductName = productBaseModel.Name;
-            specificProduct.Price = _client.Type ? productBaseModel.WholesalePrice : productBaseModel.RetailPrice;
+            specificProduct.Price = _client.CorporateBody ? productBaseModel.WholesalePrice : productBaseModel.RetailPrice;
             specificProduct.ProductMeasureUnit = productBaseModel.MeasureUnitName;
             specificProduct.OrderID = _orderId;
             _crntProductBaseModel = productBaseModel;
@@ -254,6 +258,11 @@ namespace TradeCompany_UI
             _orderModel.DateTime = (DateTime)DataPicker.SelectedDate;
             _orderModel.Summ = CountSummProductsOfBindingList();
             _orderModel.Comment = Comment.Text;
+            if(_orderModel.ID > 0)
+            {
+                return;
+            }
+            _orderModel.OrderListModel = listOfProductForOrder;
         }
 
         private void ChooseClient_Click(object sender, RoutedEventArgs e)

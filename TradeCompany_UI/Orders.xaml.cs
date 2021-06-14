@@ -46,7 +46,7 @@ namespace TradeCompany_UI
             FilterOrders();
         }
 
-        private void FilterOrders()
+        public void FilterOrders()
         {
             string client = null;
             string address = null;
