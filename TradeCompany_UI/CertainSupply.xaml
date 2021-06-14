@@ -27,7 +27,6 @@
                 <DataGrid.Columns >
                     <DataGridTextColumn Binding="{Binding Path=ProductID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Header="ID" IsReadOnly="True" Width="30" MinWidth="30"></DataGridTextColumn>
                     <DataGridTextColumn Binding="{Binding Path=ProductName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Наименование" IsReadOnly="True" Width="*" MinWidth="100"></DataGridTextColumn>
-                    <DataGridTextColumn Binding="{Binding Path=ProductGroup, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Категория" IsReadOnly="True" Width="*" MinWidth="100"></DataGridTextColumn>
                     <DataGridTextColumn Binding="{Binding Path=Amount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Количество" IsReadOnly="False" Width="85" MinWidth="85"></DataGridTextColumn>
                     <DataGridTextColumn Binding="{Binding Path=ProductMeasureUnit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="ед. изм." IsReadOnly="True" Width="52" MinWidth="52"></DataGridTextColumn>
                 </DataGrid.Columns>
