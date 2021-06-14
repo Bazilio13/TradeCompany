@@ -15,6 +15,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TradeCompany_BLL;
 using TradeCompany_BLL.Models;
+using TradeCompany_UI.DialogWindows;
+using TradeCompany_UI.Pop_ups;
 
 namespace TradeCompany_UI
 {
@@ -98,8 +100,8 @@ namespace TradeCompany_UI
         {
             MeasureUnitsModel selectedItem = (MeasureUnitsModel)MeasureUnit.SelectedItem;
             if(!MeasureUnit.Items.Contains(selectedItem))
-            {
-                MessageBox.Show("Неверно выбрана единица измерения");
+            {                
+                new MessageWindow("Неверно выбрана единица измерения").ShowDialog();
                 return;
             }
             _measureUnitID = selectedItem.ID; 
@@ -172,11 +174,11 @@ namespace TradeCompany_UI
                 || Text_StockAmount.Text != "" || ChosenCategories.Text != "Не выбрано" || MeasureUnit.Text != ""
                 || Text_Description.Text != "" || Text_Comments.Text != "")
             {
-                if (MessageBox.Show("Отменить изменения?",
-                        "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                ConfirmitionWindow confirmitionWindow = new ConfirmitionWindow("Отменить изменения?");
+                if (confirmitionWindow.ShowDialog() == true)
                 {
                     _uiNavi.GoToThePage(_priviosPage);
-                }
+                }                
             }
             else
             {
@@ -207,7 +209,7 @@ namespace TradeCompany_UI
             }
             else
             {
-                MessageBox.Show("Не выбрано ни одной категории", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                new MessageWindow("Не выбрано ни одной категории").ShowDialog();
             }
             EnableSaveButton();
         }
@@ -243,8 +245,7 @@ namespace TradeCompany_UI
             if (!(selectedItem is null))
             {
                 if (ChosenCategories.Text.Contains(selectedItem.Name))
-                {
-                    MessageBox.Show($"Категория \"{selectedItem.Name}\" уже выбрана", "", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.None, MessageBoxOptions.DefaultDesktopOnly);
+                {                    
                     Category.Text = "";
                     return;
                 }
@@ -281,7 +282,7 @@ namespace TradeCompany_UI
         {
             if (textBox.Text.Length >= textBox.MaxLength)
             {
-                MessageBox.Show("Введено максимальное число символов", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                new MessageWindow("Введено максимальное число символов").ShowDialog();
             }
         }
 
@@ -306,7 +307,7 @@ namespace TradeCompany_UI
                 catch (FormatException ex)
                 {
                     textbox.Text = "";
-                    MessageBox.Show("Неверный ввод", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                    new MessageWindow("Неверный ввод").ShowDialog();
                 }
             }
         }
@@ -344,8 +345,8 @@ namespace TradeCompany_UI
 
         private void Button_Delete_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Удалить из каталога?",
-                        "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            ConfirmitionWindow confirmitionWindow = new ConfirmitionWindow("Удалить из каталога?");
+            if (confirmitionWindow.ShowDialog() == true)
             {
                 try
                 {
@@ -355,7 +356,7 @@ namespace TradeCompany_UI
                 {
                     _productsData.SoftDeleteProductByID(_currentProductID);
                 }
-                MessageBox.Show("Товар удален", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                new MessageWindow("Товар удален").ShowDialog();
                 _prodCatalog.ApplyFilters();
                 _uiNavi.GoToThePage(_priviosPage);
             }

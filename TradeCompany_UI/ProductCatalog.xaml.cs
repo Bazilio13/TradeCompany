@@ -18,6 +18,7 @@ using TradeCompany_BLL.Models;
 using TradeCompany_UI.Interfaces;
 using TradeCompany_UI.Pop_ups;
 
+
 namespace TradeCompany_UI
 {
     /// <summary>
@@ -184,7 +185,7 @@ namespace TradeCompany_UI
                     {
                         filtr = null;
                         textbox.Text = "";
-                        MessageBox.Show("Неверный ввод");
+                        new MessageWindow("Неверный ввод").ShowDialog();
                     }
                 }
                 return filtr;
@@ -235,7 +236,7 @@ namespace TradeCompany_UI
             {
                 DateFrom.SelectedDate = null;
                 DateUntil.SelectedDate = null;
-                MessageBox.Show("Неверный выбор даты");
+                new MessageWindow("Неверный выбор даты").ShowDialog();                
             }
         }
 
@@ -303,7 +304,7 @@ namespace TradeCompany_UI
         {
             if (textBox.Text.Length >= textBox.MaxLength)
             {
-                MessageBox.Show("Введено максимальное число символов", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                new MessageWindow("Введено максимальное число символов").ShowDialog();
             }
         }
     }
