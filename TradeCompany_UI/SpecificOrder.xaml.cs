@@ -234,7 +234,7 @@ namespace TradeCompany_UI
             specificProduct = new OrderListModel();
             specificProduct.ProductID = productBaseModel.ID;
             specificProduct.ProductName = productBaseModel.Name;
-            specificProduct.Price = _client.Type ? productBaseModel.WholesalePrice : productBaseModel.RetailPrice;
+            specificProduct.Price = _client.Type ?  productBaseModel.RetailPrice : productBaseModel.WholesalePrice ;
             specificProduct.ProductMeasureUnit = productBaseModel.MeasureUnitName;
             specificProduct.OrderID = _orderId;
             _crntProductBaseModel = productBaseModel;
