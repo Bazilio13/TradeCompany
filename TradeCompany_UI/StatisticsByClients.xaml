@@ -25,7 +25,7 @@
                 <DockPanel HorizontalAlignment="Right" Margin="0,0,0,12">
                     <Image Source="Pictures/filter.png" Height="28" Margin="0,0,5,0"/>
                     <Button x:Name="OneYearButton"  Content="Год" Margin="0,0,10,0" Click="OneYearButtonClick"/>
-                    <Button x:Name="HalfYearButton" Content="Пол года" Margin="0,0,10,0" Click="HalfYearButtonClick"/>
+                    <Button x:Name="HalfYearButton" Content="Полгода" Margin="0,0,10,0" Click="HalfYearButtonClick"/>
                     <Button x:Name="MonthButton" Content="Месяц" Margin="0,0,10,0" Click="MonthButtonClick"/>
                     <Button x:Name="YesterdayButton" Content="Вчера" Margin="0,0,10,0" Click="YesterdayButtonClick"/>
                     <Button x:Name="TodayButton" Content="Сегодня" Click="TodayButtonClick"/>

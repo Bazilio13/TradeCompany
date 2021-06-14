@@ -57,8 +57,8 @@
                 <StackPanel Margin="0,0,0,33">
                     <TextBlock Margin="0,0,0,6" HorizontalAlignment="Center">Тип заказа:</TextBlock>
                     <StackPanel HorizontalAlignment="Center">
-                        <CheckBox x:Name="CheckBoxOpt" Content="Розница" Click="ClientsFiltr"/>
-                        <CheckBox x:Name="CheckBoxRetail" Content="Опт" Click="ClientsFiltr"/>
+                        <CheckBox x:Name="CheckBoxOpt" Content="Опт" Click="ClientsFiltr"/>
+                        <CheckBox x:Name="CheckBoxRetail" Content="Розница" Click="ClientsFiltr"/>
                     </StackPanel>
                 </StackPanel>
 
