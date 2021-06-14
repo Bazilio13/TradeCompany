@@ -11,10 +11,20 @@ namespace TradeCompany_BLL
 {
     public class ProductsDataAccess
     {
-        private ProductsData _productsData = new ProductsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
+        private ProductsDataInterface _productsData;
         private ProductGroupsData _groupsData = new ProductGroupsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
         private MapsDTOtoModel _mapsDTOtoModel = new MapsDTOtoModel();
         private MapModelToDTO _mapsModelToDTO = new MapModelToDTO();
+
+        public ProductsDataAccess()
+        {
+            _productsData = new ProductsData(@"Persist Security Info=False;User ID=DevEd;Password=qqq!11;Initial Catalog=Sandbox.Test;Server=80.78.240.16");
+        }
+
+        public ProductsDataAccess(ProductsDataInterface productInterface)
+        {
+            _productsData = productInterface;
+    }
 
         public List<ProductBaseModel> GetAllProducts()
         {
@@ -103,5 +113,11 @@ namespace TradeCompany_BLL
             _productsData.ReduceProductAmountInStockByID(id, minusAmount);
 
         }
+        public void IncreaseProductAmountInStockByID(int id, int plusAmount)
+        {
+            _productsData.IncreaseProductAmountInStockByID(id, plusAmount);
+
+        }
+
     }
 }

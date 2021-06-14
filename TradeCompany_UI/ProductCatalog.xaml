@@ -69,11 +69,11 @@
                     <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" FontSize="14">Остаток:</TextBlock>
                     <StackPanel DockPanel.Dock="Right">
                         <TextBlock Margin="30,0,0,0">до</TextBlock>
-                        <TextBox x:Name="ToStockAmount" TextWrapping="Wrap" MaxLength="15" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" TextAlignment="Center" Width="80" Height="20" TextChanged="ToStockAmount_TextChange"/>
+                        <TextBox x:Name="ToStockAmount" TextWrapping="Wrap" MaxLength="15" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" TextAlignment="Center" Width="80" Height="20" TextChanged="ToStockAmount_TextChange" PreviewTextInput="LengthCheck_PreviewTextInput"/>
                     </StackPanel>
                     <StackPanel DockPanel.Dock="Left">
                         <TextBlock Margin="30,0,0,0">от</TextBlock>
-                        <TextBox x:Name="FromStockAmount" TextWrapping="Wrap" MaxLength="15" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" VerticalContentAlignment="Center" TextAlignment="Center" Height="20" RenderTransformOrigin="0.219,0.561" TextChanged="FromStockAmount_TextChange"/>
+                        <TextBox x:Name="FromStockAmount" TextWrapping="Wrap" MaxLength="15" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" VerticalContentAlignment="Center" TextAlignment="Center" Height="20" RenderTransformOrigin="0.219,0.561" TextChanged="FromStockAmount_TextChange" PreviewTextInput="LengthCheck_PreviewTextInput"/>
                     </StackPanel>
                 </DockPanel>
 
@@ -89,11 +89,11 @@
                     <StackPanel Orientation="Horizontal">
                         <StackPanel Margin="0,0,27,0">
                             <TextBlock Margin="30,0,0,0">от</TextBlock>
-                            <TextBox x:Name="FromPrice" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Width="80" Height="20" VerticalContentAlignment="Center" Text="" TextAlignment="Center" TextChanged="FromPrice_TextChange" IsEnabled="False"/>
+                            <TextBox x:Name="FromPrice" MaxLength="15" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Width="80" Height="20" VerticalContentAlignment="Center" Text="" TextAlignment="Center" TextChanged="FromPrice_TextChange" IsEnabled="False" PreviewTextInput="LengthCheck_PreviewTextInput"/>
                         </StackPanel>
                         <StackPanel>
                         <TextBlock Margin="30,0,0,0">до</TextBlock>
-                        <TextBox x:Name="ToPrice" TextWrapping="Wrap" MaxLength="15" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" TextAlignment="Center" Height="20" Width="80" TextChanged="ToPrice_TextChange" IsEnabled="False"/>
+                        <TextBox x:Name="ToPrice" TextWrapping="Wrap" MaxLength="15" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" TextAlignment="Center" Height="20" Width="80" TextChanged="ToPrice_TextChange" IsEnabled="False" PreviewTextInput="LengthCheck_PreviewTextInput"/>
                     </StackPanel>
                     
                     </StackPanel>

@@ -10,7 +10,7 @@ using System.Data;
 
 namespace TradeCompany_DAL
 {
-    public class ProductsData
+    public class ProductsData: ProductsDataInterface
     {
         public string ConnectionString { get; set; }
         public ProductsData()
@@ -284,6 +284,15 @@ namespace TradeCompany_DAL
                 dbConnection.Query(query, new { id , amount });
             }
 
+        }
+        public void IncreaseProductAmountInStockByID(int id, int amount)
+        {
+            string query;
+            using (IDbConnection dbConnection = new SqlConnection(ConnectionString))
+            {
+                query = "exec [TradeCompany_DataBase].[IncreaseProductAmountInStockByID] @id , @amount";
+                dbConnection.Query(query, new { id, amount });
+            }
         }
     }
 }

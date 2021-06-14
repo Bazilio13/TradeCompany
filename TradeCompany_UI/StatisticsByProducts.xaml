@@ -26,15 +26,15 @@
                 <DockPanel Margin="0,0,0,15">
                     <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" Height="33" VerticalAlignment="Bottom">
                         <Image Source="Pictures/filter.png" Height="28" Margin="0,0,5,0" HorizontalAlignment="Right"/>
-                        <Button Content="Год" Margin="0,0,10,0" Click="ButtonYear" HorizontalAlignment="Right"/>
-                        <Button Content="Месяц" Margin="0,0,10,0" Click="ButtonMonth" HorizontalAlignment="Right"/>
-                        <Button Content="Сегодня" Click="ButtonToday" HorizontalAlignment="Right"/>
+                        <Button x:Name="ButtonYearName" Content="Год" Margin="0,0,10,0" Click="ButtonYear" HorizontalAlignment="Right"/>
+                        <Button x:Name="ButtonMonthName" Content="Месяц" Margin="0,0,10,0" Click="ButtonMonth" HorizontalAlignment="Right"/>
+                        <Button x:Name="ButtonTodayName" Content="Сегодня" Click="ButtonToday" HorizontalAlignment="Right"/>
                     </StackPanel>
                     <StackPanel Orientation="Vertical" DockPanel.Dock="Right">
                         <TextBlock Margin="65,0,0,5">Выбор периода:</TextBlock>
                         <StackPanel Orientation="Horizontal">
-                            <DatePicker x:Name="PeriodFor" Height="27" Width="112" HorizontalAlignment="Left" CalendarClosed="GroupFilter" BorderBrush="#FFF3DFC4" Background="#FFF3DFC4" Margin="0,0,10,0"/>
-                            <DatePicker x:Name="PeriodUntil" Height="27" Width="112" HorizontalAlignment="Left" CalendarClosed="GroupFilter" BorderBrush="#FFF3DFC4" Background="#FFF3DFC4"/>
+                            <DatePicker x:Name="PeriodFor" Height="27" Width="112" HorizontalAlignment="Left" CalendarClosed="GroupFilter" BorderBrush="#FFF3DFC4" Background="#FFF3DFC4" Margin="0,0,10,0" SelectedDateChanged="Period_SelectedDateChanged"/>
+                            <DatePicker x:Name="PeriodUntil" Height="27" Width="112" HorizontalAlignment="Left" CalendarClosed="GroupFilter" BorderBrush="#FFF3DFC4" Background="#FFF3DFC4" SelectedDateChanged="Period_SelectedDateChanged"/>
                         </StackPanel>
                     </StackPanel>
                     
