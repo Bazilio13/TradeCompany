@@ -23,14 +23,14 @@
                 <Button x:Name="Button_AddExistingProduct" Content="Добавить товар" Click="AddProduct_ButtonClick" IsEnabled ="False"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
-                <StackPanel Height="74">
-                    <TextBlock x:Name="ID" Text="ID Заказа" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap" Width="136" Margin="0,0,0,10"/>
-                    <TextBlock x:Name="Sum" Text="Сумма" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap" Width="112"/>
+                <StackPanel Height="74" Width="240">
+                    <TextBlock x:Name="ID" Text="ID Заказа" HorizontalAlignment="Left" TextWrapping="Wrap" Width="223" Margin="0,0,0,10" Height="43"/>
+                    <TextBlock x:Name="Sum" Text="Сумма" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap" Width="223"/>
                 </StackPanel>
 
-                <StackPanel Width="228">
-                    <TextBlock x:Name="ClientName" Text="Клиент" TextWrapping="Wrap" Width="170" Margin="0,0,0,10" HorizontalAlignment="Left"/>
-                    <TextBlock x:Name="Phone" Grid.Row="1" Text="Телефон" TextWrapping="Wrap" Width="170" HorizontalAlignment="Left"/>
+                <StackPanel Width="304">
+                    <TextBlock x:Name="ClientName" Text="Клиент" TextWrapping="Wrap" Width="292" Height="43" Margin="0,0,0,10" HorizontalAlignment="Left" Foreground="#6E304B" FontWeight="Bold" FontSize="14" />
+                    <TextBlock x:Name="Phone" Grid.Row="1" Text="Телефон" TextWrapping="Wrap" Width="223" HorizontalAlignment="Left"/>
                 </StackPanel>
                 <StackPanel Width="122" Margin="0,0,30,0">
                     <TextBlock HorizontalAlignment="Center">Дата заказа:</TextBlock>
@@ -44,7 +44,7 @@
                 </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button x:Name="PreviousPage" Content="Назад"  IsEnabled="True" Click="PreviousPage_Click" />
+                <Button x:Name="PreviousPage" Content="Назад"  IsEnabled="True" Click="PreviousPage_Click" Margin="0,0,15,0"/>
                 <Button x:Name="AddProductInOrder" Content="Сохранить" Click="SaveProductInOrder_ButtonClick" IsEnabled="False" />
             </StackPanel>
         </StackPanel>
