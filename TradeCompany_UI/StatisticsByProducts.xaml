@@ -1,4 +1,4 @@
-﻿<Page x:Class="TradeCompany_UI.StatisticsByProducts"
+<Page x:Class="TradeCompany_UI.StatisticsByProducts"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -50,7 +50,7 @@
 
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding ="{Binding Path = CategoryName}" IsReadOnly="True" Header="Категория" Width="*" MinWidth="155"/>
-                        <DataGridTextColumn Binding ="{Binding Path = Amount}" IsReadOnly="True" Header="Количество (заказов)" Width="103" MinWidth="103"/>
+                        <DataGridTextColumn Binding ="{Binding Path = Amount}" IsReadOnly="True" Header="Проданное количество" Width="103" MinWidth="103"/>
                         <DataGridTextColumn Binding ="{Binding Path = Summ }" IsReadOnly="True" Header="Сумма" Width="82" MinWidth="82" />
                         <DataGridTextColumn Binding ="{Binding Path = StockAmount}" IsReadOnly="True" Header="Остаток" Width="82" MinWidth="82"/>
                         <DataGridTextColumn Binding ="{Binding StringFormat = dd MMMM yyyy, ConverterCulture=ru, Path = LastSupplyDate}" IsReadOnly="True" Header="Дата последней поставки" Width="100" MinWidth="100"/>
@@ -62,11 +62,11 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding ="{Binding Path = ID}" IsReadOnly="True" Header="ID" Width="20" MinWidth="30"/>
                         <DataGridTextColumn Binding ="{Binding Path = Name}" IsReadOnly="True" Header="Товар" Width="*" MinWidth="125"/>
-                        <DataGridTextColumn Binding ="{Binding Path = Amount}" IsReadOnly="True" Header="Количество (заказов)" Width="103" MinWidth="103"/>
+                        <DataGridTextColumn Binding ="{Binding Path = Amount}" IsReadOnly="True" Header="Проданное количество" Width="103" MinWidth="103"/>
                         <DataGridTextColumn Binding ="{Binding Path = Summ }" IsReadOnly="True" Header="Сумма" Width="82" MinWidth="82" />
                         <DataGridTextColumn Binding ="{Binding Path = StockAmount}" IsReadOnly="True" Header="Остаток" Width="82" MinWidth="82"/>
-                        <DataGridTextColumn Binding ="{Binding Path = LastSupplyDate}" IsReadOnly="True" Header="Дата последней поставки" Width="145" MinWidth="145"/>
-                        <DataGridTextColumn Binding ="{Binding Path = LastOrderDate}" IsReadOnly="True" Header="Дата последнего заказ" Width="145" MinWidth="145"/>
+                        <DataGridTextColumn Binding ="{Binding StringFormat = dd MMMM yyyy, ConverterCulture=ru, Path = LastSupplyDate}" IsReadOnly="True" Header="Дата последней поставки" Width="145" MinWidth="145"/>
+                        <DataGridTextColumn Binding ="{Binding StringFormat = dd MMMM yyyy, ConverterCulture=ru, Path = LastOrderDate}" IsReadOnly="True" Header="Дата последнего заказ" Width="145" MinWidth="145"/>
                     </DataGrid.Columns>
                 </DataGrid>
                 
