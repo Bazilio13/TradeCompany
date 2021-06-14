@@ -56,7 +56,7 @@ namespace TradeCompany_BLL.Models
             headers.Add("Контактное лицо");
             headers.Add("Телефон");
             headers.Add("E-mail");
-            headers.Add("Опт/розница");
+            headers.Add("Тип заказа");
             return headers;
         }
 

@@ -36,7 +36,7 @@ namespace TradeCompany_BLL.Models
         public List<string> GetHeaders()
         {
             List<string> TextView = new List<string>();
-            TextView.Add("Название");
+            TextView.Add("Товар");
             TextView.Add("Остаток");
             TextView.Add("Ед. изм.");
             TextView.Add("Розн. цена");
