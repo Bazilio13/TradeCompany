@@ -36,11 +36,11 @@ namespace TradeCompany_BLL.Models
         public List<string> GetHeaders()
         {
             List<string> TextView = new List<string>();
-            TextView.Add("Название");
+            TextView.Add("Товар");
             TextView.Add("Остаток");
-            TextView.Add("Ед. изм.");
-            TextView.Add("Розн. цена");
-            TextView.Add("Опт. цена");
+            TextView.Add("Единица измерения");
+            TextView.Add("Розничная цена");
+            TextView.Add("Оптовая цена");
             TextView.Add("Последняя поставка");
             return TextView;
         }
@@ -55,9 +55,9 @@ namespace TradeCompany_BLL.Models
             List<int> sizes = new List<int>();
             sizes.Add(250);
             sizes.Add(100);
-            sizes.Add(100);
-            sizes.Add(100);
             sizes.Add(150);
+            sizes.Add(125);
+            sizes.Add(125);
             sizes.Add(150);
             return sizes;
         }

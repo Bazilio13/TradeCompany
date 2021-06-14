@@ -15,7 +15,7 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition Width="851"></ColumnDefinition>
+            <ColumnDefinition Width="901"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Button Content="Назад" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Click="BackButton_Click" Width="100" Grid.Column="1"/>
